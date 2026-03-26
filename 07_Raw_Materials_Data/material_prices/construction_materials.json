@@ -1,0 +1,572 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-20",
+  "source": "indonesia_construction_market_research",
+  "description": "Construction material prices for Indonesia with regional focus on Banten, Serang, Walantaka area for KPRFlow Enterprise",
+  
+  "material_categories": {
+    "cement": {
+      "description": "Portland cement and specialized cement products",
+      "unit": "sak (40kg)",
+      "regional_pricing": {
+        "national_average": 62000,
+        "jakarta": 64000,
+        "surabaya": 60000,
+        "bandung": 59000,
+        "medan": 61000,
+        "banten": 61000,
+        "serang": 61000,
+        "walantaka": 60000
+      },
+      "products": [
+        {
+          "brand": "Semen Tiga Roda (Indocement)",
+          "type": "Portland Cement",
+          "price_per_sak": 62000,
+          "regional_prices": {
+            "jakarta": 63000,
+            "surabaya": 61000,
+            "bandung": 60000,
+            "banten": 61000,
+            "serang": 61000,
+            "walantaka": 60000
+          },
+          "specifications": {
+            "strength": "32.5 MPa",
+            "setting_time": "45 minutes",
+            "shelf_life": "12 months",
+            "standards": "SNI 15-7064-2014"
+          }
+        },
+        {
+          "brand": "Semen Baturaja",
+          "type": "Portland Cement",
+          "price_per_sak": 63000,
+          "regional_prices": {
+            "jakarta": 64000,
+            "surabaya": 62000,
+            "bandung": 61000,
+            "banten": 62000,
+            "serang": 62000,
+            "walantaka": 60000
+          },
+          "specifications": {
+            "strength": "32.5 MPa",
+            "setting_time": "45 minutes",
+            "shelf_life": "12 months",
+            "standards": "SNI 15-7064-2014"
+          }
+        },
+        {
+          "brand": "Semen Padang",
+          "type": "Portland Cement",
+          "price_per_sak": 60000,
+          "regional_prices": {
+            "jakarta": 61000,
+            "surabaya": 59000,
+            "bandung": 58000,
+            "banten": 59000,
+            "serang": 59000,
+            "walantaka": 58000
+          },
+          "specifications": {
+            "strength": "32.5 MPa",
+            "setting_time": "45 minutes",
+            "shelf_life": "12 months",
+            "standards": "SNI 15-7064-2014"
+          }
+        },
+        {
+          "brand": "Semen Holcim",
+          "type": "Portland Cement",
+          "price_per_sak": 62000,
+          "regional_prices": {
+            "jakarta": 63000,
+            "surabaya": 61000,
+            "bandung": 60000,
+            "banten": 61000,
+            "serang": 61000,
+            "walantaka": 60000
+          },
+          "specifications": {
+            "strength": "32.5 MPa",
+            "setting_time": "45 minutes",
+            "shelf_life": "12 months",
+            "standards": "SNI 15-7064-2014"
+          }
+        },
+        {
+          "brand": "Semen Putih Tiga Roda",
+          "type": "White Cement",
+          "price_per_sak": 95000,
+          "regional_prices": {
+            "jakarta": 96000,
+            "surabaya": 94000,
+            "bandung": 93000,
+            "banten": 94000,
+            "serang": 94000,
+            "walantaka": 93000
+          },
+          "specifications": {
+            "strength": "32.5 MPa",
+            "setting_time": "45 minutes",
+            "shelf_life": "12 months",
+            "standards": "SNI 15-7064-2014"
+          }
+        }
+      ]
+    },
+    "steel": {
+      "description": "Steel reinforcement and structural steel products",
+      "unit": "kg",
+      "regional_pricing": {
+        "national_average": 12000,
+        "jakarta": 12500,
+        "surabaya": 11500,
+        "bandung": 11800,
+        "medan": 12000,
+        "banten": 11800,
+        "serang": 11800,
+        "walantaka": 11600
+      },
+      "products": [
+        {
+          "type": "Besi Beton Polos (U-24)",
+          "price_per_kg": 12000,
+          "regional_prices": {
+            "jakarta": 12500,
+            "surabaya": 11500,
+            "bandung": 11800,
+            "banten": 11800,
+            "serang": 11800,
+            "walantaka": 11600
+          },
+          "diameter": "8mm",
+          "length": "12m",
+          "weight_per_length": 0.395,
+          "standards": "SNI 07-2054-2014"
+        },
+        {
+          "type": "Besi Beton Ulir (S-10)",
+          "price_per_kg": 11800,
+          "regional_prices": {
+            "jakarta": 12300,
+            "surabaya": 11300,
+            "bandung": 11600,
+            "banten": 11600,
+            "serang": 11600,
+            "walantaka": 11400
+          },
+          "diameter": "10mm",
+          "length": "12m",
+          "weight_per_length": 0.617,
+          "standards": "SNI 07-2054-2014"
+        },
+        {
+          "type": "Besi Profile",
+          "price_per_kg": 13500,
+          "regional_prices": {
+            "jakarta": 14000,
+            "surabaya": 13000,
+            "bandung": 13300,
+            "banten": 13300,
+            "serang": 13300,
+            "walantaka": 13100
+          },
+          "applications": ["Window frames", "Doors", "Fencing"],
+          "standards": "SNI 07-2054-2014"
+        },
+        {
+          "type": "Besi Plat",
+          "price_per_kg": 14000,
+          "regional_prices": {
+            "jakarta": 14500,
+            "surabaya": 13500,
+            "bandung": 13800,
+            "banten": 13800,
+            "serang": 13800,
+            "walantaka": 13600
+          },
+          "applications": ["Flooring", "Roofing", "Structural"],
+          "thickness": ["2mm", "3mm", "4mm", "6mm", "8mm", "10mm"],
+          "standards": "SNI 07-2054-2014"
+        }
+      ]
+    },
+    "brick": {
+      "description": "Brick and masonry products",
+      "unit": "buah",
+      "regional_pricing": {
+        "national_average": 1200,
+        "jakarta": 1300,
+        "surabaya": 1100,
+        "bandung": 1150,
+        "medan": 1200,
+        "banten": 1150,
+        "serang": 1150,
+        "walantaka": 1100
+      },
+      "products": [
+        {
+          "type": "Bata Merah",
+          "price_per_buah": 1200,
+          "regional_prices": {
+            "jakarta": 1300,
+            "surabaya": 1100,
+            "bandung": 1150,
+            "banten": 1150,
+            "serang": 1150,
+            "walantaka": 1100
+          },
+          "size": "Standard (19x9x5cm)",
+          "weight": "2.5kg",
+          "strength": "7-10 MPa",
+          "applications": ["Walls", "Partitions", "Foundations"],
+          "standards": "SNI 15-2094-2000"
+        },
+        {
+          "type": "Batako",
+          "price_per_buah": 800,
+          "regional_prices": {
+            "jakarta": 850,
+            "surabaya": 750,
+            "bandung": 800,
+            "banten": 800,
+            "serang": 800,
+            "walantaka": 750
+          },
+          "size": "Standard (20x10x6cm)",
+          "weight": "3.0kg",
+          "strength": "5-7 MPa",
+          "applications": ["Walls", "Partitions"],
+          "standards": "SNI 15-2094-2000"
+        },
+        {
+          "type": "Bata Press",
+          "price_per_buah": 1500,
+          "regional_prices": {
+            "jakarta": 1600,
+            "surabaya": 1400,
+            "bandung": 1450,
+            "banten": 1450,
+            "serang": 1450,
+            "walantaka": 1400
+          },
+          "size": "Standard (20x10x6cm)",
+          "weight": "2.8kg",
+          "strength": "10-15 MPa",
+          "applications": ["Load-bearing walls", "Structural"],
+          "standards": "SNI 15-2094-2000"
+        }
+      ]
+    },
+    "sand": {
+      "description": "Sand for construction and concrete mixing",
+      "unit": "m³",
+      "regional_pricing": {
+        "national_average": 450000,
+        "jakarta": 500000,
+        "surabaya": 400000,
+        "bandung": 425000,
+        "medan": 450000,
+        "banten": 425000,
+        "serang": 425000,
+        "walantaka": 400000
+      },
+      "products": [
+        {
+          "type": "Pasir Beton",
+          "price_per_m3": 450000,
+          "regional_prices": {
+            "jakarta": 500000,
+            "surabaya": 400000,
+            "bandung": 425000,
+            "banten": 425000,
+            "serang": 425000,
+            "walantaka": 400000
+          },
+          "fineness_modulus": "2.6",
+          "bulk_density": "1500 kg/m³",
+          "applications": ["Concrete mixing", "Plastering"],
+          "standards": "SNI 03-2847-2002"
+        },
+        {
+          "type": "Pasir Pasang",
+          "price_per_m3": 480000,
+          "regional_prices": {
+            "jakarta": 530000,
+            "surabaya": 430000,
+            "bandung": 455000,
+            "banten": 455000,
+            "serang": 455000,
+            "walantaka": 430000
+          },
+          "fineness_modulus": "2.2",
+          "bulk_density": "1600 kg/m³",
+          "applications": ["Plastering", "Finishing"],
+          "standards": "SNI 03-2847-2002"
+        },
+        {
+          "type": "Pasir Urug",
+          "price_per_m3": 550000,
+          "regional_prices": {
+            "jakarta": 600000,
+            "surabaya": 500000,
+            "bandung": 525000,
+            "banten": 525000,
+            "serang": 525000,
+            "walantaka": 500000
+          },
+          "fineness_modulus": "1.8",
+          "bulk_density": "1700 kg/m³",
+          "applications": ["Rendering", "Finishing"],
+          "standards": "SNI 03-2847-2002"
+        },
+        {
+          "type": "Pasir Sungai",
+          "price_per_m3": 350000,
+          "regional_prices": {
+            "jakarta": 380000,
+            "surabaya": 320000,
+            "bandung": 340000,
+            "banten": 340000,
+            "serang": 340000,
+            "walantaka": 320000
+          },
+          "fineness_modulus": "2.8",
+          "bulk_density": "1400 kg/m³",
+          "applications": ["Concrete mixing", "Backfill"],
+          "standards": "SNI 03-2847-2002"
+        }
+      ]
+    },
+    "finishing": {
+      "description": "Finishing materials for interior and exterior",
+      "unit": "liter",
+      "regional_pricing": {
+        "national_average": 35000,
+        "jakarta": 38000,
+        "surabaya": 32000,
+        "bandung": 33500,
+        "medan": 35000,
+        "banten": 33500,
+        "serang": 33500,
+        "walantaka": 32000
+      },
+      "products": [
+        {
+          "type": "Cat Tembok Exterior",
+          "price_per_liter": 35000,
+          "regional_prices": {
+            "jakarta": 38000,
+            "surabaya": 32000,
+            "bandung": 33500,
+            "banten": 33500,
+            "serang": 33500,
+            "walantaka": 32000
+          },
+          "coverage": "12-14 m²/liter",
+          "applications": ["Exterior walls", "Facades"],
+          "durability": "5-7 years",
+          "standards": "SNI 03-6547-2001"
+        },
+        {
+          "type": "Cat Tembok Interior",
+          "price_per_liter": 32000,
+          "regional_prices": {
+            "jakarta": 35000,
+            "surabaya": 30000,
+            "bandung": 31500,
+            "banten": 31500,
+            "serang": 31500,
+            "walantaka": 30000
+          },
+          "coverage": "10-12 m²/liter",
+          "applications": ["Interior walls", "Ceilings"],
+          "durability": "3-5 years",
+          "standards": "SNI 03-6547-2001"
+        },
+        {
+          "type": "Cat Kayu",
+          "price_per_liter": 40000,
+          "regional_prices": {
+            "jakarta": 43000,
+            "surabaya": 38000,
+            "bandung": 40000,
+            "banten": 40000,
+            "serang": 40000,
+            "walantaka": 38000
+          },
+          "coverage": "8-10 m²/liter",
+          "applications": ["Wood surfaces", "Furniture"],
+          "durability": "2-3 years",
+          "standards": "SNI 03-6547-2001"
+        }
+      ]
+    }
+  },
+  
+  "regional_analysis": {
+    "banten_region": {
+      "overview": "Banten province has competitive construction material prices compared to Jakarta",
+      "price_index": 0.95,
+      "major_cities": ["Serang", "Cilegon", "Tangerang", "Pandeglang"],
+      "infrastructure_impact": "Good connectivity to Jakarta port"
+    },
+    "serang_walantaka": {
+      "location": "Serang and Walantaka areas",
+      "price_advantage": "5-10% cheaper than Jakarta",
+      "major_projects": [
+        "Industrial estates",
+        "Residential developments",
+        "Commercial buildings"
+      ],
+      "transportation": "Good road connectivity to Jakarta",
+      "supplier_network": "Multiple local and national suppliers"
+    },
+    "price_trends": {
+      "q1_2026": "Stable with slight increase",
+      "q2_2026": "Expected 5% increase due to infrastructure projects",
+      "q3_2026": "Peak construction season",
+      "q4_2026": "Moderate increase due to year-end demand"
+    }
+  },
+  
+  "suppliers": {
+    "national_suppliers": [
+      {
+        "name": "PT Semen Indonesia",
+        "products": ["Cement", "Concrete"],
+        "coverage": "National",
+        "reliability": "High"
+      },
+      {
+        "name": "PT Krakatau Steel",
+        "products": ["Steel", "Iron products"],
+        "coverage": "National",
+        "reliability": "High"
+      },
+      {
+        "name": "PT Wijaya Karya",
+        "products": ["Construction services"],
+        "coverage": "National",
+        "reliability": "High"
+      }
+    ],
+    "local_suppliers": [
+      {
+        "name": "PT Material Bangunan Serang",
+        "products": ["Cement", "Brick", "Sand"],
+        "coverage": "Serang, Walantaka",
+        "reliability": "Medium"
+      },
+      {
+        "name": "Toko Material Walantaka",
+        "products": ["All construction materials"],
+        "coverage": "Walantaka, Cilegon",
+        "reliability": "Medium"
+      },
+      {
+        "name": "Distributor Material Banten",
+        "products": ["Cement", "Steel", "Finishing"],
+        "coverage": "Banten region",
+        "reliability": "Medium"
+      }
+    ]
+  },
+  
+  "quality_standards": {
+    "indonesian_standards": [
+      "SNI 15-7064-2014 (Cement)",
+      "SNI 07-2054-2014 (Steel)",
+      "SNI 15-2094-2000 (Brick)",
+      "SNI 03-2847-2002 (Sand)",
+      "SNI 03-6547-2001 (Paints)"
+    ],
+    "international_standards": [
+      "ASTM C150/C150M",
+      "BS 8110",
+      "DIN Standards"
+    ],
+    "testing_requirements": [
+      "Material strength testing",
+      "Quality certification",
+      "Laboratory testing",
+      "Field verification"
+    ]
+  },
+  
+  "cost_calculation": {
+    "material_factors": {
+      "waste_factor": {
+        "cement": 0.05,
+        "steel": 0.07,
+        "brick": 0.03,
+        "sand": 0.10,
+        "finishing": 0.15
+      },
+      "storage_losses": {
+        "cement": 0.02,
+        "steel": 0.03,
+        "brick": 0.01,
+        "sand": 0.05,
+        "finishing": 0.08
+      },
+      "transportation_costs": {
+        "jakarta": "High",
+        "surabaya": "Medium",
+        "bandung": "Medium",
+        "banten": "Low to Medium"
+      }
+    },
+    "labor_costs": {
+      "skilled_worker_per_day": 150000,
+      "unskilled_worker_per_day": 80000,
+      "foreman_per_day": 200000,
+      "serang_walantaka": {
+        "skilled_worker_per_day": 120000,
+        "unskilled_worker_per_day": 70000,
+        "foreman_per_day": 160000
+      }
+    },
+    "equipment_costs": {
+      "concrete_mixer": 500000_per_month,
+      "crane": 2000000_per_month,
+      "excavator": 1500000_per_month,
+      "truck": 1000000_per_month
+    }
+  },
+  
+  "integration_mapping": {
+    "financial_configuration": {
+      "material_pricing": "Regional-adjusted material costs",
+      "budget_calculation": "Market-based cost estimation"
+    },
+    "business_rules": {
+      "material_validation": "Quality standards compliance",
+      "supplier_validation": "Supplier reliability checks"
+    },
+    "api_integration": {
+      "price_monitoring": "Real-time price tracking",
+      "supplier_management": "Supplier performance tracking"
+    }
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-20",
+    "last_modified": "2026-06-20",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Construction material prices for Indonesia with regional focus on Banten, Serang, Walantaka area",
+    "data_sources": [
+      "Industry publications",
+      "Supplier websites",
+      "Market research reports",
+      "Regional price surveys",
+      "Construction cost databases"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

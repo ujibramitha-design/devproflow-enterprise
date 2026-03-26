@@ -1,0 +1,440 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-20",
+  "source": "ciruas_land_database",
+  "clusters": [
+    {
+      "cluster_id": "cluster-titanium-001",
+      "project_id": "ciruas-land-project-001",
+      "cluster_name": "Cluster Titanium",
+      "cluster_code": "CLUSTER_TITANIUM",
+      "cluster_type": "MIXED",
+      "total_units": 239,
+      "residential_units": 201,
+      "commercial_units": 38,
+      "cluster_area": 35000,
+      "description": "Cluster premium dengan area hunian dan komersial. Terdiri dari Blok A (201 unit hunian) dan area komersial premium.",
+      "color_code": "#FF6B6B",
+      "priority_level": 1,
+      "status": "ACTIVE",
+      "location": {
+        "province": "Banten",
+        "city": "Serang",
+        "district": "Walantaka",
+        "subdistrict": "Walantaka",
+        "postal_code": "42183",
+        "coordinates": {
+          "latitude": -6.539,
+          "longitude": 106.749
+        }
+      },
+      "facilities": [
+        "clubhouse",
+        "swimming_pool",
+        "fitness_center",
+        "security_24h",
+        "jogging_track",
+        "commercial_center",
+        "atm_center"
+      ],
+      "infrastructure": {
+        "electricity": "PLN",
+        "water": "PDAM",
+        "internet": "Fiber Optic",
+        "road_access": "Paving",
+        "drainage": "Betul",
+        "waste_management": "Landfill"
+      },
+      "developer": {
+        "name": "PT. Rucita Indah Sejahtera",
+        "established": 2015,
+        "type": "property_developer",
+        "contact": {
+          "phone": "+62-21-1234-5678",
+          "email": "info@rucita.co.id",
+          "website": "https://www.rucita.co.id"
+        }
+      },
+      "marketing": {
+        "launch_date": "2023-01-15",
+        "completion_date": "2025-12-31",
+        "marketing_status": "active",
+        "sales_progress": 85,
+        "avg_price_per_m2": 15000000
+      }
+    },
+    {
+      "cluster_id": "cluster-crown-001",
+      "project_id": "ciruas-land-project-001",
+      "cluster_name": "Cluster Crown",
+      "cluster_code": "CLUSTER_CROWN",
+      "cluster_type": "RESIDENTIAL",
+      "total_units": 479,
+      "residential_units": 479,
+      "commercial_units": 0,
+      "cluster_area": 42000,
+      "description": "Cluster hunian terbesar dengan 479 unit. Blok B menawarkan berbagai tipe rumah dengan desain modern dan fasilitas lengkap.",
+      "color_code": "#FFD93D",
+      "priority_level": 1,
+      "status": "ACTIVE",
+      "location": {
+        "province": "Banten",
+        "city": "Serang",
+        "district": "Walantaka",
+        "subdistrict": "Walantaka",
+        "postal_code": "42183",
+        "coordinates": {
+          "latitude": -6.5405,
+          "longitude": 106.751
+        }
+      },
+      "facilities": [
+        "playground",
+        "parking_area",
+        "security_24h",
+        "clubhouse",
+        "jogging_track",
+        "community_center"
+      ],
+      "infrastructure": {
+        "electricity": "PLN",
+        "water": "PDAM",
+        "internet": "Fiber Optic",
+        "road_access": "Paving",
+        "drainage": "Betul",
+        "waste_management": "Landfill"
+      },
+      "developer": {
+        "name": "PT. Rucita Indah Sejahtera",
+        "established": 2015,
+        "type": "property_developer",
+        "contact": {
+          "phone": "+62-21-1234-5678",
+          "email": "info@rucita.co.id",
+          "website": "https://www.rucita.co.id"
+        }
+      },
+      "marketing": {
+        "launch_date": "2023-06-01",
+        "completion_date": "2025-12-31",
+        "marketing_status": "active",
+        "sales_progress": 80,
+        "avg_price_per_m2": 12000000
+      }
+    },
+    {
+      "cluster_id": "cluster-gold-001",
+      "project_id": "ciruas-land-project-001",
+      "cluster_name": "Cluster Gold",
+      "cluster_code": "CLUSTER_GOLD",
+      "cluster_type": "RESIDENTIAL",
+      "total_units": 241,
+      "residential_units": 241,
+      "commercial_units": 0,
+      "cluster_area": 28000,
+      "description": "Cluster hunian menengah dengan 241 unit. Blok C menawarkan tipe rumah yang ideal untuk keluarga berkembang.",
+      "color_code": "#FFA500",
+      "priority_level": 2,
+      "status": "ACTIVE",
+      "location": {
+        "province": "Banten",
+        "city": "Serang",
+        "district": "Walantaka",
+        "subdistrict": "Walantaka",
+        "postal_code": "42183",
+        "coordinates": {
+          "latitude": -6.5415,
+          "longitude": 106.7495
+        }
+      },
+      "facilities": [
+        "garden",
+        "playground",
+        "parking_area",
+        "security_24h",
+        "mosque",
+        "jogging_track"
+      ],
+      "infrastructure": {
+        "electricity": "PLN",
+        "water": "PDAM",
+        "internet": "Fiber Optic",
+        "road_access": "Paving",
+        "drainage": "Betul",
+        "waste_management": "Landfill"
+      },
+      "developer": {
+        "name": "PT. Rucita Indah Sejahtera",
+        "established": 2015,
+        "type": "property_developer",
+        "contact": {
+          "phone": "+62-21-1234-5678",
+          "email": "info@rucita.co.id",
+          "website": "https://www.rucita.co.id"
+        }
+      },
+      "marketing": {
+        "launch_date": "2023-09-01",
+        "completion_date": "2026-03-31",
+        "marketing_status": "active",
+        "sales_progress": 75,
+        "avg_price_per_m2": 11000000
+      }
+    },
+    {
+      "cluster_id": "cluster-skandium-001",
+      "project_id": "ciruas-land-project-001",
+      "cluster_name": "Cluster Skandium",
+      "cluster_code": "CLUSTER_SKANDIUM",
+      "cluster_type": "RESIDENTIAL",
+      "total_units": 214,
+      "residential_units": 214,
+      "commercial_units": 0,
+      "cluster_area": 25000,
+      "description": "Cluster hunian dengan konsep skandinavia. Blok E dengan 214 unit menawarkan desain minimalis dan fungsional.",
+      "color_code": "#4ECDC4",
+      "priority_level": 2,
+      "status": "ACTIVE",
+      "location": {
+        "province": "Banten",
+        "city": "Serang",
+        "district": "Walantaka",
+        "subdistrict": "Walantaka",
+        "postal_code": "42183",
+        "coordinates": {
+          "latitude": -6.54,
+          "longitude": 106.7515
+        }
+      },
+      "facilities": [
+        "community_center",
+        "playground",
+        "parking_area",
+        "security_24h",
+        "jogging_track",
+        "bike_parking"
+      ],
+      "infrastructure": {
+        "electricity": "PLN",
+        "water": "PDAM",
+        "internet": "Fiber Optic",
+        "road_access": "Paving",
+        "drainage": "Betul",
+        "waste_management": "Landfill"
+      },
+      "developer": {
+        "name": "PT. Rucita Indah Sejahtera",
+        "established": 2015,
+        "type": "property_developer",
+        "contact": {
+          "phone": "+62-21-1234-5678",
+          "email": "info@rucita.co.id",
+          "website": "https://www.rucita.co.id"
+        }
+      },
+      "marketing": {
+        "launch_date": "2023-12-01",
+        "completion_date": "2026-06-30",
+        "marketing_status": "active",
+        "sales_progress": 70,
+        "avg_price_per_m2": 10000000
+      }
+    },
+    {
+      "cluster_id": "cluster-paladio-001",
+      "project_id": "ciruas-land-project-001",
+      "cluster_name": "Cluster Paladio",
+      "cluster_code": "CLUSTER_PALADIO",
+      "cluster_type": "RESIDENTIAL",
+      "total_units": 181,
+      "residential_units": 181,
+      "commercial_units": 0,
+      "cluster_area": 22000,
+      "description": "Cluster hunian dengan desain mediterania. Blok F dengan 181 unit menawarkan arsitektur yang elegan.",
+      "color_code": "#8B4513",
+      "priority_level": 2,
+      "status": "ACTIVE",
+      "location": {
+        "province": "Banten",
+        "city": "Serang",
+        "district": "Walantaka",
+        "subdistrict": "Walantaka",
+        "postal_code": "42183",
+        "coordinates": {
+          "latitude": -6.541,
+          "longitude": 106.7505
+        }
+      },
+      "facilities": [
+        "garden",
+        "playground",
+        "parking_area",
+        "security_24h",
+        "mosque",
+        "community_garden"
+      ],
+      "infrastructure": {
+        "electricity": "PLN",
+        "water": "PDAM",
+        "internet": "Fiber Optic",
+        "road_access": "Paving",
+        "drainage": "Betul",
+        "waste_management": "Landfill"
+      },
+      "developer": {
+        "name": "PT. Rucita Indah Sejahtera",
+        "established": 2015,
+        "type": "property_developer",
+        "contact": {
+          "phone": "+62-21-1234-5678",
+          "email": "info@rucita.co.id",
+          "website": "https://www.rucita.co.id"
+        }
+      },
+      "marketing": {
+        "launch_date": "2024-03-01",
+        "completion_date": "2026-09-30",
+        "marketing_status": "active",
+        "sales_progress": 65,
+        "avg_price_per_m2": 9000000
+      }
+    },
+    {
+      "cluster_id": "cluster-platinum-001",
+      "project_id": "ciruas-land-project-001",
+      "cluster_name": "Cluster Platinum",
+      "cluster_code": "CLUSTER_PLATINUM",
+      "cluster_type": "RESIDENTIAL",
+      "total_units": 603,
+      "residential_units": 603,
+      "commercial_units": 0,
+      "cluster_area": 55000,
+      "description": "Cluster hunian premium terbesar kedua. Blok D dengan 603 unit menawarkan fasilitas mewah dan lokasi eksklusif.",
+      "color_code": "#E5E4E2",
+      "priority_level": 1,
+      "status": "ACTIVE",
+      "location": {
+        "province": "Banten",
+        "city": "Serang",
+        "district": "Walantaka",
+        "subdistrict": "Walantaka",
+        "postal_code": "42183",
+        "coordinates": {
+          "latitude": -6.5395,
+          "longitude": 106.75
+        }
+      },
+      "facilities": [
+        "swimming_pool",
+        "fitness_center",
+        "children_playground",
+        "security_24h",
+        "convenience_store",
+        "tennis_court",
+        "sauna",
+        "jacuzzi"
+      ],
+      "infrastructure": {
+        "electricity": "PLN",
+        "water": "PDAM",
+        "internet": "Fiber Optic",
+        "road_access": "Paving",
+        "drainage": "Betul",
+        "waste_management": "Landfill"
+      },
+      "developer": {
+        "name": "PT. Rucita Indah Sejahtera",
+        "established": 2015,
+        "type": "property_developer",
+        "contact": {
+          "phone": "+62-21-1234-5678",
+          "email": "info@rucita.co.id",
+          "website": "https://www.rucita.co.id"
+        }
+      },
+      "marketing": {
+        "launch_date": "2024-06-01",
+        "completion_date": "2026-12-31",
+        "marketing_status": "active",
+        "sales_progress": 85,
+        "avg_price_per_m2": 18000000
+      }
+    },
+    {
+      "cluster_id": "cluster-komersial-001",
+      "project_id": "ciruas-land-project-001",
+      "cluster_name": "Cluster Komersial Lainnya",
+      "cluster_code": "CLUSTER_KOMERSIAL",
+      "cluster_type": "COMMERCIAL",
+      "total_units": 2,
+      "residential_units": 0,
+      "commercial_units": 2,
+      "cluster_area": 5000,
+      "description": "Area komersial khusus dengan 2 unit besar untuk kebutuhan bisnis skala besar.",
+      "color_code": "#FF9800",
+      "priority_level": 3,
+      "status": "ACTIVE",
+      "location": {
+        "province": "Banten",
+        "city": "Serang",
+        "district": "Walantaka",
+        "subdistrict": "Walantaka",
+        "postal_code": "42183",
+        "coordinates": {
+          "latitude": -6.5405,
+          "longitude": 106.7485
+        }
+      },
+      "facilities": [
+        "parking_lot",
+        "security_24h",
+        "elevator",
+        "atm_center",
+        "food_court",
+        "loading_dock"
+      ],
+      "infrastructure": {
+        "electricity": "PLN",
+        "water": "PDAM",
+        "internet": "Fiber Optic",
+        "road_access": "Paving",
+        "drainage": "Betul",
+        "waste_management": "Landfill"
+      },
+      "developer": {
+        "name": "PT. Rucita Indah Sejahtera",
+        "established": 2015,
+        "type": "property_developer",
+        "contact": {
+          "phone": "+62-21-1234-5678",
+          "email": "info@rucita.co.id",
+          "website": "https://www.rucita.co.id"
+        }
+      },
+      "marketing": {
+        "launch_date": "2024-09-01",
+        "completion_date": "2027-03-31",
+        "marketing_status": "active",
+        "sales_progress": 50,
+        "avg_price_per_m2": 25000000
+      }
+    }
+  ],
+  "metadata": {
+    "total_clusters": 7,
+    "total_units": 1959,
+    "residential_units": 1919,
+    "commercial_units": 40,
+    "total_area": 207000,
+    "source": "ciruas_land_database",
+    "last_updated": "2026-03-20T00:00:00Z",
+    "validation_rules": [
+      "cluster_id must be unique",
+      "project_id must be valid project_id",
+      "cluster_code must be unique within project",
+      "cluster_type must be valid type",
+      "total_units must be >= 0",
+      "cluster_area must be positive"
+    ]
+  }
+}

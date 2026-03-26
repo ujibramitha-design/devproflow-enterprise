@@ -1,0 +1,318 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-21",
+  "source": "bramsray2_email_parser",
+  "description": "Email parser edge function configuration for KPRFlow Enterprise",
+  
+  "function_id": "email-parser",
+  "name": "Email Parser",
+  "description": "Parse incoming emails and extract customer data for automated processing",
+  "category": "email_processing",
+  "enabled": true,
+  "status": "ACTIVE",
+  
+  "functionality": {
+    "email_extraction": {
+      "enabled": true,
+      "description": "Extract customer data from email content",
+      "features": [
+        "sender_email_extraction",
+        "sender_name_extraction",
+        "subject_parsing",
+        "body_content_extraction",
+        "attachment_processing"
+      ]
+    },
+    "attachment_processing": {
+      "enabled": true,
+      "description": "Parse and extract data from email attachments",
+      "supported_formats": [
+        "application/pdf",
+        "image/jpeg",
+        "image/png",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      ],
+      "max_attachment_size_mb": 25,
+      "max_attachments_per_email": 10
+    },
+    "data_conversion": {
+      "enabled": true,
+      "description": "Convert email data to structured format",
+      "conversion_rules": [
+        "email_to_customer_data",
+        "attachment_to_document_data",
+        "content_to_application_data",
+        "metadata_to_tracking_data"
+      ]
+    },
+    "workflow_triggering": {
+      "enabled": true,
+      "description": "Trigger workflows based on email content",
+      "trigger_conditions": [
+        "customer_inquiry",
+        "document_submission",
+        "application_request",
+        "payment_notification",
+        "support_request"
+      ]
+    }
+  },
+  
+  "technology": {
+    "runtime": "deno",
+    "language": "typescript",
+    "version": "1.40.0",
+    "dependencies": [
+      {
+        "name": "std",
+        "version": "^0.224.0"
+      },
+      {
+        "name": "email",
+        "version": "^0.8.0"
+      },
+      {
+        "name": "pdf",
+        "version": "^0.1.0"
+      },
+      {
+        "name": "image",
+        "version": "^0.1.0"
+      }
+    ]
+  },
+  
+  "integration": {
+    "email_service": {
+      "provider": "gmail",
+      "api_endpoint": "https://api.gmail.com",
+      "webhook_url": "https://your-project.supabase.co/functions/v1/email-parser",
+      "authentication": "oauth2",
+      "scopes": [
+        "https://www.googleapis.com/auth/gmail.readonly",
+        "https://www.googleapis.com/auth/gmail.send"
+      ]
+    },
+    "supabase": {
+      "enabled": true,
+      "database_url": "https://your-project.supabase.co",
+      "service_role_key": "your-service-role-key",
+      "tables": {
+        "customers": "customers",
+        "applications": "applications",
+        "documents": "documents",
+        "email_logs": "email_processing_logs",
+        "workflow_triggers": "workflow_trigger_queue"
+      }
+    }
+  },
+  
+  "parsing_rules": {
+    "customer_data_extraction": {
+      "name_patterns": [
+        "^[A-Z][a-z]+ [A-Z][a-z]+$",
+        "^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+$"
+      ],
+      "email_patterns": [
+        "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+      ],
+      "phone_patterns": [
+        "^\\+62[0-9]{9,12}$",
+        "^0[0-9]{9,12}$"
+      ],
+      "nik_patterns": [
+        "^[0-9]{16}$"
+      ]
+    },
+    "property_data_extraction": {
+      "property_type_keywords": [
+        "rumah", "house", "tanah", "land", "ruko", "shop-house",
+        "apartemen", "apartment", "villa", "condominium"
+      ],
+      "location_keywords": [
+        "jakarta", "serang", "tangerang", "bogor", "depok",
+        "bekasi", "bandung", "surabaya", "medan", "semarang"
+      ],
+      "price_patterns": [
+        "Rp [0-9.,]+",
+        "IDR [0-9.,]+",
+        "[0-9.,]+ juta",
+        "[0-9.,]+ miliar"
+      ]
+    },
+    "application_data_extraction": {
+      "loan_amount_patterns": [
+        "pinjaman [0-9.,]+",
+        "kpr [0-9.,]+",
+        "loan [0-9.,]+"
+      ],
+      "tenure_patterns": [
+        "[0-9]+ tahun",
+        "[0-9]+ years",
+        "[0-9]+ thn"
+      ],
+      "status_keywords": [
+        "pending", "approved", "rejected", "completed",
+        "menunggu", "disetujui", "ditolak", "selesai"
+      ]
+    }
+  },
+  
+  "workflow_mapping": {
+    "customer_inquiry": {
+      "trigger_keywords": ["info", "informasi", "tanya", "ask", "question"],
+      "workflow_type": "customer_inquiry",
+      "priority": "medium",
+      "auto_response": true,
+      "escalation_team": "sales_team"
+    },
+    "document_submission": {
+      "trigger_keywords": ["lampiran", "attachment", "dokumen", "document"],
+      "workflow_type": "document_processing",
+      "priority": "high",
+      "auto_response": false,
+      "escalation_team": "document_team"
+    },
+    "application_request": {
+      "trigger_keywords": ["pengajuan", "application", "kpr", "pinjaman"],
+      "workflow_type": "loan_application",
+      "priority": "high",
+      "auto_response": true,
+      "escalation_team": "sales_team"
+    },
+    "payment_notification": {
+      "trigger_keywords": ["pembayaran", "payment", "bayar", "transfer"],
+      "workflow_type": "payment_processing",
+      "priority": "high",
+      "auto_response": true,
+      "escalation_team": "finance_team"
+    },
+    "support_request": {
+      "trigger_keywords": ["bantuan", "help", "support", "masalah", "problem"],
+      "workflow_type": "customer_support",
+      "priority": "medium",
+      "auto_response": true,
+      "escalation_team": "support_team"
+    }
+  },
+  
+  "processing_settings": {
+    "max_processing_time_seconds": 60,
+    "max_email_size_mb": 50,
+    "batch_processing": {
+      "enabled": true,
+      "batch_size": 10,
+      "batch_delay_seconds": 5
+    },
+    "retry_logic": {
+      "enabled": true,
+      "max_retry_attempts": 3,
+      "retry_delay_seconds": 30,
+      "exponential_backoff": true
+    },
+    "error_handling": {
+      "log_errors": true,
+      "notify_on_error": true,
+      "continue_on_error": true,
+      "quarantine_failed_emails": true
+    }
+  },
+  
+  "quality_assurance": {
+    "data_validation": {
+      "enabled": true,
+      "validate_email_format": true,
+      "validate_phone_format": true,
+      "validate_nik_format": true,
+      "validate_required_fields": true
+    },
+    "duplicate_detection": {
+      "enabled": true,
+      "check_duplicate_emails": true,
+      "check_duplicate_customers": true,
+      "merge_duplicate_data": true
+    },
+    "content_filtering": {
+      "enabled": true,
+      "filter_spam": true,
+      "filter_inappropriate_content": true,
+      "filter_malicious_attachments": true
+    }
+  },
+  
+  "monitoring_settings": {
+    "metrics_tracking": {
+      "enabled": true,
+      "track_processing_time": true,
+      "track_success_rate": true,
+      "track_error_rate": true,
+      "track_throughput": true
+    },
+    "logging": {
+      "enabled": true,
+      "log_level": "INFO",
+      "log_processing_details": true,
+      "log_extraction_results": true,
+      "log_workflow_triggers": true
+    },
+    "alerting": {
+      "enabled": true,
+      "alert_on_failure": true,
+      "alert_on_spam_increase": true,
+      "alert_on_processing_delays": true,
+      "alert_recipients": ["dev_team", "ops_team"]
+    }
+  },
+  
+  "security_settings": {
+    "authentication": {
+      "required": true,
+      "method": "api_key",
+      "api_key_header": "Authorization",
+      "api_key_validation": true
+    },
+    "data_protection": {
+      "encrypt_sensitive_data": true,
+      "mask_personal_info": true,
+      "gdpr_compliant": true,
+      "data_retention_days": 365
+    },
+    "access_control": {
+      "allowed_senders": [],
+      "blocked_senders": [],
+      "domain_whitelist": [],
+      "ip_whitelist": []
+    }
+  },
+  
+  "testing_settings": {
+    "test_mode": false,
+    "test_email_address": "test@kprflow.com",
+    "mock_data_generation": true,
+    "test_scenarios": [
+      "customer_inquiry_email",
+      "document_submission_email",
+      "application_request_email",
+      "payment_notification_email",
+      "support_request_email"
+    ]
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-21",
+    "last_modified": "2026-03-21",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Email parser edge function configuration for KPRFlow Enterprise",
+    "total_workflow_types": 5,
+    "parsing_categories": 3,
+    "integration_tables": 5,
+    "data_sources": [
+      "bramsray2/supabase/functions/email-parser/deno.json"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

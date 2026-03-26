@@ -1,0 +1,148 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-20",
+  "source": "bramsray1_drive_configuration",
+  "description": "Drive configuration and template registry for KPRFlow Enterprise",
+  
+  "drive_configuration": {
+    "master_id": "1tu3w3BKLVCSob9wqPtKEJkrVEJ-s4QVe",
+    "folder_templates": "1jrWBP5-JuMIl_rXSTABnkQchePpNi3p3",
+    "folder_siteplan": "1aZqs-SPTzBqIsCcpWghfq_y1mwZAFga3",
+    "folder_ppjb": "1XP2OluWWBJUfpR5uZ80qJHynF7hzHEv3",
+    "folder_memo": "1UYLAlC7BSXLTQ4sH7r71XW3Hr9B-VXIT",
+    "folder_undangan": "1wHygRs-q-oR_TIlVjilKRe3JAI8V23qC",
+    "folder_bast": "1hYVdqdZQMPTmOSgeuqN4nw6VPZUGlhzq",
+    "folder_pdf_output": "1Omc3_EfRChO30lt_eKonV8dn2N9J8VP6",
+    "folder_arsip_user": "1a3vAOmsagYryc_suf9ADGcxh3G70KG28",
+    "folder_ktp": "1u1Tvg91Gev3ZGwY5HF-0okYWaE30Nv5d",
+    "folder_bukti_bayar": "1U4qHeheTbxq-7z8iRnWdnwDvJst1pSRj",
+    "folder_koran_bank": "1kdTKozKhna6z3Cpl58A7W7ky8HzxTrga",
+    "folder_pajak_pbb": "1Z3VyKMzAAQzjTDr1bqjuIOu82EDi0-DO",
+    "folder_convert": "19NAPgUsuZqESk1G8XkkftVoSiKB-Ck5N",
+    "folder_email_attach": "1-7TQ1ipj5gU0Iicg-6CE9Jw4YB5ANSnE",
+    "folder_history": "1Zp8X9l6cX4JLztNPUaLb0OTfcnP5KgBk"
+  },
+  
+  "template_registry": {
+    "mbr_v1": "1oHvUCkq0KocUsR5TDYGfGwIkS7uAGbInQ_kcwGmnq0Y",
+    "surat_pernyataan_mbr": "1DdrC0N0W0Rzm2Gh-Zs67kK1S-fNQQvZnjKhDVRJFyTM",
+    "sk_tidak_sengketa": "1_D-YiwR6O9ur3mSkjjVbTJpOmnNn0-SBSO4Mjn4s4Nw",
+    "sk_kuasa_notaris": "1i-N39jv8cf9YK8SnfAVF7tCoHhEtvuoV765_O7Ulj3c",
+    "pernyataan_shgb": "1crBf7EndoHR8Tugjrl7Nn6qFETEu_emr9ef-aYS_boI",
+    "pernyataan_pbg": "1QfVFzKM7-ugtl7OipUnN7vJXhWAKFe_QSNRDXvajd_o",
+    "pernyataan_pip_dev": "1pk83YqLO1toGkG44QFBYoUVSNMthSe5pVg5oNLAorCY",
+    "pernyataan_pip_deb": "1ML8eK5w-0CbPPHdgOsNVvm64gOC_X8Yg2mju9dZRKL8",
+    "ppjb_lampiran": "1Cbm4mGV1dE2RRgXVeKFRf1OJu_3704KK1FJb1saHsB8",
+    "ppjb_subsidi_kpr": "1SL47VeH8oW39DoJbzv5xqie4c44FRi4pA-i_jGyFJSE",
+    "ppjb_subsidi_cash_free": "1UgHyKDDqPmmAuriOnHqZD7z-i-omeHfNaCsa8p-btV0",
+    "ppjb_subsidi_cash_non": "1VVYw1UzOvaXsytWKOkX_eICV57YONVBZHF7nEE8yrpo",
+    "ppjb_ruko_kpr_free": "11lYr_L2cdvEkHDU8blYNCre06ijz8oM9iOBiktEiDVc",
+    "ppjb_ruko_kpr_non": "1GCbh1Cs7xG2m-yqjuHyyjt5zPLyf2Ue5MobgR7taf-g",
+    "ppjb_ruko_cash_free": "1JnHSkDyXLcATwu1ym0gaykD3yfP6Z-29IABXl_ae7rk",
+    "ppjb_ruko_cash_non": "1KpI8cjyUvAyzhsEOXYKySNyA2jJTYFFVzcHlGL78TCI",
+    "ppjb_semi_komersil_kpr_free": "1d9dc2gaBkcgemVHUuWJz43eSCvFMSL4FAqP2gJ7FAEo",
+    "ppjb_semi_komersil_kpr_non": "1hTVZnmJBww7tYeP_fonwrXU3sJ16QxW39D5lPOe1Zbw",
+    "ppjb_semi_komersil_cash_free": "1lNtPkpQ9GEWuaP53Jzz2UfNqoO6bG-XfjT5alpoM_go",
+    "ppjb_semi_komersil_cash_non": "1rb56AwHaP3Hk-XhpHB6b6sfFcmUzitTWYpCu7DrVAOI",
+    "ppjb_kom_kpr_free": "1zERuZn6gIY6-jhHcrm1xnNFRYl60pA_CE0RRMlwqLwI",
+    "ppjb_kom_kpr_non": "1zGi7o7P4GnLnVsJG8k49Fy3RCQuoaljOdTHYLXbjfwc",
+    "ppjb_kom_cash_free": "1wh_VkfJomgSglv5k6OPJkYKiTz4dXUCpKfADgf01tP4",
+    "ppjb_kom_cash_non": "1-PKRlFzrYZs8tAI3hkUAvMUBXtQ9Is2q9dxJcTaDu8M",
+    "ppjb_pendamping": "1IyKkn0UB7pgpyp7wWZP5tr_UMgtvn5G6eGfT2JhH06Y",
+    "flpp_btn": "18-Yx9hHfp43tcl-IaxQqL4UOmRyNmxRN2GOzRhxGtzo",
+    "flpp_bjb": "1GUQCwgVvuv8Dl1cFdc7KAZmJUMwRDMDeY_ZKmp6PCyQ",
+    "flpp_bni": "1VIzi3URvxvGGLIu7vlGzUM8gunhq7YFSX65_KwhfTNI",
+    "flpp_bri": "1nBZZOHqHzHzLxD0Mb_sQjiwQE272EwvQyDOgGtSSFljcg",
+    "flpp_mandiri": "1h4dEWWEcPvw5-EBEBrXMpIEaUewKtpKEqH5pqdvBMCs",
+    "flpp_bsi": "1pLlsIB9Ab7N3UTHL2z4YUh75XtuR1q37zolrY16Gm1E",
+    "form_bank_sub_btn": "1E8Y_sruv8wbv3V3iasZQDq0ytUfct4_tCi7mla_acV8",
+    "form_bank_sub_bjb": "113VWVIKVHMMaAnhyfL-JqMPbhLNodXZKIrr7cpXyK98",
+    "form_bank_sub_bni": "1D0fGYjusl41eAlkGOCZMZ87rt2QXWl57WzWLv4pT6TQ",
+    "form_bank_sub_bri": "10Ow3C7yEp04fgxP6zcoh0F1NbOG_CrGkEfM3DzDufAE",
+    "form_bank_sub_mandiri": "1siMf5P0g0-oHPk4y7SBvAkNcZjQgVMnyEuJXXpn2MyU",
+    "form_bank_sub_bsi": "1mAjYwXPCSwjPM77AnFPBAQIkJvf86PR1OjRnwyvfTco",
+    "form_bank_kom_btn": "1kp33_d6YSycu_Pzu5o8hahIgL30mZdcGjk-zW2lc3HE",
+    "form_bank_kom_bjb": "1ekIu6g2G8xDO7hNGKnb9GHvvGy2RC4Hy5nlCDuAZLTM",
+    "form_bank_kom_bni": "1bLBzRwN3sTHS6I8AukqYzzi5NlB37CoiG9PPzSf-gKI",
+    "form_bank_kom_bri": "1bHttUk8mS6TZG_ZVijYbx9_c2KnkaZX-DvrcayYtLkc",
+    "form_bank_kom_mandiri": "1__no8OhT5o_wXRwnR3Mk1X7-uTkeXN047DIGbrZjAYQ",
+    "form_bank_kom_bsi": "1tGspum7nqZAEVxicB4kstfKgKSaUZpeRHVbUn432cQc",
+    "akad_bjb": "1PkAKsKu6tPX1ovQGP3rBLw9-hkK754gSWrdkeqePCmk",
+    "akad_bni": "16sHVGwWK6XbJMiH_HaA0S2MNckwy4keHBHX7WMVtmU4",
+    "akad_bri": "1ikIU7cl7fB9BVeBOF1jNGQg46QzYyDcZp4ygPgdxRTQ",
+    "akad_bsi": "1IbRH5nXMD2FND4NamAz-IuI1aGt3xbkWC7mVHKopRaI",
+    "akad_btn": "1uW_M_yC7QdeWYRGWBub3DIy_qmuCtpjI4-_Z5taZ9As",
+    "akad_man": "1IyKkn0UB7pgpyp7wWZP5tr_UMgtvn5G6eGfT2JhH06Y",
+    "und_bsi": "14tnmJiDb5RDkGx1qZ1ce8Xo8IEv65bV1KWsyuoipj1g",
+    "und_bri": "10sQ9tUG77jhuSEzTDF_2LyI0nNdcrYGNmbPfFBxyJs0",
+    "und_btn": "1dQ1EGkhSOfXpFF3Ts12aE3xBO5FZmPw_dYFROvLK3bQ",
+    "und_bjb": "1uBqLn_r8YBywIVYMkWvKoBin2CzVfJQeBW58vCgbCEw",
+    "und_bni": "1hQb3s-qkT4uMfWHOqBGdFOuDGpG2mgwE6Lvr6f16WUA",
+    "und_man": "1gMDnrZ3OfV19yJP4SaOltU0PL3ZVdrKeca4jr42mWhs"
+  },
+  
+  "integration_mapping": {
+    "drive_integration": {
+      "source": "bramsray1/04_AI_Universal_Scanner.gs",
+      "status": "Ready for integration",
+      "description": "Drive configuration for Google Drive folder access"
+    },
+    "template_management": {
+      "source": "bramsray1/06_Template_Registry.gs",
+      "status": "Ready for integration",
+      "description": "Template registry for document templates"
+    },
+    "document_generation": {
+      "source": "bramsray1/96_UI_Legal_Wrappers.gs",
+      "status": "Ready for integration",
+      "description": "UI wrappers for document generation"
+    },
+    "bank_integration": {
+      "source": "bramsray1/97_UI_Bank_Wrappers.gs",
+      "status": "Ready for integration",
+      "description": "UI wrappers for bank forms and akad documents"
+    },
+    "07_raw_materials_integration": {
+      "target": "07_Raw_Materials_Data/configuration/",
+      "status": "Ready for mapping",
+      "description": "Integration target for drive configuration"
+    }
+  },
+  
+  "usage_scenarios": {
+    "template_generation": {
+      "description": "Generate documents using templates from Drive",
+      "integration": "07_Raw_Materials_Data/templates/",
+      "benefits": ["Centralized template management", "Version control", "Easy updates"]
+    },
+    "document_automation": {
+      "description": "Automate PPJB and akad document generation",
+      "integration": "07_Raw_Materials_Data/business_rules.json",
+      "benefits": ["Auto-merge functionality", "Quality control", "Process automation"]
+    },
+    "bank_form_generation": {
+      "description": "Generate bank forms automatically",
+      "integration": "07_Raw_Materials_Data/master_data/banks.json",
+      "benefits": ["Standardized forms", "Data consistency", "Reduced errors"]
+    }
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-20",
+    "last_modified": "2026-06-20",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Drive configuration and template registry for KPRFlow Enterprise from bramsray1",
+    "total_folders": 13,
+    "total_templates": 25,
+    "data_sources": [
+      "bramsray1/04_AI_Universal_Scanner.gs",
+      "bramsray1/06_Template_Registry.gs",
+      "bramsray1/96_UI_Legal_Wrappers.gs",
+      "bramsray1/97_UI_Bank_Wrappers.gs"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

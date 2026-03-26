@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KPRFlow Enterprise</string>
+    <string name="main_title">KPRFlow Enterprise</string>
+    <string name="main_subtitle">Mobile Application for KPR Management</string>
+    <string name="start_application">Start Application</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="enter_customer_name">Enter customer name</string>
+    <string name="enter_email">Enter email address</string>
+    <string name="enter_phone">Enter phone number</string>
+    <string name="enter_address">Enter address</string>
+    <string name="save_customer">Save Customer</string>
+    <string name="document_scanner">Document Scanner</string>
+    <string name="scan_document">Scan Document</string>
+    <string name="select_from_gallery">Select from Gallery</string>
+    <string name="process">Process</string>
+    <string name="cancel">Cancel</string>
+    <string name="view_details">View Details</string>
+    <string name="property_name">Property Name</string>
+    <string name="property_type">Property Type</string>
+    <string name="property_price">Property Price</string>
+    <string name="property_location">Location</string>
+    <string name="available">Available</string>
+    <string name="sold">Sold</string>
+    <string name="reserved">Reserved</string>
+    <string name="scan_document_description">Scan documents for KPR application. Supported formats: KTP, Slip Gaji, SPR</string>
+</resources>

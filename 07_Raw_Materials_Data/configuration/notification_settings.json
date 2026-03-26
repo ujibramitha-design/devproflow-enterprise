@@ -1,0 +1,355 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-20",
+  "source": "kprflow_enterprise_notification_system",
+  "description": "Complete notification system configuration for KPRFlow Enterprise",
+  
+  "notification_channels": [
+    {
+      "channel_id": "email",
+      "name": "Email Notifications",
+      "description": "Email-based notifications for various workflow events",
+      "status": "active",
+      "configuration": {
+        "smtp_server": "smtp.gmail.com",
+        "smtp_port": 587,
+        "smtp_username": "notifications@kprflow.com",
+        "smtp_password": "encrypted_password",
+        "use_tls": true,
+        "max_retries": 3,
+        "retry_delay": 300
+      },
+      "settings": {
+        "enabled": true,
+        "batch_size": 50,
+        "rate_limit": 100,
+        "rate_limit_period": 3600
+      }
+    },
+    {
+      "channel_id": "sms",
+      "name": "SMS Notifications",
+      "description": "SMS notifications for urgent alerts and updates",
+      "status": "active",
+      "configuration": {
+        "provider": "twilio",
+        "api_key": "encrypted_api_key",
+        "api_secret": "encrypted_api_secret",
+        "from_number": "+628123456789",
+        "max_retries": 3,
+        "retry_delay": 60
+      },
+      "settings": {
+        "enabled": true,
+        "max_characters": 160,
+        "rate_limit": 50,
+        "rate_limit_period": 3600
+      }
+    },
+    {
+      "channel_id": "whatsapp",
+      "name": "WhatsApp Notifications",
+      "description": "WhatsApp notifications for customer communications",
+      "status": "active",
+      "configuration": {
+        "provider": "whatsapp_business_api",
+        "api_key": "encrypted_api_key",
+        "phone_number_id": "encrypted_phone_id",
+        "webhook_url": "https://api.kprflow.com/webhook/whatsapp",
+        "max_retries": 3,
+        "retry_delay": 120
+      },
+      "settings": {
+        "enabled": true,
+        "max_message_length": 1000,
+        "rate_limit": 30,
+        "rate_limit_period": 3600
+      }
+    },
+    {
+      "channel_id": "push_notification",
+      "name": "Push Notifications",
+      "description": "Push notifications for mobile app users",
+      "status": "active",
+      "configuration": {
+        "provider": "firebase_cloud_messaging",
+        "server_key": "encrypted_server_key",
+        "api_url": "https://fcm.googleapis.com/fcm/send",
+        "max_retries": 3,
+        "retry_delay": 60
+      },
+      "settings": {
+        "enabled": true,
+        "max_payload_size": 4096,
+        "rate_limit": 100,
+        "rate_limit_period": 3600
+      }
+    },
+    {
+      "channel_id": "in_app",
+      "name": "In-App Notifications",
+      "description": "In-app notifications for logged-in users",
+      "status": "active",
+      "configuration": {
+        "storage_duration": 30,
+        "max_notifications_per_user": 50,
+        "cleanup_interval": 86400
+      },
+      "settings": {
+        "enabled": true,
+        "real_time_updates": true,
+        "notification_center": true
+      }
+    }
+  ],
+  
+  "notification_templates": [
+    {
+      "template_id": "customer_registration_welcome",
+      "name": "Customer Registration Welcome",
+      "description": "Welcome message for new customer registration",
+      "category": "customer_onboarding",
+      "channels": ["email", "sms", "whatsapp"],
+      "templates": {
+        "email": {
+          "subject": "Welcome to KPRFlow - Your Registration is Complete",
+          "body": "Dear {{customer_name}},\n\nWelcome to KPRFlow Enterprise! Your registration has been successfully completed.\n\nRegistration Details:\n- Customer ID: {{customer_id}}\n- Registration Date: {{registration_date}}\n- Assigned Agent: {{agent_name}}\n\nNext Steps:\n1. Complete your profile information\n2. Upload required documents\n3. Select your preferred property\n\nFor assistance, contact us at support@kprflow.com or call {{support_phone}}.\n\nBest regards,\nKPRFlow Team",
+          "html_template": true
+        },
+        "sms": {
+          "body": "Welcome to KPRFlow! Your registration is complete. Customer ID: {{customer_id}}. Next: Complete profile & upload documents. Support: {{support_phone}}"
+        },
+        "whatsapp": {
+          "body": "🎉 Welcome to KPRFlow! Your registration is complete.\n\n📋 Customer ID: {{customer_id}}\n📅 Date: {{registration_date}}\n👤 Agent: {{agent_name}}\n\n📱 Complete your profile and upload documents to proceed with your KPR application.\n\nNeed help? Call {{support_phone}}"
+        }
+      },
+      "variables": ["customer_name", "customer_id", "registration_date", "agent_name", "support_phone"],
+      "triggers": ["customer_registration_completed"]
+    },
+    {
+      "template_id": "document_upload_reminder",
+      "name": "Document Upload Reminder",
+      "description": "Reminder for customers to upload required documents",
+      "category": "document_management",
+      "channels": ["email", "sms", "whatsapp"],
+      "templates": {
+        "email": {
+          "subject": "Action Required: Upload Your Documents - KPRFlow",
+          "body": "Dear {{customer_name}},\n\nThis is a reminder to upload your required documents for your KPR application.\n\nMissing Documents:\n{{missing_documents}}\n\nHow to Upload:\n1. Log in to your KPRFlow account\n2. Go to Document section\n3. Upload clear photos/scans of each document\n4. Wait for verification\n\nRequired Documents:\n- KTP (Identity Card)\n- KK (Family Card)\n- Slip Gaji (Payslip)\n- Rekening Koran (Bank Statement)\n- Surat Nikah (Marriage Certificate, if applicable)\n\nUpload Deadline: {{deadline_date}}\n\nFor assistance, contact your agent {{agent_name}} or call {{support_phone}}.\n\nBest regards,\nKPRFlow Team",
+          "html_template": true
+        },
+        "sms": {
+          "body": "KPRFlow: Please upload your required documents by {{deadline_date}}. Missing: {{missing_documents_count}} docs. Login to upload. Support: {{support_phone}}"
+        },
+        "whatsapp": {
+          "body": "📄 KPRFlow Document Reminder\n\nHi {{customer_name}},\n\nPlease upload your required documents by {{deadline_date}}.\n\n📋 Missing: {{missing_documents_count}} documents\n📅 Deadline: {{deadline_date}}\n\n📱 Upload via your KPRFlow account or contact {{agent_name}} for help.\n\nSupport: {{support_phone}}"
+        }
+      },
+      "variables": ["customer_name", "missing_documents", "missing_documents_count", "deadline_date", "agent_name", "support_phone"],
+      "triggers": ["document_upload_overdue", "document_upload_reminder"]
+    },
+    {
+      "template_id": "bank_application_status",
+      "name": "Bank Application Status Update",
+      "description": "Status update for bank application progress",
+      "category": "application_tracking",
+      "channels": ["email", "sms", "whatsapp"],
+      "templates": {
+        "email": {
+          "subject": "Bank Application Status Update - {{bank_name}} - KPRFlow",
+          "body": "Dear {{customer_name}},\n\nWe're updating you on your KPR application status with {{bank_name}}.\n\nApplication Details:\n- Application ID: {{application_id}}\n- Bank: {{bank_name}}\n- Property: {{property_name}}\n- Loan Amount: {{loan_amount}}\n- Current Status: {{current_status}}\n- Last Updated: {{update_date}}\n\nStatus Description: {{status_description}}\n\nNext Steps: {{next_steps}}\n\nFor questions, contact your agent {{agent_name}} or call {{support_phone}}.\n\nBest regards,\nKPRFlow Team",
+          "html_template": true
+        },
+        "sms": {
+          "body": "KPRFlow: Your {{bank_name}} application status is {{current_status}}. App ID: {{application_id}}. Next: {{next_steps}}. Support: {{support_phone}}"
+        },
+        "whatsapp": {
+          "body": "🏦 Bank Application Update\n\nHi {{customer_name}},\n\nYour {{bank_name}} application status: {{current_status}}\n\n📋 Application ID: {{application_id}}\n🏠 Property: {{property_name}}\n💰 Amount: {{loan_amount}}\n📅 Updated: {{update_date}}\n\n📄 Description: {{status_description}}\n\n🔄 Next Steps: {{next_steps}}\n\nContact {{agent_name}} for questions. Support: {{support_phone}}"
+        }
+      },
+      "variables": ["customer_name", "bank_name", "application_id", "property_name", "loan_amount", "current_status", "update_date", "status_description", "next_steps", "agent_name", "support_phone"],
+      "triggers": ["bank_application_status_change"]
+    },
+    {
+      "template_id": "akad_scheduling",
+      "name": "Akad Scheduling Notification",
+      "description": "Notification for akad (credit agreement) scheduling",
+      "category": "akad_management",
+      "channels": ["email", "sms", "whatsapp"],
+      "templates": {
+        "email": {
+          "subject": "Akad Scheduling Confirmation - KPRFlow",
+          "body": "Dear {{customer_name}},\n\nYour akad (credit agreement) has been scheduled!\n\nAkad Details:\n- Akad Date: {{akad_date}}\n- Akad Time: {{akad_time}}\n- Location: {{akad_location}}\n- Bank: {{bank_name}}\n- Property: {{property_name}}\n- Loan Amount: {{loan_amount}}\n\nRequired Documents:\n{{required_documents}}\n\nWhat to Bring:\n- Original KTP and KK\n- Original payslips (3 months)\n- Original bank statements (3 months)\n- Marriage certificate (if applicable)\n- Down payment proof\n\nContact Person: {{contact_person}}\nPhone: {{contact_phone}}\n\nPlease arrive 15 minutes early. For questions, contact {{agent_name}} or call {{support_phone}}.\n\nBest regards,\nKPRFlow Team",
+          "html_template": true
+        },
+        "sms": {
+          "body": "KPRFlow: Akad scheduled! Date: {{akad_date}}, Time: {{akad_time}}, Location: {{akad_location}}. Bring required documents. Contact: {{contact_person}}"
+        },
+        "whatsapp": {
+          "body": "📅 Akad Scheduled!\n\nHi {{customer_name}},\n\nYour akad details:\n\n🗓️ Date: {{akad_date}}\n⏰ Time: {{akad_time}}\n📍 Location: {{akad_location}}\n🏦 Bank: {{bank_name}}\n\n📋 Required Documents:\n{{required_documents}}\n\n📱 Contact: {{contact_person}} ({{contact_phone}})\n\nPlease arrive 15 minutes early. Contact {{agent_name}} for questions."
+        }
+      },
+      "variables": ["customer_name", "akad_date", "akad_time", "akad_location", "bank_name", "property_name", "loan_amount", "required_documents", "contact_person", "contact_phone", "agent_name", "support_phone"],
+      "triggers": ["akad_scheduled"]
+    },
+    {
+      "template_id": "payment_reminder",
+      "name": "Payment Reminder",
+      "description": "Payment reminder for down payments and installments",
+      "category": "payment_management",
+      "channels": ["email", "sms", "whatsapp"],
+      "templates": {
+        "email": {
+          "subject": "Payment Reminder - KPRFlow",
+          "body": "Dear {{customer_name}},\n\nThis is a reminder for your upcoming payment.\n\nPayment Details:\n- Payment Type: {{payment_type}}\n- Amount: {{payment_amount}}\n- Due Date: {{due_date}}\n- Property: {{property_name}}\n- Payment Method: {{payment_method}}\n\nHow to Pay:\n{{payment_instructions}}\n\nPayment Deadline: {{due_date}}\n\nLate payments may affect your application status. For assistance, contact {{agent_name}} or call {{support_phone}}.\n\nBest regards,\nKPRFlow Team",
+          "html_template": true
+        },
+        "sms": {
+          "body": "KPRFlow: Payment reminder! {{payment_type}}: {{payment_amount}} due {{due_date}}. Property: {{property_name}}. Pay on time to avoid delays. Support: {{support_phone}}"
+        },
+        "whatsapp": {
+          "body": "💳 Payment Reminder\n\nHi {{customer_name}},\n\nYour payment details:\n\n💰 Amount: {{payment_amount}}\n📅 Due Date: {{due_date}}\n🏠 Property: {{property_name}}\n💳 Type: {{payment_type}}\n\n📱 Payment Method: {{payment_method}}\n\nPlease pay on time to avoid delays. Contact {{agent_name}} for help.\n\nSupport: {{support_phone}}"
+        }
+      },
+      "variables": ["customer_name", "payment_type", "payment_amount", "due_date", "property_name", "payment_method", "payment_instructions", "agent_name", "support_phone"],
+      "triggers": ["payment_due", "payment_overdue"]
+    }
+  ],
+  
+  "notification_settings": {
+    "global_settings": {
+      "enabled": true,
+      "debug_mode": false,
+      "log_notifications": true,
+      "archive_notifications": true,
+      "archive_duration": 365
+    },
+    "delivery_settings": {
+      "max_retry_attempts": 3,
+      "retry_delay_seconds": 300,
+      "timeout_seconds": 60,
+      "bulk_send_limit": 100,
+      "rate_limit_enabled": true
+    },
+    "content_settings": {
+      "max_email_size_mb": 25,
+      "max_sms_length": 160,
+      "max_whatsapp_length": 1000,
+      "allow_html_emails": true,
+      "default_language": "id",
+      "supported_languages": ["id", "en"]
+    },
+    "privacy_settings": {
+      "mask_sensitive_data": true,
+      "log_personal_data": false,
+      "data_retention_days": 365,
+      "gdpr_compliant": true
+    }
+  },
+  
+  "notification_triggers": {
+    "customer_triggers": [
+      {
+        "trigger_id": "customer_registration_completed",
+        "name": "Customer Registration Completed",
+        "description": "Triggered when customer completes registration",
+        "template_id": "customer_registration_welcome",
+        "channels": ["email", "sms", "whatsapp"],
+        "delay_seconds": 0,
+        "conditions": ["registration_complete"]
+      },
+      {
+        "trigger_id": "document_upload_reminder",
+        "name": "Document Upload Reminder",
+        "description": "Reminder for document upload",
+        "template_id": "document_upload_reminder",
+        "channels": ["email", "sms", "whatsapp"],
+        "delay_seconds": 86400,
+        "conditions": ["documents_missing", "registration_complete"]
+      },
+      {
+        "trigger_id": "payment_due",
+        "name": "Payment Due",
+        "description": "Payment due reminder",
+        "template_id": "payment_reminder",
+        "channels": ["email", "sms", "whatsapp"],
+        "delay_seconds": 86400,
+        "conditions": ["payment_due_soon"]
+      }
+    ],
+    "workflow_triggers": [
+      {
+        "trigger_id": "workflow_step_completed",
+        "name": "Workflow Step Completed",
+        "description": "Triggered when a workflow step is completed",
+        "template_id": "workflow_status_update",
+        "channels": ["email", "in_app"],
+        "delay_seconds": 0,
+        "conditions": ["step_completed"]
+      },
+      {
+        "trigger_id": "workflow_completed",
+        "name": "Workflow Completed",
+        "description": "Triggered when a workflow is completed",
+        "template_id": "workflow_completion_notification",
+        "channels": ["email", "sms", "whatsapp"],
+        "delay_seconds": 0,
+        "conditions": ["workflow_completed"]
+      }
+    ],
+    "system_triggers": [
+      {
+        "trigger_id": "system_maintenance",
+        "name": "System Maintenance",
+        "description": "System maintenance notification",
+        "template_id": "system_maintenance_notification",
+        "channels": ["email", "in_app"],
+        "delay_seconds": 0,
+        "conditions": ["maintenance_scheduled"]
+      }
+    ]
+  },
+  
+  "integration_mapping": {
+    "workflow_integration": {
+      "source": "07_Raw_Materials_Data/configuration/workflow_tracking.json",
+      "mapping": "workflow status notifications",
+      "description": "Workflow status changes trigger notifications"
+    },
+    "business_rules_integration": {
+      "source": "07_Raw_Materials_Data/configuration/business_rules.json",
+      "mapping": "business rule notifications",
+      "description": "Business rule violations trigger notifications"
+    },
+    "validation_rules_integration": {
+      "source": "07_Raw_Materials_Data/validation_rules/field_validations.json",
+      "mapping": "validation error notifications",
+      "description": "Validation errors trigger notifications"
+    },
+    "drive_configuration_integration": {
+      "source": "07_Raw_Materials_Data/configuration/drive_configuration.json",
+      "mapping": "document notifications",
+      "description": "Document changes trigger notifications"
+    }
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-20",
+    "last_modified": "2026-06-20",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Complete notification system configuration for KPRFlow Enterprise",
+    "total_channels": 5,
+    "total_templates": 5,
+    "total_triggers": 6,
+    "data_sources": [
+      "bramsray1/96_UI_Legal_Wrappers.gs",
+      "bramsray1/97_UI_Bank_Wrappers.gs",
+      "07_Raw_Materials_Data/configuration/workflow_tracking.json",
+      "07_Raw_Materials_Data/configuration/business_rules.json"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

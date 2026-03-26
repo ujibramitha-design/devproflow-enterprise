@@ -1,0 +1,431 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-20",
+  "source": "kprflow_enterprise_validation_rules",
+  "description": "Field validation rules and data quality standards for KPRFlow Enterprise",
+  
+  "field_validations": [
+    {
+      "field_name": "email",
+      "validation_type": "email_format",
+      "required": true,
+      "format": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+      "error_message": "Invalid email format",
+      "description": "Email must be in valid format",
+      "examples": ["user@example.com", "test@domain.co.id"],
+      "invalid_examples": ["user@", "@domain.com", "user@.com"],
+      "integration_source": "packages/utils/src/validation.ts"
+    },
+    {
+      "field_name": "phone",
+      "validation_type": "phone_format",
+      "required": true,
+      "format": "^(\\+62|62)?[\\s-]?0?8[1-9]{1}[\\s-]?\\d{1,4}[\\s-]?\\d{1,4}[\\s-]?\\d{1,4}$",
+      "error_message": "Invalid Indonesian phone number format",
+      "description": "Phone number must be valid Indonesian format",
+      "examples": ["+62-812-3456-7890", "08123456789", "628123456789"],
+      "invalid_examples": ["123456", "08123456789012", "0812-3456-78901"],
+      "integration_source": "packages/utils/src/validation.ts"
+    },
+    {
+      "field_name": "nik",
+      "validation_type": "nik_format",
+      "required": true,
+      "format": "^\\d{16}$",
+      "error_message": "NIK must be 16 digits",
+      "description": "Indonesian National ID number (16 digits)",
+      "examples": ["3201012345678901", "1234567890123456"],
+      "invalid_examples": ["123456789012345", "12345678901234567", "ABCDEFGHIJKLMNO"],
+      "integration_source": "packages/utils/src/validation.ts"
+    },
+    {
+      "field_name": "npwp",
+      "validation_type": "npwp_format",
+      "required": false,
+      "format": "^\\d{2}\\.\\d{3}\\.\\d{3}\\.\\d-\\d{3}\\.\\d{3}$",
+      "error_message": "NPWP must be in format XX.XXX.XXX.X-XXX.XXX",
+      "description": "Indonesian Taxpayer Registration Number",
+      "examples": ["12.345.678.9-123.456", "01.234.567.8-123.456"],
+      "invalid_examples": ["1234567890123456", "12.345.678.9-12345", "12.345.678.9.123.456"],
+      "integration_source": "packages/utils/src/validation.ts"
+    },
+    {
+      "field_name": "first_name",
+      "validation_type": "name_format",
+      "required": true,
+      "min_length": 2,
+      "max_length": 50,
+      "format": "^[a-zA-Z\\s'-]+$",
+      "error_message": "First name must be 2-50 characters, letters only",
+      "description": "Customer first name validation",
+      "examples": ["John", "Maria", "Ahmad", "Siti"],
+      "invalid_examples": ["J", "John123", "John@", "John-123"],
+      "integration_source": "custom"
+    },
+    {
+      "field_name": "last_name",
+      "validation_type": "name_format",
+      "required": true,
+      "min_length": 2,
+      "max_length": 50,
+      "format": "^[a-zA-Z\\s'-]+$",
+      "error_message": "Last name must be 2-50 characters, letters only",
+      "description": "Customer last name validation",
+      "examples": ["Doe", "Smith", "Wijaya", "Putri"],
+      "invalid_examples": ["D", "Doe123", "Doe@", "Doe-123"],
+      "integration_source": "custom"
+    },
+    {
+      "field_name": "birth_date",
+      "validation_type": "date_format",
+      "required": true,
+      "format": "^\\d{4}-\\d{2}-\\d{2}$",
+      "error_message": "Birth date must be in YYYY-MM-DD format",
+      "description": "Customer birth date validation",
+      "examples": ["1990-01-15", "1985-12-31", "2000-06-15"],
+      "invalid_examples": ["15-01-1990", "1990/01/15", "1990-13-01"],
+      "integration_source": "custom"
+    },
+    {
+      "field_name": "loan_amount",
+      "validation_type": "amount_format",
+      "required": true,
+      "min_value": 50000000,
+      "max_value": 10000000000,
+      "format": "^\\d+$",
+      "error_message": "Loan amount must be between 50 million and 10 billion IDR",
+      "description": "Loan amount validation in Indonesian Rupiah",
+      "examples": ["100000000", "500000000", "1000000000"],
+      "invalid_examples": ["10000000", "15000000000", "abc123"],
+      "integration_source": "packages/utils/src/validation.ts"
+    },
+    {
+      "field_name": "down_payment",
+      "validation_type": "down_payment_format",
+      "required": true,
+      "min_percentage": 20,
+      "max_percentage": 100,
+      "format": "^\\d+$",
+      "error_message": "Down payment must be at least 20% of loan amount",
+      "description": "Down payment validation with percentage check",
+      "examples": ["20000000", "50000000", "100000000"],
+      "invalid_examples": ["5000000", "abc123", "100000000000"],
+      "integration_source": "packages/utils/src/validation.ts"
+    },
+    {
+      "field_name": "tenure",
+      "validation_type": "tenure_format",
+      "required": true,
+      "min_value": 12,
+      "max_value": 360,
+      "format": "^\\d+$",
+      "error_message": "Tenure must be between 12 and 360 months",
+      "description": "Loan tenure validation in months",
+      "examples": ["12", "60", "120", "360"],
+      "invalid_examples": ["6", "361", "abc", "12.5"],
+      "integration_source": "packages/utils/src/validation.ts"
+    },
+    {
+      "field_name": "property_type",
+      "validation_type": "property_type_format",
+      "required": true,
+      "allowed_values": ["Rumah Tinggal", "Rumah Subsidi", "Ruko"],
+      "error_message": "Property type must be one of: Rumah Tinggal, Rumah Subsidi, Ruko",
+      "description": "Property type validation",
+      "examples": ["Rumah Tinggal", "Rumah Subsidi", "Ruko"],
+      "invalid_examples": ["Apartment", "Vila", "Townhouse", "rumah"],
+      "integration_source": "business_rules.json"
+    },
+    {
+      "field_name": "bank_name",
+      "validation_type": "bank_name_format",
+      "required": true,
+      "allowed_values": ["BTN", "BNI", "BRI", "Bank Mandiri", "Danamon", "CIMB Niaga", "Permata", "BSI", "OCBC NISP", "BJB"],
+      "error_message": "Bank must be one of the supported banks",
+      "description": "Bank name validation",
+      "examples": ["BTN", "BNI", "BRI", "Bank Mandiri"],
+      "invalid_examples": ["BCA", "Bank Central Asia", "Citibank", "HSBC"],
+      "integration_source": "master_data/banks.json"
+    },
+    {
+      "field_name": "file_size",
+      "validation_type": "file_size_format",
+      "required": false,
+      "max_size_mb": 10,
+      "format": "^\\d+$",
+      "error_message": "File size must not exceed 10MB",
+      "description": "File size validation for document uploads",
+      "examples": ["1024", "1048576", "5242880"],
+      "invalid_examples": ["11534336", "abc", "10.5"],
+      "integration_source": "packages/utils/src/validation.ts"
+    },
+    {
+      "field_name": "file_type",
+      "validation_type": "file_type_format",
+      "required": false,
+      "allowed_types": ["pdf", "jpg", "jpeg", "png", "doc", "docx"],
+      "error_message": "File type must be one of: pdf, jpg, jpeg, png, doc, docx",
+      "description": "File type validation for document uploads",
+      "examples": ["document.pdf", "photo.jpg", "scan.png", "application.doc"],
+      "invalid_examples": ["file.txt", "image.gif", "video.mp4", "archive.zip"],
+      "integration_source": "packages/utils/src/validation.ts"
+    }
+  ],
+  
+  "data_quality_rules": [
+    {
+      "rule_name": "required_fields",
+      "description": "Fields that must be present in all records",
+      "fields": [
+        "first_name",
+        "last_name", 
+        "email",
+        "phone",
+        "nik",
+        "birth_date",
+        "loan_amount",
+        "down_payment",
+        "tenure",
+        "property_type",
+        "bank_name"
+      ],
+      "error_message": "Required fields are missing",
+      "severity": "critical",
+      "validation_type": "completeness_check"
+    },
+    {
+      "rule_name": "email_uniqueness",
+      "description": "Email must be unique across all customers",
+      "field": "email",
+      "error_message": "Email already exists",
+      "severity": "high",
+      "validation_type": "uniqueness_check"
+    },
+    {
+      "rule_name": "nik_uniqueness",
+      "description": "NIK must be unique across all customers",
+      "field": "nik",
+      "error_message": "NIK already exists",
+      "severity": "critical",
+      "validation_type": "uniqueness_check"
+    },
+    {
+      "rule_name": "phone_uniqueness",
+      "description": "Phone number must be unique across all customers",
+      "field": "phone",
+      "error_message": "Phone number already exists",
+      "severity": "medium",
+      "validation_type": "uniqueness_check"
+    },
+    {
+      "rule_name": "age_validation",
+      "description": "Customer age must be between 18 and 65 years",
+      "field": "birth_date",
+      "min_age": 18,
+      "max_age": 65,
+      "error_message": "Customer age must be between 18 and 65 years",
+      "severity": "high",
+      "validation_type": "age_check"
+    },
+    {
+      "rule_name": "loan_to_value_ratio",
+      "description": "Loan to value ratio must not exceed 80%",
+      "fields": ["loan_amount", "property_value"],
+      "max_ratio": 0.8,
+      "error_message": "Loan to value ratio exceeds 80%",
+      "severity": "high",
+      "validation_type": "ratio_check"
+    },
+    {
+      "rule_name": "debt_to_income_ratio",
+      "description": "Debt to income ratio must not exceed 40%",
+      "fields": ["monthly_income", "monthly_debt"],
+      "max_ratio": 0.4,
+      "error_message": "Debt to income ratio exceeds 40%",
+      "severity": "medium",
+      "validation_type": "ratio_check"
+    },
+    {
+      "rule_name": "property_price_range",
+      "description": "Property price must be within reasonable range",
+      "field": "property_value",
+      "min_value": 100000000,
+      "max_value": 5000000000,
+      "error_message": "Property price is outside reasonable range",
+      "severity": "medium",
+      "validation_type": "range_check"
+    }
+  ],
+  
+  "validation_workflows": [
+    {
+      "workflow_name": "customer_registration",
+      "description": "Validation workflow for new customer registration",
+      "steps": [
+        {
+          "step": 1,
+          "name": "basic_info_validation",
+          "fields": ["first_name", "last_name", "email", "phone", "nik"],
+          "required": true
+        },
+        {
+          "step": 2,
+          "name": "demographic_validation",
+          "fields": ["birth_date", "address"],
+          "required": true
+        },
+        {
+          "step": 3,
+          "name": "financial_validation",
+          "fields": ["monthly_income", "monthly_debt"],
+          "required": true
+        },
+        {
+          "step": 4,
+          "name": "uniqueness_validation",
+          "fields": ["email", "nik", "phone"],
+          "required": true
+        }
+      ],
+      "error_handling": "stop_on_first_error"
+    },
+    {
+      "workflow_name": "loan_application",
+      "description": "Validation workflow for loan application",
+      "steps": [
+        {
+          "step": 1,
+          "name": "customer_validation",
+          "fields": ["customer_id"],
+          "required": true
+        },
+        {
+          "step": 2,
+          "name": "property_validation",
+          "fields": ["property_id", "property_type", "property_value"],
+          "required": true
+        },
+        {
+          "step": 3,
+          "name": "financial_validation",
+          "fields": ["loan_amount", "down_payment", "tenure"],
+          "required": true
+        },
+        {
+          "step": 4,
+          "name": "bank_validation",
+          "fields": ["bank_name", "bank_branch"],
+          "required": true
+        }
+      ],
+      "error_handling": "collect_all_errors"
+    },
+    {
+      "workflow_name": "document_upload",
+      "description": "Validation workflow for document uploads",
+      "steps": [
+        {
+          "step": 1,
+          "name": "file_format_validation",
+          "fields": ["file_type"],
+          "required": true
+        },
+        {
+          "step": 2,
+          "name": "file_size_validation",
+          "fields": ["file_size"],
+          "required": true
+        },
+        {
+          "step": 3,
+          "name": "document_type_validation",
+          "fields": ["document_type"],
+          "required": true
+        }
+      ],
+      "error_handling": "collect_all_errors"
+    }
+  ],
+  
+  "error_handling": {
+    "error_messages": {
+      "field_validation_failed": "Field validation failed",
+      "required_field_missing": "Required field is missing",
+      "invalid_format": "Invalid format",
+      "value_out_of_range": "Value is out of allowed range",
+      "uniqueness_violation": "Value must be unique",
+      "business_rule_violation": "Business rule violation",
+      "system_error": "System validation error"
+    },
+    "error_codes": {
+      "VAL001": "Field validation error",
+      "VAL002": "Required field error",
+      "VAL003": "Format validation error",
+      "VAL004": "Range validation error",
+      "VAL005": "Uniqueness validation error",
+      "VAL006": "Business rule validation error",
+      "VAL007": "System validation error"
+    },
+    "error_severity": {
+      "critical": "Block processing",
+      "high": "Manual review required",
+      "medium": "Warning notification",
+      "low": "Info log"
+    }
+  },
+  
+  "integration_mapping": {
+    "technical_validation": {
+      "source": "packages/utils/src/validation.ts",
+      "functions": [
+        "isValidEmail",
+        "isValidPhone", 
+        "isValidNIK",
+        "isValidNPWP",
+        "isValidAmount",
+        "isValidLoanAmount",
+        "isValidDownPayment",
+        "isValidTenure",
+        "isValidFileSize",
+        "isValidFileType"
+      ]
+    },
+    "database_validation": {
+      "source": "database/CIRUAS_LAND_VALIDATION_REPORT.sql",
+      "reports": [
+        "Project validation",
+        "Unit validation",
+        "Distribution validation"
+      ]
+    },
+    "business_validation": {
+      "source": "documentation/FINAL TARGET BANK SYSTEM WITH UNIT VALIDATION.md",
+      "features": [
+        "Unit completion validation",
+        "Processing time validation",
+        "Bank selection validation"
+      ]
+    }
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-20",
+    "last_modified": "2026-06-20",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Field validation rules and data quality standards for KPRFlow Enterprise",
+    "total_field_validations": 13,
+    "total_data_quality_rules": 7,
+    "total_validation_workflows": 3,
+    "data_sources": [
+      "packages/utils/src/validation.ts",
+      "database/CIRUAS_LAND_VALIDATION_REPORT.sql",
+      "documentation/FINAL TARGET BANK SYSTEM WITH UNIT VALIDATION.md",
+      "business_rules.json",
+      "master_data/banks.json"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

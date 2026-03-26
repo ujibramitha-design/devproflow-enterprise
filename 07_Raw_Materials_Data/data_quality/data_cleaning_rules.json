@@ -1,0 +1,822 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-21",
+  "source": "kprflow_enterprise_data_quality",
+  "description": "Complete data cleaning rules for KPRFlow Enterprise data quality management",
+  
+  "cleaning_rules": [
+    {
+      "rule_id": "PHONE_STANDARDIZATION",
+      "name": "Phone Number Standardization",
+      "description": "Standardize phone number formats to international format",
+      "category": "contact_data",
+      "priority": "high",
+      "enabled": true,
+      "input_patterns": [
+        "^0[0-9]{9,12}$",
+        "^\\+62[0-9]{9,12}$",
+        "^62[0-9]{9,12}$",
+        "^[0-9]{10,13}$",
+        "^\\+62[-\\s][0-9]{3}[-\\s][0-9]{4}[-\\s][0-9]{4}$",
+        "^0[0-9]{3}[-\\s][0-9]{4}[-\\s][0-9]{4}$"
+      ],
+      "output_format": "+62{number}",
+      "cleaning_actions": [
+        "remove_special_characters",
+        "remove_spaces",
+        "add_country_code",
+        "validate_length"
+      ],
+      "validation_rules": [
+        "phone_length_10_to_13",
+        "phone_start_with_valid_prefix",
+        "phone_numeric_only"
+      ],
+      "examples": [
+        {
+          "input": "08123456789",
+          "output": "+628123456789"
+        },
+        {
+          "input": "+62-812-345-6789",
+          "output": "+628123456789"
+        },
+        {
+          "input": "0812 345 6789",
+          "output": "+628123456789"
+        },
+        {
+          "input": "628123456789",
+          "output": "+628123456789"
+        }
+      ]
+    },
+    {
+      "rule_id": "EMAIL_STANDARDIZATION",
+      "name": "Email Standardization",
+      "description": "Standardize email formats and validate email addresses",
+      "category": "contact_data",
+      "priority": "high",
+      "enabled": true,
+      "input_patterns": [
+        "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$",
+        "^[A-Z0-9._%+-]+@[A-Z0-9.-]+$",
+        "^[A-Z0-9._%+-]+@[A-Z.-]+$"
+      ],
+      "output_format": "lowercase_trimmed",
+      "cleaning_actions": [
+        "convert_to_lowercase",
+        "trim_whitespace",
+        "validate_domain",
+        "validate_format"
+      ],
+      "validation_rules": [
+        "email_format_validation",
+        "domain_validation",
+        "local_part_validation",
+        "no_consecutive_dots",
+        "starts_with_letter_or_number"
+      ],
+      "examples": [
+        {
+          "input": "USER.EMAIL@GMAIL.COM",
+          "output": "user.email@gmail.com"
+        },
+        {
+          "input": "user.email@gmail.com ",
+          "output": "user.email@gmail.com"
+        },
+        {
+          "input": "user.email@gmail",
+          "output": "user.email@gmail.com",
+          "warning": "Domain might be incomplete"
+        }
+      ]
+    },
+    {
+      "rule_id": "NIK_VALIDATION",
+      "name": "NIK Validation and Standardization",
+      "description": "Validate and standardize Indonesian NIK (National ID) numbers",
+      "category": "identity_data",
+      "priority": "high",
+      "enabled": true,
+      "input_patterns": [
+        "^[0-9]{16}$",
+        "^[0-9]{3}[-\\s][0-9]{4}[-\\s][0-9]{4}[-\\s][0-9]{4}$",
+        "^[0-9]{3}[0-9]{4}[0-9]{4}[0-9]{4}$"
+      ],
+      "output_format": "16_digits",
+      "cleaning_actions": [
+        "remove_special_characters",
+        "remove_spaces",
+        "validate_length",
+        "validate_checksum"
+      ],
+      "validation_rules": [
+        "nik_length_16_digits",
+        "nik_numeric_only",
+        "nik_checksum_validation",
+        "nik_province_code_validation",
+        "nik_date_validation"
+      ],
+      "examples": [
+        {
+          "input": "3271-0101-0101-0001",
+          "output": "3271010101010001"
+        },
+        {
+          "input": "3271 0101 0101 0001",
+          "output": "3271010101010001"
+        },
+        {
+          "input": "3271010101010001",
+          "output": "3271010101010001"
+        }
+      ]
+    },
+    {
+      "rule_id": "ADDRESS_NORMALIZATION",
+      "name": "Address Normalization",
+      "description": "Standardize address formats and validate address completeness",
+      "category": "location_data",
+      "priority": "medium",
+      "enabled": true,
+      "input_patterns": [
+        "^[A-Z0-9\\s.,#-]+$",
+        "^[A-Z0-9\\s.,#-]+[A-Z0-9\\s.,#-]+$",
+        "^[A-Z0-9\\s.,#-]+[A-Z0-9\\s.,#-]+[A-Z0-9\\s.,#-]+$"
+      ],
+      "output_format": "standardized_address",
+      "cleaning_actions": [
+        "standardize_street_types",
+        "standardize_number_format",
+        "add_missing_components",
+        "validate_province_code",
+        "validate_postal_code"
+      ],
+      "validation_rules": [
+        "address_completeness_check",
+        "street_name_validation",
+        "house_number_validation",
+        "postal_code_validation",
+        "province_validation"
+      ],
+      "examples": [
+        {
+          "input": "Jl. Sudirman 123, Jakarta",
+          "output": "Jl. Sudirman No. 123, RT 001/RW 002, Kel. Kramat, Kec. Senen, Jakarta Pusat, DKI Jakarta 10410"
+        },
+        {
+          "input": "Jalan Sudirman No. 123, Jakarta Pusat 10410",
+          "output": "Jl. Sudirman No. 123, RT 001/RW 002, Kel. Kramat, Kec. Senen, Jakarta Pusat, DKI Jakarta 10410"
+        }
+      ]
+    },
+    {
+      "rule_id": "FINANCIAL_STANDARDIZATION",
+      "name": "Financial Data Standardization",
+      "description": "Standardize financial data formats and validate amounts",
+      "category": "financial_data",
+      "priority": "high",
+      "enabled": true,
+      "input_patterns": [
+        "^Rp [0-9.,]+$",
+        "^[0-9.,]+$",
+        "^[0-9.,]+ IDR$",
+        "^[A-Z0-9.,]+$"
+      ],
+      "output_format": "numeric_decimal",
+      "cleaning_actions": [
+        "remove_currency_symbols",
+        "remove_thousand_separators",
+        "convert_to_numeric",
+        "validate_positive_amount",
+        "validate_range"
+      ],
+      "validation_rules": [
+        "numeric_validation",
+        "positive_amount_validation",
+        "range_validation",
+        "decimal_places_validation"
+      ],
+      "examples": [
+        {
+          "input": "Rp 10.000.000",
+          "output": "10000000"
+        },
+        {
+          "input": "10,000,000",
+          "output": "10000000"
+        },
+        {
+          "input": "10000000",
+          "output": "10000000"
+        },
+        {
+          "input": "10 juta",
+          "output": "10000000",
+          "warning": "Text conversion applied"
+        }
+      ]
+    },
+    {
+      "rule_id": "DATE_STANDARDIZATION",
+      "name": "Date Standardization",
+      "description": "Standardize date formats to ISO format",
+      "category": "temporal_data",
+      "priority": "medium",
+      "enabled": true,
+      "input_patterns": [
+        "^[0-9]{2}/[0-9]{2}/[0-9]{4}$",
+        "^[0-9]{2}-[0-9]{2}-[0-9]{4}$",
+        "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+        "^[0-9]{2} [A-Z]{3} [0-9]{4}$"
+      ],
+      "output_format": "YYYY-MM-DD",
+      "cleaning_actions": [
+        "convert_to_iso_format",
+        "validate_date_range",
+        "validate_date_logic",
+        "handle_timezone"
+      ],
+      "validation_rules": [
+        "date_format_validation",
+        "date_range_validation",
+        "date_logic_validation",
+        "future_date_validation",
+        "past_date_validation"
+      ],
+      "examples": [
+        {
+          "input": "20/03/2026",
+          "output": "2026-03-20"
+        },
+        {
+          "input": "20-03-2026",
+          "output": "2026-03-20"
+        },
+        {
+          "input": "20 Mar 2026",
+          "output": "2026-03-20"
+        },
+        {
+          "input": "2026-03-20",
+          "output": "2026-03-20"
+        }
+      ]
+    },
+    {
+      "rule_id": "DUPLICATE_DETECTION",
+      "name": "Duplicate Detection and Merging",
+      "description": "Detect and merge duplicate records",
+      "category": "data_integrity",
+      "priority": "high",
+      "enabled": true,
+      "input_patterns": [
+        ".*",
+        ".*",
+        ".*"
+      ],
+      "output_format": "deduplicated_records",
+      "cleaning_actions": [
+        "identify_potential_duplicates",
+        "calculate_similarity_score",
+        "merge_duplicate_records",
+        "assign_unique_id",
+        "preserve_original_data"
+      ],
+      "validation_rules": [
+        "duplicate_threshold_validation",
+        "merge_conflict_resolution",
+        "data_loss_prevention",
+        "audit_trail_maintenance"
+      ],
+      "examples": [
+        {
+          "input": [
+            {
+              "name": "John Doe",
+              "phone": "08123456789",
+              "email": "john@gmail.com"
+            },
+            {
+              "name": "John Doe",
+              "phone": "+628123456789",
+              "email": "john@gmail.com"
+            }
+          ],
+          "output": {
+            "name": "John Doe",
+            "phone": "+628123456789",
+            "email": "john@gmail.com",
+            "duplicate_sources": 2
+          }
+        }
+      ]
+    },
+    {
+      "rule_id": "MISSING_DATA_HANDLING",
+      "name": "Missing Data Handling",
+      "description": "Handle missing or null data values",
+      "category": "data_completeness",
+      "priority": "high",
+      "enabled": true,
+      "input_patterns": [
+        "^$",
+        "^\\s*$",
+        "^null$",
+        "^NULL$",
+        "^undefined$",
+        "^N/A$",
+        "^n/a$"
+      ],
+      "output_format": "handled_missing_data",
+      "cleaning_actions": [
+        "identify_missing_fields",
+        "auto_fill_default_values",
+        "flag_incomplete_records",
+        "validate_required_fields",
+        "generate_missing_data_report"
+      ],
+      "validation_rules": [
+        "required_field_validation",
+        "missing_data_threshold_validation",
+        "auto_fill_validation",
+        "completeness_score_validation"
+      ],
+      "examples": [
+        {
+          "input": {
+            "name": "John Doe",
+            "phone": "",
+            "email": "john@gmail.com"
+          },
+          "output": {
+            "name": "John Doe",
+            "phone": null,
+            "email": "john@gmail.com",
+            "missing_fields": ["phone"],
+            "completeness_score": 66.7
+          }
+        }
+      ]
+    },
+    {
+      "rule_id": "DATA_TYPE_CONVERSION",
+      "name": "Data Type Conversion",
+      "description": "Convert data to appropriate data types",
+      "category": "data_consistency",
+      "priority": "medium",
+      "enabled": true,
+      "input_patterns": [
+        "^[0-9]+$",
+        "^[0-9]+\\.[0-9]+$",
+        "^[A-Z]+$",
+        "^[A-Z0-9]+$",
+        "^[A-Z0-9\\s]+$"
+      ],
+      "output_format": "consistent_data_types",
+      "cleaning_actions": [
+        "convert_strings_to_numbers",
+        "convert_strings_to_dates",
+        "convert_strings_to_booleans",
+        "validate_type_conversion",
+        "handle_conversion_errors"
+      ],
+      "validation_rules": [
+        "type_consistency_validation",
+        "conversion_error_handling",
+        "data_loss_prevention",
+        "type_range_validation"
+      ],
+      "examples": [
+        {
+          "input": {
+            "age": "25",
+            "salary": "5000000.50",
+            "active": "true"
+          },
+          "output": {
+            "age": 25,
+            "salary": 5000000.50,
+            "active": true
+          }
+        }
+      ]
+    },
+    {
+      "rule_id": "OUTLIER_DETECTION",
+      "name": "Outlier Detection",
+      "description": "Detect and handle outlier values in numerical data",
+      "category": "data_quality",
+      "priority": "medium",
+      "enabled": true,
+      "input_patterns": [
+        "^[0-9]+$",
+        "^[0-9]+\\.[0-9]+$"
+      ],
+      "output_format": "flagged_outliers",
+      "cleaning_actions": [
+        "calculate_statistical_measures",
+        "identify_outliers_using_iqr",
+        "identify_outliers_using_zscore",
+        "flag_outlier_records",
+        "generate_outlier_report"
+      ],
+      "validation_rules": [
+        "outlier_threshold_validation",
+        "statistical_significance_validation",
+        "business_rule_validation",
+        "data_integrity_validation"
+      ],
+      "examples": [
+        {
+          "input": {
+            "salary": [5000000, 5500000, 6000000, 6500000, 7000000, 100000000]
+          },
+          "output": {
+            "salary": [5000000, 5500000, 6000000, 6500000, 7000000],
+            "outliers": [100000000],
+            "outlier_method": "IQR"
+          }
+        }
+      ]
+    },
+    {
+      "rule_id": "DATA_CONSISTENCY_CHECK",
+      "name": "Data Consistency Check",
+      "description": "Ensure data consistency across related fields",
+      "category": "data_integrity",
+      "priority": "medium",
+      "enabled": true,
+      "input_patterns": [
+        ".*",
+        ".*",
+        ".*"
+      ],
+      "output_format": "consistent_data",
+      "cleaning_actions": [
+        "validate_field_relationships",
+        "check_logical_consistency",
+        "validate_business_rules",
+        "flag_inconsistent_records",
+        "generate_consistency_report"
+      ],
+      "validation_rules": [
+        "field_relationship_validation",
+        "business_rule_validation",
+        "logical_consistency_validation",
+        "cross_field_validation"
+      ],
+      "examples": [
+        {
+          "input": {
+            "age": 25,
+            "birth_date": "2001-03-20",
+            "employment_status": "employed",
+            "monthly_income": 5000000
+          },
+          "output": {
+            "age": 25,
+            "birth_date": "2001-03-20",
+            "employment_status": "employed",
+            "monthly_income": 5000000,
+            "consistency_score": 100,
+            "inconsistencies": []
+          }
+        }
+      ]
+    },
+    {
+      "rule_id": "DATA_FORMAT_STANDARDIZATION",
+      "name": "Data Format Standardization",
+      "description": "Standardize data formats across the system",
+      "category": "data_consistency",
+      "priority": "medium",
+      "enabled": true,
+      "input_patterns": [
+        ".*",
+        ".*",
+        ".*"
+      ],
+      "output_format": "standardized_formats",
+      "cleaning_actions": [
+        "standardize_text_case",
+        "standardize_number_format",
+        "standardize_date_format",
+        "standardize_boolean_format",
+        "validate_format_standards"
+      ],
+      "validation_rules": [
+        "format_standard_validation",
+        "case_consistency_validation",
+        "number_format_validation",
+        "date_format_validation"
+      ],
+      "examples": [
+        {
+          "input": {
+            "first_name": "JOHN",
+            "last_name": "doe",
+            "phone": "08123456789",
+            "active": "TRUE"
+          },
+          "output": {
+            "first_name": "John",
+            "last_name": "Doe",
+            "phone": "+628123456789",
+            "active": true
+          }
+        }
+      ]
+    },
+    {
+      "rule_id": "DATA_INTEGRITY_VALIDATION",
+      "name": "Data Integrity Validation",
+      "description": "Validate data integrity and referential integrity",
+      "category": "data_integrity",
+      "priority": "high",
+      "enabled": true,
+      "input_patterns": [
+        ".*",
+        ".*",
+        ".*"
+      ],
+      "output_format": "validated_integrity",
+      "cleaning_actions": [
+        "validate_referential_integrity",
+        "check_foreign_key_constraints",
+        "validate_primary_key_uniqueness",
+        "check_data_corruption",
+        "generate_integrity_report"
+      ],
+      "validation_rules": [
+        "referential_integrity_validation",
+        "primary_key_validation",
+        "foreign_key_validation",
+        "data_corruption_validation"
+      ],
+      "examples": [
+        {
+          "input": {
+            "customer_id": "CUST001",
+            "property_id": "PROP001",
+            "bank_id": "BANK001"
+          },
+          "output": {
+            "customer_id": "CUST001",
+            "property_id": "PROP001",
+            "bank_id": "BANK001",
+            "integrity_score": 100,
+            "integrity_issues": []
+          }
+        }
+      ]
+    },
+    {
+      "rule_id": "DATA_QUALITY_METRICS",
+      "name": "Data Quality Metrics Calculation",
+      "description": "Calculate data quality metrics and generate quality reports",
+      "category": "quality_assessment",
+      "priority": "medium",
+      "enabled": true,
+      "input_patterns": [
+        ".*",
+        ".*",
+        ".*"
+      ],
+      "output_format": "quality_metrics",
+      "cleaning_actions": [
+        "calculate_completeness_score",
+        "calculate_accuracy_score",
+        "calculate_consistency_score",
+        "calculate_validity_score",
+        "calculate_uniqueness_score",
+        "generate_quality_report"
+      ],
+      "validation_rules": [
+        "quality_threshold_validation",
+        "metric_calculation_validation",
+        "report_generation_validation"
+      ],
+      "examples": [
+        {
+          "input": {
+            "total_records": 1000,
+            "complete_records": 950,
+            "accurate_records": 980,
+            "consistent_records": 990,
+            "valid_records": 975,
+            "unique_records": 1000
+          },
+          "output": {
+            "completeness_score": 95.0,
+            "accuracy_score": 98.0,
+            "consistency_score": 99.0,
+            "validity_score": 97.5,
+            "uniqueness_score": 100.0,
+            "overall_quality_score": 97.9
+          }
+        }
+      ]
+    },
+    {
+      "rule_id": "AUTOMATED_CLEANING_WORKFLOW",
+      "name": "Automated Cleaning Workflow",
+      "description": "Orchestrate automated data cleaning workflows",
+      "category": "automation",
+      "priority": "high",
+      "enabled": true,
+      "input_patterns": [
+        ".*",
+        ".*",
+        ".*"
+      ],
+      "output_format": "cleaned_data",
+      "cleaning_actions": [
+        "execute_cleaning_pipeline",
+        "apply_cleaning_rules",
+        "validate_cleaned_data",
+        "generate_cleaning_report",
+        "schedule_automated_cleaning"
+      ],
+      "validation_rules": [
+        "workflow_execution_validation",
+        "rule_application_validation",
+        "data_quality_validation",
+        "report_generation_validation"
+      ],
+      "examples": [
+        {
+          "input": {
+            "data_source": "customer_registration",
+            "rules": ["PHONE_STANDARDIZATION", "EMAIL_STANDARDIZATION", "NIK_VALIDATION"],
+            "schedule": "daily"
+          },
+          "output": {
+            "workflow_id": "WF001",
+            "status": "completed",
+            "records_processed": 1000,
+            "records_cleaned": 950,
+            "quality_improvement": 15.5
+          }
+        }
+      ]
+    }
+  ],
+  
+  "quality_thresholds": {
+    "completeness": {
+      "excellent": 95.0,
+      "good": 85.0,
+      "acceptable": 70.0,
+      "poor": 50.0
+    },
+    "accuracy": {
+      "excellent": 98.0,
+      "good": 90.0,
+      "acceptable": 80.0,
+      "poor": 60.0
+    },
+    "consistency": {
+      "excellent": 99.0,
+      "good": 95.0,
+      "acceptable": 85.0,
+      "poor": 70.0
+    },
+    "validity": {
+      "excellent": 97.0,
+      "good": 90.0,
+      "acceptable": 80.0,
+      "poor": 60.0
+    },
+    "uniqueness": {
+      "excellent": 100.0,
+      "good": 98.0,
+      "acceptable": 95.0,
+      "poor": 90.0
+    }
+  },
+  
+  "cleaning_schedules": [
+    {
+      "schedule_id": "DAILY_CLEANING",
+      "name": "Daily Data Cleaning",
+      "description": "Daily automated data cleaning for new records",
+      "frequency": "daily",
+      "time": "02:00",
+      "rules": [
+        "PHONE_STANDARDIZATION",
+        "EMAIL_STANDARDIZATION",
+        "NIK_VALIDATION",
+        "FINANCIAL_STANDARDIZATION",
+        "DATE_STANDARDIZATION"
+      ],
+      "data_sources": [
+        "customer_registration",
+        "property_booking",
+        "bank_application"
+      ]
+    },
+    {
+      "schedule_id": "WEEKLY_CLEANING",
+      "name": "Weekly Data Cleaning",
+      "description": "Weekly comprehensive data cleaning",
+      "frequency": "weekly",
+      "day": "sunday",
+      "time": "03:00",
+      "rules": [
+        "DUPLICATE_DETECTION",
+        "MISSING_DATA_HANDLING",
+        "DATA_CONSISTENCY_CHECK",
+        "OUTLIER_DETECTION"
+      ],
+      "data_sources": [
+        "all_data_sources"
+      ]
+    },
+    {
+      "schedule_id": "MONTHLY_CLEANING",
+      "name": "Monthly Data Cleaning",
+      "description": "Monthly deep data cleaning and quality assessment",
+      "frequency": "monthly",
+      "day": 1,
+      "time": "04:00",
+      "rules": [
+        "DATA_INTEGRITY_VALIDATION",
+        "DATA_QUALITY_METRICS",
+        "AUTOMATED_CLEANING_WORKFLOW"
+      ],
+      "data_sources": [
+        "all_data_sources"
+      ]
+    }
+  ],
+  
+  "error_handling": {
+    "validation_errors": {
+      "action": "flag_and_continue",
+      "log_level": "warning",
+      "notification": true
+    },
+    "conversion_errors": {
+      "action": "skip_and_log",
+      "log_level": "error",
+      "notification": true
+    },
+    "system_errors": {
+      "action": "stop_and_notify",
+      "log_level": "critical",
+      "notification": true
+    },
+    "data_loss_prevention": {
+      "enabled": true,
+      "backup_before_cleaning": true,
+      "rollback_enabled": true,
+      "audit_trail": true
+    }
+  },
+  
+  "integration_mapping": {
+    "business_rules_integration": {
+      "source": "07_Raw_Materials_Data/configuration/business_rules.json",
+      "mapping": "business rule validation in cleaning",
+      "description": "Business rules applied during data cleaning"
+    },
+    "validation_rules_integration": {
+      "source": "07_Raw_Materials_Data/validation_rules/field_validations.json",
+      "mapping": "field validation in cleaning rules",
+      "description": "Field validation rules applied in cleaning"
+    },
+    "workflow_tracking_integration": {
+      "source": "07_Raw_Materials_Data/configuration/workflow_tracking.json",
+      "mapping": "workflow data quality checks",
+      "description": "Data quality checks in workflow steps"
+    },
+    "notification_settings_integration": {
+      "source": "07_Raw_Materials_Data/configuration/notification_settings.json",
+      "mapping": "quality issue notifications",
+      "description": "Notifications for data quality issues"
+    }
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-21",
+    "last_modified": "2026-03-21",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Complete data cleaning rules for KPRFlow Enterprise data quality management",
+    "total_rules": 15,
+    "quality_thresholds": 5,
+    "cleaning_schedules": 3,
+    "data_sources": [
+      "customer_registration",
+      "property_booking",
+      "bank_application",
+      "all_data_sources"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

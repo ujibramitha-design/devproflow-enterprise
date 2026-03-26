@@ -1,0 +1,1028 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-20",
+  "source": "kprflow_enterprise_business_rules",
+  "total_rules": 32,
+  "description": "Complete business rules and validation logic for KPRFlow Enterprise",
+  "business_rules": [
+    {
+      "id": 1,
+      "name": "Customer Eligibility Rules",
+      "category": "customer_validation",
+      "description": "Customer eligibility criteria for KPR applications",
+      "rules": [
+        {
+          "rule_id": "CUST_001",
+          "name": "Minimum Age Requirement",
+          "condition": "age >= 19",
+          "description": "Customer must be at least 19 years old (BTN Bank only)",
+          "error_message": "Customer must be at least 19 years old (BTN Bank only)",
+          "severity": "critical",
+          "validation_type": "age_check",
+          "applies_to": ["application", "customer_validation"],
+          "bank_specific": "BTN"
+        },
+        {
+          "rule_id": "CUST_002",
+          "name": "Maximum Age Requirement",
+          "condition": "age <= 55",
+          "description": "Customer must not be older than 55 years old",
+          "error_message": "Customer age must be 55 years or younger",
+          "severity": "critical",
+          "validation_type": "age_check",
+          "applies_to": ["application", "customer_validation"]
+        },
+        {
+          "rule_id": "CUST_003",
+          "name": "Minimum Income Requirement",
+          "condition": "monthly_income >= 2500000",
+          "description": "Customer minimum monthly income 2.5 million rupiah",
+          "error_message": "Customer must have minimum income of 2.5 million rupiah per month",
+          "severity": "critical",
+          "validation_type": "income_check",
+          "applies_to": ["application", "customer_validation"]
+        },
+        {
+          "rule_id": "CUST_004",
+          "name": "Credit Score Minimum",
+          "condition": "credit_score >= 650",
+          "description": "Customer must have minimum credit score of 650",
+          "error_message": "Credit score must be at least 650",
+          "severity": "critical",
+          "validation_type": "credit_check",
+          "applies_to": ["application", "customer_validation"]
+        },
+        {
+          "rule_id": "CUST_005",
+          "name": "Employment Stability",
+          "condition": "employment_months >= 12",
+          "description": "Customer must have stable employment for at least 1 year",
+          "error_message": "Customer must have stable employment for at least 1 year",
+          "severity": "high",
+          "validation_type": "employment_check",
+          "applies_to": ["application", "customer_validation"]
+        }
+      ],
+      "required_documents": [
+        "ID card",
+        "Family card",
+        "Salary slip",
+        "Bank statement",
+        "Tax return",
+        "Marriage certificate"
+      ],
+      "enabled": true,
+      "auto_check": true,
+      "priority": "high"
+    },
+    {
+      "id": 2,
+      "name": "Property Validation Rules",
+      "category": "property_validation",
+      "description": "Property validation and requirements for KPR applications",
+      "rules": [
+        {
+          "rule_id": "PROP_001",
+          "name": "Property Type Validation",
+          "condition": "property_type in ['Rumah Tinggal', 'Rumah Subsidi', 'Ruko']",
+          "description": "Property type must be valid KPR property type",
+          "error_message": "Invalid property type for KPR financing",
+          "severity": "critical",
+          "validation_type": "property_type_check",
+          "applies_to": ["application", "property_validation"]
+        }
+      ],
+      "property_types": [
+        {
+          "property_type": "Rumah Tinggal",
+          "min_price": 500000000,
+          "max_price": 5000000000,
+          "min_area": 36,
+          "max_area": 200,
+          "features": ["2 bedrooms", "1 bathroom", "carport"],
+          "requirements": ["Legal certificate", "Building permit"]
+        },
+        {
+          "property_type": "Rumah Subsidi",
+          "min_price": 150000000,
+          "max_price": 1000000000,
+          "min_area": 21,
+          "max_area": 70,
+          "features": ["2 bedrooms", "1 bathroom"],
+          "requirements": ["Legal certificate", "Building permit", "Subsidy approval"]
+        },
+        {
+          "property_type": "Ruko",
+          "min_price": 800000000,
+          "max_price": 8000000000,
+          "min_area": 60,
+          "max_area": 200,
+          "features": ["Commercial space", "Storage", "Parking"],
+          "requirements": ["Legal certificate", "Building permit", "Business license"]
+        }
+      ],
+      "enabled": true,
+      "auto_check": true,
+      "priority": "high"
+    },
+    {
+      "id": 3,
+      "name": "Financial Validation Rules",
+      "category": "financial_validation",
+      "description": "Financial validation and assessment rules for KPR applications",
+      "rules": [
+        {
+          "rule_id": "FIN_001",
+          "name": "Interest Rate Limit",
+          "condition": "interest_rate >= 6.5 && interest_rate <= 11.5",
+          "description": "Interest rate must be between 6.5% and 11.5%",
+          "error_message": "Interest rate must be between 6.5% and 11.5%",
+          "severity": "critical",
+          "validation_type": "interest_rate_check",
+          "applies_to": ["application", "financial_validation"]
+        },
+        {
+          "rule_id": "FIN_002",
+          "name": "Loan to Value Ratio",
+          "condition": "loan_amount <= 0.8 * property_value",
+          "description": "Loan amount cannot exceed 80% of property value",
+          "error_message": "Loan amount exceeds 80% of property value",
+          "severity": "critical",
+          "validation_type": "ltv_check",
+          "applies_to": ["application", "financial_validation"]
+        },
+        {
+          "rule_id": "FIN_003",
+          "name": "Debt to Income Ratio",
+          "condition": "monthly_payment <= 0.3 * monthly_income",
+          "description": "Monthly payment cannot exceed 30% of monthly income",
+          "error_message": "Monthly payment exceeds 30% of monthly income",
+          "severity": "critical",
+          "validation_type": "dti_check",
+          "applies_to": ["application", "financial_validation"]
+        },
+        {
+          "rule_id": "FIN_004",
+          "name": "Down Payment Percentage",
+          "condition": "down_payment >= 0.1 * property_value",
+          "description": "Minimum down payment of 10% of property value",
+          "error_message": "Down payment must be at least 10% of property value",
+          "severity": "critical",
+          "validation_type": "percentage_check",
+          "applies_to": ["application", "financial_validation"]
+        },
+        {
+          "rule_id": "FIN_005",
+          "name": "Monthly Payment Capacity",
+          "condition": "monthly_payment <= 5000000",
+          "description": "Monthly payment maximum 5 million rupiah",
+          "error_message": "Monthly payment exceeds maximum allowed",
+          "severity": "high",
+          "validation_type": "amount_check",
+          "applies_to": ["application", "financial_validation"]
+        }
+      ],
+      "enabled": true,
+      "auto_check": true,
+      "priority": "high"
+    },
+    {
+      "id": 4,
+      "name": "Document Validation Rules",
+      "category": "document_validation",
+      "description": "Document validation and completeness rules",
+      "rules": [
+        {
+          "rule_id": "DOC_001",
+          "name": "KTP Required",
+          "condition": "ktp_exists && ktp_valid",
+          "description": "Valid KTP is required",
+          "error_message": "Valid KTP is required",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "document_validation"]
+        },
+        {
+          "rule_id": "DOC_002",
+          "name": "KTP Pasangan Required",
+          "condition": "ktp_pasangan_exists && ktp_pasangan_valid",
+          "description": "Valid KTP Pasangan is required",
+          "error_message": "Valid KTP Pasangan is required",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "document_validation"]
+        },
+        {
+          "rule_id": "DOC_003",
+          "name": "Family Card Required",
+          "condition": "family_card_exists && family_card_valid",
+          "description": "Valid family card is required",
+          "error_message": "Valid family card is required",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "document_validation"]
+        },
+        {
+          "rule_id": "DOC_004",
+          "name": "NPWP Card Required",
+          "condition": "npwp_exists && npwp_valid",
+          "description": "Valid NPWP card is required",
+          "error_message": "Valid NPWP card is required",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "document_validation"]
+        },
+        {
+          "rule_id": "DOC_005",
+          "name": "Marriage Certificate Required",
+          "condition": "marriage_certificate_exists && marriage_certificate_valid",
+          "description": "Valid marriage certificate is required",
+          "error_message": "Valid marriage certificate is required",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "document_validation"]
+        },
+        {
+          "rule_id": "DOC_006",
+          "name": "Surat Keterangan Kerja Required",
+          "condition": "surat_keterangan_kerja_exists && surat_keterangan_kerja_valid",
+          "description": "Valid Surat Keterangan Kerja is required",
+          "error_message": "Valid Surat Keterangan Kerja is required",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "document_validation"]
+        },
+        {
+          "rule_id": "DOC_007",
+          "name": "Surat Keterangan Usaha Required",
+          "condition": "surat_keterangan_usaha_exists && surat_keterangan_usaha_valid",
+          "description": "Valid Surat Keterangan Usaha is required",
+          "error_message": "Valid Surat Keterangan Usaha is required",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "document_validation"]
+        },
+        {
+          "rule_id": "DOC_008",
+          "name": "Salary Slip Required",
+          "condition": "salary_slip_exists && salary_slip_valid",
+          "description": "Valid salary slip is required",
+          "error_message": "Valid salary slip is required",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "document_validation"]
+        },
+        {
+          "rule_id": "DOC_009",
+          "name": "Bank Statement Required",
+          "condition": "bank_statement_exists && bank_statement_valid",
+          "description": "Valid bank statement is required",
+          "error_message": "Valid bank statement is required",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "document_validation"]
+        },
+        {
+          "rule_id": "DOC_010",
+          "name": "Surat Keterangan Karyawan Tetap Required",
+          "condition": "surat_keterangan_karyawan_tetap_exists && surat_keterangan_karyawan_tetap_valid",
+          "description": "Valid Surat Keterangan Karyawan Tetap is required",
+          "error_message": "Valid Surat Keterangan Karyawan Tetap is required",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "document_validation"]
+        },
+        {
+          "rule_id": "DOC_011",
+          "name": "Surat Keterangan Domisili Required",
+          "condition": "surat_keterangan_domisili_exists && surat_keterangan_domisili_valid",
+          "description": "Valid Surat Keterangan Domisili is required",
+          "error_message": "Valid Surat Keterangan Domisili is required",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "document_validation"]
+        },
+        {
+          "rule_id": "DOC_012",
+          "name": "Surat Keterangan Belum Menikah Required",
+          "condition": "surat_keterangan_belum_menikah_exists && surat_keterangan_belum_menikah_valid",
+          "description": "Valid Surat Keterangan Belum Menikah is required",
+          "error_message": "Valid Surat Keterangan Belum Menikah is required",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "document_validation"]
+        },
+        {
+          "rule_id": "DOC_013",
+          "name": "Surat Keterangan Belum Memiliki Rumah Required",
+          "condition": "surat_keterangan_belum_memiliki_rumah_exists && surat_keterangan_belum_memiliki_rumah_valid",
+          "description": "Valid Surat Keterangan Belum Memiliki Rumah is required",
+          "error_message": "Valid Surat Keterangan Belum Memiliki Rumah is required",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "document_validation"]
+        }
+      ],
+      "enabled": true,
+      "auto_check": true,
+      "priority": "high"
+    },
+    {
+      "id": 5,
+      "name": "Application Processing Rules",
+      "category": "application_processing",
+      "description": "Application processing and approval rules",
+      "rules": [
+        {
+          "rule_id": "APP_001",
+          "name": "Application Completeness",
+          "condition": "all_required_fields_filled",
+          "description": "All required fields must be filled",
+          "error_message": "Please complete all required fields",
+          "severity": "critical",
+          "validation_type": "completeness_check",
+          "applies_to": ["application", "application_processing"]
+        },
+        {
+          "rule_id": "APP_002",
+          "name": "Document Upload Required",
+          "condition": "all_documents_uploaded",
+          "description": "All documents must be uploaded",
+          "error_message": "Please upload all required documents",
+          "severity": "critical",
+          "validation_type": "document_check",
+          "applies_to": ["application", "application_processing"]
+        },
+        {
+          "rule_id": "APP_003",
+          "name": "Credit Assessment Required",
+          "condition": "credit_assessment_completed",
+          "description": "Credit assessment must be completed",
+          "error_message": "Credit assessment is required",
+          "severity": "critical",
+          "validation_type": "assessment_check",
+          "applies_to": ["application", "application_processing"]
+        },
+        {
+          "rule_id": "APP_004",
+          "name": "Bank Approval Required",
+          "condition": "bank_approval_received",
+          "description": "Bank approval is required",
+          "error_message": "Bank approval is required",
+          "severity": "critical",
+          "validation_type": "approval_check",
+          "applies_to": ["application", "application_processing"]
+        },
+        {
+          "rule_id": "APP_005",
+          "name": "Legal Review Required",
+          "condition": "legal_review_completed",
+          "description": "Legal review is required",
+          "error_message": "Legal review is required",
+          "severity": "critical",
+          "validation_type": "legal_check",
+          "applies_to": ["application", "application_processing"]
+        }
+      ],
+      "enabled": true,
+      "auto_check": true,
+      "priority": "high"
+    },
+    {
+      "id": 6,
+      "name": "Risk Assessment Rules",
+      "category": "risk_assessment",
+      "description": "Risk assessment and credit scoring rules",
+      "rules": [
+        {
+          "rule_id": "RISK_001",
+          "name": "Credit Score Threshold",
+          "condition": "credit_score >= 650",
+          "description": "Credit score must be 650 or higher",
+          "error_message": "Credit score too low for KPR qualification",
+          "severity": "critical",
+          "validation_type": "credit_score_check",
+          "applies_to": ["application", "risk_assessment"]
+        },
+        {
+          "rule_id": "RISK_002",
+          "name": "Employment Stability Score",
+          "condition": "employment_score >= 60",
+          "description": "Employment must be stable (score 60+)",
+          "error_message": "Employment not stable enough",
+          "severity": "high",
+          "validation_type": "stability_check",
+          "applies_to": ["application", "risk_assessment"]
+        },
+        {
+          "rule_id": "RISK_003",
+          "name": "Income Stability",
+          "condition": "income_stable",
+          "description": "Income must be stable",
+          "error_message": "Income not stable",
+          "severity": "high",
+          "validation_type": "stability_check",
+          "applies_to": ["application", "risk_assessment"]
+        },
+        {
+          "rule_id": "RISK_004",
+          "name": "Debt Service Ratio",
+          "condition": "debt_service_ratio <= 0.35",
+          "description": "Debt service ratio must be 35% or less",
+          "error_message": "Debt service ratio too high",
+          "severity": "high",
+          "validation_type": "ratio_check",
+          "applies_to": ["application", "risk_assessment"]
+        }
+      ],
+      "enabled": true,
+      "auto_check": true,
+      "priority": "high"
+    },
+    {
+      "id": 7,
+      "name": "Compliance Rules",
+      "category": "compliance",
+      "description": "Regulatory compliance and legal compliance rules",
+      "rules": [
+        {
+          "rule_id": "COMP_001",
+          "name": "OJK Compliance",
+          "condition": "ojk_compliant",
+          "description": "Must comply with OJK regulations",
+          "error_message": "Must comply with OJK regulations",
+          "severity": "critical",
+          "validation_type": "compliance_check",
+          "applies_to": ["application", "compliance"]
+        },
+        {
+          "rule_id": "COMP_002",
+          "name": "BI Checking",
+          "condition": "bi_check_passed",
+          "description": "BI checking must be passed",
+          "error_message": "BI checking must be passed",
+          "severity": "high",
+          "validation_type": "compliance_check",
+          "applies_to": ["application", "compliance"]
+        },
+        {
+          "rule_id": "COMP_003",
+          "name": "AML Compliance",
+          "condition": "aml_compliant",
+          "description": "AML compliance check passed",
+          "error_message": "AML compliance must be passed",
+          "severity": "high",
+          "validation_type": "compliance_check",
+          "applies_to": ["application", "compliance"]
+        },
+        {
+          "rule_id": "COMP_004",
+          "name": "PPAT Compliance",
+          "condition": "ppat_compliant",
+          "description": "PPAT compliance check passed",
+          "error_message": "PPAT compliance must be passed",
+          "severity": "high",
+          "validation_type": "compliance_check",
+          "applies_to": ["application", "compliance"]
+        }
+      ],
+      "enabled": true,
+      "auto_check": true,
+      "priority": "high"
+    }
+  ],
+  "validation_workflows": [
+    {
+      "workflow_id": "WF_001",
+      "name": "Customer Onboarding",
+      "description": "Customer data collection and initial validation",
+      "steps": [
+        "customer_data_collection",
+        "initial_validation",
+        "document_upload",
+        "preliminary_assessment",
+        "credit_check",
+        "compliance_check"
+      ],
+      "required_rules": ["CUST_001", "CUST_002", "CUST_003", "CUST_004", "CUST_005"],
+      "auto_check": true,
+      "priority": "high"
+    },
+    {
+      "workflow_id": "WF_002",
+      "name": "Application Processing",
+      "description": "Complete KPR application processing",
+      "steps": [
+        "document_verification",
+        "credit_assessment",
+        "risk_assessment",
+        "bank_approval",
+        "legal_review",
+        "final_approval"
+      ],
+      "required_rules": ["APP_001", "APP_002", "APP_003", "APP_004", "APP_005"],
+      "auto_check": true,
+      "priority": "high"
+    },
+    {
+      "workflow_id": "WF_003",
+      "name": "Loan Disbursement",
+      "description": "Loan disbursement process",
+      "steps": [
+        "disbursement_request",
+        "bank_processing",
+        "fund_transfer",
+        "document_verification",
+        "disbursement_release",
+        "post_disbursement"
+      ],
+      "required_rules": ["FIN_001", "FIN_002", "FIN_003", "FIN_004", "FIN_005"],
+      "auto_check": true,
+      "priority": "high"
+    },
+    {
+      "id": 8,
+      "name": "Technical Validation Rules",
+      "category": "technical_validation",
+      "description": "Technical validation and format checking rules from bramsray3",
+      "rules": [
+        {
+          "rule_id": "TECH_001",
+          "name": "Email Format Validation",
+          "condition": "email_format_valid",
+          "description": "Email must be in valid format",
+          "error_message": "Invalid email format",
+          "severity": "critical",
+          "validation_type": "format_check",
+          "applies_to": ["application", "customer_validation"],
+          "regex_pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+        },
+        {
+          "rule_id": "TECH_002",
+          "name": "Phone Format Validation",
+          "condition": "phone_format_valid",
+          "description": "Phone number must be valid Indonesian format",
+          "error_message": "Invalid Indonesian phone number format",
+          "severity": "critical",
+          "validation_type": "format_check",
+          "applies_to": ["application", "customer_validation"],
+          "regex_pattern": "^(\\+62|62)?[\\s-]?0?8[1-9]{1}[\\s-]?\\d{1,4}[\\s-]?\\d{1,4}[\\s-]?\\d{1,4}$"
+        },
+        {
+          "rule_id": "TECH_003",
+          "name": "NIK Format Validation",
+          "condition": "nik_format_valid",
+          "description": "NIK must be 16 digits",
+          "error_message": "NIK must be 16 digits",
+          "severity": "critical",
+          "validation_type": "format_check",
+          "applies_to": ["application", "customer_validation"],
+          "regex_pattern": "^\\d{16}$"
+        },
+        {
+          "rule_id": "TECH_004",
+          "name": "NPWP Format Validation",
+          "condition": "npwp_format_valid",
+          "description": "NPWP must be in valid format XX.XXX.XXX.X-XXX.XXX",
+          "error_message": "NPWP must be in format XX.XXX.XXX.X-XXX.XXX",
+          "severity": "critical",
+          "validation_type": "format_check",
+          "applies_to": ["application", "customer_validation"],
+          "regex_pattern": "^\\d{2}\\.\\d{3}\\.\\d{3}\\.\\d-\\d{3}\\.\\d{3}$"
+        },
+        {
+          "rule_id": "TECH_005",
+          "name": "Loan Amount Range Validation",
+          "condition": "loan_amount_in_range",
+          "description": "Loan amount must be between 50 million and 10 billion IDR",
+          "error_message": "Loan amount must be between 50 million and 10 billion IDR",
+          "severity": "critical",
+          "validation_type": "range_check",
+          "applies_to": ["application", "financial_validation"],
+          "min_value": 50000000,
+          "max_value": 10000000000
+        },
+        {
+          "rule_id": "TECH_006",
+          "name": "Down Payment Percentage Validation",
+          "condition": "down_payment_percentage_valid",
+          "description": "Down payment must be at least 20% of loan amount",
+          "error_message": "Down payment must be at least 20% of loan amount",
+          "severity": "critical",
+          "validation_type": "percentage_check",
+          "applies_to": ["application", "financial_validation"],
+          "min_percentage": 20
+        },
+        {
+          "rule_id": "TECH_007",
+          "name": "Tenure Range Validation",
+          "condition": "tenure_in_range",
+          "description": "Tenure must be between 1-30 years (12-360 months)",
+          "error_message": "Tenure must be between 1-30 years",
+          "severity": "critical",
+          "validation_type": "range_check",
+          "applies_to": ["application", "financial_validation"],
+          "min_months": 12,
+          "max_months": 360
+        },
+        {
+          "rule_id": "TECH_008",
+          "name": "File Size Validation",
+          "condition": "file_size_valid",
+          "description": "File size must not exceed maximum limit",
+          "error_message": "File size exceeds maximum limit",
+          "severity": "medium",
+          "validation_type": "file_check",
+          "applies_to": ["application", "document_validation"],
+          "max_size_mb": 10
+        },
+        {
+          "rule_id": "TECH_009",
+          "name": "File Type Validation",
+          "condition": "file_type_allowed",
+          "description": "File type must be in allowed list",
+          "error_message": "File type not allowed",
+          "severity": "medium",
+          "validation_type": "file_check",
+          "applies_to": ["application", "document_validation"],
+          "allowed_types": ["pdf", "jpg", "jpeg", "png", "doc", "docx"]
+        }
+      ],
+      "enabled": true,
+      "auto_check": true,
+      "priority": "high"
+    },
+    {
+      "id": 9,
+      "name": "System Configuration Rules",
+      "category": "system_configuration",
+      "description": "System configuration and feature toggle rules from bramsray3",
+      "rules": [
+        {
+          "rule_id": "SYS_001",
+          "name": "Customer Management Feature",
+          "condition": "feature_customer_management_enabled",
+          "description": "Customer management feature must be enabled",
+          "error_message": "Customer management feature is disabled",
+          "severity": "high",
+          "validation_type": "feature_check",
+          "applies_to": ["system", "feature_validation"],
+          "feature_name": "customer_management",
+          "required_status": "ACTIVE"
+        },
+        {
+          "rule_id": "SYS_002",
+          "name": "Unit Management Feature",
+          "condition": "feature_unit_management_enabled",
+          "description": "Unit management feature must be enabled",
+          "error_message": "Unit management feature is disabled",
+          "severity": "high",
+          "validation_type": "feature_check",
+          "applies_to": ["system", "feature_validation"],
+          "feature_name": "unit_management",
+          "required_status": "ACTIVE"
+        },
+        {
+          "rule_id": "SYS_003",
+          "name": "Property Sales Feature",
+          "condition": "feature_property_sales_enabled",
+          "description": "Property sales feature must be enabled",
+          "error_message": "Property sales feature is disabled",
+          "severity": "high",
+          "validation_type": "feature_check",
+          "applies_to": ["system", "feature_validation"],
+          "feature_name": "property_sales",
+          "required_status": "ACTIVE"
+        },
+        {
+          "rule_id": "SYS_004",
+          "name": "Financial Tracking Feature",
+          "condition": "feature_financial_tracking_enabled",
+          "description": "Financial tracking feature must be enabled",
+          "error_message": "Financial tracking feature is disabled",
+          "severity": "high",
+          "validation_type": "feature_check",
+          "applies_to": ["system", "feature_validation"],
+          "feature_name": "financial_tracking",
+          "required_status": "ACTIVE"
+        },
+        {
+          "rule_id": "SYS_005",
+          "name": "Document Management Feature",
+          "condition": "feature_document_management_enabled",
+          "description": "Document management feature must be enabled",
+          "error_message": "Document management feature is disabled",
+          "severity": "high",
+          "validation_type": "feature_check",
+          "applies_to": ["system", "feature_validation"],
+          "feature_name": "document_management",
+          "required_status": "ACTIVE"
+        },
+        {
+          "rule_id": "SYS_006",
+          "name": "Automated Notifications Feature",
+          "condition": "feature_automated_notifications_enabled",
+          "description": "Automated notifications feature must be enabled",
+          "error_message": "Automated notifications feature is disabled",
+          "severity": "medium",
+          "validation_type": "feature_check",
+          "applies_to": ["system", "feature_validation"],
+          "feature_name": "automated_notifications",
+          "required_status": "ACTIVE"
+        },
+        {
+          "rule_id": "SYS_007",
+          "name": "Bulk Operations Feature",
+          "condition": "feature_bulk_operations_enabled",
+          "description": "Bulk operations feature must be enabled",
+          "error_message": "Bulk operations feature is disabled",
+          "severity": "medium",
+          "validation_type": "feature_check",
+          "applies_to": ["system", "feature_validation"],
+          "feature_name": "bulk_operations",
+          "required_status": "ACTIVE"
+        },
+        {
+          "rule_id": "SYS_008",
+          "name": "Reporting Feature",
+          "condition": "feature_reporting_enabled",
+          "description": "Reporting feature must be enabled",
+          "error_message": "Reporting feature is disabled",
+          "severity": "medium",
+          "validation_type": "feature_check",
+          "applies_to": ["system", "feature_validation"],
+          "feature_name": "reporting",
+          "required_status": "ACTIVE"
+        }
+      ],
+      "enabled": true,
+      "auto_check": true,
+      "priority": "medium"
+    },
+    {
+      "id": 10,
+      "name": "Business Intelligence Rules",
+      "category": "business_intelligence",
+      "description": "Business intelligence and performance scoring rules from bramsray3",
+      "rules": [
+        {
+          "rule_id": "BI_001",
+          "name": "Notaris Performance Score Calculation",
+          "condition": "notaris_score_calculated",
+          "description": "Notaris performance score must be calculated (1-100)",
+          "error_message": "Notaris performance score calculation failed",
+          "severity": "medium",
+          "validation_type": "score_check",
+          "applies_to": ["analytics", "performance_evaluation"],
+          "score_range": {
+            "min": 1,
+            "max": 100
+          },
+          "weight_distribution": {
+            "processing_speed": 0.4,
+            "document_accuracy": 0.3,
+            "responsiveness": 0.2,
+            "completion_rate": 0.1
+          }
+        },
+        {
+          "rule_id": "BI_002",
+          "name": "Notaris Performance Grade Classification",
+          "condition": "notaris_grade_classified",
+          "description": "Notaris must be classified into performance grades A-F",
+          "error_message": "Notaris performance grade classification failed",
+          "severity": "medium",
+          "validation_type": "grade_check",
+          "applies_to": ["analytics", "performance_evaluation"],
+          "grade_ranges": {
+            "A": {"min": 90, "max": 100, "description": "Excellent"},
+            "B": {"min": 80, "max": 89, "description": "Good"},
+            "C": {"min": 70, "max": 79, "description": "Average"},
+            "D": {"min": 60, "max": 69, "description": "Below Average"},
+            "F": {"min": 0, "max": 59, "description": "Poor/Critical"}
+          }
+        },
+        {
+          "rule_id": "BI_003",
+          "name": "TBO Aging Analytics",
+          "condition": "tbo_aging_analyzed",
+          "description": "TBO aging must be analyzed for risk assessment",
+          "error_message": "TBO aging analysis failed",
+          "severity": "medium",
+          "validation_type": "aging_check",
+          "applies_to": ["analytics", "risk_assessment"],
+          "aging_thresholds": {
+            "normal": {"days": 30, "action": "monitor"},
+            "warning": {"days": 60, "action": "review"},
+            "critical": {"days": 90, "action": "escalate"}
+          }
+        },
+        {
+          "rule_id": "BI_004",
+          "name": "Vendor Performance Evaluation",
+          "condition": "vendor_performance_evaluated",
+          "description": "Vendor performance must be evaluated for optimization",
+          "error_message": "Vendor performance evaluation failed",
+          "severity": "medium",
+          "validation_type": "evaluation_check",
+          "applies_to": ["analytics", "vendor_management"],
+          "evaluation_metrics": [
+            "completion_rate",
+            "processing_time",
+            "quality_score",
+            "cost_efficiency"
+          ]
+        }
+      ],
+      "enabled": true,
+      "auto_check": true,
+      "priority": "medium"
+    }
+  ],
+  "error_handling": {
+    "validation_errors": {
+      "severity_mapping": {
+        "critical": "auto_reject",
+        "high": "manual_review",
+        "medium": "warning_notification",
+        "low": "info_log"
+      },
+      "auto_recovery": {
+        "enabled": true,
+        "retry_count": 3,
+        "retry_delay": 1000
+      },
+      "manual_override": {
+        "enabled": true,
+        "requires_approval": ["critical", "high"]
+      }
+    },
+    "notification_settings": {
+      "email_notifications": true,
+      "sms_notifications": true,
+      "whatsapp_notifications": true,
+      "push_notifications": true,
+      "escalation_rules": {
+        "critical": ["immediate", "manager", "director"],
+        "high": ["team_lead", "supervisor"],
+        "medium": ["team_member"],
+        "low": ["staff"]
+      }
+    }
+  },
+  "system_settings": {
+    "auto_validation": {
+      "enabled": true,
+      "batch_processing": true,
+      "validation_timeout": 5000
+    },
+    "audit_logging": {
+      "enabled": true,
+      "log_level": "detailed",
+      "retention_period": 90
+    },
+    "backup_rules": {
+      "auto_backup": true,
+      "backup_frequency": "daily",
+      "backup_location": "/backups/kprflow",
+      "backup_retention": "30 days"
+    }
+  },
+  "integration": {
+    "google_apps_script": {
+      "validation_functions": [
+        "validate_customer_eligibility",
+        "validate_property",
+        "validate_financial",
+        "validate_documents",
+        "validate_compliance"
+      ],
+      "trigger_points": [
+        "application_submit",
+        "document_upload",
+        "credit_assessment",
+        "bank_approval"
+      ]
+    },
+    "supabase": {
+      "validation_triggers": [
+        "application_insert",
+        "application_update",
+        "document_upload",
+        "credit_assessment",
+        "bank_approval"
+      ]
+    },
+    "api_integration": {
+      "validation_endpoints": [
+        "/api/kpr/application/validate",
+        "/api/kpr/credit/assess",
+        "/api/kpr/bank/approve",
+        "/api/kpr/compliance/check"
+      ]
+    }
+  },
+  "special_features": {
+    "btn_bank_specific": {
+      "feature": "age >= 19",
+      "rule_id": "CUST_001",
+      "description": "Minimum age requirement specific to BTN Bank only",
+      "condition": "age >= 19",
+      "bank_specific": "BTN"
+    },
+    "subsidy_support": {
+      "feature": "Rumah Subsidi type",
+      "property_type": "Rumah Subsidi",
+      "description": "Subsidized housing support for eligible applicants",
+      "price_range": "150M-1B",
+      "area_range": "21-70m²",
+      "special_requirements": ["Subsidy approval", "Income verification"]
+    },
+    "commercial_support": {
+      "ruko_type": {
+        "feature": "Ruko type",
+        "property_type": "Ruko",
+        "description": "Commercial property support for business financing",
+        "price_range": "800M-8B",
+        "area_range": "60-200m²",
+        "special_requirements": ["Business license", "Commercial permit"]
+      },
+      "rumah_tinggal_type": {
+        "feature": "Rumah Tinggal type",
+        "property_type": "Rumah Tinggal",
+        "description": "Residential property support for standard housing",
+        "price_range": "500M-5B",
+        "area_range": "36-200m²",
+        "special_requirements": ["Legal certificate", "Building permit"]
+      }
+    },
+    "comprehensive_documents": {
+      "feature": "13 requirements",
+      "total_documents": 13,
+      "description": "Comprehensive document requirements for complete validation",
+      "categories": ["Identity", "Family", "Financial", "Employment", "Status"]
+    },
+    "family_documents": {
+      "feature": "KTP Pasangan, Family Card",
+      "documents": [
+        {
+          "doc_id": "DOC_002",
+          "name": "KTP Pasangan Required",
+          "description": "Spouse ID card required for married applicants"
+        },
+        {
+          "doc_id": "DOC_003",
+          "name": "Family Card Required",
+          "description": "Family card for household verification"
+        }
+      ]
+    },
+    "employment_documents": {
+      "feature": "Kerja, Usaha, Karyawan Tetap",
+      "documents": [
+        {
+          "doc_id": "DOC_006",
+          "name": "Surat Keterangan Kerja Required",
+          "description": "Employment verification letter"
+        },
+        {
+          "doc_id": "DOC_007",
+          "name": "Surat Keterangan Usaha Required",
+          "description": "Business verification letter for self-employed"
+        },
+        {
+          "doc_id": "DOC_010",
+          "name": "Surat Keterangan Karyawan Tetap Required",
+          "description": "Permanent employee verification letter"
+        }
+      ]
+    },
+    "status_documents": {
+      "feature": "Belum Menikah, Belum Memiliki Rumah",
+      "documents": [
+        {
+          "doc_id": "DOC_012",
+          "name": "Surat Keterangan Belum Menikah Required",
+          "description": "Single status certificate for unmarried applicants"
+        },
+        {
+          "doc_id": "DOC_013",
+          "name": "Surat Keterangan Belum Memiliki Rumah Required",
+          "description": "Non-homeowner certificate for first-time homebuyers"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "created_date": "2026-03-20",
+    "last_modified": "2026-06-20",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Complete business rules and validation logic for KPRFlow Enterprise",
+    "total_rules": 32,
+    "total_workflows": 3,
+    "validation_status": "verified",
+    "data_quality": "enterprise",
+    "validation_level": "comprehensive"
+  }
+}

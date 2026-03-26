@@ -1,0 +1,416 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-21",
+  "source": "bramsray3_sla_configuration",
+  "description": "Complete SLA configuration for KPRFlow Enterprise",
+  
+  "sla_enforcement": {
+    "enabled": false,
+    "status": "DISABLED",
+    "configuration": {
+      "monitoring_enabled": false,
+      "escalation_enabled": false,
+      "reporting_enabled": false,
+      "alerting_enabled": false
+    }
+  },
+  
+  "sla_thresholds": {
+    "customer_registration": {
+      "target_time_hours": 24,
+      "warning_threshold_hours": 18,
+      "critical_threshold_hours": 22,
+      "business_hours_only": true,
+      "weekend_excluded": true,
+      "holiday_excluded": true
+    },
+    "document_verification": {
+      "target_time_hours": 48,
+      "warning_threshold_hours": 36,
+      "critical_threshold_hours": 44,
+      "business_hours_only": true,
+      "weekend_excluded": false,
+      "holiday_excluded": true
+    },
+    "property_booking": {
+      "target_time_hours": 72,
+      "warning_threshold_hours": 60,
+      "critical_threshold_hours": 68,
+      "business_hours_only": false,
+      "weekend_excluded": false,
+      "holiday_excluded": false
+    },
+    "bank_application": {
+      "target_time_hours": 120,
+      "warning_threshold_hours": 96,
+      "critical_threshold_hours": 114,
+      "business_hours_only": false,
+      "weekend_excluded": false,
+      "holiday_excluded": false
+    },
+    "loan_approval": {
+      "target_time_hours": 168,
+      "warning_threshold_hours": 144,
+      "critical_threshold_hours": 162,
+      "business_hours_only": false,
+      "weekend_excluded": false,
+      "holiday_excluded": false
+    },
+    "akad_scheduling": {
+      "target_time_hours": 48,
+      "warning_threshold_hours": 36,
+      "critical_threshold_hours": 44,
+      "business_hours_only": true,
+      "weekend_excluded": false,
+      "holiday_excluded": true
+    },
+    "document_generation": {
+      "target_time_hours": 24,
+      "warning_threshold_hours": 18,
+      "critical_threshold_hours": 22,
+      "business_hours_only": false,
+      "weekend_excluded": false,
+      "holiday_excluded": false
+    }
+  },
+  
+  "escalation_rules": {
+    "levels": [
+      {
+        "level": 1,
+        "name": "Team Lead",
+        "trigger_threshold_hours": 2,
+        "notification_methods": ["email", "internal_notification"],
+        "auto_escalate": true,
+        "escalation_delay_hours": 4
+      },
+      {
+        "level": 2,
+        "name": "Manager",
+        "trigger_threshold_hours": 6,
+        "notification_methods": ["email", "sms", "internal_notification"],
+        "auto_escalate": true,
+        "escalation_delay_hours": 8
+      },
+      {
+        "level": 3,
+        "name": "Director",
+        "trigger_threshold_hours": 12,
+        "notification_methods": ["email", "sms", "whatsapp", "internal_notification"],
+        "auto_escalate": false,
+        "escalation_delay_hours": null
+      }
+    ],
+    "escalation_conditions": {
+      " overdue_tasks": true,
+      "failed_tasks": true,
+      "customer_complaints": true,
+      "system_errors": true,
+      "critical_issues": true
+    }
+  },
+  
+  "monitoring": {
+    "real_time_tracking": {
+      "enabled": false,
+      "update_interval_seconds": 300,
+      "dashboard_refresh_seconds": 60,
+      "alert_check_interval_seconds": 1800
+    },
+    "performance_metrics": {
+      "enabled": false,
+      "metrics_tracked": [
+        "task_completion_time",
+        "sla_compliance_rate",
+        "escalation_frequency",
+        "customer_satisfaction",
+        "team_performance",
+        "system_response_time"
+      ]
+    },
+    "reporting": {
+      "enabled": false,
+      "report_frequency": "daily",
+      "report_types": [
+        "sla_compliance_report",
+        "escalation_report",
+        "performance_report",
+        "customer_satisfaction_report",
+        "team_productivity_report"
+      ]
+    }
+  },
+  
+  "sla_definitions": {
+    "customer_registration": {
+      "name": "Customer Registration SLA",
+      "description": "Time to complete customer registration process",
+      "start_event": "registration_started",
+      "end_event": "registration_completed",
+      "target_hours": 24,
+      "measurement_unit": "hours",
+      "exclusions": ["weekends", "holidays"],
+      "owner": "sales_team"
+    },
+    "document_verification": {
+      "name": "Document Verification SLA",
+      "description": "Time to verify uploaded documents",
+      "start_event": "document_uploaded",
+      "end_event": "document_verified",
+      "target_hours": 48,
+      "measurement_unit": "hours",
+      "exclusions": ["holidays"],
+      "owner": "document_team"
+    },
+    "property_booking": {
+      "name": "Property Booking SLA",
+      "description": "Time to complete property booking process",
+      "start_event": "booking_initiated",
+      "end_event": "booking_confirmed",
+      "target_hours": 72,
+      "measurement_unit": "hours",
+      "exclusions": [],
+      "owner": "sales_team"
+    },
+    "bank_application": {
+      "name": "Bank Application SLA",
+      "description": "Time to submit and track bank application",
+      "start_event": "application_submitted",
+      "end_event": "application_approved",
+      "target_hours": 120,
+      "measurement_unit": "hours",
+      "exclusions": [],
+      "owner": "finance_team"
+    },
+    "loan_approval": {
+      "name": "Loan Approval SLA",
+      "description": "Time to get loan approval from bank",
+      "start_event": "bank_submission",
+      "end_event": "loan_approved",
+      "target_hours": 168,
+      "measurement_unit": "hours",
+      "exclusions": [],
+      "owner": "finance_team"
+    },
+    "akad_scheduling": {
+      "name": "Akad Scheduling SLA",
+      "description": "Time to schedule akad (credit agreement)",
+      "start_event": "loan_approved",
+      "end_event": "akad_scheduled",
+      "target_hours": 48,
+      "measurement_unit": "hours",
+      "exclusions": ["holidays"],
+      "owner": "legal_team"
+    },
+    "document_generation": {
+      "name": "Document Generation SLA",
+      "description": "Time to generate required documents",
+      "start_event": "document_request",
+      "end_event": "document_generated",
+      "target_hours": 24,
+      "measurement_unit": "hours",
+      "exclusions": [],
+      "owner": "document_team"
+    }
+  },
+  
+  "business_hours": {
+    "monday": {
+      "open": "08:00",
+      "close": "17:00",
+      "break_start": "12:00",
+      "break_end": "13:00"
+    },
+    "tuesday": {
+      "open": "08:00",
+      "close": "17:00",
+      "break_start": "12:00",
+      "break_end": "13:00"
+    },
+    "wednesday": {
+      "open": "08:00",
+      "close": "17:00",
+      "break_start": "12:00",
+      "break_end": "13:00"
+    },
+    "thursday": {
+      "open": "08:00",
+      "close": "17:00",
+      "break_start": "12:00",
+      "break_end": "13:00"
+    },
+    "friday": {
+      "open": "08:00",
+      "close": "17:00",
+      "break_start": "12:00",
+      "break_end": "13:00"
+    },
+    "saturday": {
+      "open": null,
+      "close": null,
+      "break_start": null,
+      "break_end": null
+    },
+    "sunday": {
+      "open": null,
+      "close": null,
+      "break_start": null,
+      "break_end": null
+    }
+  },
+  
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "Tahun Baru",
+      "type": "national",
+      "observed": true
+    },
+    {
+      "date": "2026-02-10",
+      "name": "Tahun Baru Imlek",
+      "type": "national",
+      "observed": true
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Hari Raya Nyepi",
+      "type": "national",
+      "observed": true
+    },
+    {
+      "date": "2026-04-10",
+      "name": "Hari Raya Idul Fitri",
+      "type": "national",
+      "observed": true
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Hari Buruh",
+      "type": "national",
+      "observed": true
+    },
+    {
+      "date": "2026-05-26",
+      "name": "Kenaikan Isa Al Masih",
+      "type": "national",
+      "observed": true
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Hari Lahir Pancasila",
+      "type": "national",
+      "observed": true
+    },
+    {
+      "date": "2026-08-17",
+      "name": "Hari Kemerdekaan",
+      "type": "national",
+      "observed": true
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Hari Raya Natal",
+      "type": "national",
+      "observed": true
+    }
+  ],
+  
+  "notification_settings": {
+    "overdue_alerts": {
+      "enabled": false,
+      "channels": ["email", "internal_notification"],
+      "recipients": ["team_lead", "manager"],
+      "frequency": "hourly"
+    },
+    "critical_alerts": {
+      "enabled": false,
+      "channels": ["email", "sms", "internal_notification"],
+      "recipients": ["team_lead", "manager", "director"],
+      "frequency": "immediate"
+    },
+    "escalation_alerts": {
+      "enabled": false,
+      "channels": ["email", "internal_notification"],
+      "recipients": ["manager", "director"],
+      "frequency": "immediate"
+    }
+  },
+  
+  "reporting_settings": {
+    "daily_reports": {
+      "enabled": false,
+      "recipients": ["team_lead", "manager"],
+      "time": "09:00",
+      "include_metrics": [
+        "sla_compliance_rate",
+        "overdue_tasks",
+        "escalation_count",
+        "customer_satisfaction"
+      ]
+    },
+    "weekly_reports": {
+      "enabled": false,
+      "recipients": ["manager", "director"],
+      "day": "monday",
+      "time": "10:00",
+      "include_metrics": [
+        "weekly_sla_compliance",
+        "team_performance",
+        "escalation_trends",
+        "process_improvements"
+      ]
+    },
+    "monthly_reports": {
+      "enabled": false,
+      "recipients": ["director", "executive"],
+      "day": 1,
+      "time": "08:00",
+      "include_metrics": [
+        "monthly_sla_compliance",
+        "performance_trends",
+        "customer_feedback",
+        "strategic_insights"
+      ]
+    }
+  },
+  
+  "integration_settings": {
+    "workflow_tracking": {
+      "enabled": false,
+      "sync_with_workflows": true,
+      "update_workflow_status": true,
+      "trigger_workflow_actions": true
+    },
+    "notification_system": {
+      "enabled": false,
+      "sync_with_notifications": true,
+      "send_sla_notifications": true,
+      "update_notification_preferences": true
+    },
+    "customer_management": {
+      "enabled": false,
+      "sync_customer_data": true,
+      "update_customer_status": true,
+      "track_customer_satisfaction": true
+    }
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-21",
+    "last_modified": "2026-03-21",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Complete SLA configuration for KPRFlow Enterprise",
+    "total_sla_definitions": 7,
+    "escalation_levels": 3,
+    "business_hours_defined": 7,
+    "holidays_defined": 9,
+    "data_sources": [
+      "bramsray3/configuration/sla_configuration.json"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

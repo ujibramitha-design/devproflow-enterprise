@@ -1,0 +1,388 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-21",
+  "source": "bramsray2_legal_document_sync",
+  "description": "Legal document synchronization edge function configuration for KPRFlow Enterprise",
+  
+  "function_id": "legal-document-sync",
+  "name": "Legal Document Sync",
+  "description": "Sync PPJB and Akad documents between Google Drive and Supabase database",
+  "category": "document_synchronization",
+  "enabled": true,
+  "status": "ACTIVE",
+  
+  "functionality": {
+    "document_sync": {
+      "enabled": true,
+      "description": "Synchronize legal documents from Google Drive to database",
+      "features": [
+        "ppjb_document_sync",
+        "akad_document_sync",
+        "bast_document_sync",
+        "memo_document_sync",
+        "undangan_document_sync"
+      ]
+    },
+    "document_validation": {
+      "enabled": true,
+      "description": "Validate document status and content",
+      "validation_rules": [
+        "document_structure_validation",
+        "required_fields_validation",
+        "signature_validation",
+        "date_validation",
+        "status_validation"
+      ]
+    },
+    "status_tracking": {
+      "enabled": true,
+      "description": "Track document processing status",
+      "status_types": [
+        "uploaded",
+        "processing",
+        "validated",
+        "completed",
+        "error"
+      ]
+    },
+    "database_updates": {
+      "enabled": true,
+      "description": "Update database records with document information",
+      "update_operations": [
+        "document_metadata_update",
+        "status_update",
+        "validation_result_update",
+        "processing_log_update"
+      ]
+    }
+  },
+  
+  "technology": {
+    "runtime": "deno",
+    "language": "typescript",
+    "version": "1.40.0",
+    "dependencies": [
+      {
+        "name": "std",
+        "version": "^0.224.0"
+      },
+      {
+        "name": "google-drive",
+        "version": "^0.1.0"
+      },
+      {
+        "name": "pdf",
+        "version": "^0.1.0"
+      },
+      {
+        "name": "image",
+        "version": "^0.1.0"
+      }
+    ]
+  },
+  
+  "integration": {
+    "google_drive": {
+      "provider": "google_drive",
+      "api_endpoint": "https://www.googleapis.com/drive/v3",
+      "folder_ids": {
+        "ppjb_folder": "your-ppjb-folder-id",
+        "akad_folder": "your-akad-folder-id",
+        "bast_folder": "your-bast-folder-id",
+        "memo_folder": "your-memo-folder-id",
+        "undangan_folder": "your-undangan-folder-id"
+      },
+      "authentication": "oauth2",
+      "scopes": [
+        "https://www.googleapis.com/auth/drive.readonly",
+        "https://www.googleapis.com/auth/drive.metadata.readonly"
+      ]
+    },
+    "supabase": {
+      "enabled": true,
+      "database_url": "https://your-project.supabase.co",
+      "service_role_key": "your-service-role-key",
+      "tables": {
+        "documents": "documents",
+        "applications": "applications",
+        "customers": "customers",
+        "document_sync_logs": "document_sync_logs",
+        "validation_results": "document_validation_results"
+      }
+    }
+  },
+  
+  "document_types": {
+    "ppjb": {
+      "name": "Perjanjian Pengikatan Jual Beli",
+      "folder_id": "your-ppjb-folder-id",
+      "file_patterns": ["PPJB*.pdf", "Perjanjian*.pdf"],
+      "required_fields": [
+        "document_number",
+        "document_date",
+        "customer_name",
+        "property_address",
+        "property_price",
+        "down_payment",
+        "seller_name",
+        "buyer_name",
+        "witness_names",
+        "signatures"
+      ],
+      "validation_rules": {
+        "min_pages": 5,
+        "max_pages": 20,
+        "must_have_signatures": true,
+        "must_have_stamps": true
+      }
+    },
+    "akad": {
+      "name": "Akad Kredit",
+      "folder_id": "your-akad-folder-id",
+      "file_patterns": ["Akad*.pdf", "Kredit*.pdf"],
+      "required_fields": [
+        "document_number",
+        "document_date",
+        "customer_name",
+        "bank_name",
+        "loan_amount",
+        "loan_tenure",
+        "interest_rate",
+        "property_address",
+        "witness_names",
+        "signatures"
+      ],
+      "validation_rules": {
+        "min_pages": 3,
+        "max_pages": 15,
+        "must_have_signatures": true,
+        "must_have_stamps": true
+      }
+    },
+    "bast": {
+      "name": "Berita Acara Serah Terima",
+      "folder_id": "your-bast-folder-id",
+      "file_patterns": ["BAST*.pdf", "SerahTerima*.pdf"],
+      "required_fields": [
+        "document_number",
+        "document_date",
+        "customer_name",
+        "property_address",
+        "handover_date",
+        "condition_notes",
+        "witness_names",
+        "signatures"
+      ],
+      "validation_rules": {
+        "min_pages": 2,
+        "max_pages": 10,
+        "must_have_signatures": true,
+        "must_have_photos": true
+      }
+    },
+    "memo": {
+      "name": "Memo",
+      "folder_id": "your-memo-folder-id",
+      "file_patterns": ["Memo*.pdf", "Memorandum*.pdf"],
+      "required_fields": [
+        "document_number",
+        "document_date",
+        "subject",
+        "content",
+        "sender_name",
+        "recipient_name",
+        "signatures"
+      ],
+      "validation_rules": {
+        "min_pages": 1,
+        "max_pages": 5,
+        "must_have_signatures": true
+      }
+    },
+    "undangan": {
+      "name": "Undangan",
+      "folder_id": "your-undangan-folder-id",
+      "file_patterns": ["Undangan*.pdf", "Invitation*.pdf"],
+      "required_fields": [
+        "document_number",
+        "document_date",
+        "event_type",
+        "event_date",
+        "event_location",
+        "attendees",
+        "signatures"
+      ],
+      "validation_rules": {
+        "min_pages": 1,
+        "max_pages": 3,
+        "must_have_signatures": true
+      }
+    }
+  },
+  
+  "sync_settings": {
+    "sync_frequency": {
+      "enabled": true,
+      "interval_minutes": 30,
+      "batch_size": 20,
+      "max_concurrent_syncs": 5
+    },
+    "file_processing": {
+      "max_file_size_mb": 50,
+      "supported_formats": ["application/pdf"],
+      "processing_timeout_seconds": 120
+    },
+    "error_handling": {
+      "retry_failed_syncs": true,
+      "max_retry_attempts": 3,
+      "retry_delay_minutes": 15,
+      "quarantine_failed_files": true
+    }
+  },
+  
+  "validation_rules": {
+    "document_validation": {
+      "file_validation": {
+        "min_file_size_kb": 10,
+        "max_file_size_mb": 50,
+        "allowed_formats": ["application/pdf"],
+        "min_pages": 1,
+        "max_pages": 50
+      },
+      "content_validation": {
+        "check_required_fields": true,
+        "validate_signatures": true,
+        "validate_stamps": true,
+        "validate_dates": true,
+        "validate_amounts": true
+      }
+    },
+    "business_rules": {
+      "document_number_uniqueness": true,
+      "date_validity_check": true,
+      "signature_validity_check": true,
+      "amount_range_validation": true,
+      "customer_existence_check": true
+    }
+  },
+  
+  "processing_workflow": {
+    "steps": [
+      {
+        "step_id": 1,
+        "name": "Document Discovery",
+        "description": "Discover new documents in Google Drive folders",
+        "actions": ["scan_folders", "identify_new_files", "filter_by_patterns"]
+      },
+      {
+        "step_id": 2,
+        "name": "Document Download",
+        "description": "Download documents from Google Drive",
+        "actions": ["download_file", "verify_integrity", "store_temporarily"]
+      },
+      {
+        "step_id": 3,
+        "name": "Document Parsing",
+        "description": "Parse document content and extract data",
+        "actions": ["extract_text", "extract_metadata", "identify_fields"]
+      },
+      {
+        "step_id": 4,
+        "name": "Data Validation",
+        "description": "Validate extracted data against business rules",
+        "actions": ["validate_fields", "check_business_rules", "verify_signatures"]
+      },
+      {
+        "step_id": 5,
+        "name": "Database Update",
+        "description": "Update database with document information",
+        "actions": ["create_record", "update_status", "log_processing"]
+      },
+      {
+        "step_id": 6,
+        "name": "Cleanup",
+        "description": "Clean up temporary files and resources",
+        "actions": ["delete_temp_files", "update_sync_status", "send_notifications"]
+      }
+    ]
+  },
+  
+  "monitoring_settings": {
+    "metrics_tracking": {
+      "enabled": true,
+      "track_sync_time": true,
+      "track_success_rate": true,
+      "track_processing_volume": true,
+      "track_error_rate": true
+    },
+    "logging": {
+      "enabled": true,
+      "log_level": "INFO",
+      "log_sync_details": true,
+      "log_validation_results": true,
+      "log_error_details": true
+    },
+    "alerting": {
+      "enabled": true,
+      "alert_on_sync_failure": true,
+      "alert_on_validation_errors": true,
+      "alert_on_processing_delays": true,
+      "alert_recipients": ["dev_team", "ops_team"]
+    }
+  },
+  
+  "security_settings": {
+    "authentication": {
+      "required": true,
+      "method": "api_key",
+      "api_key_header": "Authorization",
+      "api_key_validation": true
+    },
+    "data_protection": {
+      "encrypt_sensitive_data": true,
+      "mask_personal_info": true,
+      "gdpr_compliant": true,
+      "data_retention_days": 365
+    },
+    "access_control": {
+      "allowed_folders": ["ppjb_folder", "akad_folder", "bast_folder", "memo_folder", "undangan_folder"],
+      "blocked_sources": [],
+      "ip_whitelist": [],
+      "domain_whitelist": []
+    }
+  },
+  
+  "testing_settings": {
+    "test_mode": false,
+    "test_documents": [
+      "test_ppjb_sample.pdf",
+      "test_akad_sample.pdf",
+      "test_bast_sample.pdf"
+    ],
+    "mock_data_generation": true,
+    "test_scenarios": [
+      "complete_sync_workflow",
+      "partial_sync_workflow",
+      "error_handling_workflow",
+      "validation_error_workflow"
+    ]
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-21",
+    "last_modified": "2026-03-21",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Legal document synchronization edge function configuration for KPRFlow Enterprise",
+    "total_document_types": 5,
+    "workflow_steps": 6,
+    "validation_categories": 2,
+    "integration_tables": 5,
+    "data_sources": [
+      "bramsray2/supabase/functions/legal-document-sync/deno.json"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

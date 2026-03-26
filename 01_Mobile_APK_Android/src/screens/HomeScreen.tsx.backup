@@ -1,0 +1,313 @@
+/**
+ * KPRFlow Enterprise - Home Screen
+ * React Native New Architecture with 05_UI_Design_System consistency
+ */
+
+import React, { useState, useEffect } from 'react'
+import {
+  View,
+  Text,
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  RefreshControl,
+  Dimensions,
+} from 'react-native'
+import { Theme } from '../theme'
+import { DesignSystemButton, DesignSystemCard } from '../components'
+import { applicationController } from '../services/application-controller'
+import { ApplicationTypes } from '../types/application-types'
+
+const { width: screenWidth } = Dimensions.get('window')
+
+interface HomeScreenState {
+  applications: ApplicationTypes[]
+  stats: {
+    total: number
+    pending: number
+    approved: number
+    rejected: number
+    in_progress: number
+  }
+  loading: boolean
+  refreshing: boolean
+}
+
+export const HomeScreen: React.FC = () => {
+  const [state, setState] = useState<HomeScreenState>({
+    applications: [],
+    stats: {
+      total: 0,
+      pending: 0,
+      approved: 0,
+      rejected: 0,
+      in_progress: 0
+    },
+    loading: true,
+    refreshing: false
+  })
+
+  useEffect(() => {
+    loadData()
+  }, [])
+
+  const loadData = async () => {
+    try {
+      setState(prev => ({ ...prev, loading: true }))
+      
+      const [applications, stats] = await Promise.all([
+        applicationController.getApplications(),
+        applicationController.getApplicationStats()
+      ])
+
+      setState({
+        applications,
+        stats,
+        loading: false,
+        refreshing: false
+      })
+    } catch (error) {
+      console.error('Error loading data:', error)
+      setState(prev => ({ ...prev, loading: false, refreshing: false }))
+    }
+  }
+
+  const onRefresh = () => {
+    setState(prev => ({ ...prev, refreshing: true }))
+    loadData()
+  }
+
+  const getStatusColor = (status: string): string => {
+    const statusColors = {
+      pending: '#F59E0B',
+      in_progress: '#3B82F6', 
+      completed: '#10B981',
+      failed: '#EF4444',
+      cancelled: '#6B7280'
+    }
+    return statusColors[status as keyof typeof statusColors] || '#6B7280'
+  }
+
+  const renderApplicationItem = ({ item }: { item: ApplicationTypes }) => (
+    <DesignSystemCard variant="elevated" padding="medium" style={styles.applicationCard}>
+      <View style={styles.applicationHeader}>
+        <Text style={styles.applicationNumber}>{item.application_number}</Text>
+        <View style={[styles.statusBadge, { backgroundColor: getStatusColor(item.status) }]}>
+          <Text style={styles.statusText}>{item.status.replace('_', ' ').toUpperCase()}</Text>
+        </View>
+      </View>
+      
+      <Text style={styles.customerName}>{item.customer_name}</Text>
+      <Text style={styles.unitType}>{item.unit_type}</Text>
+      
+      <View style={styles.applicationFooter}>
+        <Text style={styles.progressText}>Progress: {item.progress || 0}%</Text>
+        <Text style={styles.priceText}>
+          Rp {(item.unit_price || 0).toLocaleString('id-ID')}
+        </Text>
+      </View>
+    </DesignSystemCard>
+  )
+
+  if (state.loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
+
+  return (
+    <ScrollView 
+      style={styles.container}
+      refreshControl={
+        <RefreshControl refreshing={state.refreshing} onRefresh={onRefresh} />
+      }
+    >
+      <View style={styles.header}>
+        <Text style={styles.title}>KPRFlow Enterprise</Text>
+        <Text style={styles.subtitle}>Mobile Dashboard</Text>
+      </View>
+
+      <View style={styles.statsContainer}>
+        <View style={styles.statCard}>
+          <Text style={styles.statNumber}>{state.stats.total}</Text>
+          <Text style={styles.statLabel}>Total</Text>
+        </View>
+        <View style={styles.statCard}>
+          <Text style={styles.statNumber}>{state.stats.pending}</Text>
+          <Text style={styles.statLabel}>Pending</Text>
+        </View>
+        <View style={styles.statCard}>
+          <Text style={styles.statNumber}>{state.stats.in_progress}</Text>
+          <Text style={styles.statLabel}>In Progress</Text>
+        </View>
+        <View style={styles.statCard}>
+          <Text style={styles.statNumber}>{state.stats.approved}</Text>
+          <Text style={styles.statLabel}>Approved</Text>
+        </View>
+      </View>
+
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>Recent Applications</Text>
+      </View>
+        onPress={() => console.log('Navigate to settings')}
+      />
+    </View>
+  )
+
+  const renderRecentApplications = () => (
+    <View style={styles.recentContainer}>
+      <Text style={styles.sectionTitle}>Recent Applications</Text>
+      <FlatList
+        data={state.applications.slice(0, 5)}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <DesignSystemCard variant="elevated" style={styles.applicationCard}>
+            <View style={styles.applicationHeader}>
+              <View style={styles.applicationInfo}>
+                <Text style={styles.customerName}>{item.customer?.name}</Text>
+                <Text style={styles.unitInfo}>
+                  Unit: {item.unit?.block}-{item.unit?.number}
+                </Text>
+              </View>
+              <View style={styles.statusContainer}>
+                <Text style={[
+                  styles.statusText,
+                  { color: Theme.colors.status[item.status.toLowerCase()] || Theme.colors.gray[500] }
+                ]}>
+                  {item.status}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.applicationDetails}>
+              <Text style={styles.detailText}>
+                Applied: {new Date(item.created_at).toLocaleDateString()}
+              </Text>
+              <Text style={styles.detailText}>
+                Aging: {Math.floor((Date.now() - new Date(item.created_at).getTime()) / (1000 * 60 * 60 * 24))} days
+              </Text>
+            </View>
+          </DesignSystemCard>
+        )}
+        scrollEnabled={false}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
+  )
+
+  return (
+    <ScrollView
+      style={styles.container}
+      refreshControl={
+        <RefreshControl
+          refreshing={state.refreshing}
+          onRefresh={onRefresh}
+          colors={[Theme.colors.primary]}
+        />
+      }
+    >
+      {renderHeader()}
+      {renderStats()}
+      {renderQuickActions()}
+      {renderRecentApplications()}
+    </ScrollView>
+  )
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Theme.colors.background,
+  },
+  header: {
+    backgroundColor: Theme.colors.primary,
+    padding: Theme.spacing.lg,
+    paddingTop: Theme.spacing.xl,
+  },
+  headerTitle: {
+    ...Theme.typography.mobileH1,
+    color: Theme.colors.primaryForeground,
+    marginBottom: Theme.spacing.xs,
+  },
+  headerSubtitle: {
+    ...Theme.typography.body2,
+    color: Theme.colors.primaryForeground,
+  },
+  statsContainer: {
+    padding: Theme.spacing.lg,
+  },
+  statsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: Theme.spacing.md,
+  },
+  statCard: {
+    flex: 1,
+    marginHorizontal: Theme.spacing.xs,
+    alignItems: 'center',
+    paddingVertical: Theme.spacing.md,
+  },
+  statNumber: {
+    ...Theme.typography.h2,
+    color: Theme.colors.foreground,
+    marginBottom: Theme.spacing.xs,
+  },
+  statLabel: {
+    ...Theme.typography.caption1,
+    color: Theme.colors.mutedForeground,
+    textTransform: 'uppercase',
+  },
+  actionsContainer: {
+    padding: Theme.spacing.lg,
+  },
+  sectionTitle: {
+    ...Theme.typography.h3,
+    color: Theme.colors.foreground,
+    marginBottom: Theme.spacing.md,
+  },
+  buttonSpacing: {
+    height: Theme.spacing.sm,
+  },
+  recentContainer: {
+    padding: Theme.spacing.lg,
+  },
+  applicationCard: {
+    marginBottom: Theme.spacing.md,
+  },
+  applicationHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: Theme.spacing.sm,
+  },
+  applicationInfo: {
+    flex: 1,
+  },
+  customerName: {
+    ...Theme.typography.h5,
+    color: Theme.colors.foreground,
+    marginBottom: Theme.spacing.xs,
+  },
+  unitInfo: {
+    ...Theme.typography.body2,
+    color: Theme.colors.mutedForeground,
+  },
+  statusContainer: {
+    alignItems: 'flex-end',
+  },
+  statusText: {
+    ...Theme.typography.caption1,
+    fontWeight: '600',
+    textTransform: 'uppercase',
+  },
+  applicationDetails: {
+    gap: Theme.spacing.xs,
+  },
+  detailText: {
+    ...Theme.typography.body2,
+    color: Theme.colors.mutedForeground,
+  },
+})
+
+export default HomeScreen

@@ -1,0 +1,1344 @@
+{
+  "version": "6.0.0",
+  "last_updated": "2026-03-20",
+  "source": "user_priority_order_corrected",
+  "mappings": {
+    "spr_data": {
+      "description": "SPR (Surat Permohonan Rumah) data mapping - Corrected priority order with 7 notaris and bank KCP/KC support",
+      "source": "Google Sheets",
+      "target": "Supabase",
+      "table": "data global master",
+      "columns": {
+        "no": {
+          "target_field": "no",
+          "data_type": "integer",
+          "description": "Nomor urut SPR",
+          "validation": {
+            "required": true,
+            "min_value": 1,
+            "max_value": 999999
+          }
+        },
+        "tgl spr": {
+          "target_field": "tgl_spr",
+          "data_type": "date",
+          "description": "Tanggal SPR",
+          "validation": {
+            "required": true,
+            "format": "YYYY-MM-DD",
+            "min_date": "2020-01-01",
+            "max_date": "2030-12-31"
+          }
+        },
+        "id unit": {
+          "target_field": "id_unit",
+          "data_type": "string",
+          "description": "ID Unit Properti",
+          "validation": {
+            "required": true,
+            "pattern": "^[A-Z0-9-]+$",
+            "min_length": 5,
+            "max_length": 50
+          }
+        },
+        "aging hari": {
+          "target_field": "aging_hari",
+          "data_type": "integer",
+          "description": "Aging dalam Hari",
+          "validation": {
+            "required": true,
+            "min_value": 0,
+            "max_value": 365
+          }
+        },
+        "nama customer": {
+          "target_field": "nama_customer",
+          "data_type": "string",
+          "description": "Nama Lengkap Customer",
+          "validation": {
+            "required": true,
+            "min_length": 3,
+            "max_length": 100,
+            "pattern": "^[a-zA-Z\\s\\-\\.'']+$"
+          }
+        },
+        "sales koordinator": {
+          "target_field": "sales_koordinator",
+          "data_type": "string",
+          "description": "Sales Koordinator",
+          "validation": {
+            "required": false,
+            "min_length": 3,
+            "max_length": 100
+          }
+        },
+        "harga jual dpp": {
+          "target_field": "harga_jual_dpp",
+          "data_type": "decimal",
+          "description": "Harga Jual DPP",
+          "validation": {
+            "required": true,
+            "min_value": 0,
+            "max_value": 9999999999
+          }
+        },
+        "progres rumah": {
+          "target_field": "progres_rumah",
+          "data_type": "string",
+          "description": "Progress Pembangunan",
+          "validation": {
+            "required": false,
+            "min_length": 1,
+            "max_length": 100
+          }
+        },
+        "keterangan": {
+          "target_field": "keterangan",
+          "data_type": "string",
+          "description": "Keterangan",
+          "validation": {
+            "required": false,
+            "max_length": 500
+          }
+        },
+        "isu kendala": {
+          "target_field": "isu_kendala",
+          "data_type": "string",
+          "description": "Isu/Kendala",
+          "validation": {
+            "required": false,
+            "max_length": 500
+          }
+        },
+        "proses pemberkasan": {
+          "target_field": "proses_pemberkasan",
+          "data_type": "string",
+          "description": "Proses Pemberkasan",
+          "validation": {
+            "required": false,
+            "max_length": 500
+          }
+        },
+        "solusi masalah": {
+          "target_field": "solusi_masalah",
+          "data_type": "string",
+          "description": "Solusi Masalah",
+          "validation": {
+            "required": false,
+            "max_length": 500
+          }
+        },
+        "aging fisik": {
+          "target_field": "aging_fisik",
+          "data_type": "integer",
+          "description": "Aging Fisik",
+          "validation": {
+            "required": false,
+            "min_value": 0,
+            "max_value": 365
+          }
+        },
+        "pic bank": {
+          "target_field": "pic_bank",
+          "data_type": "string",
+          "description": "PIC Bank Contact",
+          "validation": {
+            "required": false,
+            "max_length": 200
+          }
+        },
+        // Bank Status Fields (6) - Single column per bank
+        "bjb": {
+          "target_field": "bjb",
+          "data_type": "string",
+          "description": "Bank BJB Status",
+          "validation": {
+            "required": false,
+            "enum": ["pending", "approved", "rejected", "processing", "completed"]
+          }
+        },
+        "mandiri": {
+          "target_field": "mandiri",
+          "data_type": "string",
+          "description": "Bank Mandiri Status",
+          "validation": {
+            "required": false,
+            "enum": ["pending", "approved", "rejected", "processing", "completed"]
+          }
+        },
+        "bni": {
+          "target_field": "bni",
+          "data_type": "string",
+          "description": "Bank BNI Status",
+          "validation": {
+            "required": false,
+            "enum": ["pending", "approved", "rejected", "processing", "completed"]
+          }
+        },
+        "bri": {
+          "target_field": "bri",
+          "data_type": "string",
+          "description": "Bank BRI Status",
+          "validation": {
+            "required": false,
+            "enum": ["pending", "approved", "rejected", "processing", "completed"]
+          }
+        },
+        "btn": {
+          "target_field": "btn",
+          "data_type": "string",
+          "description": "Bank BTN Status",
+          "validation": {
+            "required": false,
+            "enum": ["pending", "approved", "rejected", "processing", "completed"]
+          }
+        },
+        "bsi": {
+          "target_field": "bsi",
+          "data_type": "string",
+          "description": "Bank BSI Status",
+          "validation": {
+            "required": false,
+            "enum": ["pending", "approved", "rejected", "processing", "completed"]
+          }
+        },
+        // Status & Planning (4)
+        "status unit": {
+          "target_field": "status_unit",
+          "data_type": "string",
+          "description": "Status Unit",
+          "validation": {
+            "required": true,
+            "enum": ["available", "booked", "sold", "reserved", "cancelled"]
+          }
+        },
+        "potensi app": {
+          "target_field": "potensi_app",
+          "data_type": "string",
+          "description": "Potensi Approve",
+          "validation": {
+            "required": false,
+            "enum": ["high", "medium", "low", "none"]
+          }
+        },
+        "rencana akad": {
+          "target_field": "rencana_akad",
+          "data_type": "date",
+          "description": "Rencana Akad",
+          "validation": {
+            "required": false,
+            "format": "YYYY-MM-DD"
+          }
+        },
+        "potensi batal": {
+          "target_field": "potensi_batal",
+          "data_type": "string",
+          "description": "Potensi Batal",
+          "validation": {
+            "required": false,
+            "enum": ["high", "medium", "low", "none"]
+          }
+        },
+        // Financial & Legal (10)
+        "tgl akad": {
+          "target_field": "tgl_akad",
+          "data_type": "date",
+          "description": "Tanggal Akad",
+          "validation": {
+            "required": false,
+            "format": "YYYY-MM-DD"
+          }
+        },
+        "bank final": {
+          "target_field": "bank_final",
+          "data_type": "string",
+          "description": "Bank Final",
+          "validation": {
+            "required": false,
+            "enum": ["bjb", "mandiri", "bni", "bri", "btn", "bsi", "bsn", "nobu"]
+          }
+        },
+        "plafon": {
+          "target_field": "plafon",
+          "data_type": "decimal",
+          "description": "Plafon Kredit",
+          "validation": {
+            "required": false,
+            "min_value": 0,
+            "max_value": 9999999999
+          }
+        },
+        "cair": {
+          "target_field": "cair",
+          "data_type": "decimal",
+          "description": "Jumlah Pencairan",
+          "validation": {
+            "required": false,
+            "min_value": 0,
+            "max_value": 9999999999
+          }
+        },
+        "ajb ppjb": {
+          "target_field": "ajb_ppjb",
+          "data_type": "string",
+          "description": "AJB/PPJB Status",
+          "validation": {
+            "required": false,
+            "enum": ["pending", "processed", "completed"]
+          }
+        },
+        "pph": {
+          "target_field": "pph",
+          "data_type": "decimal",
+          "description": "PPH",
+          "validation": {
+            "required": false,
+            "min_value": 0,
+            "max_value": 999999999
+          }
+        },
+        "bphtb": {
+          "target_field": "bphtb",
+          "data_type": "decimal",
+          "description": "BPHTB",
+          "validation": {
+            "required": false,
+            "min_value": 0,
+            "max_value": 999999999
+          }
+        },
+        "wa cust": {
+          "target_field": "wa_cust",
+          "data_type": "string",
+          "description": "WhatsApp Customer",
+          "validation": {
+            "required": false,
+            "pattern": "^\\+62[0-9]{9,12}$"
+          }
+        },
+        "email cust": {
+          "target_field": "email_cust",
+          "data_type": "string",
+          "description": "Email Customer",
+          "validation": {
+            "required": false,
+            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        },
+        "timestamp": {
+          "target_field": "timestamp",
+          "data_type": "timestamp",
+          "description": "Timestamp",
+          "validation": {
+            "required": false
+          }
+        },
+        // Location & Source (4)
+        "sumber": {
+          "target_field": "sumber",
+          "data_type": "string",
+          "description": "Sumber Data",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "koordinat": {
+          "target_field": "koordinat",
+          "data_type": "string",
+          "description": "Koordinat Lokasi",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "no id rumah": {
+          "target_field": "no_id_rumah",
+          "data_type": "string",
+          "description": "Nomor ID Rumah",
+          "validation": {
+            "required": false,
+            "max_length": 50
+          }
+        },
+        "siteplan index": {
+          "target_field": "siteplan_index",
+          "data_type": "integer",
+          "description": "Siteplan Index (1-10)",
+          "validation": {
+            "required": false,
+            "min_value": 1,
+            "max_value": 10
+          },
+          "integration": {
+            "source": "bramsray3_siteplan",
+            "reference": "siteplan_data.master_siteplan",
+            "auto_populate": true,
+            "siteplan_options": {
+              "1": {
+                "name": "Ciruas land",
+                "prefix_legal": "SRG0310122020T002",
+                "year": "2020"
+              },
+              "2": {
+                "name": "Ciruasland tahap 3",
+                "prefix_legal": "SRG0310122024T001",
+                "year": "2024"
+              }
+            }
+          }
+        },
+        "house_id": {
+          "target_field": "house_id",
+          "data_type": "string",
+          "description": "House ID with prefix legal and category",
+          "validation": {
+            "required": false,
+            "max_length": 50,
+            "pattern": "^SRG031012\\d{4}T\\d{3}(PLATINUM|SKANDIUM|PALADIO|TITANIUM|GOLD|CROWN)\\d{2}\\d{2}$"
+          },
+          "integration": {
+            "source": "generated",
+            "reference": "siteplan_index + category + blok + nomor",
+            "auto_generate": true
+          },
+          "dropdown_options": [
+            "PLATINUM - Premium",
+            "SKANDIUM - High-End", 
+            "PALADIO - Luxury",
+            "TITANIUM - Ultra-Premium",
+            "GOLD - Standard Premium",
+            "CROWN - Luxury Elite"
+          ]
+        },
+        "unit_category": {
+          "target_field": "unit_category",
+          "data_type": "string",
+          "description": "Unit Category",
+          "validation": {
+            "required": false,
+            "max_length": 20
+          },
+          "dropdown_options": [
+            "PLATINUM",
+            "SKANDIUM",
+            "PALADIO",
+            "TITANIUM",
+            "GOLD",
+            "CROWN"
+          ]
+        },
+        "prefix_legal": {
+          "target_field": "prefix_legal",
+          "data_type": "string",
+          "description": "Prefix Legal Code",
+          "validation": {
+            "required": false,
+            "max_length": 50,
+            "pattern": "^SRG031012\\d{4}T\\d{3}$"
+          },
+          "integration": {
+            "source": "siteplan_index",
+            "reference": "siteplan_options.prefix_legal",
+            "auto_populate": true
+          }
+        },
+        // Unit Data (5)
+        "cluster": {
+          "target_field": "cluster",
+          "data_type": "string",
+          "description": "Cluster",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "blok": {
+          "target_field": "blok",
+          "data_type": "string",
+          "description": "Blok",
+          "validation": {
+            "required": false,
+            "max_length": 10
+          }
+        },
+        "nomor": {
+          "target_field": "nomor",
+          "data_type": "string",
+          "description": "Nomor Unit",
+          "validation": {
+            "required": false,
+            "max_length": 20
+          }
+        },
+        "jenis produk": {
+          "target_field": "jenis_produk",
+          "data_type": "string",
+          "description": "Jenis Produk",
+          "validation": {
+            "required": false,
+            "max_length": 50
+          }
+        },
+        "tipe unit": {
+          "target_field": "tipe_unit",
+          "data_type": "string",
+          "description": "Tipe Unit",
+          "validation": {
+            "required": false,
+            "max_length": 50
+          }
+        },
+        // Payment & MBR (4)
+        "payment method": {
+          "target_field": "payment_method",
+          "data_type": "string",
+          "description": "Payment Method",
+          "validation": {
+            "required": false,
+            "max_length": 50
+          }
+        },
+        "vat incentive": {
+          "target_field": "vat_incentive",
+          "data_type": "string",
+          "description": "VAT Incentive",
+          "validation": {
+            "required": false,
+            "max_length": 50
+          }
+        },
+        "mbr status": {
+          "target_field": "mbr_status",
+          "data_type": "string",
+          "description": "MBR Status",
+          "validation": {
+            "required": false,
+            "enum": ["eligible", "not_eligible", "pending"]
+          }
+        },
+        "mbr date": {
+          "target_field": "mbr_date",
+          "data_type": "date",
+          "description": "MBR Date",
+          "validation": {
+            "required": false,
+            "format": "YYYY-MM-DD"
+          }
+        },
+        // Documents & Validation (17)
+        "ssp": {
+          "target_field": "ssp",
+          "data_type": "string",
+          "description": "SSP",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "validasi ssp": {
+          "target_field": "validasi_ssp",
+          "data_type": "string",
+          "description": "Validasi SSP",
+          "validation": {
+            "required": false,
+            "enum": ["valid", "invalid", "pending"]
+          }
+        },
+        "validasi bphtb": {
+          "target_field": "validasi_bphtb",
+          "data_type": "string",
+          "description": "Validasi BPHTB",
+          "validation": {
+            "required": false,
+            "enum": ["valid", "invalid", "pending"]
+          }
+        },
+        "bphtb subsidy": {
+          "target_field": "bphtb_subsidy",
+          "data_type": "decimal",
+          "description": "BPHTB Subsidy",
+          "validation": {
+            "required": false,
+            "min_value": 0,
+            "max_value": 999999999
+          }
+        },
+        "notaris": {
+          "target_field": "notaris",
+          "data_type": "string",
+          "description": "Notaris Utama",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "balik nama": {
+          "target_field": "balik_nama",
+          "data_type": "string",
+          "description": "Balik Nama",
+          "validation": {
+            "required": false,
+            "enum": ["pending", "processed", "completed"]
+          }
+        },
+        "tgl ppjb": {
+          "target_field": "tgl_ppjb",
+          "data_type": "date",
+          "description": "Tanggal PPJB",
+          "validation": {
+            "required": false,
+            "format": "YYYY-MM-DD"
+          }
+        },
+        "no ppjb notaril": {
+          "target_field": "no_ppjb_notaril",
+          "data_type": "string",
+          "description": "Nomor PPJB Notaril",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "salinan ajb notaril": {
+          "target_field": "salinan_ajb_notaril",
+          "data_type": "string",
+          "description": "Salinan AJB Notaril",
+          "validation": {
+            "required": false,
+            "enum": ["available", "not_available", "pending"]
+          }
+        },
+        "no akta buyback": {
+          "target_field": "no_akta_buyback",
+          "data_type": "string",
+          "description": "Nomor Akta Buyback",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "bast bank": {
+          "target_field": "bast_bank",
+          "data_type": "string",
+          "description": "BAST Bank",
+          "validation": {
+            "required": false,
+            "enum": ["received", "not_received", "pending"]
+          }
+        },
+        "bast developer": {
+          "target_field": "bast_developer",
+          "data_type": "string",
+          "description": "BAST Developer",
+          "validation": {
+            "required": false,
+            "enum": ["received", "not_received", "pending"]
+          }
+        },
+        // Notaris Support (43 fields) - After 59, add 7 notaris support
+        "notaris_1": {
+          "target_field": "notaris_1",
+          "data_type": "string",
+          "description": "Notaris 1",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "notaris_2": {
+          "target_field": "notaris_2",
+          "data_type": "string",
+          "description": "Notaris 2",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "notaris_3": {
+          "target_field": "notaris_3",
+          "data_type": "string",
+          "description": "Notaris 3",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "notaris_4": {
+          "target_field": "notaris_4",
+          "data_type": "string",
+          "description": "Notaris 4",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "notaris_5": {
+          "target_field": "notaris_5",
+          "data_type": "string",
+          "description": "Notaris 5",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "notaris_6": {
+          "target_field": "notaris_6",
+          "data_type": "string",
+          "description": "Notaris 6",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "notaris_7": {
+          "target_field": "notaris_7",
+          "data_type": "string",
+          "description": "Notaris 7",
+          "validation": {
+            "required": false,
+            "max_length": 100
+          }
+        },
+        "notaris_1_phone": {
+          "target_field": "notaris_1_phone",
+          "data_type": "string",
+          "description": "Notaris 1 Phone",
+          "validation": {
+            "required": false,
+            "pattern": "^\\+62[0-9]{9,12}$"
+          }
+        },
+        "notaris_2_phone": {
+          "target_field": "notaris_2_phone",
+          "data_type": "string",
+          "description": "Notaris 2 Phone",
+          "validation": {
+            "required": false,
+            "pattern": "^\\+62[0-9]{9,12}$"
+          }
+        },
+        "notaris_3_phone": {
+          "target_field": "notaris_3_phone",
+          "data_type": "string",
+          "description": "Notaris 3 Phone",
+          "validation": {
+            "required": false,
+            "pattern": "^\\+62[0-9]{9,12}$"
+          }
+        },
+        "notaris_4_phone": {
+          "target_field": "notaris_4_phone",
+          "data_type": "string",
+          "description": "Notaris 4 Phone",
+          "validation": {
+            "required": false,
+            "pattern": "^\\+62[0-9]{9,12}$"
+          }
+        },
+        "notaris_5_phone": {
+          "target_field": "notaris_5_phone",
+          "data_type": "string",
+          "description": "Notaris 5 Phone",
+          "validation": {
+            "required": false,
+            "pattern": "^\\+62[0-9]{9,12}$"
+          }
+        },
+        "notaris_6_phone": {
+          "target_field": "notaris_6_phone",
+          "data_type": "string",
+          "description": "Notaris 6 Phone",
+          "validation": {
+            "required": false,
+            "pattern": "^\\+62[0-9]{9,12}$"
+          }
+        },
+        "notaris_7_phone": {
+          "target_field": "notaris_7_phone",
+          "data_type": "string",
+          "description": "Notaris 7 Phone",
+          "validation": {
+            "required": false,
+            "pattern": "^\\+62[0-9]{9,12}$"
+          }
+        },
+        "notaris_1_email": {
+          "target_field": "notaris_1_email",
+          "data_type": "string",
+          "description": "Notaris 1 Email",
+          "validation": {
+            "required": false,
+            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        },
+        "notaris_2_email": {
+          "target_field": "notaris_2_email",
+          "data_type": "string",
+          "description": "Notaris 2 Email",
+          "validation": {
+            "required": false,
+            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        },
+        "notaris_3_email": {
+          "target_field": "notaris_3_email",
+          "data_type": "string",
+          "description": "Notaris 3 Email",
+          "validation": {
+            "required": false,
+            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        },
+        "notaris_4_email": {
+          "target_field": "notaris_4_email",
+          "data_type": "string",
+          "description": "Notaris 4 Email",
+          "validation": {
+            "required": false,
+            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        },
+        "notaris_5_email": {
+          "target_field": "notaris_5_email",
+          "data_type": "string",
+          "description": "Notaris 5 Email",
+          "validation": {
+            "required": false,
+            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        },
+        "notaris_6_email": {
+          "target_field": "notaris_6_email",
+          "data_type": "string",
+          "description": "Notaris 6 Email",
+          "validation": {
+            "required": false,
+            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        },
+        "notaris_7_email": {
+          "target_field": "notaris_7_email",
+          "data_type": "string",
+          "description": "Notaris 7 Email",
+          "validation": {
+            "required": false,
+            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        },
+        "notaris_1_specialization": {
+          "target_field": "notaris_1_specialization",
+          "data_type": "string",
+          "description": "Notaris 1 Specialization",
+          "validation": {
+            "required": false,
+            "max_length": 200
+          }
+        },
+        "notaris_2_specialization": {
+          "target_field": "notaris_2_specialization",
+          "data_type": "string",
+          "description": "Notaris 2 Specialization",
+          "validation": {
+            "required": false,
+            "max_length": 200
+          }
+        },
+        "notaris_3_specialization": {
+          "target_field": "notaris_3_specialization",
+          "data_type": "string",
+          "description": "Notaris 3 Specialization",
+          "validation": {
+            "required": false,
+            "max_length": 200
+          }
+        },
+        "notaris_4_specialization": {
+          "target_field": "notaris_4_specialization",
+          "data_type": "string",
+          "description": "Notaris 4 Specialization",
+          "validation": {
+            "required": false,
+            "max_length": 200
+          }
+        },
+        "notaris_5_specialization": {
+          "target_field": "notaris_5_specialization",
+          "data_type": "string",
+          "description": "Notaris 5 Specialization",
+          "validation": {
+            "required": false,
+            "max_length": 200
+          }
+        },
+        "notaris_6_specialization": {
+          "target_field": "notaris_6_specialization",
+          "data_type": "string",
+          "description": "Notaris 6 Specialization",
+          "validation": {
+            "required": false,
+            "max_length": 200
+          }
+        },
+        "notaris_7_specialization": {
+          "target_field": "notaris_7_specialization",
+          "data_type": "string",
+          "description": "Notaris 7 Specialization",
+          "validation": {
+            "required": false,
+            "max_length": 200
+          }
+        },
+        "notaris_1_available": {
+          "target_field": "notaris_1_available",
+          "data_type": "boolean",
+          "description": "Notaris 1 Available",
+          "validation": {
+            "required": false
+          }
+        },
+        "notaris_2_available": {
+          "target_field": "notaris_2_available",
+          "data_type": "boolean",
+          "description": "Notaris 2 Available",
+          "validation": {
+            "required": false
+          }
+        },
+        "notaris_3_available": {
+          "target_field": "notaris_3_available",
+          "data_type": "boolean",
+          "description": "Notaris 3 Available",
+          "validation": {
+            "required": false
+          }
+        },
+        "notaris_4_available": {
+          "target_field": "notaris_4_available",
+          "data_type": "boolean",
+          "description": "Notaris 4 Available",
+          "validation": {
+            "required": false
+          }
+        },
+        "notaris_5_available": {
+          "target_field": "notaris_5_available",
+          "data_type": "boolean",
+          "description": "Notaris 5 Available",
+          "validation": {
+            "required": false
+          }
+        },
+        "notaris_6_available": {
+          "target_field": "notaris_6_available",
+          "data_type": "boolean",
+          "description": "Notaris 6 Available",
+          "validation": {
+            "required": false
+          }
+        },
+        "notaris_7_available": {
+          "target_field": "notaris_7_available",
+          "data_type": "boolean",
+          "description": "Notaris 7 Available",
+          "validation": {
+            "required": false
+          }
+        }
+      }
+    }
+  },
+  "column_order": [
+    // Basic Info (14 fields)
+    "no", "tgl spr", "id unit", "aging hari", "nama customer", "sales koordinator", 
+    "harga jual dpp", "progres rumah", "keterangan", "isu kendala", "proses pemberkasan", 
+    "solusi masalah", "aging fisik", "pic bank",
+    
+    // Bank Status (6 fields) - Single column per bank
+    "bjb", "mandiri", "bni", "bri", "btn", "bsi",
+    
+    // Status & Planning (4 fields)
+    "status unit", "potensi app", "rencana akad", "potensi batal",
+    
+    // Financial & Legal (10 fields)
+    "tgl akad", "bank final", "plafon", "cair", "ajb ppjb", "pph", "bphtb", "wa cust", "email cust", "timestamp",
+    
+    // Location & Source (4 fields)
+    "sumber", "koordinat", "no id rumah", "siteplan index",
+    
+    // Unit Data (5 fields)
+    "cluster", "blok", "nomor", "jenis produk", "tipe unit",
+    
+    // Payment & MBR (4 fields)
+    "payment method", "vat incentive", "mbr status", "mbr date",
+    
+    // Documents & Validation (17 fields)
+    "ssp", "validasi ssp", "validasi bphtb", "bphtb subsidy", "notaris", "balik nama", 
+    "tgl ppjb", "no ppjb notaril", "salinan ajb notaril", "no akta buyback", "bast bank", 
+    "bast developer",
+    
+    // Notaris Support (43 fields) - Added after 59
+    "notaris_1", "notaris_2", "notaris_3", "notaris_4", "notaris_5", "notaris_6", "notaris_7",
+    "notaris_1_phone", "notaris_2_phone", "notaris_3_phone", "notaris_4_phone", "notaris_5_phone", "notaris_6_phone", "notaris_7_phone",
+    "notaris_1_email", "notaris_2_email", "notaris_3_email", "notaris_4_email", "notaris_5_email", "notaris_6_email", "notaris_7_email",
+    "notaris_1_specialization", "notaris_2_specialization", "notaris_3_specialization", "notaris_4_specialization", "notaris_5_specialization", "notaris_6_specialization", "notaris_7_specialization",
+    "notaris_1_available", "notaris_2_available", "notaris_3_available", "notaris_4_available", "notaris_5_available", "notaris_6_available", "notaris_7_available",
+    
+    // Remaining Data (54 fields) - Customer Data (12)
+    "no spr", "ttl cust", "nik cust", "npwp cust", "alamat ktp cust", "alamat dom cust", 
+    "nama pasangan", "ttl pasangan", "nik pasangan", "npwp pasangan", "alamat ktp pasangan", 
+    "alamat dom pasangan",
+    
+    // Emergency Contact (4 fields)
+    "no telp ec", "nama ec", "alamat ec", "hubungan ec",
+    
+    // Additional Data (38 fields)
+    "siteplan", "kode cetak ppjb", "kode cetak akad", "Template ID", "id_google_ppjb", "id_google_akad", 
+    "id_google_flpp", "id_google_form_bank", "id_google_undangan", "id_google_mbr", 
+    "harga jual akta", "nilai sbum", "nilai ppn", "nilai bphtb", "biaya ajb", "markup keterangan", 
+    "prefix legal", "nama proyek", "nilai pph", "biaya bank estimasi", "komisi sales", 
+    "override manager", "bonus closing", "booking fee std", "biaya strategis", "biaya listrik", 
+    "dividen owner", "dividen investor", "id_google_so", "biaya_provisi", "biaya_asuransi", 
+    "biaya_admin_notaris", "total_biaya_bank", "teks_estimasi_bank", "raw_scan_data", 
+    "aging_fisik", "aging_hari", "sync_status"
+  ],
+  "transformations": {
+    "date_transformations": {
+      "tgl spr": {
+        "source_format": "DD/MM/YYYY",
+        "target_format": "YYYY-MM-DD",
+        "function": "transformDate"
+      },
+      "rencana akad": {
+        "source_format": "DD/MM/YYYY",
+        "target_format": "YYYY-MM-DD",
+        "function": "transformDate"
+      },
+      "tgl akad": {
+        "source_format": "DD/MM/YYYY",
+        "target_format": "YYYY-MM-DD",
+        "function": "transformDate"
+      },
+      "mbr date": {
+        "source_format": "DD/MM/YYYY",
+        "target_format": "YYYY-MM-DD",
+        "function": "transformDate"
+      },
+      "tgl ppjb": {
+        "source_format": "DD/MM/YYYY",
+        "target_format": "YYYY-MM-DD",
+        "function": "transformDate"
+      }
+    },
+    "number_transformations": {
+      "harga jual dpp": {
+        "source_format": "currency",
+        "target_format": "decimal",
+        "function": "transformCurrency"
+      },
+      "aging hari": {
+        "source_format": "integer",
+        "target_format": "integer",
+        "function": "transformInteger"
+      },
+      "aging fisik": {
+        "source_format": "integer",
+        "target_format": "integer",
+        "function": "transformInteger"
+      },
+      "siteplan index": {
+        "source_format": "integer",
+        "target_format": "integer",
+        "function": "transformInteger"
+      },
+      "plafon": {
+        "source_format": "currency",
+        "target_format": "decimal",
+        "function": "transformCurrency"
+      },
+      "cair": {
+        "source_format": "currency",
+        "target_format": "decimal",
+        "function": "transformCurrency"
+      },
+      "pph": {
+        "source_format": "currency",
+        "target_format": "decimal",
+        "function": "transformCurrency"
+      },
+      "bphtb": {
+        "source_format": "currency",
+        "target_format": "decimal",
+        "function": "transformCurrency"
+      },
+      "bphtb subsidy": {
+        "source_format": "currency",
+        "target_format": "decimal",
+        "function": "transformCurrency"
+      }
+    },
+    "text_transformations": {
+      "nama customer": {
+        "function": "properCase",
+        "description": "Convert to proper case"
+      },
+      "keterangan": {
+        "function": "trimAndUppercase",
+        "description": "Trim and uppercase"
+      },
+      "status unit": {
+        "function": "lowercase",
+        "description": "Convert to lowercase"
+      },
+      "notaris": {
+        "function": "properCase",
+        "description": "Convert to proper case"
+      },
+      "notaris_1": {
+        "function": "properCase",
+        "description": "Convert to proper case"
+      },
+      "notaris_2": {
+        "function": "properCase",
+        "description": "Convert to proper case"
+      },
+      "notaris_3": {
+        "function": "properCase",
+        "description": "Convert to proper case"
+      },
+      "notaris_4": {
+        "function": "properCase",
+        "description": "Convert to proper case"
+      },
+      "notaris_5": {
+        "function": "properCase",
+        "description": "Convert to proper case"
+      },
+      "notaris_6": {
+        "function": "properCase",
+        "description": "Convert to proper case"
+      },
+      "notaris_7": {
+        "function": "properCase",
+        "description": "Convert to proper case"
+      }
+    },
+    "contact_transformations": {
+      "notaris_1_phone": {
+        "function": "formatPhone",
+        "description": "Format phone number"
+      },
+      "notaris_2_phone": {
+        "function": "formatPhone",
+        "description": "Format phone number"
+      },
+      "notaris_3_phone": {
+        "function": "formatPhone",
+        "description": "Format phone number"
+      },
+      "notaris_4_phone": {
+        "function": "formatPhone",
+        "description": "Format phone number"
+      },
+      "notaris_5_phone": {
+        "function": "formatPhone",
+        "description": "Format phone number"
+      },
+      "notaris_6_phone": {
+        "function": "formatPhone",
+        "description": "Format phone number"
+      },
+      "notaris_7_phone": {
+        "function": "formatPhone",
+        "description": "format phone number"
+      }
+    },
+    "email_transformations": {
+      "notaris_1_email": {
+        "function": "formatEmail",
+        "description": "Format email address"
+      },
+      "notaris_2_email": {
+        "function": "formatEmail",
+        "description": "Format email address"
+      },
+      "notaris_3_email": {
+        "function": "formatEmail",
+        "description": "Format email address"
+      },
+      "notaris_4_email": {
+        "function": "formatEmail",
+        "description": "Format email address"
+      },
+      "notaris_5_email": {
+        "function": "formatEmail",
+        "description": "Format email address"
+      },
+      "notaris_6_email": {
+        "function": "formatEmail",
+        "description": "Format email address"
+      },
+      "notaris_7_email": {
+        "function": "formatEmail",
+        "description": "Format email address"
+      }
+    },
+    "specialization_transformations": {
+      "notaris_1_specialization": {
+        "function": "formatSpecialization",
+        "description": "Format specialization list"
+      },
+      "notaris_2_specialization": {
+        "function": "formatSpecialization",
+        "description": "Format specialization list"
+      },
+      "notaris_3_specialization": {
+        "function": "formatSpecialization",
+        "description": "Format specialization list"
+      },
+      "notaris_4_specialization": {
+        "function": "formatSpecialization",
+        "description": "Format specialization list"
+      },
+      "notaris_5_specialization": {
+        "function": "formatSpecialization",
+        "description": "Format specialization list"
+      },
+      "notaris_6_specialization": {
+        "function": "formatSpecialization",
+        "description": "format specialization list"
+      },
+      "notaris_7_specialization": {
+        "function": "formatSpecialization",
+        "description": "Format specialization list"
+      }
+    },
+    "availability_transformations": {
+      "notaris_1_available": {
+        "function": "transformBoolean",
+        "description": "Transform to boolean"
+      },
+      "notaris_2_available": {
+        "function": "transformBoolean",
+        "description": "Transform to boolean"
+      },
+      "notaris_3_available": {
+        "function": "transformBoolean",
+        "description": "Transform to boolean"
+      },
+      "notaris_4_available": {
+        "function": "transformBoolean",
+        "description": "Transform to boolean"
+      },
+      "notaris_5_available": {
+        "function": "transformBoolean",
+        "description": "Transform to boolean"
+      },
+      "notaris_6_available": {
+        "function": "transformBoolean",
+        "description": "Transform to boolean"
+      },
+      "notaris_7_available": {
+        "function": "transformBoolean",
+        "description": "Transform to boolean"
+      }
+    }
+  },
+  "validation_rules": {
+    "required_fields": {
+      "spr_data": ["no", "tgl spr", "id unit", "nama customer", "status unit"]
+    },
+    "bank_validation": {
+      "unique_bank_selection": "Only one bank should be selected as final",
+      "phone_format": "Bank phone must be in format +62XXXXXXXXXX",
+      "email_format": "Bank email must be valid email format"
+    },
+    "field_dependencies": {
+      "spr_data": {
+        "bank final": {
+          "depends_on": ["bjb", "mandiri", "bni", "bri", "btn", "bsi"],
+          "condition": "At least one bank status must be set"
+        },
+        "plafon": {
+          "depends_on": ["bank final"],
+          "condition": "Bank final must be selected"
+        }
+      }
+    },
+    "business_rules": {
+      "bank_assignment": {
+        "field": "bank final",
+        "logic": {
+          "bjb": "Use BJB bank status",
+          "mandiri": "Use Mandiri bank status",
+          "bni": "Use BNI bank status",
+          "bri": "Use BRI bank status",
+          "btn": "Use BTN bank status",
+          "bsi": "Use BSI bank status",
+          "bsn": "Use BSN bank status (alias for BSI)",
+          "nobu": "Use NOBU bank status"
+        }
+      }
+    }
+  },
+  "integration_settings": {
+    "google_sheets": {
+      "spreadsheet_id": "your-spreadsheet-id",
+      "sheet_name": "database",
+      "range": "A:KN",
+      "header_row": 1,
+      "data_start_row": 2
+    },
+    "supabase": {
+      "url": "https://ntlkmxuajqaoijjrxpqf.supabase.co",
+      "api_key": "your-api-key",
+      "table": "data global master"
+    },
+    "sync_frequency": {
+      "real_time": false,
+      "scheduled_sync": true,
+      "sync_interval_minutes": 30,
+      "batch_size": 100
+    },
+    "error_handling": {
+      "max_retries": 3,
+      "retry_delay_seconds": 5,
+      "error_logging": true,
+      "notification_on_error": true
+    }
+  },
+  "metadata": {
+    "total_mappings": 1,
+    "total_columns": 113,
+    "priority_columns": 59,
+    "notaris_columns": 43,
+    "bank_columns": 6,
+    "remaining_columns": 54,
+    "total_transformations": 70,
+    "total_validation_rules": 25,
+    "source": "user_priority_order_corrected",
+    "target_table": "data global master",
+    "last_updated": "2026-03-20T00:00:00Z",
+    "validation_rules": [
+      "mapping_id must be unique",
+      "target_field must be valid database field",
+      "data_type must be valid data type",
+      "validation rules must be complete",
+      "column order must match user request",
+      "notaris fields must support 7 notaris",
+      "bank fields must support 6 banks with single column each"
+    ],
+    "column_categories": {
+      "basic_info": 14,
+      "bank_status": 6,
+      "status_planning": 4,
+      "financial_legal": 10,
+      "location_source": 4,
+      "unit_data": 5,
+      "payment_mbr": 4,
+      "documents_validation": 17,
+      "notaris_data": 43,
+      "remaining_data": 54
+    }
+  }
+}

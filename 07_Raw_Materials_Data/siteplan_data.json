@@ -1,0 +1,166 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-20",
+  "source": "bramsray3_siteplan_data",
+  "siteplan_integration": {
+    "master_siteplan": {
+      "name": "KPRFlow Enterprise Siteplan System",
+      "description": "Master siteplan data with house ID generation",
+      "total_units": 0,
+      "status": "active",
+      "image_url": "/07_Raw_Materials_Data/master siteplan.jpg",
+      "interactive": true,
+      "has_pdf": true,
+      "pdf_path": "/assets/Siteplan Rucita Master.pdf"
+    },
+    "siteplans": {
+      "1": {
+        "name": "Ciruas land",
+        "prefix_legal": "SRG0310122020T002",
+        "year": "2020",
+        "description": "Siteplan induk Ciruas land",
+        "image_url": "/07_Raw_Materials_Data/master siteplan.jpg",
+        "status": "active",
+        "code": "002"
+      },
+      "2": {
+        "name": "Ciruasland tahap 3",
+        "prefix_legal": "SRG0310122024T001",
+        "year": "2024",
+        "description": "Siteplan tahap 3 Ciruasland",
+        "image_url": "/07_Raw_Materials_Data/master siteplan.jpg",
+        "status": "active",
+        "code": "001"
+      }
+    },
+    "unit_categories": {
+      "PLATINUM": {
+        "name": "PLATINUM",
+        "description": "Premium",
+        "level": 1,
+        "features": ["Premium location", "Extra facilities", "Priority service"]
+      },
+      "SKANDIUM": {
+        "name": "SKANDIUM",
+        "description": "High-End",
+        "level": 2,
+        "features": ["Good location", "Standard facilities", "Regular service"]
+      },
+      "PALADIO": {
+        "name": "PALADIO",
+        "description": "Luxury",
+        "level": 1,
+        "features": ["Luxury location", "Premium facilities", "VIP service"]
+      },
+      "TITANIUM": {
+        "name": "TITANIUM",
+        "description": "Ultra-Premium",
+        "level": 1,
+        "features": ["Ultra location", "Ultra facilities", "Ultra VIP service"]
+      },
+      "GOLD": {
+        "name": "GOLD",
+        "description": "Standard Premium",
+        "level": 2,
+        "features": ["Standard location", "Basic facilities", "Standard service"]
+      },
+      "CROWN": {
+        "name": "CROWN",
+        "description": "Luxury Elite",
+        "level": 1,
+        "features": ["Elite location", "Elite facilities", "Elite service"]
+      }
+    },
+    "house_id_system": {
+      "format": "SRG031012YYYYTXXX[KATEGORI][BLOK][NOMOR]",
+      "description": "Prefix Legal House ID Generation System",
+      "components": {
+        "prefix": "SRG031012",
+        "year": "YYYY (2020, 2024)",
+        "siteplan_code": "XXX (001, 002)",
+        "category": "[PLATINUM|SKANDIUM|PALADIO|TITANIUM|GOLD|CROWN]",
+        "block": "[A-Z][0-9][0-9]",
+        "number": "[0-9][0-9]"
+      },
+      "examples": [
+        {
+          "siteplan": "Ciruas land",
+          "unit": "D02-19",
+          "category": "PLATINUM",
+          "house_id": "SRG0310122020T002PLATINUMD0219"
+        },
+        {
+          "siteplan": "Ciruasland tahap 3",
+          "unit": "A01-05",
+          "category": "TITANIUM",
+          "house_id": "SRG0310122024T001TITANIUMA0105"
+        }
+      ]
+    },
+    "integration_points": {
+      "google_apps_script": {
+        "column_mappings": {
+          "siteplan_index": {
+            "target_field": "siteplan_index",
+            "data_type": "integer",
+            "validation": {
+              "min_value": 1,
+              "max_value": 2
+            }
+          },
+          "house_id": {
+            "target_field": "house_id",
+            "data_type": "string",
+            "validation": {
+              "pattern": "^SRG031012\\d{4}T\\d{3}(PLATINUM|SKANDIUM|PALADIO|TITANIUM|GOLD|CROWN)\\d{2}\\d{2}$"
+            }
+          },
+          "unit_category": {
+            "target_field": "unit_category",
+            "data_type": "string",
+            "validation": {
+              "options": ["PLATINUM", "SKANDIUM", "PALADIO", "TITANIUM", "GOLD", "CROWN"]
+            }
+          },
+          "prefix_legal": {
+            "target_field": "prefix_legal",
+            "data_type": "string",
+            "validation": {
+              "pattern": "^SRG031012\\d{4}T\\d{3}$"
+            }
+          }
+        },
+        "functions": [
+          "generateHouseId",
+          "parseHouseId",
+          "validateHouseId",
+          "transformHouseId",
+          "autoGenerateHouseId"
+        ]
+      },
+      "supabase": {
+        "table": "data global master",
+        "fields": [
+          "siteplan_index",
+          "house_id",
+          "unit_category",
+          "prefix_legal",
+          "blok",
+          "nomor"
+        ],
+        "validation": {
+          "house_id_unique": true,
+          "siteplan_index_range": [1, 2],
+          "category_validation": true
+        }
+      }
+    },
+    "metadata": {
+      "created_date": "2026-03-20",
+      "last_modified": "2026-03-20",
+      "version": "1.0.0",
+      "author": "KPRFlow Enterprise",
+      "status": "production_ready"
+    }
+  }
+}

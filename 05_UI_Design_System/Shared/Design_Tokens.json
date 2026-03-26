@@ -1,0 +1,812 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "version": "1.0.0",
+  "lastUpdated": "2026-03-25T03:30:00+07:00",
+  "description": "DevPro Flow Enterprise - Universal Design Tokens",
+  "metadata": {
+    "author": "DevPro Enterprise Team",
+    "platforms": ["web", "mobile", "desktop"],
+    "sourceDesign": "Master Layout UI Design System"
+  },
+  
+  "colors": {
+    "light": {
+      "background": {
+        "value": "#FAFAF9",
+        "oklch": "0.97 0.004 75",
+        "rgb": "250, 250, 249",
+        "description": "Main background color for light theme"
+      },
+      "foreground": {
+        "value": "#18181B",
+        "oklch": "0.22 0.02 260",
+        "rgb": "24, 24, 27",
+        "description": "Main text color for light theme"
+      },
+      "primary": {
+        "value": "#3B82F6",
+        "oklch": "0.52 0.08 255",
+        "rgb": "59, 130, 246",
+        "description": "Primary brand color (blue)"
+      },
+      "primaryForeground": {
+        "value": "#FFFFFF",
+        "oklch": "0.99 0 0",
+        "rgb": "255, 255, 255",
+        "description": "Text on primary color"
+      },
+      "secondary": {
+        "value": "#F5F5F4",
+        "oklch": "0.955 0.006 75",
+        "rgb": "245, 245, 244",
+        "description": "Secondary background color"
+      },
+      "secondaryForeground": {
+        "value": "#1C1917",
+        "oklch": "0.35 0.02 260",
+        "rgb": "28, 25, 23",
+        "description": "Text on secondary color"
+      },
+      "accent": {
+        "value": "#FB923C",
+        "oklch": "0.82 0.065 70",
+        "rgb": "251, 146, 60",
+        "description": "Accent color (orange)"
+      },
+      "accentForeground": {
+        "value": "#292524",
+        "oklch": "0.28 0.04 70",
+        "rgb": "41, 37, 36",
+        "description": "Text on accent color"
+      },
+      "destructive": {
+        "value": "#EF4444",
+        "oklch": "0.577 0.245 27.325",
+        "rgb": "239, 68, 68",
+        "description": "Error/destructive actions"
+      },
+      "destructiveForeground": {
+        "value": "#EF4444",
+        "oklch": "0.577 0.245 27.325",
+        "rgb": "239, 68, 68",
+        "description": "Text on destructive color"
+      },
+      "success": {
+        "value": "#10B981",
+        "oklch": "0.62 0.12 160",
+        "rgb": "16, 185, 129",
+        "description": "Success state color"
+      },
+      "warning": {
+        "value": "#F59E0B",
+        "oklch": "0.6 0.15 30",
+        "rgb": "245, 158, 11",
+        "description": "Warning state color"
+      },
+      "info": {
+        "value": "#3B82F6",
+        "oklch": "0.52 0.08 255",
+        "rgb": "59, 130, 246",
+        "description": "Info state color"
+      },
+      "muted": {
+        "value": "#F0F0EE",
+        "oklch": "0.935 0.006 75",
+        "rgb": "240, 240, 238",
+        "description": "Muted background"
+      },
+      "mutedForeground": {
+        "value": "#78716C",
+        "oklch": "0.52 0.015 260",
+        "rgb": "120, 113, 108",
+        "description": "Muted text color"
+      },
+      "border": {
+        "value": "#E7E5E4",
+        "oklch": "0.925 0.006 75",
+        "rgb": "231, 229, 228",
+        "description": "Border color"
+      },
+      "input": {
+        "value": "#E7E5E4",
+        "oklch": "0.925 0.006 75",
+        "rgb": "231, 229, 228",
+        "description": "Input border color"
+      },
+      "ring": {
+        "value": "#3B82F6",
+        "oklch": "0.52 0.08 255",
+        "rgb": "59, 130, 246",
+        "description": "Focus ring color"
+      },
+      "card": {
+        "value": "#FFFFFF",
+        "oklch": "0.993 0.002 75",
+        "rgb": "255, 255, 255",
+        "description": "Card background"
+      },
+      "cardForeground": {
+        "value": "#18181B",
+        "oklch": "0.22 0.02 260",
+        "rgb": "24, 24, 27",
+        "description": "Card text color"
+      },
+      "popover": {
+        "value": "#FFFFFF",
+        "oklch": "0.993 0.002 75",
+        "rgb": "255, 255, 255",
+        "description": "Popover background"
+      },
+      "popoverForeground": {
+        "value": "#18181B",
+        "oklch": "0.22 0.02 260",
+        "rgb": "24, 24, 27",
+        "description": "Popover text color"
+      },
+      "sidebar": {
+        "value": "#FAFAF8",
+        "oklch": "0.985 0.003 75",
+        "rgb": "250, 250, 248",
+        "description": "Sidebar background"
+      },
+      "sidebarForeground": {
+        "value": "#44403C",
+        "oklch": "0.3 0.015 260",
+        "rgb": "68, 64, 60",
+        "description": "Sidebar text color"
+      },
+      "sidebarPrimary": {
+        "value": "#3B82F6",
+        "oklch": "0.52 0.08 255",
+        "rgb": "59, 130, 246",
+        "description": "Sidebar primary color"
+      },
+      "sidebarPrimaryForeground": {
+        "value": "#FFFFFF",
+        "oklch": "0.99 0 0",
+        "rgb": "255, 255, 255",
+        "description": "Sidebar primary text"
+      },
+      "sidebarAccent": {
+        "value": "#EFF6FF",
+        "oklch": "0.94 0.012 255",
+        "rgb": "239, 246, 255",
+        "description": "Sidebar accent background"
+      },
+      "sidebarAccentForeground": {
+        "value": "#1E3A8A",
+        "oklch": "0.35 0.04 255",
+        "rgb": "30, 58, 138",
+        "description": "Sidebar accent text"
+      },
+      "sidebarBorder": {
+        "value": "#E7E5E4",
+        "oklch": "0.93 0.006 75",
+        "rgb": "231, 229, 228",
+        "description": "Sidebar border"
+      },
+      "chart1": {
+        "value": "#3B82F6",
+        "oklch": "0.52 0.08 255",
+        "rgb": "59, 130, 246",
+        "description": "Chart color 1 (blue)"
+      },
+      "chart2": {
+        "value": "#10B981",
+        "oklch": "0.62 0.12 160",
+        "rgb": "16, 185, 129",
+        "description": "Chart color 2 (green)"
+      },
+      "chart3": {
+        "value": "#FB923C",
+        "oklch": "0.82 0.065 70",
+        "rgb": "251, 146, 60",
+        "description": "Chart color 3 (orange)"
+      },
+      "chart4": {
+        "value": "#F59E0B",
+        "oklch": "0.6 0.15 30",
+        "rgb": "245, 158, 11",
+        "description": "Chart color 4 (amber)"
+      },
+      "chart5": {
+        "value": "#8B5CF6",
+        "oklch": "0.5 0.1 300",
+        "rgb": "139, 92, 246",
+        "description": "Chart color 5 (purple)"
+      }
+    },
+    "dark": {
+      "background": {
+        "value": "#0F172A",
+        "oklch": "0.16 0.015 260",
+        "rgb": "15, 23, 42",
+        "description": "Main background color for dark theme"
+      },
+      "foreground": {
+        "value": "#F8FAFC",
+        "oklch": "0.92 0.005 260",
+        "rgb": "248, 250, 252",
+        "description": "Main text color for dark theme"
+      },
+      "primary": {
+        "value": "#60A5FA",
+        "oklch": "0.65 0.10 255",
+        "rgb": "96, 165, 250",
+        "description": "Primary brand color (blue) - dark mode"
+      },
+      "primaryForeground": {
+        "value": "#FFFFFF",
+        "oklch": "0.99 0 0",
+        "rgb": "255, 255, 255",
+        "description": "Text on primary color - dark mode"
+      },
+      "secondary": {
+        "value": "#1E293B",
+        "oklch": "0.22 0.015 260",
+        "rgb": "30, 41, 59",
+        "description": "Secondary background - dark mode"
+      },
+      "secondaryForeground": {
+        "value": "#E2E8F0",
+        "oklch": "0.85 0.005 260",
+        "rgb": "226, 232, 240",
+        "description": "Text on secondary - dark mode"
+      },
+      "accent": {
+        "value": "#FDBA74",
+        "oklch": "0.72 0.06 70",
+        "rgb": "253, 186, 116",
+        "description": "Accent color - dark mode"
+      },
+      "accentForeground": {
+        "value": "#F8FAFC",
+        "oklch": "0.92 0.005 70",
+        "rgb": "248, 250, 252",
+        "description": "Text on accent - dark mode"
+      },
+      "destructive": {
+        "value": "#DC2626",
+        "oklch": "0.55 0.20 27",
+        "rgb": "220, 38, 38",
+        "description": "Error/destructive - dark mode"
+      },
+      "destructiveForeground": {
+        "value": "#DC2626",
+        "oklch": "0.55 0.20 27",
+        "rgb": "220, 38, 38",
+        "description": "Text on destructive - dark mode"
+      },
+      "success": {
+        "value": "#34D399",
+        "oklch": "0.62 0.12 160",
+        "rgb": "52, 211, 153",
+        "description": "Success state - dark mode"
+      },
+      "warning": {
+        "value": "#FBBF24",
+        "oklch": "0.60 0.15 30",
+        "rgb": "251, 191, 36",
+        "description": "Warning state - dark mode"
+      },
+      "info": {
+        "value": "#60A5FA",
+        "oklch": "0.65 0.10 255",
+        "rgb": "96, 165, 250",
+        "description": "Info state - dark mode"
+      },
+      "muted": {
+        "value": "#334155",
+        "oklch": "0.24 0.015 260",
+        "rgb": "51, 65, 85",
+        "description": "Muted background - dark mode"
+      },
+      "mutedForeground": {
+        "value": "#94A3B8",
+        "oklch": "0.62 0.01 260",
+        "rgb": "148, 163, 184",
+        "description": "Muted text - dark mode"
+      },
+      "border": {
+        "value": "#475569",
+        "oklch": "0.26 0.015 260",
+        "rgb": "71, 85, 105",
+        "description": "Border color - dark mode"
+      },
+      "input": {
+        "value": "#475569",
+        "oklch": "0.26 0.015 260",
+        "rgb": "71, 85, 105",
+        "description": "Input border - dark mode"
+      },
+      "ring": {
+        "value": "#60A5FA",
+        "oklch": "0.65 0.10 255",
+        "rgb": "96, 165, 250",
+        "description": "Focus ring - dark mode"
+      },
+      "card": {
+        "value": "#1E293B",
+        "oklch": "0.19 0.015 260",
+        "rgb": "30, 41, 59",
+        "description": "Card background - dark mode"
+      },
+      "cardForeground": {
+        "value": "#F8FAFC",
+        "oklch": "0.92 0.005 260",
+        "rgb": "248, 250, 252",
+        "description": "Card text - dark mode"
+      },
+      "popover": {
+        "value": "#1E293B",
+        "oklch": "0.19 0.015 260",
+        "rgb": "30, 41, 59",
+        "description": "Popover background - dark mode"
+      },
+      "popoverForeground": {
+        "value": "#F8FAFC",
+        "oklch": "0.92 0.005 260",
+        "rgb": "248, 250, 252",
+        "description": "Popover text - dark mode"
+      },
+      "sidebar": {
+        "value": "#0C1222",
+        "oklch": "0.15 0.018 260",
+        "rgb": "12, 18, 34",
+        "description": "Sidebar background - dark mode"
+      },
+      "sidebarForeground": {
+        "value": "#E2E8F0",
+        "oklch": "0.85 0.005 260",
+        "rgb": "226, 232, 240",
+        "description": "Sidebar text - dark mode"
+      },
+      "sidebarPrimary": {
+        "value": "#60A5FA",
+        "oklch": "0.65 0.10 255",
+        "rgb": "96, 165, 250",
+        "description": "Sidebar primary - dark mode"
+      },
+      "sidebarPrimaryForeground": {
+        "value": "#FFFFFF",
+        "oklch": "0.99 0 0",
+        "rgb": "255, 255, 255",
+        "description": "Sidebar primary text - dark mode"
+      },
+      "sidebarAccent": {
+        "value": "#1E3A8A",
+        "oklch": "0.22 0.02 255",
+        "rgb": "30, 58, 138",
+        "description": "Sidebar accent - dark mode"
+      },
+      "sidebarAccentForeground": {
+        "value": "#DBEAFE",
+        "oklch": "0.85 0.01 255",
+        "rgb": "219, 234, 254",
+        "description": "Sidebar accent text - dark mode"
+      },
+      "sidebarBorder": {
+        "value": "#334155",
+        "oklch": "0.24 0.015 260",
+        "rgb": "51, 65, 85",
+        "description": "Sidebar border - dark mode"
+      },
+      "chart1": {
+        "value": "#60A5FA",
+        "oklch": "0.65 0.10 255",
+        "rgb": "96, 165, 250",
+        "description": "Chart color 1 - dark mode"
+      },
+      "chart2": {
+        "value": "#34D399",
+        "oklch": "0.62 0.12 160",
+        "rgb": "52, 211, 153",
+        "description": "Chart color 2 - dark mode"
+      },
+      "chart3": {
+        "value": "#FDBA74",
+        "oklch": "0.72 0.06 70",
+        "rgb": "253, 186, 116",
+        "description": "Chart color 3 - dark mode"
+      },
+      "chart4": {
+        "value": "#FBBF24",
+        "oklch": "0.60 0.15 30",
+        "rgb": "251, 191, 36",
+        "description": "Chart color 4 - dark mode"
+      },
+      "chart5": {
+        "value": "#A78BFA",
+        "oklch": "0.55 0.10 300",
+        "rgb": "167, 139, 250",
+        "description": "Chart color 5 - dark mode"
+      }
+    }
+  },
+  
+  "typography": {
+    "fontFamily": {
+      "sans": {
+        "value": "Plus Jakarta Sans, Inter, system-ui, sans-serif",
+        "fallback": "system-ui, sans-serif",
+        "description": "Primary sans-serif font"
+      },
+      "mono": {
+        "value": "Geist Mono, Monaco, Consolas, monospace",
+        "fallback": "monospace",
+        "description": "Monospace font for code"
+      }
+    },
+    "fontSize": {
+      "xs": { "value": "0.75rem", "px": 12 },
+      "sm": { "value": "0.875rem", "px": 14 },
+      "base": { "value": "1rem", "px": 16 },
+      "lg": { "value": "1.125rem", "px": 18 },
+      "xl": { "value": "1.25rem", "px": 20 },
+      "2xl": { "value": "1.5rem", "px": 24 },
+      "3xl": { "value": "1.875rem", "px": 30 },
+      "4xl": { "value": "2.25rem", "px": 36 },
+      "5xl": { "value": "3rem", "px": 48 }
+    },
+    "fontWeight": {
+      "normal": { "value": "400" },
+      "medium": { "value": "500" },
+      "semibold": { "value": "600" },
+      "bold": { "value": "700" },
+      "extrabold": { "value": "800" }
+    },
+    "lineHeight": {
+      "tight": { "value": "1.25" },
+      "normal": { "value": "1.5" },
+      "relaxed": { "value": "1.75" },
+      "loose": { "value": "2" }
+    },
+    "letterSpacing": {
+      "tighter": { "value": "-0.05em" },
+      "tight": { "value": "-0.025em" },
+      "normal": { "value": "0em" },
+      "wide": { "value": "0.025em" },
+      "wider": { "value": "0.05em" },
+      "widest": { "value": "0.1em" }
+    }
+  },
+  
+  "spacing": {
+    "unit": { "value": "8px", "description": "Base 8px grid system" },
+    "scale": {
+      "0": { "value": "0px", "rem": "0rem" },
+      "1": { "value": "4px", "rem": "0.25rem" },
+      "2": { "value": "8px", "rem": "0.5rem" },
+      "3": { "value": "12px", "rem": "0.75rem" },
+      "4": { "value": "16px", "rem": "1rem" },
+      "5": { "value": "20px", "rem": "1.25rem" },
+      "6": { "value": "24px", "rem": "1.5rem" },
+      "8": { "value": "32px", "rem": "2rem" },
+      "10": { "value": "40px", "rem": "2.5rem" },
+      "12": { "value": "48px", "rem": "3rem" },
+      "16": { "value": "64px", "rem": "4rem" },
+      "20": { "value": "80px", "rem": "5rem" },
+      "24": { "value": "96px", "rem": "6rem" }
+    },
+    "borderRadius": {
+      "none": { "value": "0px", "rem": "0rem" },
+      "sm": { "value": "4px", "rem": "0.25rem" },
+      "md": { "value": "8px", "rem": "0.5rem" },
+      "lg": { "value": "12px", "rem": "0.75rem" },
+      "xl": { "value": "16px", "rem": "1rem" },
+      "2xl": { "value": "20px", "rem": "1.25rem" },
+      "full": { "value": "9999px", "rem": "9999px" }
+    }
+  },
+  
+  "animations": {
+    "duration": {
+      "fast": { "value": "150ms" },
+      "normal": { "value": "300ms" },
+      "slow": { "value": "500ms" },
+      "slower": { "value": "800ms" }
+    },
+    "easing": {
+      "default": { "value": "cubic-bezier(0.22, 1, 0.36, 1)", "description": "Smooth easing" },
+      "linear": { "value": "linear" },
+      "easeIn": { "value": "ease-in" },
+      "easeOut": { "value": "ease-out" },
+      "easeInOut": { "value": "ease-in-out" }
+    },
+    "keyframes": {
+      "float": {
+        "0%": { "transform": "translateY(0px) rotateX(0deg) rotateY(0deg)" },
+        "25%": { "transform": "translateY(-3px) rotateX(2deg) rotateY(-2deg)" },
+        "50%": { "transform": "translateY(-5px) rotateX(0deg) rotateY(2deg)" },
+        "75%": { "transform": "translateY(-2px) rotateX(-2deg) rotateY(0deg)" },
+        "100%": { "transform": "translateY(0px) rotateX(0deg) rotateY(0deg)" }
+      },
+      "glowPulse": {
+        "0%": { "opacity": "0.4", "transform": "scale(1)" },
+        "50%": { "opacity": "0.7", "transform": "scale(1.15)" },
+        "100%": { "opacity": "0.4", "transform": "scale(1)" }
+      },
+      "fadeInUp": {
+        "from": { "opacity": "0", "transform": "translateY(16px)" },
+        "to": { "opacity": "1", "transform": "translateY(0)" }
+      },
+      "slideInRight": {
+        "from": { "opacity": "0", "transform": "translateX(-12px)" },
+        "to": { "opacity": "1", "transform": "translateX(0)" }
+      },
+      "scaleIn": {
+        "from": { "opacity": "0", "transform": "scale(0.92)" },
+        "to": { "opacity": "1", "transform": "scale(1)" }
+      },
+      "barGrow": {
+        "from": { "transform": "scaleY(0)" },
+        "to": { "transform": "scaleY(1)" }
+      },
+      "dotPing": {
+        "0%": { "transform": "scale(1)", "opacity": "1" },
+        "75%": { "transform": "scale(2.2)", "opacity": "0" },
+        "100%": { "transform": "scale(2.2)", "opacity": "0" }
+      },
+      "shimmerSlide": {
+        "from": { "transform": "translateX(-100%)" },
+        "to": { "transform": "translateX(100%)" }
+      },
+      "tickIn": {
+        "from": { "opacity": "0", "transform": "translateY(-4px)" },
+        "to": { "opacity": "1", "transform": "translateY(0)" }
+      }
+    }
+  },
+  
+  "shadows": {
+    "sm": { "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)" },
+    "md": { "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)" },
+    "lg": { "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)" },
+    "xl": { "value": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" },
+    "2xl": { "value": "0 25px 50px -12px rgb(0 0 0 / 0.25)" },
+    "inner": { "value": "inset 0 2px 4px 0 rgb(0 0 0 / 0.05)" },
+    "none": { "value": "0 0 #0000" }
+  },
+  
+  "icons": {
+    "library": "lucide-react",
+    "version": "0.474.0",
+    "sizes": {
+      "xs": { "value": "12px" },
+      "sm": { "value": "16px" },
+      "md": { "value": "20px" },
+      "lg": { "value": "24px" },
+      "xl": { "value": "32px" },
+      "2xl": { "value": "48px" }
+    },
+    "strokeWidth": {
+      "thin": { "value": "1.5" },
+      "normal": { "value": "2" },
+      "bold": { "value": "2.5" }
+    }
+  },
+  
+  "breakpoints": {
+    "xs": { "value": "320px" },
+    "sm": { "value": "640px" },
+    "md": { "value": "768px" },
+    "lg": { "value": "1024px" },
+    "xl": { "value": "1280px" },
+    "2xl": { "value": "1536px" }
+  },
+
+  "radius": {
+    "description": "Global border radius token from --radius CSS variable (Master Layout: 1rem)",
+    "base": { "value": "1rem", "px": 16, "cssVar": "--radius", "description": "Global --radius: 1rem (Master Layout default)" },
+    "sm":   { "value": "calc(1rem - 4px)", "px": 12, "description": "Small radius = --radius - 4px" },
+    "md":   { "value": "calc(1rem - 2px)", "px": 14, "description": "Medium radius = --radius - 2px" },
+    "lg":   { "value": "1rem", "px": 16, "description": "Large radius = --radius" },
+    "xl":   { "value": "calc(1rem + 4px)", "px": 20, "description": "Extra large radius = --radius + 4px" }
+  },
+
+  "cssVariables": {
+    "description": "Maps CSS variable names (from globals.css) to their Design_Tokens.json keys. Use this for token → CSS var traceability.",
+    "light": {
+      "--background":                 "colors.light.background",
+      "--foreground":                 "colors.light.foreground",
+      "--card":                       "colors.light.card",
+      "--card-foreground":            "colors.light.cardForeground",
+      "--popover":                    "colors.light.popover",
+      "--popover-foreground":         "colors.light.popoverForeground",
+      "--primary":                    "colors.light.primary",
+      "--primary-foreground":         "colors.light.primaryForeground",
+      "--secondary":                  "colors.light.secondary",
+      "--secondary-foreground":       "colors.light.secondaryForeground",
+      "--muted":                      "colors.light.muted",
+      "--muted-foreground":           "colors.light.mutedForeground",
+      "--accent":                     "colors.light.accent",
+      "--accent-foreground":          "colors.light.accentForeground",
+      "--destructive":                "colors.light.destructive",
+      "--destructive-foreground":     "colors.light.destructiveForeground",
+      "--border":                     "colors.light.border",
+      "--input":                      "colors.light.input",
+      "--ring":                       "colors.light.ring",
+      "--radius":                     "radius.base",
+      "--chart-1":                    "colors.light.chart1",
+      "--chart-2":                    "colors.light.chart2",
+      "--chart-3":                    "colors.light.chart3",
+      "--chart-4":                    "colors.light.chart4",
+      "--chart-5":                    "colors.light.chart5",
+      "--sidebar":                    "colors.light.sidebar",
+      "--sidebar-foreground":         "colors.light.sidebarForeground",
+      "--sidebar-primary":            "colors.light.sidebarPrimary",
+      "--sidebar-primary-foreground": "colors.light.sidebarPrimaryForeground",
+      "--sidebar-accent":             "colors.light.sidebarAccent",
+      "--sidebar-accent-foreground":  "colors.light.sidebarAccentForeground",
+      "--sidebar-border":             "colors.light.sidebarBorder",
+      "--sidebar-ring":               "colors.light.sidebarBorder",
+      "--font-sans":                  "typography.fontFamily.sans",
+      "--font-mono":                  "typography.fontFamily.mono"
+    },
+    "dark": {
+      "--background":                 "colors.dark.background",
+      "--foreground":                 "colors.dark.foreground",
+      "--card":                       "colors.dark.card",
+      "--card-foreground":            "colors.dark.cardForeground",
+      "--popover":                    "colors.dark.popover",
+      "--popover-foreground":         "colors.dark.popoverForeground",
+      "--primary":                    "colors.dark.primary",
+      "--primary-foreground":         "colors.dark.primaryForeground",
+      "--secondary":                  "colors.dark.secondary",
+      "--secondary-foreground":       "colors.dark.secondaryForeground",
+      "--muted":                      "colors.dark.muted",
+      "--muted-foreground":           "colors.dark.mutedForeground",
+      "--accent":                     "colors.dark.accent",
+      "--accent-foreground":          "colors.dark.accentForeground",
+      "--destructive":                "colors.dark.destructive",
+      "--destructive-foreground":     "colors.dark.destructiveForeground",
+      "--border":                     "colors.dark.border",
+      "--input":                      "colors.dark.input",
+      "--ring":                       "colors.dark.ring",
+      "--chart-1":                    "colors.dark.chart1",
+      "--chart-2":                    "colors.dark.chart2",
+      "--chart-3":                    "colors.dark.chart3",
+      "--chart-4":                    "colors.dark.chart4",
+      "--chart-5":                    "colors.dark.chart5",
+      "--sidebar":                    "colors.dark.sidebar",
+      "--sidebar-foreground":         "colors.dark.sidebarForeground",
+      "--sidebar-primary":            "colors.dark.sidebarPrimary",
+      "--sidebar-primary-foreground": "colors.dark.sidebarPrimaryForeground",
+      "--sidebar-accent":             "colors.dark.sidebarAccent",
+      "--sidebar-accent-foreground":  "colors.dark.sidebarAccentForeground",
+      "--sidebar-border":             "colors.dark.sidebarBorder",
+      "--sidebar-ring":               "colors.dark.sidebarBorder"
+    }
+  },
+
+  "textStyles": {
+    "description": "Composite typography presets (font + size + weight + lineHeight) extracted from Master Layout UI components",
+    "display": {
+      "fontFamily": "typography.fontFamily.sans",
+      "fontSize":   "typography.fontSize.5xl",
+      "fontWeight": "typography.fontWeight.bold",
+      "lineHeight": "typography.lineHeight.tight",
+      "letterSpacing": "typography.letterSpacing.tight",
+      "usage": "Hero headings, page titles"
+    },
+    "h1": {
+      "fontFamily": "typography.fontFamily.sans",
+      "fontSize":   "typography.fontSize.4xl",
+      "fontWeight": "typography.fontWeight.bold",
+      "lineHeight": "typography.lineHeight.tight",
+      "letterSpacing": "typography.letterSpacing.tight",
+      "usage": "Page-level headings"
+    },
+    "h2": {
+      "fontFamily": "typography.fontFamily.sans",
+      "fontSize":   "typography.fontSize.3xl",
+      "fontWeight": "typography.fontWeight.semibold",
+      "lineHeight": "typography.lineHeight.tight",
+      "letterSpacing": "typography.letterSpacing.tight",
+      "usage": "Section headings"
+    },
+    "h3": {
+      "fontFamily": "typography.fontFamily.sans",
+      "fontSize":   "typography.fontSize.2xl",
+      "fontWeight": "typography.fontWeight.semibold",
+      "lineHeight": "typography.lineHeight.tight",
+      "letterSpacing": "typography.letterSpacing.normal",
+      "usage": "Subsection headings, card titles"
+    },
+    "h4": {
+      "fontFamily": "typography.fontFamily.sans",
+      "fontSize":   "typography.fontSize.xl",
+      "fontWeight": "typography.fontWeight.semibold",
+      "lineHeight": "typography.lineHeight.normal",
+      "letterSpacing": "typography.letterSpacing.normal",
+      "usage": "Widget headings, dialog titles"
+    },
+    "body": {
+      "fontFamily": "typography.fontFamily.sans",
+      "fontSize":   "typography.fontSize.base",
+      "fontWeight": "typography.fontWeight.normal",
+      "lineHeight": "typography.lineHeight.normal",
+      "letterSpacing": "typography.letterSpacing.normal",
+      "usage": "Default body text"
+    },
+    "bodySmall": {
+      "fontFamily": "typography.fontFamily.sans",
+      "fontSize":   "typography.fontSize.sm",
+      "fontWeight": "typography.fontWeight.normal",
+      "lineHeight": "typography.lineHeight.normal",
+      "letterSpacing": "typography.letterSpacing.normal",
+      "usage": "Secondary text, descriptions"
+    },
+    "caption": {
+      "fontFamily": "typography.fontFamily.sans",
+      "fontSize":   "typography.fontSize.xs",
+      "fontWeight": "typography.fontWeight.normal",
+      "lineHeight": "typography.lineHeight.normal",
+      "letterSpacing": "typography.letterSpacing.wide",
+      "usage": "Captions, helper text, timestamps"
+    },
+    "label": {
+      "fontFamily": "typography.fontFamily.sans",
+      "fontSize":   "typography.fontSize.sm",
+      "fontWeight": "typography.fontWeight.medium",
+      "lineHeight": "typography.lineHeight.normal",
+      "letterSpacing": "typography.letterSpacing.normal",
+      "usage": "Form labels, button text"
+    },
+    "code": {
+      "fontFamily": "typography.fontFamily.mono",
+      "fontSize":   "typography.fontSize.sm",
+      "fontWeight": "typography.fontWeight.normal",
+      "lineHeight": "typography.lineHeight.relaxed",
+      "letterSpacing": "typography.letterSpacing.normal",
+      "usage": "Code snippets, terminal output"
+    },
+    "kpiValue": {
+      "fontFamily": "typography.fontFamily.sans",
+      "fontSize":   "typography.fontSize.3xl",
+      "fontWeight": "typography.fontWeight.bold",
+      "lineHeight": "typography.lineHeight.tight",
+      "letterSpacing": "typography.letterSpacing.tight",
+      "usage": "KPI card numbers (from kpi-cards.tsx)"
+    },
+    "kpiLabel": {
+      "fontFamily": "typography.fontFamily.sans",
+      "fontSize":   "typography.fontSize.sm",
+      "fontWeight": "typography.fontWeight.medium",
+      "lineHeight": "typography.lineHeight.normal",
+      "letterSpacing": "typography.letterSpacing.wide",
+      "usage": "KPI card labels (from kpi-cards.tsx)"
+    }
+  },
+
+  "zIndex": {
+    "description": "Z-index layering scale for consistent stacking context",
+    "base":     { "value": "0",    "usage": "Default stacking" },
+    "raised":   { "value": "1",    "usage": "Slightly raised elements" },
+    "dropdown": { "value": "1000", "usage": "Dropdown menus, select popups" },
+    "sticky":   { "value": "1020", "usage": "Sticky headers, sidebars" },
+    "overlay":  { "value": "1030", "usage": "Backdrop overlays" },
+    "modal":    { "value": "1040", "usage": "Dialogs, modals, sheets" },
+    "popover":  { "value": "1050", "usage": "Tooltips, popovers, command palettes" },
+    "toast":    { "value": "1060", "usage": "Toast notifications (Sonner)" },
+    "tooltip":  { "value": "1070", "usage": "Top-most tooltips" }
+  },
+
+  "opacity": {
+    "description": "Opacity scale for consistent transparency",
+    "0":   { "value": "0",    "usage": "Fully transparent" },
+    "5":   { "value": "0.05", "usage": "Subtle tint" },
+    "10":  { "value": "0.1",  "usage": "Very subtle overlay" },
+    "20":  { "value": "0.2",  "usage": "Disabled state" },
+    "30":  { "value": "0.3",  "usage": "Placeholder text" },
+    "40":  { "value": "0.4",  "usage": "Low emphasis" },
+    "50":  { "value": "0.5",  "usage": "Medium transparency" },
+    "60":  { "value": "0.6",  "usage": "Overlay backgrounds" },
+    "70":  { "value": "0.7",  "usage": "Semi-transparent" },
+    "75":  { "value": "0.75", "usage": "Backdrop blur overlay" },
+    "80":  { "value": "0.8",  "usage": "High emphasis" },
+    "90":  { "value": "0.9",  "usage": "Near opaque" },
+    "95":  { "value": "0.95", "usage": "Very near opaque" },
+    "100": { "value": "1",    "usage": "Fully opaque" }
+  }
+}

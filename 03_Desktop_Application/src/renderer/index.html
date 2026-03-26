@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KPRFlow Enterprise - Desktop Application</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+        
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
+            color: white;
+            flex-direction: column;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .loading-subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .app-container {
+            display: none;
+            height: 100vh;
+        }
+        
+        .titlebar {
+            height: 30px;
+            background: #2c3e50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            -webkit-app-region: drag;
+            user-select: none;
+        }
+        
+        .titlebar-title {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .titlebar-controls {
+            display: flex;
+            -webkit-app-region: no-drag;
+        }
+        
+        .titlebar-button {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .titlebar-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .titlebar-button.close:hover {
+            background: #e74c3c;
+        }
+        
+        .main-content {
+            height: calc(100vh - 30px);
+            overflow: auto;
+        }
+        
+        .iframe-container {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-container" id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">KPRFlow Enterprise</div>
+        <div class="loading-subtitle">Desktop Application Loading...</div>
+    </div>
+    
+    <!-- Main Application -->
+    <div class="app-container" id="app">
+        <!-- Custom Title Bar -->
+        <div class="titlebar">
+            <div class="titlebar-title">KPRFlow Enterprise Desktop</div>
+            <div class="titlebar-controls">
+                <button class="titlebar-button" id="minimize-btn">−</button>
+                <button class="titlebar-button" id="maximize-btn">□</button>
+                <button class="titlebar-button close" id="close-btn">×</button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <iframe 
+                id="app-frame"
+                class="iframe-container"
+                src="about:blank"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+            ></iframe>
+        </div>
+    </div>
+    
+    <script>
+        // Check if we're running in Electron
+        const isElectron = typeof window !== 'undefined' && window.process && window.process.type;
+        
+        if (isElectron) {
+            // Wait for DOM to be ready
+            document.addEventListener('DOMContentLoaded', () => {
+                initializeDesktopApp();
+            });
+        } else {
+            // Fallback for web browser
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+        }
+        
+        function initializeDesktopApp() {
+            // Get app info
+            if (window.electronAPI) {
+                window.electronAPI.getAppVersion().then(version => {
+                    console.log('App version:', version);
+                });
+                
+                window.electronAPI.getPlatform().then(platform => {
+                    console.log('Platform:', platform);
+                });
+            }
+            
+            // Setup title bar controls
+            setupTitleBarControls();
+            
+            // Setup menu listeners
+            setupMenuListeners();
+            
+            // Load the web application
+            loadWebApplication();
+        }
+        
+        function setupTitleBarControls() {
+            const minimizeBtn = document.getElementById('minimize-btn');
+            const maximizeBtn = document.getElementById('maximize-btn');
+            const closeBtn = document.getElementById('close-btn');
+            
+            if (window.electronAPI) {
+                minimizeBtn.addEventListener('click', () => {
+                    window.electronAPI.minimizeWindow();
+                });
+                
+                maximizeBtn.addEventListener('click', () => {
+                    window.electronAPI.maximizeWindow();
+                });
+                
+                closeBtn.addEventListener('click', () => {
+                    window.electronAPI.closeWindow();
+                });
+            }
+        }
+        
+        function setupMenuListeners() {
+            if (window.electronAPI) {
+                window.electronAPI.onMenuAction((event, action) => {
+                    console.log('Menu action:', action);
+                    // Handle menu actions
+                    switch (action) {
+                        case 'menu-new-application':
+                            // Navigate to new application page
+                            navigateToPage('/applications/new');
+                            break;
+                        case 'menu-open':
+                            // Open file dialog
+                            openFile();
+                            break;
+                        case 'menu-about':
+                            // Show about dialog
+                            showAboutDialog();
+                            break;
+                    }
+                });
+                
+                window.electronAPI.onDeepLink((event, url) => {
+                    console.log('Deep link received:', url);
+                    // Handle deep linking
+                    handleDeepLink(url);
+                });
+            }
+        }
+        
+        function loadWebApplication() {
+            const iframe = document.getElementById('app-frame');
+            
+            // In development, load from local dev server
+            // In production, load from built web app
+            const webAppUrl = process.env.NODE_ENV === 'development' 
+                ? 'http://localhost:3000'
+                : 'file://' + __dirname + '/../../web-app-build/index.html';
+            
+            iframe.src = webAppUrl;
+            
+            iframe.onload = () => {
+                // Hide loading screen and show app
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('app').style.display = 'block';
+            };
+            
+            iframe.onerror = () => {
+                console.error('Failed to load web application');
+                // Show error message
+                document.getElementById('loading').innerHTML = `
+                    <div style="text-align: center;">
+                        <h2>Failed to Load Application</h2>
+                        <p>Please check your internet connection or try again.</p>
+                        <button onclick="location.reload()">Retry</button>
+                    </div>
+                `;
+            };
+        }
+        
+        function navigateToPage(path) {
+            const iframe = document.getElementById('app-frame');
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.postMessage({
+                    type: 'navigate',
+                    path: path
+                }, '*');
+            }
+        }
+        
+        function openFile() {
+            // Implement file opening logic
+            console.log('Open file dialog');
+        }
+        
+        function showAboutDialog() {
+            // Implement about dialog
+            console.log('Show about dialog');
+        }
+        
+        function handleDeepLink(url) {
+            // Implement deep link handling
+            console.log('Handle deep link:', url);
+        }
+    </script>
+</body>
+</html>

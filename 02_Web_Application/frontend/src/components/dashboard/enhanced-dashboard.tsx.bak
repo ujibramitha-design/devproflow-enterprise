@@ -1,0 +1,358 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { 
+  Users, 
+  FileText, 
+  Building2, 
+  TrendingUp, 
+  Clock, 
+  CheckCircle,
+  AlertCircle,
+  DollarSign,
+  Home,
+  Calendar,
+  ArrowUpRight,
+  ArrowDownRight,
+  Calculator
+} from "lucide-react"
+// import { supabaseClient } from "@/lib/supabase-client"
+// import { businessRulesManager } from "@/lib/business-rules"
+
+interface Application {
+  id: string
+  applicant_id: string
+  property_id: string
+  amount: number
+  status: 'pending' | 'approved' | 'rejected' | 'completed'
+  created_at: string
+  updated_at: string
+  documents: string[]
+  notes?: string
+  applicants: {
+    name: string
+    email: string
+    phone: string
+    nik: string
+    income: number
+  }
+  properties: {
+    name: string
+    type: 'residential' | 'commercial' | 'mixed'
+    price: number
+    location: string
+  }
+}
+
+interface Stats {
+  title: string
+  value: string
+  change: string
+  trend: 'up' | 'down'
+  icon: React.ElementType
+  color: string
+}
+
+export function EnhancedKPRFlowDashboard() {
+  const [applications, setApplications] = useState<Application[]>([])
+  const [stats, setStats] = useState<Stats[]>([])
+  const [loading, setLoading] = useState(true)
+  const [searchQuery, setSearchQuery] = useState("")
+
+  useEffect(() => {
+    loadApplications()
+    loadStats()
+    
+    // Subscribe to real-time updates
+    const subscription = supabaseClient.subscribeToApplications((payload) => {
+      console.log('Real-time update:', payload)
+      loadApplications()
+      loadStats()
+    })
+
+    return () => {
+      subscription.unsubscribe()
+    }
+  }, [])
+
+  const loadApplications = async () => {
+    try {
+      const data = await supabaseClient.getApplications()
+      setApplications(data)
+    } catch (error) {
+      console.error('Error loading applications:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const loadStats = async () => {
+    try {
+      const applicationStats = await supabaseClient.getApplicationStats()
+      const statsData: Stats[] = [
+        {
+          title: "Total Pengajuan",
+          value: applicationStats.total.toString(),
+          change: "+12.5%",
+          trend: "up",
+          icon: FileText,
+          color: "kprflow-primary"
+        },
+        {
+          title: "Menunggu Proses",
+          value: applicationStats.pending.toString(),
+          change: "+8.2%",
+          trend: "up",
+          icon: Clock,
+          color: "kprflow-warning"
+        },
+        {
+          title: "Disetujui",
+          value: applicationStats.approved.toString(),
+          change: "+15.3%",
+          trend: "up",
+          icon: CheckCircle,
+          color: "kprflow-success"
+        },
+        {
+          title: "Ditolak",
+          value: applicationStats.rejected.toString(),
+          change: "-3.1%",
+          trend: "down",
+          icon: AlertCircle,
+          color: "kprflow-error"
+        }
+      ]
+      setStats(statsData)
+    } catch (error) {
+      console.error('Error loading stats:', error)
+    }
+  }
+
+  const handleSearch = async () => {
+    if (!searchQuery.trim()) {
+      loadApplications()
+      return
+    }
+
+    try {
+      const searchResults = await supabaseClient.searchApplications(searchQuery)
+      setApplications(searchResults)
+    } catch (error) {
+      console.error('Error searching applications:', error)
+    }
+  }
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'pending':
+        return 'kprflow-status-pending'
+      case 'approved':
+        return 'kprflow-status-approved'
+      case 'rejected':
+        return 'kprflow-status-rejected'
+      case 'completed':
+        return 'kprflow-status-completed'
+      default:
+        return 'kprflow-status-pending'
+    }
+  }
+
+  const getPropertyTypeColor = (type: string) => {
+    switch (type) {
+      case 'residential':
+        return 'kprflow-type-residential'
+      case 'commercial':
+        return 'kprflow-type-commercial'
+      case 'mixed':
+        return 'kprflow-type-mixed'
+      default:
+        return 'kprflow-type-residential'
+    }
+  }
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+    }).format(amount)
+  }
+
+  const formatDate = (dateString: string) => {
+    return new Intl.DateTimeFormat('id-ID', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    }).format(new Date(dateString))
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-kprflow-primary"></div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-kprflow-background">
+      <div className="container mx-auto p-6 space-y-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold kprflow-gradient-text">Dashboard KPRFlow</h1>
+            <p className="text-kprflow-muted-foreground mt-1">
+              Sistem Manajemen Property & KPR Enterprise
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <Button variant="kprflow" className="gap-2">
+              <FileText className="h-4 w-4" />
+              Pengajuan Baru
+            </Button>
+            <Button variant="outline" className="gap-2">
+              <Calculator className="h-4 w-4" />
+              Kalkulator KPR
+            </Button>
+          </div>
+        </div>
+
+        {/* Stats Cards */}
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat, index) => (
+            <Card key={index} className="kprflow-card-hover">
+              <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+                <div className={`p-3 rounded-lg bg-${stat.color}/10 mb-3`}>
+                  <stat.icon className={`h-6 w-6 text-${stat.color}`} />
+                </div>
+                <h3 className="font-semibold">{stat.title}</h3>
+                <p className="text-2xl font-bold mt-1">{stat.value}</p>
+                <div className={`flex items-center gap-1 mt-2 text-sm ${
+                  stat.trend === 'up' ? 'text-kprflow-success' : 'text-kprflow-error'
+                }`}>
+                  {stat.trend === 'up' ? (
+                    <ArrowUpRight className="h-3 w-3" />
+                  ) : (
+                    <ArrowDownRight className="h-3 w-3" />
+                  )}
+                  {stat.change}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Search Bar */}
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                placeholder="Cari pengajuan berdasarkan nama, email, atau properti..."
+                className="flex-1 px-3 py-2 border border-kprflow-border rounded-md focus:outline-none focus:ring-2 focus:ring-kprflow-ring"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+              />
+              <Button onClick={handleSearch} variant="kprflow">
+                Search
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Recent Applications */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="h-5 w-5" />
+              Pengajuan Terbaru
+            </CardTitle>
+            <CardDescription>
+              Daftar pengajuan KPR terbaru dengan status real-time
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {applications.slice(0, 5).map((application) => (
+                <div
+                  key={application.id}
+                  className="flex items-center justify-between p-4 border border-kprflow-border rounded-lg hover:bg-kprflow-accent/50 transition-colors"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="p-2 rounded-lg bg-kprflow-primary/10">
+                      <FileText className="h-5 w-5 text-kprflow-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">{application.applicants.name}</h4>
+                      <p className="text-sm text-kprflow-muted-foreground">
+                        {application.properties.name} • {application.properties.location}
+                      </p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <Badge className={getPropertyTypeColor(application.properties.type)}>
+                          {application.properties.type}
+                        </Badge>
+                        <span className="text-sm text-kprflow-muted-foreground">
+                          {formatDate(application.created_at)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-semibold">{formatCurrency(application.amount)}</div>
+                    <Badge className={getStatusColor(application.status)}>
+                      {application.status}
+                    </Badge>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Quick Actions */}
+        <div className="grid gap-4 md:grid-cols-3">
+          <Card className="kprflow-card-hover cursor-pointer">
+            <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+              <div className="p-3 rounded-lg bg-kprflow-warning/10 mb-3">
+                <Calculator className="h-6 w-6 text-kprflow-warning" />
+              </div>
+              <h3 className="font-semibold">Kalkulator KPR</h3>
+              <p className="text-sm text-kprflow-muted-foreground mt-1">
+                Hitung simulasi KPR Anda
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="kprflow-card-hover cursor-pointer">
+            <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+              <div className="p-3 rounded-lg bg-kprflow-success/10 mb-3">
+                <Building2 className="h-6 w-6 text-kprflow-success" />
+              </div>
+              <h3 className="font-semibold">Katalog Properti</h3>
+              <p className="text-sm text-kprflow-muted-foreground mt-1">
+                Jelajahi properti tersedia
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="kprflow-card-hover cursor-pointer">
+            <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+              <div className="p-3 rounded-lg bg-kprflow-primary/10 mb-3">
+                <Users className="h-6 w-6 text-kprflow-primary" />
+              </div>
+              <h3 className="font-semibold">Manajemen Nasabah</h3>
+              <p className="text-sm text-kprflow-muted-foreground mt-1">
+                Kelola data nasabah
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  )
+}

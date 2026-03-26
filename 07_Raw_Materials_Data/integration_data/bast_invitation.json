@@ -1,0 +1,457 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-21",
+  "source": "bramsray2_bast_invitation",
+  "description": "BAST invitation generation edge function configuration for KPRFlow Enterprise",
+  
+  "function_id": "bast-invitation",
+  "name": "BAST Invitation",
+  "description": "Generate BAST (Berita Acara Serah Terima) invitations and manage handover events",
+  "category": "invitation_management",
+  "enabled": true,
+  "status": "ACTIVE",
+  
+  "functionality": {
+    "invitation_generation": {
+      "enabled": true,
+      "description": "Generate invitation documents for BAST events",
+      "features": [
+        "document_template_generation",
+        "personalized_content_creation",
+        "dynamic_field_population",
+        "multi_format_output"
+      ]
+    },
+    "invitation_sending": {
+      "enabled": true,
+      "description": "Send invitations via multiple channels",
+      "channels": [
+        "email_invitations",
+        "whatsapp_invitations",
+        "sms_invitations",
+        "postal_mail_invitations"
+      ]
+    },
+    "event_tracking": {
+      "enabled": true,
+      "description": "Track invitation status and event attendance",
+      "tracking_features": [
+        "invitation_status_tracking",
+        "rsvp_tracking",
+        "attendance_tracking",
+        "follow_up_tracking"
+      ]
+    },
+    "event_scheduling": {
+      "enabled": true,
+      "description": "Schedule and manage handover events",
+      "scheduling_features": [
+        "calendar_integration",
+        "reminder_scheduling",
+        "rescheduling_management",
+        "conflict_detection"
+      ]
+    }
+  },
+  
+  "technology": {
+    "runtime": "deno",
+    "language": "typescript",
+    "version": "1.40.0",
+    "dependencies": [
+      {
+        "name": "std",
+        "version": "^0.224.0"
+      },
+      {
+        "name": "email",
+        "version": "^0.8.0"
+      },
+      {
+        "name": "pdf",
+        "version": "^0.1.0"
+      },
+      {
+        "name": "csv",
+        "version": "^0.8.0"
+      }
+    ]
+  },
+  
+  "integration": {
+    "document_generation": {
+      "provider": "google_docs",
+      "api_endpoint": "https://docs.googleapis.com/v1",
+      "template_ids": {
+        "bast_invitation_template": "your-bast-template-id",
+        "handover_checklist_template": "your-checklist-template-id",
+        "certificate_template": "your-certificate-template-id"
+      },
+      "authentication": "oauth2",
+      "scopes": [
+        "https://www.googleapis.com/auth/documents",
+        "https://www.googleapis.com/auth/drive"
+      ]
+    },
+    "communication_services": {
+      "email": {
+        "provider": "gmail",
+        "smtp_server": "smtp.gmail.com",
+        "smtp_port": 587,
+        "authentication": "oauth2"
+      },
+      "whatsapp": {
+        "provider": "twilio",
+        "api_endpoint": "https://api.twilio.com/2010-04-01/Accounts",
+        "webhook_url": "https://your-webhook-url.com"
+      },
+      "sms": {
+        "provider": "twilio",
+        "api_endpoint": "https://api.twilio.com/2010-04-01/Accounts"
+      }
+    },
+    "supabase": {
+      "enabled": true,
+      "database_url": "https://your-project.supabase.co",
+      "service_role_key": "your-service-role-key",
+      "tables": {
+        "invitations": "bast_invitations",
+        "events": "handover_events",
+        "attendees": "event_attendees",
+        "documents": "invitation_documents",
+        "communication_logs": "communication_logs"
+      }
+    }
+  },
+  
+  "invitation_templates": {
+    "bast_invitation": {
+      "template_id": "bast_invitation_template",
+      "name": "BAST Invitation Letter",
+      "description": "Official invitation for BAST handover ceremony",
+      "required_fields": [
+        "invitation_number",
+        "invitation_date",
+        "event_date",
+        "event_time",
+        "event_location",
+        "customer_name",
+        "customer_address",
+        "property_address",
+        "property_details",
+        "handover_items",
+        "witness_names",
+        "company_representative",
+        "contact_person",
+        "special_instructions"
+      ],
+      "template_sections": [
+        "header_section",
+        "invitation_details",
+        "customer_information",
+        "property_information",
+        "handover_details",
+        "witness_information",
+        "contact_information",
+        "signature_section"
+      ]
+    },
+    "handover_checklist": {
+      "template_id": "handover_checklist_template",
+      "name": "Handover Checklist",
+      "description": "Checklist for property handover process",
+      "required_fields": [
+        "property_address",
+        "handover_date",
+        "customer_name",
+        "representative_name",
+        "checklist_items",
+        "condition_notes",
+        "defect_report",
+        "acknowledgment_section"
+      ],
+      "checklist_categories": [
+        "document_handover",
+        "key_handover",
+        "utility_handover",
+        "facility_handover",
+        "condition_assessment",
+        "final_inspection"
+      ]
+    },
+    "completion_certificate": {
+      "template_id": "certificate_template",
+      "name": "Handover Completion Certificate",
+      "description": "Certificate confirming successful property handover",
+      "required_fields": [
+        "certificate_number",
+        "issue_date",
+        "customer_name",
+        "property_address",
+        "handover_date",
+        "witness_names",
+        "company_representative",
+        "completion_status",
+        "notes"
+      ]
+    }
+  },
+  
+  "invitation_workflow": {
+    "steps": [
+      {
+        "step_id": 1,
+        "name": "Event Scheduling",
+        "description": "Schedule BAST handover event",
+        "actions": ["check_availability", "schedule_event", "reserve_resources"],
+        "estimated_duration_minutes": 15
+      },
+      {
+        "step_id": 2,
+        "name": "Invitation Generation",
+        "description": "Generate personalized invitation documents",
+        "actions": ["populate_template", "generate_pdf", "store_document"],
+        "estimated_duration_minutes": 10
+      },
+      {
+        "step_id": 3,
+        "name": "Invitation Sending",
+        "description": "Send invitations via multiple channels",
+        "actions": ["send_email", "send_whatsapp", "send_sms", "log_communication"],
+        "estimated_duration_minutes": 20
+      },
+      {
+        "step_id": 4,
+        "name": "RSVP Tracking",
+        "description": "Track invitation responses and attendance",
+        "actions": ["monitor_responses", "update_attendance", "send_reminders"],
+        "estimated_duration_minutes": 5
+      },
+      {
+        "step_id": 5,
+        "name": "Event Preparation",
+        "description": "Prepare for handover event",
+        "actions": ["prepare_documents", "prepare_checklist", "coordinate_participants"],
+        "estimated_duration_minutes": 30
+      },
+      {
+        "step_id": 6,
+        "name": "Event Execution",
+        "description": "Execute BAST handover ceremony",
+        "actions": ["conduct_handover", "complete_checklist", "sign_documents"],
+        "estimated_duration_minutes": 60
+      },
+      {
+        "step_id": 7,
+        "name": "Post-Event Follow-up",
+        "description": "Complete post-event documentation and follow-up",
+        "actions": ["generate_certificate", "update_records", "send_confirmation"],
+        "estimated_duration_minutes": 15
+      }
+    ]
+  },
+  
+  "communication_settings": {
+    "email_settings": {
+      "enabled": true,
+      "template_id": "bast_invitation_email",
+      "subject": "Undangan Serah Terima Properti - KPRFlow Enterprise",
+      "sender_email": "invitations@kprflow.com",
+      "reply_to": "support@kprflow.com",
+      "max_attachment_size_mb": 25,
+      "supported_formats": ["application/pdf", "image/jpeg", "image/png"]
+    },
+    "whatsapp_settings": {
+      "enabled": true,
+      "template_id": "bast_invitation_whatsapp",
+      "max_message_length": 1000,
+      "media_supported": true,
+      "max_media_size_mb": 16
+    },
+    "sms_settings": {
+      "enabled": true,
+      "template_id": "bast_invitation_sms",
+      "max_message_length": 160,
+      "character_encoding": "UTF-8"
+    },
+    "reminder_settings": {
+      "enabled": true,
+      "reminder_schedule": [
+        {
+          "days_before": 7,
+          "channels": ["email", "whatsapp"],
+          "message_type": "initial_reminder"
+        },
+        {
+          "days_before": 3,
+          "channels": ["email", "whatsapp", "sms"],
+          "message_type": "follow_up_reminder"
+        },
+        {
+          "days_before": 1,
+          "channels": ["whatsapp", "sms"],
+          "message_type": "final_reminder"
+        }
+      ]
+    }
+  },
+  
+  "event_management": {
+    "scheduling_rules": {
+      "business_hours_only": true,
+      "exclude_weekends": false,
+      "exclude_holidays": true,
+      "min_advance_days": 3,
+      "max_advance_days": 30,
+      "event_duration_hours": 2
+    },
+    "location_requirements": {
+      "required_facilities": ["meeting_room", "parking", "restroom"],
+      "capacity_min": 5,
+      "capacity_max": 20,
+      "equipment_needed": ["projector", "printer", "scanner"]
+    },
+    "participant_requirements": {
+      "required_participants": ["customer", "company_representative", "witness"],
+      "optional_participants": ["family_members", "legal_advisor", "property_manager"],
+      "min_participants": 3,
+      "max_participants": 10
+    }
+  },
+  
+  "document_requirements": {
+    "required_documents": [
+      {
+        "name": "BAST Document",
+        "description": "Berita Acara Serah Terima",
+        "format": "PDF",
+        "required_signatures": ["customer", "company_representative", "witness"]
+      },
+      {
+        "name": "Handover Checklist",
+        "description": "Checklist serah terima",
+        "format": "PDF",
+        "required_signatures": ["customer", "company_representative"]
+      },
+      {
+        "name": "Property Certificate",
+        "description": "Sertifikat properti",
+        "format": "PDF",
+        "required_signatures": ["company_representative"]
+      },
+      {
+        "name": "ID Documents",
+        "description": "KTP peserta",
+        "format": "PDF/Image",
+        "required_signatures": []
+      }
+    ],
+    "document_validation": {
+      "check_signatures": true,
+      "check_dates": true,
+      "check_required_fields": true,
+      "verify_document_integrity": true
+    }
+  },
+  
+  "quality_assurance": {
+    "data_validation": {
+      "enabled": true,
+      "validate_customer_data": true,
+      "validate_property_data": true,
+      "validate_event_data": true,
+      "validate_document_data": true
+    },
+    "template_validation": {
+      "enabled": true,
+      "validate_template_structure": true,
+      "validate_required_fields": true,
+      "validate_format_consistency": true
+    },
+    "communication_validation": {
+      "enabled": true,
+      "validate_email_addresses": true,
+      "validate_phone_numbers": true,
+      "validate_message_content": true
+    }
+  },
+  
+  "monitoring_settings": {
+    "metrics_tracking": {
+      "enabled": true,
+      "track_invitation_generation": true,
+      "track_invitation_delivery": true,
+      "track_rsvp_rates": true,
+      "track_attendance_rates": true
+    },
+    "logging": {
+      "enabled": true,
+      "log_level": "INFO",
+      "log_invitation_details": true,
+      "log_communication_results": true,
+      "log_event_outcomes": true
+    },
+    "alerting": {
+      "enabled": true,
+      "alert_on_delivery_failure": true,
+      "alert_on_low_rsvp": true,
+      "alert_on_scheduling_conflicts": true,
+      "alert_recipients": ["ops_team", "management"]
+    }
+  },
+  
+  "security_settings": {
+    "authentication": {
+      "required": true,
+      "method": "api_key",
+      "api_key_header": "Authorization",
+      "api_key_validation": true
+    },
+    "data_protection": {
+      "encrypt_sensitive_data": true,
+      "mask_personal_info": true,
+      "gdpr_compliant": true,
+      "data_retention_days": 365
+    },
+    "access_control": {
+      "authorized_users": ["ops_team", "management", "legal_team"],
+      "role_based_access": true,
+      "ip_whitelist": [],
+      "domain_whitelist": []
+    }
+  },
+  
+  "testing_settings": {
+    "test_mode": false,
+    "test_invitations": [
+      "test_bast_invitation.pdf",
+      "test_handover_checklist.pdf",
+      "test_completion_certificate.pdf"
+    ],
+    "mock_data_generation": true,
+    "test_scenarios": [
+      "complete_invitation_workflow",
+      "rsvp_tracking_workflow",
+      "event_scheduling_workflow",
+      "communication_failure_workflow"
+    ]
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-21",
+    "last_modified": "2026-03-21",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "BAST invitation generation edge function configuration for KPRFlow Enterprise",
+    "total_templates": 3,
+    "workflow_steps": 7,
+    "communication_channels": 3,
+    "integration_tables": 5,
+    "data_sources": [
+      "bramsray2/supabase/functions/bast-invitation/deno.json"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

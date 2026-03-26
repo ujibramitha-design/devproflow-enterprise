@@ -1,0 +1,374 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-20",
+  "source": "bramsray1_workflow_tracking",
+  "description": "Complete workflow tracking configuration for KPRFlow Enterprise",
+  
+  "workflows": [
+    {
+      "workflow_id": "customer_registration",
+      "name": "Customer Registration Workflow",
+      "description": "Complete customer registration process from initial contact to approval",
+      "status": "active",
+      "steps": [
+        {
+          "step_id": 1,
+          "name": "Initial Contact",
+          "description": "Customer makes initial contact or inquiry",
+          "status": "pending",
+          "required_fields": ["customer_name", "phone", "email"],
+          "validation_rules": ["email_format", "phone_format", "name_validation"],
+          "actions": ["create_customer_record", "assign_sales_agent"],
+          "next_step": 2,
+          "estimated_duration": "1 day"
+        },
+        {
+          "step_id": 2,
+          "name": "Data Collection",
+          "description": "Collect complete customer information",
+          "status": "pending",
+          "required_fields": ["nik", "npwp", "birth_date", "address", "monthly_income"],
+          "validation_rules": ["nik_format", "npwp_format", "age_validation", "income_validation"],
+          "actions": ["validate_customer_data", "check_eligibility"],
+          "next_step": 3,
+          "estimated_duration": "2 days"
+        },
+        {
+          "step_id": 3,
+          "name": "Document Upload",
+          "description": "Upload required documents",
+          "status": "pending",
+          "required_documents": ["ktp", "kk", "slip_gaji", "rekening_koran", "surat_nikah"],
+          "validation_rules": ["file_validation", "document_completeness"],
+          "actions": ["upload_documents", "verify_documents"],
+          "next_step": 4,
+          "estimated_duration": "3 days"
+        },
+        {
+          "step_id": 4,
+          "name": "Property Selection",
+          "description": "Customer selects property",
+          "status": "pending",
+          "required_fields": ["property_id", "property_type", "property_price"],
+          "validation_rules": ["property_validation", "price_validation"],
+          "actions": ["reserve_property", "calculate_loan_requirements"],
+          "next_step": 5,
+          "estimated_duration": "2 days"
+        },
+        {
+          "step_id": 5,
+          "name": "Bank Application",
+          "description": "Submit application to selected bank",
+          "status": "pending",
+          "required_fields": ["bank_name", "loan_amount", "tenure"],
+          "validation_rules": ["bank_validation", "loan_validation", "tenure_validation"],
+          "actions": ["submit_bank_application", "track_application_status"],
+          "next_step": 6,
+          "estimated_duration": "5 days"
+        },
+        {
+          "step_id": 6,
+          "name": "Approval Process",
+          "description": "Bank approval and processing",
+          "status": "pending",
+          "required_fields": ["bank_approval_status", "approved_amount", "approved_terms"],
+          "validation_rules": ["approval_validation", "terms_validation"],
+          "actions": ["receive_approval", "schedule_akad"],
+          "next_step": 7,
+          "estimated_duration": "7 days"
+        },
+        {
+          "step_id": 7,
+          "name": "Akad Process",
+          "description": "Complete akad process and documentation",
+          "status": "pending",
+          "required_fields": ["akad_date", "akad_location", "witnesses"],
+          "validation_rules": ["akad_validation", "document_validation"],
+          "actions": ["prepare_akad_documents", "conduct_akad"],
+          "next_step": null,
+          "estimated_duration": "3 days"
+        }
+      ],
+      "total_estimated_duration": "23 days",
+      "critical_path": ["Document Upload", "Bank Application", "Approval Process"],
+      "success_metrics": ["completion_rate", "time_to_approval", "customer_satisfaction"]
+    },
+    {
+      "workflow_id": "property_booking",
+      "name": "Property Booking Workflow",
+      "description": "Property reservation and booking process",
+      "status": "active",
+      "steps": [
+        {
+          "step_id": 1,
+          "name": "Property Inquiry",
+          "description": "Customer inquires about property",
+          "status": "pending",
+          "required_fields": ["property_id", "customer_id"],
+          "validation_rules": ["property_validation", "customer_validation"],
+          "actions": ["check_availability", "provide_property_info"],
+          "next_step": 2,
+          "estimated_duration": "1 day"
+        },
+        {
+          "step_id": 2,
+          "name": "Site Visit",
+          "description": "Customer visits property site",
+          "status": "pending",
+          "required_fields": ["visit_date", "visit_time"],
+          "validation_rules": ["schedule_validation"],
+          "actions": ["schedule_visit", "conduct_site_visit"],
+          "next_step": 3,
+          "estimated_duration": "2 days"
+        },
+        {
+          "step_id": 3,
+          "name": "Booking Decision",
+          "description": "Customer decides to book property",
+          "status": "pending",
+          "required_fields": ["booking_decision", "down_payment_amount"],
+          "validation_rules": ["decision_validation", "payment_validation"],
+          "actions": ["process_booking", "collect_down_payment"],
+          "next_step": 4,
+          "estimated_duration": "2 days"
+        },
+        {
+          "step_id": 4,
+          "name": "Booking Confirmation",
+          "description": "Confirm booking and issue documents",
+          "status": "pending",
+          "required_fields": ["booking_number", "booking_confirmation"],
+          "validation_rules": ["booking_validation", "document_validation"],
+          "actions": ["issue_booking_confirmation", "update_property_status"],
+          "next_step": null,
+          "estimated_duration": "1 day"
+        }
+      ],
+      "total_estimated_duration": "6 days",
+      "critical_path": ["Site Visit", "Booking Decision"],
+      "success_metrics": ["booking_conversion_rate", "time_to_booking", "customer_satisfaction"]
+    },
+    {
+      "workflow_id": "document_processing",
+      "name": "Document Processing Workflow",
+      "description": "Document verification and processing workflow",
+      "status": "active",
+      "steps": [
+        {
+          "step_id": 1,
+          "name": "Document Upload",
+          "description": "Customer uploads required documents",
+          "status": "pending",
+          "required_documents": ["ktp", "kk", "slip_gaji", "rekening_koran"],
+          "validation_rules": ["file_validation", "document_type_validation"],
+          "actions": ["upload_documents", "scan_documents"],
+          "next_step": 2,
+          "estimated_duration": "1 day"
+        },
+        {
+          "step_id": 2,
+          "name": "Document Verification",
+          "description": "Verify uploaded documents",
+          "status": "pending",
+          "required_fields": ["verification_status", "verification_notes"],
+          "validation_rules": ["document_authenticity", "document_completeness"],
+          "actions": ["verify_documents", "flag_issues"],
+          "next_step": 3,
+          "estimated_duration": "2 days"
+        },
+        {
+          "step_id": 3,
+          "name": "Document Processing",
+          "description": "Process verified documents",
+          "status": "pending",
+          "required_fields": ["processing_status", "processed_documents"],
+          "validation_rules": ["processing_validation"],
+          "actions": ["process_documents", "update_records"],
+          "next_step": 4,
+          "estimated_duration": "2 days"
+        },
+        {
+          "step_id": 4,
+          "name": "Document Approval",
+          "description": "Final approval of documents",
+          "status": "pending",
+          "required_fields": ["approval_status", "approval_date"],
+          "validation_rules": ["approval_validation"],
+          "actions": ["approve_documents", "notify_stakeholders"],
+          "next_step": null,
+          "estimated_duration": "1 day"
+        }
+      ],
+      "total_estimated_duration": "6 days",
+      "critical_path": ["Document Verification", "Document Processing"],
+      "success_metrics": ["document_accuracy", "processing_time", "approval_rate"]
+    }
+  ],
+  
+  "workflow_status_tracking": {
+    "status_values": ["pending", "in_progress", "completed", "rejected", "cancelled"],
+    "status_colors": {
+      "pending": "#FFA500",
+      "in_progress": "#1E90FF",
+      "completed": "#32CD32",
+      "rejected": "#FF0000",
+      "cancelled": "#808080"
+    },
+    "status_transitions": {
+      "pending": ["in_progress", "cancelled"],
+      "in_progress": ["completed", "rejected", "cancelled"],
+      "completed": [],
+      "rejected": ["pending"],
+      "cancelled": ["pending"]
+    },
+    "notification_triggers": {
+      "pending": ["customer_notification", "sales_notification"],
+      "in_progress": ["daily_status_update"],
+      "completed": ["completion_notification", "management_notification"],
+      "rejected": ["rejection_notification"],
+      "cancelled": ["cancellation_notification"]
+    }
+  },
+  
+  "workflow_automation": {
+    "auto_transitions": [
+      {
+        "condition": "all_required_fields_completed",
+        "from_status": "pending",
+        "to_status": "in_progress",
+        "workflow": "customer_registration"
+      },
+      {
+        "condition": "all_documents_verified",
+        "from_status": "in_progress",
+        "to_status": "completed",
+        "workflow": "document_processing"
+      }
+    ],
+    "auto_notifications": [
+      {
+        "trigger": "step_completion",
+        "recipients": ["customer", "sales_agent", "manager"],
+        "template": "step_completion_notification"
+      },
+      {
+        "trigger": "workflow_completion",
+        "recipients": ["customer", "sales_agent", "manager", "finance_team"],
+        "template": "workflow_completion_notification"
+      }
+    ],
+    "auto_assignments": [
+      {
+        "condition": "new_customer_registration",
+        "assign_to": "sales_team",
+        "role": "sales_agent"
+      },
+      {
+        "condition": "document_upload_required",
+        "assign_to": "document_team",
+        "role": "document_specialist"
+      }
+    ]
+  },
+  
+  "workflow_metrics": {
+    "performance_metrics": [
+      {
+        "name": "workflow_completion_rate",
+        "description": "Percentage of workflows completed successfully",
+        "calculation": "(completed_workflows / total_workflows) * 100",
+        "target": 85,
+        "unit": "percentage"
+      },
+      {
+        "name": "average_processing_time",
+        "description": "Average time to complete workflows",
+        "calculation": "sum(completion_times) / count(workflows)",
+        "target": "20 days",
+        "unit": "days"
+      },
+      {
+        "name": "step_efficiency",
+        "description": "Efficiency of individual workflow steps",
+        "calculation": "(actual_time / estimated_time) * 100",
+        "target": 90,
+        "unit": "percentage"
+      }
+    ],
+    "quality_metrics": [
+      {
+        "name": "data_accuracy",
+        "description": "Accuracy of data collected in workflows",
+        "calculation": "(accurate_data_points / total_data_points) * 100",
+        "target": 95,
+        "unit": "percentage"
+      },
+      {
+        "name": "document_completeness",
+        "description": "Completeness of required documents",
+        "calculation": "(complete_documents / required_documents) * 100",
+        "target": 90,
+        "unit": "percentage"
+      }
+    ],
+    "customer_satisfaction_metrics": [
+      {
+        "name": "customer_satisfaction_score",
+        "description": "Customer satisfaction with workflow process",
+        "calculation": "average(customer_satisfaction_ratings)",
+        "target": 4.5,
+        "unit": "rating"
+      },
+      {
+        "name": "net_promoter_score",
+        "description": "Net promoter score for workflow experience",
+        "calculation": "promoters - detractors",
+        "target": 40,
+        "unit": "score"
+      }
+    ]
+  },
+  
+  "integration_mapping": {
+    "business_rules_integration": {
+      "source": "07_Raw_Materials_Data/configuration/business_rules.json",
+      "mapping": "workflow validation rules",
+      "description": "Business rules applied to workflow steps and validations"
+    },
+    "validation_rules_integration": {
+      "source": "07_Raw_Materials_Data/validation_rules/field_validations.json",
+      "mapping": "field validation in workflow steps",
+      "description": "Field validation rules applied to workflow data collection"
+    },
+    "master_data_integration": {
+      "source": "07_Raw_Materials_Data/master_data/",
+      "mapping": "workflow data references",
+      "description": "Master data referenced in workflow processes"
+    },
+    "drive_configuration_integration": {
+      "source": "07_Raw_Materials_Data/configuration/drive_configuration.json",
+      "mapping": "document storage and templates",
+      "description": "Drive configuration for document management in workflows"
+    }
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-20",
+    "last_modified": "2026-06-20",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Complete workflow tracking configuration for KPRFlow Enterprise",
+    "total_workflows": 3,
+    "total_steps": 17,
+    "total_metrics": 8,
+    "data_sources": [
+      "bramsray1/96_UI_Legal_Wrappers.gs",
+      "bramsray1/97_UI_Bank_Wrappers.gs",
+      "07_Raw_Materials_Data/configuration/business_rules.json",
+      "07_Raw_Materials_Data/validation_rules/field_validations.json"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

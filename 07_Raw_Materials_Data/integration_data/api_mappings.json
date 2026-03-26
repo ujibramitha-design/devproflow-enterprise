@@ -1,0 +1,850 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-21",
+  "source": "system_integration_requirements",
+  "description": "Complete API mappings configuration for KPRFlow Enterprise",
+  
+  "api_mappings": {
+    "system_overview": {
+      "total_integrations": 8,
+      "active_integrations": 4,
+      "disabled_integrations": 4,
+      "integration_status": "partially_active",
+      "last_updated": "2026-03-21"
+    },
+    
+    "integration_systems": [
+      {
+        "system_id": "supabase_database",
+        "name": "Supabase Database Integration",
+        "enabled": true,
+        "status": "ACTIVE",
+        "priority": "HIGH",
+        "description": "Primary database for KPRFlow Enterprise",
+        "api_endpoints": [
+          {
+            "endpoint_id": "supabase_auth",
+            "method": "POST",
+            "internal_path": "/api/auth",
+            "external_url": "https://your-project.supabase.co/auth/v1",
+            "purpose": "User authentication",
+            "data_mapping": {
+              "request": {
+                "email": "email",
+                "password": "password",
+                "provider": "provider"
+              },
+              "response": {
+                "access_token": "access_token",
+                "refresh_token": "refresh_token",
+                "user": "user_data"
+              }
+            },
+            "authentication": {
+              "type": "api_key",
+              "header": "apikey",
+              "key": "SUPABASE_ANON_KEY"
+            }
+          },
+          {
+            "endpoint_id": "supabase_rest_customers",
+            "method": "GET",
+            "internal_path": "/api/customers",
+            "external_url": "https://your-project.supabase.co/rest/v1/customers",
+            "purpose": "Customer data operations",
+            "data_mapping": {
+              "request": {
+                "select": "fields_to_select",
+                "filter": "where_conditions",
+                "order": "order_by"
+              },
+              "response": {
+                "id": "customer_id",
+                "name": "customer_name",
+                "email": "customer_email",
+                "phone": "customer_phone",
+                "nik": "customer_nik",
+                "birth_date": "customer_birth_date",
+                "address": "customer_address",
+                "created_at": "registration_date"
+              }
+            },
+            "authentication": {
+              "type": "bearer_token",
+              "header": "Authorization",
+              "key": "Bearer SUPABASE_ANON_KEY"
+            }
+          },
+          {
+            "endpoint_id": "supabase_rest_applications",
+            "method": "POST",
+            "internal_path": "/api/applications",
+            "external_url": "https://your-project.supabase.co/rest/v1/applications",
+            "purpose": "Application data operations",
+            "data_mapping": {
+              "request": {
+                "customer_id": "customer_id",
+                "property_id": "property_id",
+                "application_date": "application_date",
+                "status": "application_status",
+                "loan_amount": "loan_amount",
+                "down_payment": "down_payment",
+                "tenure": "loan_tenure"
+              },
+              "response": {
+                "id": "application_id",
+                "customer_id": "customer_id",
+                "property_id": "property_id",
+                "application_date": "application_date",
+                "status": "application_status",
+                "loan_amount": "loan_amount",
+                "down_payment": "down_payment",
+                "tenure": "loan_tenure",
+                "created_at": "created_timestamp"
+              }
+            },
+            "authentication": {
+              "type": "bearer_token",
+              "header": "Authorization",
+              "key": "Bearer SUPABASE_ANON_KEY"
+            }
+          },
+          {
+            "endpoint_id": "supabase_storage",
+            "method": "POST",
+            "internal_path": "/api/storage",
+            "external_url": "https://your-project.supabase.co/storage/v1/object",
+            "purpose": "File storage operations",
+            "data_mapping": {
+              "request": {
+                "bucket": "storage_bucket",
+                "path": "file_path",
+                "file": "file_data"
+              },
+              "response": {
+                "Key": "file_key",
+                "ETag": "file_etag"
+              }
+            },
+            "authentication": {
+              "type": "bearer_token",
+              "header": "Authorization",
+              "key": "Bearer SUPABASE_ANON_KEY"
+            }
+          }
+        ],
+        "data_transformations": [
+          {
+            "transformation_id": "customer_data_transform",
+            "description": "Transform customer data for Supabase",
+            "input_format": "internal_customer_format",
+            "output_format": "supabase_customer_format",
+            "rules": [
+              {
+                "field": "phone",
+                "rule": "format_phone_international",
+                "input": "08123456789",
+                "output": "+628123456789"
+              },
+              {
+                "field": "birth_date",
+                "rule": "format_date_iso",
+                "input": "20-03-2001",
+                "output": "2001-03-20"
+              },
+              {
+                "field": "income",
+                "rule": "parse_currency",
+                "input": "Rp 10.000.000",
+                "output": 10000000
+              }
+            ]
+          }
+        ],
+        "error_handling": {
+          "error_codes": {
+            "400": "Bad Request - Invalid data format",
+            "401": "Unauthorized - Invalid API key",
+            "403": "Forbidden - Insufficient permissions",
+            "404": "Not Found - Resource not found",
+            "500": "Server Error - Database error"
+          },
+          "retry_logic": {
+            "max_retries": 3,
+            "retry_delay": 1000,
+            "exponential_backoff": true
+          }
+        }
+      },
+      
+      {
+        "system_id": "google_drive",
+        "name": "Google Drive Integration",
+        "enabled": true,
+        "status": "ACTIVE",
+        "priority": "HIGH",
+        "description": "Document storage and template management",
+        "api_endpoints": [
+          {
+            "endpoint_id": "drive_files_upload",
+            "method": "POST",
+            "internal_path": "/api/drive/upload",
+            "external_url": "https://www.googleapis.com/upload/drive/v3/files",
+            "purpose": "File upload to Google Drive",
+            "data_mapping": {
+              "request": {
+                "name": "file_name",
+                "parents": "folder_id",
+                "file": "file_data"
+              },
+              "response": {
+                "id": "file_id",
+                "name": "file_name",
+                "webViewLink": "file_url",
+                "webContentLink": "download_url"
+              }
+            },
+            "authentication": {
+              "type": "oauth2",
+              "header": "Authorization",
+              "key": "Bearer GOOGLE_ACCESS_TOKEN"
+            }
+          },
+          {
+            "endpoint_id": "drive_files_download",
+            "method": "GET",
+            "internal_path": "/api/drive/download",
+            "external_url": "https://www.googleapis.com/drive/v3/files/{fileId}",
+            "purpose": "File download from Google Drive",
+            "data_mapping": {
+              "request": {
+                "fileId": "file_id",
+                "alt": "media"
+              },
+              "response": {
+                "file_content": "binary_data",
+                "file_metadata": "file_info"
+              }
+            },
+            "authentication": {
+              "type": "oauth2",
+              "header": "Authorization",
+              "key": "Bearer GOOGLE_ACCESS_TOKEN"
+            }
+          },
+          {
+            "endpoint_id": "drive_folders_list",
+            "method": "GET",
+            "internal_path": "/api/drive/folders",
+            "external_url": "https://www.googleapis.com/drive/v3/files",
+            "purpose": "List folders in Google Drive",
+            "data_mapping": {
+              "request": {
+                "q": "query_parameters",
+                "fields": "fields_to_return"
+              },
+              "response": {
+                "files": "folder_list",
+                "nextPageToken": "pagination_token"
+              }
+            },
+            "authentication": {
+              "type": "oauth2",
+              "header": "Authorization",
+              "key": "Bearer GOOGLE_ACCESS_TOKEN"
+            }
+          }
+        ],
+        "data_transformations": [
+          {
+            "transformation_id": "drive_file_transform",
+            "description": "Transform file data for Google Drive",
+            "input_format": "internal_file_format",
+            "output_format": "drive_file_format",
+            "rules": [
+              {
+                "field": "file_name",
+                "rule": "sanitize_filename",
+                "input": "Customer Document #123.pdf",
+                "output": "customer_document_123.pdf"
+              },
+              {
+                "field": "folder_path",
+                "rule": "convert_to_folder_id",
+                "input": "/customers/2024/01",
+                "output": "FOLDER_ID_HERE"
+              }
+            ]
+          }
+        ],
+        "error_handling": {
+          "error_codes": {
+            "400": "Bad Request - Invalid file format",
+            "401": "Unauthorized - Invalid OAuth token",
+            "403": "Forbidden - Insufficient permissions",
+            "404": "Not Found - File not found",
+            "429": "Too Many Requests - Rate limit exceeded"
+          },
+          "retry_logic": {
+            "max_retries": 3,
+            "retry_delay": 2000,
+            "exponential_backoff": true
+          }
+        }
+      },
+      
+      {
+        "system_id": "bank_api",
+        "name": "Bank API Integration",
+        "enabled": false,
+        "status": "DISABLED",
+        "priority": "MEDIUM",
+        "description": "Bank loan application processing",
+        "api_endpoints": [
+          {
+            "endpoint_id": "bank_loan_application",
+            "method": "POST",
+            "internal_path": "/api/bank/application",
+            "external_url": "https://api.bank.co.id/v1/loan/application",
+            "purpose": "Submit loan application to bank",
+            "data_mapping": {
+              "request": {
+                "applicant_name": "customer_name",
+                "applicant_nik": "customer_nik",
+                "property_address": "property_address",
+                "loan_amount": "loan_amount",
+                "loan_tenure": "loan_tenure",
+                "monthly_income": "monthly_income"
+              },
+              "response": {
+                "application_id": "bank_application_id",
+                "status": "application_status",
+                "estimated_approval_time": "approval_timeframe"
+              }
+            },
+            "authentication": {
+              "type": "api_key",
+              "header": "X-API-Key",
+              "key": "BANK_API_KEY"
+            }
+          },
+          {
+            "endpoint_id": "bank_application_status",
+            "method": "GET",
+            "internal_path": "/api/bank/status",
+            "external_url": "https://api.bank.co.id/v1/loan/status/{applicationId}",
+            "purpose": "Check loan application status",
+            "data_mapping": {
+              "request": {
+                "applicationId": "bank_application_id"
+              },
+              "response": {
+                "application_id": "bank_application_id",
+                "status": "application_status",
+                "updated_at": "status_update_time",
+                "notes": "status_notes"
+              }
+            },
+            "authentication": {
+              "type": "api_key",
+              "header": "X-API-Key",
+              "key": "BANK_API_KEY"
+            }
+          }
+        ],
+        "data_transformations": [
+          {
+            "transformation_id": "bank_data_transform",
+            "description": "Transform data for bank API",
+            "input_format": "internal_format",
+            "output_format": "bank_format",
+            "rules": [
+              {
+                "field": "loan_amount",
+                "rule": "format_currency_number",
+                "input": "Rp 400.000.000",
+                "output": 400000000
+              },
+              {
+                "field": "income",
+                "rule": "format_monthly_income",
+                "input": 10000000,
+                "output": 10000000
+              }
+            ]
+          }
+        ],
+        "error_handling": {
+          "error_codes": {
+            "400": "Bad Request - Invalid application data",
+            "401": "Unauthorized - Invalid API key",
+            "403": "Forbidden - Insufficient permissions",
+            "404": "Not Found - Application not found",
+            "422": "Unprocessable Entity - Validation failed"
+          },
+          "retry_logic": {
+            "max_retries": 2,
+            "retry_delay": 5000,
+            "exponential_backoff": false
+          }
+        }
+      },
+      
+      {
+        "system_id": "email_service",
+        "name": "Email Service Integration",
+        "enabled": true,
+        "status": "ACTIVE",
+        "priority": "HIGH",
+        "description": "Email communication and notifications",
+        "api_endpoints": [
+          {
+            "endpoint_id": "email_send",
+            "method": "POST",
+            "internal_path": "/api/email/send",
+            "external_url": "https://api.gmail.com/v1/users/me/messages/send",
+            "purpose": "Send email notifications",
+            "data_mapping": {
+              "request": {
+                "to": "recipient_email",
+                "subject": "email_subject",
+                "body": "email_body",
+                "attachments": "file_attachments"
+              },
+              "response": {
+                "id": "message_id",
+                "threadId": "thread_id",
+                "labelIds": "message_labels"
+              }
+            },
+            "authentication": {
+              "type": "oauth2",
+              "header": "Authorization",
+              "key": "Bearer GMAIL_ACCESS_TOKEN"
+            }
+          },
+          {
+            "endpoint_id": "email_draft",
+            "method": "POST",
+            "internal_path": "/api/email/draft",
+            "external_url": "https://api.gmail.com/v1/users/me/drafts",
+            "purpose": "Create email draft",
+            "data_mapping": {
+              "request": {
+                "message": {
+                  "to": "recipient_email",
+                  "subject": "email_subject",
+                  "body": "email_body"
+                }
+              },
+              "response": {
+                "id": "draft_id",
+                "message": "draft_message"
+              }
+            },
+            "authentication": {
+              "type": "oauth2",
+              "header": "Authorization",
+              "key": "Bearer GMAIL_ACCESS_TOKEN"
+            }
+          }
+        ],
+        "data_transformations": [
+          {
+            "transformation_id": "email_data_transform",
+            "description": "Transform data for email service",
+            "input_format": "internal_email_format",
+            "output_format": "gmail_format",
+            "rules": [
+              {
+                "field": "recipient",
+                "rule": "validate_email_format",
+                "input": "customer@example.com",
+                "output": "customer@example.com"
+              },
+              {
+                "field": "subject",
+                "rule": "encode_subject",
+                "input": "Welcome to KPRFlow",
+                "output": "=?UTF-8?B?V2VsY29tZSB0byBLUFJGbG93?="
+              }
+            ]
+          }
+        ],
+        "error_handling": {
+          "error_codes": {
+            "400": "Bad Request - Invalid email format",
+            "401": "Unauthorized - Invalid OAuth token",
+            "403": "Forbidden - Insufficient permissions",
+            "429": "Too Many Requests - Rate limit exceeded"
+          },
+          "retry_logic": {
+            "max_retries": 3,
+            "retry_delay": 1000,
+            "exponential_backoff": true
+          }
+        }
+      },
+      
+      {
+        "system_id": "whatsapp_api",
+        "name": "WhatsApp API Integration",
+        "enabled": false,
+        "status": "DISABLED",
+        "priority": "LOW",
+        "description": "WhatsApp messaging and notifications",
+        "api_endpoints": [
+          {
+            "endpoint_id": "whatsapp_send_message",
+            "method": "POST",
+            "internal_path": "/api/whatsapp/send",
+            "external_url": "https://graph.facebook.com/v15.0/PHONE_NUMBER_ID/messages",
+            "purpose": "Send WhatsApp messages",
+            "data_mapping": {
+              "request": {
+                "messaging_product": "whatsapp",
+                "to": "recipient_phone",
+                "type": "message_type",
+                "text": {
+                  "body": "message_content"
+                }
+              },
+              "response": {
+                "messaging_product": "whatsapp",
+                "contacts": "contact_data",
+                "messages": "message_data"
+              }
+            },
+            "authentication": {
+              "type": "bearer_token",
+              "header": "Authorization",
+              "key": "Bearer WHATSAPP_ACCESS_TOKEN"
+            }
+          }
+        ],
+        "data_transformations": [
+          {
+            "transformation_id": "whatsapp_data_transform",
+            "description": "Transform data for WhatsApp API",
+            "input_format": "internal_message_format",
+            "output_format": "whatsapp_format",
+            "rules": [
+              {
+                "field": "phone_number",
+                "rule": "format_phone_international",
+                "input": "08123456789",
+                "output": "628123456789"
+              },
+              {
+                "field": "message_content",
+                "rule": "format_whatsapp_text",
+                "input": "Welcome to KPRFlow!",
+                "output": "Welcome to KPRFlow!"
+              }
+            ]
+          }
+        ],
+        "error_handling": {
+          "error_codes": {
+            "400": "Bad Request - Invalid message format",
+            "401": "Unauthorized - Invalid access token",
+            "403": "Forbidden - Template not approved",
+            "429": "Too Many Requests - Rate limit exceeded"
+          },
+          "retry_logic": {
+            "max_retries": 2,
+            "retry_delay": 3000,
+            "exponential_backoff": false
+          }
+        }
+      },
+      
+      {
+        "system_id": "sms_gateway",
+        "name": "SMS Gateway Integration",
+        "enabled": false,
+        "status": "DISABLED",
+        "priority": "LOW",
+        "description": "SMS messaging and notifications",
+        "api_endpoints": [
+          {
+            "endpoint_id": "sms_send",
+            "method": "POST",
+            "internal_path": "/api/sms/send",
+            "external_url": "https://api.twilio.com/2010-04-01/Accounts/ACCOUNT_SID/Messages.json",
+            "purpose": "Send SMS messages",
+            "data_mapping": {
+              "request": {
+                "To": "recipient_phone",
+                "From": "sender_phone",
+                "Body": "message_content"
+              },
+              "response": {
+                "sid": "message_sid",
+                "status": "message_status",
+                "date_created": "creation_time"
+              }
+            },
+            "authentication": {
+              "type": "basic_auth",
+              "header": "Authorization",
+              "key": "Basic BASE64_ENCODED_CREDENTIALS"
+            }
+          }
+        ],
+        "data_transformations": [
+          {
+            "transformation_id": "sms_data_transform",
+            "description": "Transform data for SMS gateway",
+            "input_format": "internal_message_format",
+            "output_format": "twilio_format",
+            "rules": [
+              {
+                "field": "phone_number",
+                "rule": "format_phone_international",
+                "input": "08123456789",
+                "output": "+628123456789"
+              },
+              {
+                "field": "message_content",
+                "rule": "truncate_sms",
+                "input": "Long message content here...",
+                "output": "Long message content..."
+              }
+            ]
+          }
+        ],
+        "error_handling": {
+          "error_codes": {
+            "400": "Bad Request - Invalid phone number",
+            "401": "Unauthorized - Invalid credentials",
+            "403": "Forbidden - Insufficient credits",
+            "429": "Too Many Requests - Rate limit exceeded"
+          },
+          "retry_logic": {
+            "max_retries": 2,
+            "retry_delay": 2000,
+            "exponential_backoff": false
+          }
+        }
+      },
+      
+      {
+        "system_id": "payment_gateway",
+        "name": "Payment Gateway Integration",
+        "enabled": false,
+        "status": "DISABLED",
+        "priority": "MEDIUM",
+        "description": "Payment processing and transactions",
+        "api_endpoints": [
+          {
+            "endpoint_id": "payment_create",
+            "method": "POST",
+            "internal_path": "/api/payment/create",
+            "external_url": "https://api.payment.co.id/v1/payments",
+            "purpose": "Create payment transaction",
+            "data_mapping": {
+              "request": {
+                "amount": "payment_amount",
+                "currency": "IDR",
+                "customer_email": "customer_email",
+                "description": "payment_description"
+              },
+              "response": {
+                "payment_id": "transaction_id",
+                "status": "payment_status",
+                "payment_url": "payment_redirect_url"
+              }
+            },
+            "authentication": {
+              "type": "api_key",
+              "header": "X-API-Key",
+              "key": "PAYMENT_API_KEY"
+            }
+          }
+        ],
+        "data_transformations": [
+          {
+            "transformation_id": "payment_data_transform",
+            "description": "Transform data for payment gateway",
+            "input_format": "internal_payment_format",
+            "output_format": "payment_gateway_format",
+            "rules": [
+              {
+                "field": "amount",
+                "rule": "format_currency_number",
+                "input": "Rp 1.000.000",
+                "output": 1000000
+              },
+              {
+                "field": "currency",
+                "rule": "standardize_currency",
+                "input": "IDR",
+                "output": "IDR"
+              }
+            ]
+          }
+        ],
+        "error_handling": {
+          "error_codes": {
+            "400": "Bad Request - Invalid payment data",
+            "401": "Unauthorized - Invalid API key",
+            "402": "Payment Required - Insufficient funds",
+            "429": "Too Many Requests - Rate limit exceeded"
+          },
+          "retry_logic": {
+            "max_retries": 2,
+            "retry_delay": 5000,
+            "exponential_backoff": false
+          }
+        }
+      },
+      
+      {
+        "system_id": "third_party_service",
+        "name": "Third-party Service Integration",
+        "enabled": true,
+        "status": "ACTIVE",
+        "priority": "MEDIUM",
+        "description": "External services and utilities",
+        "api_endpoints": [
+          {
+            "endpoint_id": "validation_service",
+            "method": "POST",
+            "internal_path": "/api/validation",
+            "external_url": "https://api.validation.co.id/v1/validate",
+            "purpose": "Data validation services",
+            "data_mapping": {
+              "request": {
+                "type": "validation_type",
+                "data": "data_to_validate"
+              },
+              "response": {
+                "valid": "validation_result",
+                "errors": "validation_errors",
+                "suggestions": "data_suggestions"
+              }
+            },
+            "authentication": {
+              "type": "api_key",
+              "header": "X-API-Key",
+              "key": "VALIDATION_API_KEY"
+            }
+          }
+        ],
+        "data_transformations": [
+          {
+            "transformation_id": "validation_data_transform",
+            "description": "Transform data for validation service",
+            "input_format": "internal_data_format",
+            "output_format": "validation_format",
+            "rules": [
+              {
+                "field": "nik",
+                "rule": "format_nik",
+                "input": "3271010101010001",
+                "output": "3271010101010001"
+              },
+              {
+                "field": "phone",
+                "rule": "format_phone",
+                "input": "+628123456789",
+                "output": "+628123456789"
+              }
+            ]
+          }
+        ],
+        "error_handling": {
+          "error_codes": {
+            "400": "Bad Request - Invalid data format",
+            "401": "Unauthorized - Invalid API key",
+            "422": "Unprocessable Entity - Validation failed"
+          },
+          "retry_logic": {
+            "max_retries": 2,
+            "retry_delay": 1000,
+            "exponential_backoff": false
+          }
+        }
+      }
+    ]
+  },
+  
+  "global_settings": {
+    "rate_limiting": {
+      "enabled": true,
+      "global_rate_limit": 1000,
+      "per_system_limits": {
+        "supabase_database": 500,
+        "google_drive": 100,
+        "bank_api": 50,
+        "email_service": 200,
+        "whatsapp_api": 50,
+        "sms_gateway": 100,
+        "payment_gateway": 100,
+        "third_party_service": 200
+      }
+    },
+    "timeout_settings": {
+      "global_timeout": 30000,
+      "per_system_timeouts": {
+        "supabase_database": 10000,
+        "google_drive": 30000,
+        "bank_api": 15000,
+        "email_service": 10000,
+        "whatsapp_api": 5000,
+        "sms_gateway": 5000,
+        "payment_gateway": 20000,
+        "third_party_service": 10000
+      }
+    },
+    "retry_settings": {
+      "global_max_retries": 3,
+      "global_retry_delay": 1000,
+      "exponential_backoff": true,
+      "per_system_retries": {
+        "supabase_database": 3,
+        "google_drive": 3,
+        "bank_api": 2,
+        "email_service": 3,
+        "whatsapp_api": 2,
+        "sms_gateway": 2,
+        "payment_gateway": 2,
+        "third_party_service": 2
+      }
+    }
+  },
+  
+  "monitoring_settings": {
+    "enabled": true,
+    "metrics_tracking": {
+      "request_count": true,
+      "response_time": true,
+      "error_rate": true,
+      "success_rate": true
+    },
+    "alerting": {
+      "enabled": true,
+      "alert_on_failure": true,
+      "alert_on_high_error_rate": true,
+      "alert_on_slow_response": true,
+      "alert_recipients": ["dev_team", "ops_team"]
+    }
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-21",
+    "last_modified": "2026-03-21",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Complete API mappings configuration for KPRFlow Enterprise",
+    "total_systems": 8,
+    "active_systems": 4,
+    "disabled_systems": 4,
+    "total_endpoints": 20,
+    "data_transformations": 8,
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

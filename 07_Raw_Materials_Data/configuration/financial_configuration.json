@@ -1,0 +1,185 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-20",
+  "source": "kprflow_enterprise_financial_configuration",
+  "description": "Complete financial configuration and business logic for KPRFlow Enterprise",
+  
+  "product_line": {
+    "D": { 
+      "nama": "PLATINUM", 
+      "opsi_kelas": ["SEMI_KOMERSIL", "SUBSIDI"], 
+      "default_kelas": "SUBSIDI", 
+      "exceptions": { 
+        "D27": "SEMI_KOMERSIL", 
+        "D28": "SEMI_KOMERSIL" 
+      } 
+    },
+    "E": { 
+      "nama": "SKANDIUM", 
+      "opsi_kelas": ["SEMI_KOMERSIL", "SUBSIDI"], 
+      "default_kelas": "SUBSIDI", 
+      "exceptions": { 
+        "E1": "SEMI_KOMERSIL", 
+        "E01": "SEMI_KOMERSIL", 
+        "E2": "SEMI_KOMERSIL", 
+        "E02": "SEMI_KOMERSIL" 
+      } 
+    },
+    "F": { 
+      "nama": "PALADIO",  
+      "kelas": "SEMI_KOMERSIL" 
+    },
+    "A": { 
+      "nama": "TITANIUM", 
+      "kelas": "KOMERSIL" 
+    },
+    "C": { 
+      "nama": "GOLD",     
+      "kelas": "KOMERSIL" 
+    },
+    "R": { 
+      "nama": "RUKOTIARA",
+      "kelas": "KOMERSIL" 
+    },
+    "B": { 
+      "nama": "CROWN",    
+      "opsi_kelas": ["SEMI_KOMERSIL", "SUBSIDI"], 
+      "default_kelas": "SUBSIDI", 
+      "exceptions": { 
+        "B1": "SEMI_KOMERSIL", 
+        "B01": "SEMI_KOMERSIL", 
+        "B2": "SEMI_KOMERSIL", 
+        "B02": "SEMI_KOMERSIL" 
+      } 
+    }
+  },
+
+  "tax_logic": {
+    "ppn_standard_pct": 0.11,
+    "ppn_dtp_pct": 1.00,
+    "bphtb_pct": 0.05,
+    "npoptkp": 60000000,
+    "status_ppn": {
+      "SUBSIDI": "FREE_MBR",
+      "KOMERSIL": "PPN_11_PERCENT",
+      "DTP": "PPN_DTP_GOVERNMENT"
+    }
+  },
+
+  "government_policy": {
+    "ppn_dtp": { 
+      "is_active": true, 
+      "max_price": 5000000000, 
+      "start_date": "2024-01-01", 
+      "end_date": "2024-12-31" 
+    },
+    "mbr_incentives": { 
+      "free_ppn": true, 
+      "subsidi_bphtb": 2000000, 
+      "diskon_ajb_bn": 0.50 
+    }
+  },
+
+  "sbum_logic": {
+    "nilai_default": 4000000,
+    "kategori": {
+      "ditalangi_dev": { 
+        "kode": "SBUM_T", 
+        "deskripsi": "Ditalangi Developer (Masuk Piutang)",
+        "aksi": "DEDUCT_FROM_DP_CASH"
+      },
+      "tidak_ditalangi": { 
+        "kode": "SBUM_NT", 
+        "deskripsi": "Tidak Ditalangi (Menunggu Cair Bank)",
+        "aksi": "WAIT_FOR_LIQUIDATION"
+      }
+    }
+  },
+
+  "financial_engine": {
+    "mode": "MARKUP_PLAFON",
+    "calculate_markup_function": "function(hargaAsli, plafonBank) { let selisih = plafonBank - hargaAsli; let hargaFinalAkta = (selisih > 0) ? plafonBank : hargaAsli; return { isMarkup: selisih > 0, nilaiMarkup: (selisih > 0) ? selisih : 0, hargaJualAkta: hargaFinalAkta, keterangan: (selisih > 0) ? 'Markup Plafon (DP Semu)' : 'Harga Normal' }; }"
+  },
+
+  "biaya": {
+    "strategis": 5000000,
+    "ajb_normal": 4000000,
+    "ajb_mbr": 2000000,
+    "bphtb_pct": 0.05,
+    "bank_pct": 0.035,
+    "biaya_admin_flpp": 500000,
+    "biaya_notaris_flpp": 500000,
+    
+    "plafon": {
+      "subsidi": { 
+        "type": "FIXED", 
+        "value": 166000000, 
+        "multiplier": 0.99 
+      },
+      "semi_komersil": [0.95, 0.90, 0.85, 0.80], 
+      "komersil": [0.95, 0.90, 0.85, 0.80],      
+      "ruko": [0.95, 0.90, 0.85, 0.60],          
+      "manual": "INPUT_MANUAL"                   
+    }
+  },
+
+  "letter_config": {
+    "company_code": "RIS",
+    "project_code": "LFR",
+    "roman_months": ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"],
+    "padding": 3
+  },
+
+  "metadata": {
+    "created_date": "2026-03-20",
+    "last_modified": "2026-06-20",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Complete financial configuration and business logic for KPRFlow Enterprise",
+    "total_product_lines": 7,
+    "total_tax_categories": 3,
+    "total_sbum_categories": 2,
+    "total_plafon_types": 5,
+    "validation_status": "verified",
+    "data_quality": "enterprise",
+    "integration_ready": true
+  },
+
+  "api_integration": {
+    "validation_endpoints": [
+      "/api/financial/product/validate",
+      "/api/financial/tax/calculate",
+      "/api/financial/sbum/process",
+      "/api/financial/markup/calculate",
+      "/api/financial/biaya/compute",
+      "/api/financial/plafon/determine",
+      "/api/letter/number/generate"
+    ]
+  },
+
+  "business_rules_mapping": {
+    "product_validation": "business_rules.json#Customer_Eligibility_Rules",
+    "tax_calculation": "business_rules.json#Financial_Validation_Rules",
+    "document_requirements": "business_rules.json#Document_Validation_Rules",
+    "system_configuration": "business_rules.json#System_Configuration_Rules"
+  },
+
+  "error_handling": {
+    "validation_errors": {
+      "product_not_found": "Product line not found in configuration",
+      "invalid_kelas": "Invalid kelas for product line",
+      "tax_calculation_error": "Tax calculation failed",
+      "sbum_processing_error": "SBUM processing failed",
+      "markup_calculation_error": "Markup calculation failed",
+      "plafon_determination_error": "Plafon determination failed"
+    },
+    "severity_mapping": {
+      "product_not_found": "critical",
+      "invalid_kelas": "high",
+      "tax_calculation_error": "medium",
+      "sbum_processing_error": "medium",
+      "markup_calculation_error": "low",
+      "plafon_determination_error": "medium"
+    }
+  }
+}

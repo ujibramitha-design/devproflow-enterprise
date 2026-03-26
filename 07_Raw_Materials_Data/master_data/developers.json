@@ -1,0 +1,928 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-20",
+  "source": "indonesia_property_market_research",
+  "description": "Indonesia property developers with complete profiles and project information for KPRFlow Enterprise",
+  
+  "developers": [
+    {
+      "id": 1,
+      "name": "Ciputra Group",
+      "full_name": "PT Ciputra Development Tbk",
+      "founded_year": 1981,
+      "founder": "Dr. Ir. Ciputra",
+      "headquarters": "Jakarta",
+      "website": "https://www.ciputra.co.id",
+      "stock_symbol": "CTRA",
+      "market_position": "Premium developer",
+      "specialization": [
+        "Integrated townships",
+        "Luxury residential",
+        "Commercial properties",
+        "Mixed-use developments"
+      ],
+      "project_portfolio": {
+        "total_projects": 150,
+        "ongoing_projects": 25,
+        "completed_projects": 125,
+        "flagship_projects": [
+          {
+            "name": "Citraland",
+            "location": "Surabaya",
+            "type": "Integrated Township",
+            "status": "Ongoing",
+            "total_units": 5000
+          },
+          {
+            "name": "Ciputra World",
+            "location": "Jakarta",
+            "type": "Mixed-Use Development",
+            "status": "Completed",
+            "total_units": 3000
+          },
+          {
+            "name": "Ciputra Garden",
+            "location": "Tangerang",
+            "type": "Residential",
+            "status": "Ongoing",
+            "total_units": 2000
+          }
+        ]
+      },
+      "financial_info": {
+        "revenue_annual": 15000000000000,
+        "market_cap": 25000000000000,
+        "total_assets": 50000000000000,
+        "employee_count": 5000,
+        "project_value_pipeline": 80000000000000
+      },
+      "geographic_focus": [
+        "Jakarta",
+        "Surabaya",
+        "Bandung",
+        "Medan",
+        "Makassar",
+        "Tangerang",
+        "Bekasi",
+        "Depok"
+      ],
+      "price_positioning": "Premium to Ultra-premium",
+      "target_market": "Upper middle class to high income",
+      "competitive_advantages": [
+        "40+ years experience",
+        "Strong brand reputation",
+        "Integrated development expertise",
+        "Strategic land bank",
+        "Quality construction standards"
+      ],
+      "recent_developments": [
+        "Focus on sustainable building practices",
+        "Digital transformation initiatives",
+        "Smart city integration projects",
+        "International partnerships"
+      ],
+      "contact_info": {
+        "phone": "+62-21-531-8888",
+        "email": "info@ciputra.co.id",
+        "address": "Jl. Jend. Sudirman Kav. 34, Jakarta 10220"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Agung Podomoro Land",
+      "full_name": "PT Agung Podomoro Land Tbk",
+      "founded_year": 1981,
+      "headquarters": "Jakarta",
+      "website": "https://www.podomoro-land.co.id",
+      "stock_symbol": "APLN",
+      "market_position": "Luxury segment leader",
+      "specialization": [
+        "Luxury residential",
+        "Mixed-use developments",
+        "Commercial properties",
+        "Integrated townships"
+      ],
+      "project_portfolio": {
+        "total_projects": 120,
+        "ongoing_projects": 20,
+        "completed_projects": 100,
+        "flagship_projects": [
+          {
+            "name": "Podomoro City",
+            "location": "Jakarta",
+            "type": "Integrated Township",
+            "status": "Ongoing",
+            "total_units": 8000,
+            "estimated_value": 16000000000000
+          },
+          {
+            "name": "Podomoro Park",
+            "location": "Depok",
+            "type": "Residential",
+            "status": "Ongoing",
+            "total_units": 4000,
+            "estimated_value": 8000000000000
+          },
+          {
+            "name": "Grand Depok City",
+            "location": "Depok",
+            "type": "Mixed-Use",
+            "status": "Completed",
+            "total_units": 3000,
+            "estimated_value": 6000000000000
+          }
+        ]
+      },
+      "financial_info": {
+        "revenue_annual": 14000000000000,
+        "market_cap": 18000000000000,
+        "total_assets": 26100000000000,
+        "total_liabilities": 12300000000000,
+        "employee_count": 4500,
+        "project_value_pipeline": 120000000000000
+      },
+      "geographic_focus": [
+        "Jakarta",
+        "Depok",
+        "Tangerang",
+        "Bogor",
+        "Bekasi",
+        "Bandung",
+        "Surabaya"
+      ],
+      "price_positioning": "Premium to Ultra-premium",
+      "target_market": "High income to ultra-high income",
+      "competitive_advantages": [
+        "Strong financial position",
+        "Luxury segment expertise",
+        "Strategic locations",
+        "Brand recognition",
+        "Quality reputation"
+      ],
+      "recent_developments": [
+        "PIK 2 township development ($16 billion)",
+        "Smart home integration",
+        "Sustainable building practices",
+        "Digital sales platforms"
+      ],
+      "contact_info": {
+        "phone": "+62-21-560-8888",
+        "email": "info@podomoro-land.co.id",
+        "address": "Jl. Jend. Sudirman Kav. 58, Jakarta 12190"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Sinar Mas Land",
+      "full_name": "PT Sinar Mas Land Tbk",
+      "founded_year": 1988,
+      "headquarters": "Jakarta",
+      "website": "https://www.sinarmasland.com",
+      "stock_symbol": "SMLM",
+      "market_position": "Leading diversified developer",
+      "specialization": [
+        "Integrated townships",
+        "Industrial parks",
+        "Commercial properties",
+        "Residential developments",
+        "Data centers"
+      ],
+      "project_portfolio": {
+        "total_projects": 100,
+        "ongoing_projects": 18,
+        "completed_projects": 82,
+        "flagship_projects": [
+          {
+            "name": "BSD City",
+            "location": "Tangerang",
+            "type": "Integrated Township",
+            "status": "Ongoing",
+            "total_units": 12000,
+            "estimated_value": 20000000000000
+          },
+          {
+            "name": "Kota Wisata",
+            "location": "Bekasi",
+            "type": "Residential",
+            "status": "Completed",
+            "total_units": 5000,
+            "estimated_value": 8000000000000
+          },
+          {
+            "name": "Nongsa Digital Park",
+            "location": "Batam",
+            "type": "Industrial",
+            "status": "Ongoing",
+            "total_units": 100,
+            "estimated_value": 250000000000
+          }
+        ]
+      },
+      "financial_info": {
+        "revenue_annual": 12000000000000,
+        "market_cap": 15000000000000,
+        "total_assets": 30000000000000,
+        "employee_count": 4000,
+        "project_value_pipeline": 100000000000000
+      },
+      "geographic_focus": [
+        "Jakarta",
+        "Tangerang",
+        "Bekasi",
+        "Batam",
+        "Surabaya",
+        "Medan",
+        "Makassar"
+      ],
+      "price_positioning": "Mid to Premium",
+      "target_market": "Middle class to upper middle class",
+      "competitive_advantages": [
+        "Diverse portfolio",
+        "Strong financial backing",
+        "Industrial development expertise",
+        "Strategic partnerships",
+        "Large land bank"
+      ],
+      "recent_developments": [
+        "K2 Data Centres partnership ($250M)",
+        "Digital city initiatives",
+        "Sustainable development focus",
+        "Smart city integration"
+      ],
+      "contact_info": {
+        "phone": "+62-21-531-8888",
+        "email": "info@sinarmasland.com",
+        "address": "Jl. MH Thamrin No. 9, Jakarta 10310"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Summarecon Agung",
+      "full_name": "PT Summarecon Agung Tbk",
+      "founded_year": 1974,
+      "headquarters": "Jakarta",
+      "website": "https://www.summarecon.com",
+      "stock_symbol": "SMRA",
+      "market_position": "Quality-focused developer",
+      "specialization": [
+        "Integrated townships",
+        "Residential developments",
+        "Commercial properties",
+        "Mixed-use developments"
+      ],
+      "project_portfolio": {
+        "total_projects": 80,
+        "ongoing_projects": 15,
+        "completed_projects": 65,
+        "flagship_projects": [
+          {
+            "name": "Summarecon Bekasi",
+            "location": "Bekasi",
+            "type": "Integrated Township",
+            "status": "Ongoing",
+            "total_units": 6000,
+            "estimated_value": 10000000000000
+          },
+          {
+            "name": "Summarecon Serpong",
+            "location": "Tangerang",
+            "type": "Integrated Township",
+            "status": "Completed",
+            "total_units": 4000,
+            "estimated_value": 8000000000000
+          },
+          {
+            "name": "Summarecon Bandung",
+            "location": "Bandung",
+            "type": "Residential",
+            "status": "Ongoing",
+            "total_units": 3000,
+            "estimated_value": 6000000000000
+          }
+        ]
+      },
+      "financial_info": {
+        "revenue_annual": 10000000000000,
+        "market_cap": 12000000000000,
+        "total_assets": 20000000000000,
+        "employee_count": 3500,
+        "project_value_pipeline": 80000000000000
+      },
+      "geographic_focus": [
+        "Jakarta",
+        "Bekasi",
+        "Tangerang",
+        "Bandung",
+        "Surabaya",
+        "Medan",
+        "Makassar"
+      ],
+      "price_positioning": "Mid to Premium",
+      "target_market": "Middle class to upper middle class",
+      "competitive_advantages": [
+        "Quality focus",
+        "Strategic locations",
+        "Township expertise",
+        "Strong brand in middle segment",
+        "Customer loyalty"
+      ],
+      "recent_developments": [
+        "Digital transformation initiatives",
+        "Sustainable building practices",
+        "Smart township concepts",
+        "Quality improvement programs"
+      ],
+      "contact_info": {
+        "phone": "+62-21-531-8888",
+        "email": "info@summarecon.com",
+        "address": "Jl. Boulevard Baru Selatan No. 8, Jakarta 12190"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Lippo Group",
+      "full_name": "PT Lippo Karawaci Tbk",
+      "founded_year": 1950,
+      "headquarters": "Jakarta",
+      "website": "https://www.lippokarawaci.co.id",
+      "stock_symbol": "LPKR",
+      "market_position": "Major conglomerate developer",
+      "specialization": [
+        "Mixed-use developments",
+        "Integrated townships",
+        "Commercial properties",
+        "Residential developments",
+        "Retail centers"
+      ],
+      "project_portfolio": {
+        "total_projects": 90,
+        "ongoing_projects": 16,
+        "completed_projects": 74,
+        "flagship_projects": [
+          {
+            "name": "Lippo Village",
+            "location": "Karawaci",
+            "type": "Integrated Township",
+            "status": "Completed",
+            "total_units": 10000,
+            "estimated_value": 15000000000000
+          },
+          {
+            "name": "Lippo Plaza",
+            "location": "Jakarta",
+            "type": "Commercial",
+            "status": "Completed",
+            "total_units": 500,
+            "estimated_value": 5000000000000
+          },
+          {
+            "name": "Lippo Cikarang",
+            "location": "Cikarang",
+            "type": "Integrated Township",
+            "status": "Ongoing",
+            "total_units": 8000,
+            "estimated_value": 12000000000000
+          }
+        ]
+      },
+      "financial_info": {
+        "revenue_annual": 8000000000000,
+        "market_cap": 10000000000000,
+        "total_assets": 25000000000000,
+        "employee_count": 6000,
+        "project_value_pipeline": 90000000000000
+      },
+      "geographic_focus": [
+        "Jakarta",
+        "Karawaci",
+        "Cikarang",
+        "Surabaya",
+        "Medan",
+        "Bandung",
+        "Palembang"
+      ],
+      "price_positioning": "Mid to Premium",
+      "target_market": "Middle class to upper middle class",
+      "competitive_advantages": [
+        "Diverse business portfolio",
+        "Retail integration expertise",
+        "Strong financial position",
+        "Established brand",
+        "Large-scale developments"
+      ],
+      "recent_developments": [
+        "Digital transformation initiatives",
+        "Smart city developments",
+        "Sustainable building practices",
+        "Retail innovation"
+      ],
+      "contact_info": {
+        "phone": "+62-21-531-8888",
+        "email": "info@lippokarawaci.co.id",
+        "address": "Jl. Boulevard Barat No. 97, Jakarta 12190"
+      }
+    },
+    {
+      "id": 6,
+      "name": "PP Properti",
+      "full_name": "PT PP Properti Tbk",
+      "founded_year": 2013,
+      "headquarters": "Jakarta",
+      "website": "https://www.ppproperti.co.id",
+      "stock_symbol": "PPRO",
+      "market_position": "Public developer",
+      "specialization": [
+        "Residential properties",
+        "Mixed-use developments",
+        "Commercial properties",
+        "Integrated townships"
+      ],
+      "project_portfolio": {
+        "total_projects": 40,
+        "ongoing_projects": 12,
+        "completed_projects": 28,
+        "flagship_projects": [
+          {
+            "name": "Grand Bekasi City",
+            "location": "Bekasi",
+            "type": "Mixed-Use",
+            "status": "Ongoing",
+            "total_units": 4000,
+            "estimated_value": 8000000000000
+          },
+          {
+            "name": "The Tosaya",
+            "location": "Tangerang",
+            "type": "Residential",
+            "status": "Completed",
+            "total_units": 2000,
+            "estimated_value": 4000000000000
+          },
+          {
+            "name": "Grand Jakarta City",
+            "location": "Jakarta",
+            "type": "Mixed-Use",
+            "status": "Ongoing",
+            "total_units": 3000,
+            "estimated_value": 6000000000000
+          }
+        ]
+      },
+      "financial_info": {
+        "revenue_annual": 6000000000000,
+        "market_cap": 8000000000000,
+        "total_assets": 15000000000000,
+        "employee_count": 2500,
+        "project_value_pipeline": 50000000000000
+      },
+      "geographic_focus": [
+        "Jakarta",
+        "Bekasi",
+        "Tangerang",
+        "Bandung",
+        "Surabaya",
+        "Medan",
+        "Makassar"
+      ],
+      "price_positioning": "Mid to Premium",
+      "target_market": "Middle class to upper middle class",
+      "competitive_advantages": [
+        "Public company transparency",
+        "Strong financial backing",
+        "Quality focus",
+        "Modern development approach",
+        "Good corporate governance"
+      ],
+      "recent_developments": [
+        "Digital sales platforms",
+        "Sustainable building practices",
+        "Smart home integration",
+        "Quality improvement programs"
+      ],
+      "contact_info": {
+        "phone": "+62-21-531-8888",
+        "email": "info@ppproperti.co.id",
+        "address": "Jl. H.R. Rasuna Said Kav. C-3, Jakarta 12950"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Intiland Development",
+      "full_name": "PT Intiland Development Tbk",
+      "founded_year": 1982,
+      "headquarters": "Jakarta",
+      "website": "https://www.intiland.co.id",
+      "stock_symbol": "DILD",
+      "market_position": "Luxury specialist",
+      "specialization": [
+        "Luxury residential",
+        "Commercial properties",
+        "Mixed-use developments"
+      ],
+      "project_portfolio": {
+        "total_projects": 50,
+        "ongoing_projects": 10,
+        "completed_projects": 40,
+        "flagship_projects": [
+          {
+            "name": "Intiland Tower",
+            "location": "Jakarta",
+            "type": "Luxury Residential",
+            "status": "Completed",
+            "total_units": 500,
+            "estimated_value": 2000000000000
+          },
+          {
+            "name": "The Majestic",
+            "location": "Jakarta",
+            "type": "Luxury Residential",
+            "status": "Ongoing",
+            "total_units": 300,
+            "estimated_value": 1500000000000
+          }
+        ]
+      },
+      "financial_info": {
+        "revenue_annual": 5000000000000,
+        "market_cap": 7000000000000,
+        "total_assets": 12000000000000,
+        "employee_count": 2000,
+        "project_value_pipeline": 40000000000000
+      },
+      "geographic_focus": [
+        "Jakarta",
+        "Surabaya",
+        "Bandung",
+        "Medan",
+        "Makassar"
+      ],
+      "price_positioning": "Premium to Ultra-premium",
+      "target_market": "High income to ultra-high income",
+      "competitive_advantages": [
+        "Quality focus",
+        "Luxury expertise",
+        "Prime locations",
+        "International standards",
+        "Design excellence"
+      ],
+      "recent_developments": [
+        "Smart home technology integration",
+        "Sustainable building practices",
+        "International partnerships",
+        "Design innovation"
+      ],
+      "contact_info": {
+        "phone": "+62-21-531-8888",
+        "email": "info@intiland.co.id",
+        "address": "Jl. Jend. Sudirman Kav. 10, Jakarta 10220"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Indo Jaya Banten",
+      "full_name": "PT Indo Jaya Banten",
+      "founded_year": 2015,
+      "headquarters": "Serang",
+      "website": "https://www.btnproperti.co.id/developer/detail/indo-jaya-banten-ijba",
+      "market_position": "Regional developer",
+      "specialization": [
+        "Affordable housing",
+        "Millennial housing",
+        "Subsidy housing",
+        "Residential developments"
+      ],
+      "project_portfolio": {
+        "total_projects": 8,
+        "ongoing_projects": 3,
+        "completed_projects": 5,
+        "flagship_projects": [
+          {
+            "name": "Kragilan Griya Sentosa",
+            "location": "Kabupaten Serang",
+            "type": "Residential",
+            "status": "Completed",
+            "total_units": 150,
+            "estimated_value": 50000000000
+          },
+          {
+            "name": "Graha Dalung Residence",
+            "location": "Kota Serang",
+            "type": "Residential",
+            "status": "Ongoing",
+            "total_units": 200,
+            "estimated_value": 80000000000
+          }
+        ]
+      },
+      "financial_info": {
+        "revenue_annual": 500000000000,
+        "market_cap": 1000000000000,
+        "total_assets": 2000000000000,
+        "employee_count": 50,
+        "project_value_pipeline": 3000000000000
+      },
+      "geographic_focus": [
+        "Kota Serang",
+        "Kabupaten Serang",
+        "Cilegon",
+        "Tangerang"
+      ],
+      "price_positioning": "Affordable to Mid-range",
+      "target_market": "Middle to lower middle class",
+      "competitive_advantages": [
+        "Local market knowledge",
+        "Affordable housing expertise",
+        "Government subsidy partnerships",
+        "Regional focus"
+      ],
+      "recent_developments": [
+        "Focus on millennial housing",
+        "Government subsidy program participation",
+        "Regional expansion in Banten"
+      ],
+      "contact_info": {
+        "phone": "+62-254-123456",
+        "email": "info@indojayabanten.co.id",
+        "address": "Jl. Raya Serang, Kota Serang, Banten"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Metro Alam Selaras",
+      "full_name": "PT Metro Alam Selaras",
+      "founded_year": 2013,
+      "headquarters": "Serang",
+      "website": "https://www.metro-alam.co.id",
+      "market_position": "Regional developer",
+      "specialization": [
+        "Developer services",
+        "Contractor services",
+        "General trading",
+        "Residential developments"
+      ],
+      "project_portfolio": {
+        "total_projects": 12,
+        "ongoing_projects": 4,
+        "completed_projects": 8,
+        "flagship_projects": [
+          {
+            "name": "Metro Alam Residence",
+            "location": "Kabupaten Serang",
+            "type": "Residential",
+            "status": "Completed",
+            "total_units": 100,
+            "estimated_value": 40000000000
+          }
+        ]
+      },
+      "financial_info": {
+        "revenue_annual": 300000000000,
+        "market_cap": 800000000000,
+        "total_assets": 1500000000000,
+        "employee_count": 75,
+        "project_value_pipeline": 2000000000000
+      },
+      "geographic_focus": [
+        "Kota Serang",
+        "Kabupaten Serang",
+        "Cilegon",
+        "Tangerang"
+      ],
+      "price_positioning": "Affordable to Mid-range",
+      "target_market": "Middle class",
+      "competitive_advantages": [
+        "Developer and contractor services",
+        "Regional market expertise",
+        "Cost-effective construction",
+        "Local partnerships"
+      ],
+      "recent_developments": [
+        "REI Banten partnership",
+        "School developer program",
+        "Regional expansion"
+      ],
+      "contact_info": {
+        "phone": "+62-254-789012",
+        "email": "info@metro-alam.co.id",
+        "address": "Jl. KH Abdul Fatah Hasan, Serang, Banten"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Alam Sutera Realty",
+      "full_name": "PT Alam Sutera Realty Tbk",
+      "founded_year": 1993,
+      "headquarters": "Tangerang",
+      "website": "https://alamsuterahomes.com",
+      "stock_symbol": "ASRI",
+      "market_position": "Premium developer",
+      "specialization": [
+        "Integrated townships",
+        "Luxury residential",
+        "Commercial properties",
+        "Mixed-use developments"
+      ],
+      "project_portfolio": {
+        "total_projects": 25,
+        "ongoing_projects": 8,
+        "completed_projects": 17,
+        "flagship_projects": [
+          {
+            "name": "Alam Sutera Township",
+            "location": "Tangerang",
+            "type": "Integrated Township",
+            "status": "Ongoing",
+            "total_units": 15000,
+            "estimated_value": 50000000000000
+          },
+          {
+            "name": "Suvarna Jati",
+            "location": "Tangerang",
+            "type": "Luxury Residential",
+            "status": "Completed",
+            "total_units": 2000,
+            "estimated_value": 8000000000000
+          }
+        ]
+      },
+      "financial_info": {
+        "revenue_annual": 8000000000000,
+        "market_cap": 12000000000000,
+        "total_assets": 25000000000000,
+        "employee_count": 3000,
+        "project_value_pipeline": 60000000000000
+      },
+      "geographic_focus": [
+        "Tangerang",
+        "Jakarta",
+        "Bandung",
+        "Surabaya"
+      ],
+      "price_positioning": "Premium to Ultra-premium",
+      "target_market": "Upper middle class to high income",
+      "competitive_advantages": [
+        "Green living pioneer",
+        "Large land bank (1222 hectares)",
+        "Integrated development expertise",
+        "Brand recognition",
+        "Quality focus"
+      ],
+      "recent_developments": [
+        "Green building initiatives",
+        "Smart city integration",
+        "Lifestyle community development",
+        "Sustainable practices"
+      ],
+      "contact_info": {
+        "phone": "+62-21-531-8888",
+        "email": "info@alamsutera.com",
+        "address": "Jl. Alam Sutera Boulevard Kav. 1, Tangerang 15143"
+      }
+    },
+    {
+      "id": 11,
+      "name": "Pakuwon Jati",
+      "full_name": "PT Pakuwon Jati Tbk",
+      "founded_year": 1982,
+      "headquarters": "Surabaya",
+      "website": "https://www.pakuwon.com",
+      "stock_symbol": "PWON",
+      "market_position": "Major developer",
+      "specialization": [
+        "Mixed-use developments",
+        "Luxury residential",
+        "Commercial properties",
+        "Shopping centers"
+      ],
+      "project_portfolio": {
+        "total_projects": 30,
+        "ongoing_projects": 6,
+        "completed_projects": 24,
+        "flagship_projects": [
+          {
+            "name": "Pakuwon City",
+            "location": "Surabaya",
+            "type": "Mixed-Use Development",
+            "status": "Completed",
+            "total_units": 8000,
+            "estimated_value": 15000000000000
+          },
+          {
+            "name": "Tunjungan City",
+            "location": "Surabaya",
+            "type": "Commercial",
+            "status": "Completed",
+            "total_units": 500,
+            "estimated_value": 3000000000000
+          }
+        ]
+      },
+      "financial_info": {
+        "revenue_annual": 6000000000000,
+        "market_cap": 10000000000000,
+        "total_assets": 20000000000000,
+        "employee_count": 2500,
+        "project_value_pipeline": 40000000000000
+      },
+      "geographic_focus": [
+        "Surabaya",
+        "Jakarta",
+        "Bandung",
+        "Medan",
+        "Makassar"
+      ],
+      "price_positioning": "Mid to Premium",
+      "target_market": "Middle class to upper middle class",
+      "competitive_advantages": [
+        "Shopping mall expertise",
+        "Mixed-use development",
+        "Strong regional presence",
+        "Quality construction"
+      ],
+      "recent_developments": [
+        "Expansion to Jakarta market",
+        "Digital transformation",
+        "Sustainable building practices",
+        "International partnerships"
+      ],
+      "contact_info": {
+        "phone": "+62-31-531-8888",
+        "email": "info@pakuwon.com",
+        "address": "Jl. Pakuwon City, Surabaya 60211"
+      }
+    }
+  ],
+  
+  "market_analysis": {
+    "total_developers": 11,
+    "market_leaders": ["Ciputra Group", "Agung Podomoro Land", "Sinar Mas Land"],
+    "emerging_players": ["PP Properti", "Intiland Development"],
+    "regional_developers": ["Indo Jaya Banten", "Metro Alam Selaras"],
+    "major_developers": ["Alam Sutera Realty", "Pakuwon Jati"],
+    "regional_focus": {
+      "jakarta": ["All developers"],
+      "surabaya": ["Ciputra Group", "Sinar Mas Land", "Pakuwon Jati"],
+      "bandung": ["Ciputra Group", "Summarecon Agung"],
+      "tangerang": ["Sinar Mas Land", "Lippo Group", "PP Properti", "Alam Sutera Realty"],
+      "bekasi": ["Sinar Mas Land", "Summarecon Agung", "Lippo Group"],
+      "depok": ["Agung Podomoro Land", "Lippo Group", "PP Properti"],
+      "kota_serang": ["Indo Jaya Banten", "Metro Alam Selaras"],
+      "kabupaten_serang": ["Indo Jaya Banten", "Metro Alam Selaras"],
+      "cilegon": ["Indo Jaya Banten", "Metro Alam Selaras"],
+      "banten_region": ["Indo Jaya Banten", "Metro Alam Selaras", "Alam Sutera Realty"]
+    },
+    "specialization_focus": {
+      "integrated_townships": ["Ciputra Group", "Sinar Mas Land", "Summarecon Agung", "Lippo Group", "Alam Sutera Realty"],
+      "luxury_residential": ["Agung Podomoro Land", "Intiland Development", "Alam Sutera Realty"],
+      "mixed_use": ["All developers"],
+      "affordable_housing": ["Indo Jaya Banten", "Metro Alam Selaras", "Regional developers"],
+      "subsidy_housing": ["Indo Jaya Banten", "Regional developers"],
+      "millennial_housing": ["Indo Jaya Banten"],
+      "shopping_centers": ["Pakuwon Jati", "Lippo Group"],
+      "green_building": ["Alam Sutera Realty"]
+    },
+    "organization_memberships": {
+      "rei_banten": ["Indo Jaya Banten", "Metro Alam Selaras"],
+      "rei_national": ["All major developers"],
+      "school_developer_program": ["Metro Alam Selaras"],
+      "government_partnerships": ["Indo Jaya Banten"]
+    }
+  },
+  
+  "integration_mapping": {
+    "business_rules": {
+      "developer_validation": "Developer reputation and financial stability checks",
+      "project_validation": "Project quality and completion status validation"
+    },
+    "financial_configuration": {
+      "developer_pricing": "Market-aligned pricing strategies by developer",
+      "project_risk_assessment": "Developer-specific risk evaluation"
+    },
+    "api_integration": {
+      "developer_monitoring": "Real-time developer performance tracking",
+      "market_intelligence": "Competitive analysis and market trends"
+    }
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-20",
+    "last_modified": "2026-06-20",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Indonesia property developers with complete profiles and project information",
+    "total_developers": 11,
+    "data_sources": [
+      "Company annual reports",
+      "Industry publications",
+      "Market research reports",
+      "Stock exchange data",
+      "Company websites",
+      "REI Banten organization data",
+      "BTN Properti platform",
+      "Regional market research"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

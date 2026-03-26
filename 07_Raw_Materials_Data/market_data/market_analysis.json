@@ -1,0 +1,349 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-20",
+  "source": "global_market_research",
+  "description": "Indonesia property market analysis and competitive intelligence for KPRFlow Enterprise",
+  
+  "market_analysis": {
+    "market_size": {
+      "total_market_value": 70370000000,
+      "currency": "USD",
+      "projected_value_2031": 93750000000,
+      "cagr_2026_2031": 0.0591,
+      "growth_rate": "5.91%",
+      "market_size_idr": 1080000000000000,
+      "key_drivers": [
+        "Rapid urbanization",
+        "Growing middle class with higher disposable income",
+        "Government-led infrastructure initiatives",
+        "Increasing foreign investment",
+        "Digitalization in property transactions",
+        "Rise of sustainable building"
+      ]
+    },
+    "residential_market": {
+      "market_share": 0.737,
+      "dominant_property_type": "Villas & Landed Houses",
+      "property_type_share": 0.65,
+      "annual_growth_new_homes": 0.05,
+      "ready_stock_inventory": 8400,
+      "subsidy_program_active": true,
+      "focus_areas": [
+        "Transit-oriented projects",
+        "Integrated township projects",
+        "Sustainable building developments"
+      ]
+    },
+    "geographic_analysis": {
+      "major_cities": [
+        {
+          "city": "Jakarta",
+          "market_status": "Stable growth",
+          "upcoming_supply_2026_2027": 3200,
+          "supply_concentration": "South Jakarta (70%)",
+          "target_market": "Middle to upper income"
+        },
+        {
+          "city": "Surabaya",
+          "market_status": "Stable growth",
+          "growth_trend": "Positive"
+        },
+        {
+          "city": "Tangerang",
+          "market_status": "Stable growth",
+          "growth_trend": "Positive"
+        },
+        {
+          "city": "Makassar",
+          "market_status": "Emerging",
+          "growth_trend": "Positive"
+        },
+        {
+          "city": "Semarang",
+          "market_status": "Emerging",
+          "growth_trend": "Positive"
+        }
+      ],
+      "price_forecast": {
+        "cumulative_growth_3_5_years": "10% to 25%",
+        "well_located_segments": "Premium performance",
+        "supporting_factors": [
+          "Demographics",
+          "Urbanization",
+          "Infrastructure completion"
+        ]
+      }
+    }
+  },
+
+  "competitor_analysis": {
+    "major_developers": [
+      {
+        "name": "Ciputra Group",
+        "market_position": "Premium developer",
+        "founded": 1981,
+        "founder": "Dr. Ir. Ciputra",
+        "specialization": "Integrated townships",
+        "market_focus": "High-density housing projects",
+        "strengths": ["Brand reputation", "Experience", "Integrated developments"]
+      },
+      {
+        "name": "Agung Podomoro Land",
+        "total_assets_2024": 26100000000000,
+        "total_assets_usd": 1600000000,
+        "total_liabilities": 12300000000000,
+        "total_liabilities_usd": 750000000,
+        "founded": 1981,
+        "market_position": "Major developer",
+        "specialization": "Luxury projects",
+        "strengths": ["Financial strength", "Luxury segment", "Brand recognition"]
+      },
+      {
+        "name": "Sinar Mas Land",
+        "market_position": "Leading developer",
+        "specialization": "Integrated townships",
+        "focus": "Middle to upper income segments",
+        "strengths": ["Diverse portfolio", "Integrated developments"]
+      },
+      {
+        "name": "Summarecon Agung",
+        "market_position": "Established developer",
+        "specialization": "Integrated townships",
+        "focus": "Urban developments",
+        "strengths": ["Quality focus", "Strategic locations"]
+      },
+      {
+        "name": "Lippo Group",
+        "market_position": "Major conglomerate",
+        "specialization": "Mixed-use developments",
+        "focus": "Integrated townships",
+        "strengths": ["Diverse business", "Retail integration"]
+      },
+      {
+        "name": "PP Properti",
+        "market_position": "Public developer",
+        "specialization": "Residential projects",
+        "focus": "Middle income segment",
+        "strengths": ["Public company", "Transparency"]
+      }
+    ],
+    "market_trends": {
+      "developer_focus": [
+        "High-density housing in urban areas",
+        "Affordable housing solutions",
+        "Integrated township developments",
+        "Sustainable building practices",
+        "Digital property transactions"
+      ],
+      "competitive_landscape": {
+        "market_concentration": "Fragmented with major players",
+        "entry_barriers": "High capital requirements",
+        "competition_intensity": "High",
+        "differentiation_factors": ["Location", "Quality", "Price", "Brand"]
+      }
+    }
+  },
+
+  "kpr_market_analysis": {
+    "market_statistics": {
+      "average_mortgage_rates_2024": 0.11,
+      "current_floating_rates_bca": 0.11,
+      "bank_indonesia_rate_trend": "Stabilizing rupiah",
+      "inflation_target_2026_2027": "Within target range",
+      "economic_growth_support": "Positive"
+    },
+    "loan_market": {
+      "total_mortgage_value": "Growing trend",
+      "loan_growth": "Positive",
+      "kpr_terminology": "Kredit Pemilikan Rumah",
+      "market_maturity": "Developing",
+      "digital_adoption": "Increasing"
+    },
+    "interest_rate_environment": {
+      "current_rates": "11% (BCA floating)",
+      "rate_trend": "Stable",
+      "central_bank_policy": "Supportive growth",
+      "inflation_impact": "Managed within target"
+    }
+  },
+
+  "customer_demographics": {
+    "middle_class_growth": {
+      "current_population": 141000000,
+      "projected_growth": "Expanding",
+      "average_household_income": 5000000,
+      "income_trend": "Rising",
+      "disposable_income": "Increasing"
+    },
+    "customer_segments": {
+      "individuals_households": {
+        "market_share": 0.737,
+        "growth_rate": 0.054,
+        "characteristics": [
+          "First-time homebuyers",
+          "Family formations",
+          "Urban professionals"
+        ]
+      },
+      "corporate_sme": {
+        "market_share": 0.263,
+        "growth_rate": "Higher than individual",
+        "characteristics": [
+          "Pre-leasing demand",
+          "Corporate housing",
+          "Employee accommodations"
+        ]
+      }
+    },
+    "target_demographics": {
+      "age_groups": ["25-35", "36-45", "46-55"],
+      "income_levels": ["Middle class", "Upper middle class", "High income"],
+      "geographic_focus": ["Urban areas", "Suburban developments", "Transit-oriented locations"],
+      "behavioral_traits": [
+        "Digital-savvy",
+        "Quality-conscious",
+        "Location-sensitive",
+        "Sustainability-aware"
+      ]
+    }
+  },
+
+  "price_analysis": {
+    "property_price_trends": {
+      "overall_trend": "Gradual price increase",
+      "major_cities_performance": "Stable growth",
+      "emerging_cities_performance": "Positive momentum",
+      "price_growth_forecast": "10% to 25% cumulative (3-5 years)"
+    },
+    "price_segments": {
+      "luxury": {
+        "price_range": "Above 2 billion IDR",
+        "market_share": 0.15,
+        "growth": "Stable"
+      },
+      "middle_upper": {
+        "price_range": "500 million - 2 billion IDR",
+        "market_share": 0.45,
+        "growth": "Positive"
+      },
+      "affordable": {
+        "price_range": "Below 500 million IDR",
+        "market_share": 0.40,
+        "growth": "Strong (subsidy support)"
+      }
+    },
+    "regional_price_comparison": {
+      "jakarta": "Premium pricing",
+      "surabaya": "Moderate pricing",
+      "bandung": "Competitive pricing",
+      "emerging_cities": "Affordable pricing",
+      "price_determinants": [
+        "Location",
+        "Infrastructure",
+        "Economic activity",
+        "Supply-demand balance"
+      ]
+    }
+  },
+
+  "regulatory_environment": {
+    "government_policies": {
+      "infrastructure_spending": "High priority",
+      "regulatory_reforms": "Foreign investment facilitation",
+      "housing_subsidy_program": "Active",
+      "urban_development_focus": "Integrated townships"
+    },
+    "banking_regulations": {
+      "central_bank_policy": "Growth supportive",
+      "lending_rates": "Managed",
+      "mortgage_regulations": "Supportive",
+      "financial_inclusion": "Priority"
+    },
+    "property_regulations": {
+      "foreign_ownership": "Restricted but improving",
+      "zoning_regulations": "City-specific",
+      "building_codes": "Modernizing",
+      "environmental_standards": "Increasing"
+    }
+  },
+
+  "market_opportunities": {
+    "growth_sectors": [
+      "Affordable housing",
+      "Integrated townships",
+      "Sustainable buildings",
+      "Digital property platforms",
+      "Transit-oriented developments"
+    ],
+    "emerging_trends": [
+      "Smart home technology",
+      "Eco-friendly construction",
+      "Co-living spaces",
+      "Virtual property tours",
+      "AI-powered property matching"
+    ],
+    "investment_opportunities": [
+      "Secondary cities development",
+      "Infrastructure-adjacent properties",
+      "Green building projects",
+      "Digital property services",
+      "Affordable housing financing"
+    ]
+  },
+
+  "market_challenges": {
+    "key_challenges": [
+      "Regulatory complexity",
+      "Infrastructure gaps in some areas",
+      "Affordability concerns",
+      "Supply-demand imbalances",
+      "Economic volatility risks"
+    ],
+    "risk_factors": [
+      "Interest rate sensitivity",
+      "Economic slowdown impact",
+      "Regulatory changes",
+      "Competition intensity",
+      "Material cost inflation"
+    ]
+  },
+
+  "integration_mapping": {
+    "business_rules_integration": {
+      "customer_eligibility": "Demographics-based validation",
+      "property_validation": "Market-aligned property types",
+      "financial_validation": "Market-adjusted pricing",
+      "document_requirements": "Regulatory compliance"
+    },
+    "financial_configuration_integration": {
+      "product_line_pricing": "Market-competitive pricing",
+      "tax_logic": "Regulatory-aligned tax structure",
+      "plafon_settings": "Market-adjusted loan limits"
+    },
+    "api_integration": {
+      "market_data_feeds": "Real-time market updates",
+      "competitor_monitoring": "Competitive intelligence",
+      "price_tracking": "Market price monitoring"
+    }
+  },
+
+  "metadata": {
+    "created_date": "2026-03-20",
+    "last_modified": "2026-06-20",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Indonesia property market analysis and competitive intelligence",
+    "data_sources": [
+      "Mordor Intelligence",
+      "Ken Research",
+      "Global Property Guide",
+      "Trading Economics",
+      "Statista",
+      "Bank Indonesia",
+      "Asian Development Bank"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

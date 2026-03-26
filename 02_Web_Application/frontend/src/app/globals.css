@@ -1,0 +1,546 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * ⭐ CSS Variables — sourced from 05_UI_Design_System/Shared/Design_Tokens.json
+ * DO NOT hard-code colors here. All values must match Design_Tokens.json.
+ * Token reference: cssVariables.light / cssVariables.dark
+ */
+:root {
+  /* ── Standard shadcn/ui CSS vars (required by tailwind.config.js) ──
+   * Token: colors.light.*
+   */
+  --background:                 #FAFAF9;  /* colors.light.background */
+  --foreground:                 #18181B;  /* colors.light.foreground */
+  --card:                       #FFFFFF;  /* colors.light.card */
+  --card-foreground:            #18181B;  /* colors.light.cardForeground */
+  --popover:                    #FFFFFF;  /* colors.light.popover */
+  --popover-foreground:         #18181B;  /* colors.light.popoverForeground */
+  --primary:                    #3B82F6;  /* colors.light.primary */
+  --primary-foreground:         #FFFFFF;  /* colors.light.primaryForeground */
+  --secondary:                  #F5F5F4;  /* colors.light.secondary */
+  --secondary-foreground:       #1C1917;  /* colors.light.secondaryForeground */
+  --muted:                      #F0F0EE;  /* colors.light.muted */
+  --muted-foreground:           #78716C;  /* colors.light.mutedForeground */
+  --accent:                     #FB923C;  /* colors.light.accent */
+  --accent-foreground:          #292524;  /* colors.light.accentForeground */
+  --destructive:                #EF4444;  /* colors.light.destructive */
+  --destructive-foreground:     #EF4444;  /* colors.light.destructiveForeground */
+  --border:                     #E7E5E4;  /* colors.light.border */
+  --input:                      #E7E5E4;  /* colors.light.input */
+  --ring:                       #3B82F6;  /* colors.light.ring */
+  --radius:                     1rem;     /* radius.base */
+
+  /* ── Chart colors ── Token: colors.light.chart* */
+  --chart-1:  #3B82F6;  /* chart1 */
+  --chart-2:  #10B981;  /* chart2 */
+  --chart-3:  #FB923C;  /* chart3 */
+  --chart-4:  #F59E0B;  /* chart4 */
+  --chart-5:  #8B5CF6;  /* chart5 */
+
+  /* ── Sidebar colors ── Token: colors.light.sidebar* */
+  --sidebar:                    #FAFAF8;  /* colors.light.sidebar */
+  --sidebar-foreground:         #44403C;  /* colors.light.sidebarForeground */
+  --sidebar-primary:            #3B82F6;  /* colors.light.sidebarPrimary */
+  --sidebar-primary-foreground: #FFFFFF;  /* colors.light.sidebarPrimaryForeground */
+  --sidebar-accent:             #EFF6FF;  /* colors.light.sidebarAccent */
+  --sidebar-accent-foreground:  #1E3A8A;  /* colors.light.sidebarAccentForeground */
+  --sidebar-border:             #E7E5E4;  /* colors.light.sidebarBorder */
+  --sidebar-ring:               #3B82F6;  /* colors.light.ring */
+
+  /* ── DevPro aliases → standard vars (backward compat) ── */
+  --devpro-primary:             var(--primary);
+  --devpro-primary-foreground:  var(--primary-foreground);
+  --devpro-secondary:           var(--secondary);
+  --devpro-secondary-foreground: var(--secondary-foreground);
+  --devpro-success:             #10B981;  /* colors.light.success */
+  --devpro-success-foreground:  #FFFFFF;
+  --devpro-warning:             #F59E0B;  /* colors.light.warning */
+  --devpro-warning-foreground:  #FFFFFF;
+  --devpro-error:               var(--destructive);
+  --devpro-error-foreground:    var(--destructive-foreground);
+  --devpro-background:          var(--background);
+  --devpro-foreground:          var(--foreground);
+  --devpro-muted:               var(--muted);
+  --devpro-muted-foreground:    var(--muted-foreground);
+  --devpro-border:              var(--border);
+  --devpro-input:               var(--input);
+  --devpro-card:                var(--card);
+  --devpro-card-foreground:     var(--card-foreground);
+  --devpro-popover:             var(--popover);
+  --devpro-popover-foreground:  var(--popover-foreground);
+  --devpro-accent:              var(--accent);
+  --devpro-accent-foreground:   var(--accent-foreground);
+  --devpro-ring:                var(--ring);
+  --devpro-chart-1:             var(--chart-1);
+  --devpro-chart-2:             var(--chart-2);
+  --devpro-chart-3:             var(--chart-3);
+  --devpro-chart-4:             var(--chart-4);
+  --devpro-chart-5:             var(--chart-5);
+  --devpro-sidebar-bg:          var(--sidebar);
+  --devpro-sidebar:             var(--sidebar);
+  --devpro-sidebar-foreground:  var(--sidebar-foreground);
+  --devpro-sidebar-primary:     var(--sidebar-primary);
+  --devpro-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --devpro-sidebar-accent:      var(--sidebar-accent);
+  --devpro-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --devpro-sidebar-border:      var(--sidebar-border);
+  --devpro-sidebar-ring:        var(--sidebar-ring);
+  --devpro-radius:              var(--radius);  /* was 0.75rem → now 1rem from radius.base */
+  --devpro-shadow:              0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --devpro-shadow-lg:           0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* ── KPRFlow aliases → standard vars (backward compat) ── */
+  --kprflow-primary:            var(--primary);
+  --kprflow-primary-foreground: var(--primary-foreground);
+  --kprflow-secondary:          var(--secondary);
+  --kprflow-secondary-foreground: var(--secondary-foreground);
+  --kprflow-success:            var(--devpro-success);
+  --kprflow-success-foreground: var(--devpro-success-foreground);
+  --kprflow-warning:            var(--devpro-warning);
+  --kprflow-warning-foreground: var(--devpro-warning-foreground);
+  --kprflow-error:              var(--destructive);
+  --kprflow-error-foreground:   var(--destructive-foreground);
+  --kprflow-background:         var(--background);
+  --kprflow-foreground:         var(--foreground);
+  --kprflow-muted:              var(--muted);
+  --kprflow-muted-foreground:   var(--muted-foreground);
+  --kprflow-border:             var(--border);
+  --kprflow-input:              var(--input);
+  --kprflow-card:               var(--card);
+  --kprflow-card-foreground:    var(--card-foreground);
+  --kprflow-popover:            var(--popover);
+  --kprflow-popover-foreground: var(--popover-foreground);
+  --kprflow-accent:             var(--accent);
+  --kprflow-accent-foreground:  var(--accent-foreground);
+  --kprflow-ring:               var(--ring);
+}
+
+/* Dark Theme — sourced from Design_Tokens.json colors.dark.* */
+.dark {
+  /* ── Standard shadcn/ui dark vars ── */
+  --background:                 #0F172A;  /* colors.dark.background */
+  --foreground:                 #F8FAFC;  /* colors.dark.foreground */
+  --card:                       #1E293B;  /* colors.dark.card */
+  --card-foreground:            #F8FAFC;  /* colors.dark.cardForeground */
+  --popover:                    #1E293B;  /* colors.dark.popover */
+  --popover-foreground:         #F8FAFC;  /* colors.dark.popoverForeground */
+  --primary:                    #60A5FA;  /* colors.dark.primary */
+  --primary-foreground:         #FFFFFF;  /* colors.dark.primaryForeground */
+  --secondary:                  #1E293B;  /* colors.dark.secondary */
+  --secondary-foreground:       #E2E8F0;  /* colors.dark.secondaryForeground */
+  --muted:                      #334155;  /* colors.dark.muted */
+  --muted-foreground:           #94A3B8;  /* colors.dark.mutedForeground */
+  --accent:                     #FDBA74;  /* colors.dark.accent */
+  --accent-foreground:          #F8FAFC;  /* colors.dark.accentForeground */
+  --destructive:                #DC2626;  /* colors.dark.destructive */
+  --destructive-foreground:     #DC2626;  /* colors.dark.destructiveForeground */
+  --border:                     #475569;  /* colors.dark.border */
+  --input:                      #475569;  /* colors.dark.input */
+  --ring:                       #60A5FA;  /* colors.dark.ring */
+
+  /* ── Chart dark vars ── */
+  --chart-1:  #60A5FA;  /* colors.dark.chart1 */
+  --chart-2:  #34D399;  /* colors.dark.chart2 */
+  --chart-3:  #FDBA74;  /* colors.dark.chart3 */
+  --chart-4:  #FBBF24;  /* colors.dark.chart4 */
+  --chart-5:  #A78BFA;  /* colors.dark.chart5 */
+
+  /* ── Sidebar dark vars ── */
+  --sidebar:                    #0C1222;  /* colors.dark.sidebar */
+  --sidebar-foreground:         #E2E8F0;  /* colors.dark.sidebarForeground */
+  --sidebar-primary:            #60A5FA;  /* colors.dark.sidebarPrimary */
+  --sidebar-primary-foreground: #FFFFFF;  /* colors.dark.sidebarPrimaryForeground */
+  --sidebar-accent:             #1E3A8A;  /* colors.dark.sidebarAccent */
+  --sidebar-accent-foreground:  #DBEAFE;  /* colors.dark.sidebarAccentForeground */
+  --sidebar-border:             #334155;  /* colors.dark.sidebarBorder */
+  --sidebar-ring:               #60A5FA;  /* colors.dark.ring */
+
+  /* ── DevPro dark aliases → standard vars ── */
+  --devpro-primary:             var(--primary);
+  --devpro-primary-foreground:  var(--primary-foreground);
+  --devpro-secondary:           var(--secondary);
+  --devpro-secondary-foreground: var(--secondary-foreground);
+  --devpro-success:             #34D399;  /* colors.dark.success */
+  --devpro-success-foreground:  #FFFFFF;
+  --devpro-warning:             #FBBF24;  /* colors.dark.warning */
+  --devpro-warning-foreground:  #FFFFFF;
+  --devpro-error:               var(--destructive);
+  --devpro-error-foreground:    var(--destructive-foreground);
+  --devpro-background:          var(--background);
+  --devpro-foreground:          var(--foreground);
+  --devpro-muted:               var(--muted);
+  --devpro-muted-foreground:    var(--muted-foreground);
+  --devpro-border:              var(--border);
+  --devpro-input:               var(--input);
+  --devpro-card:                var(--card);
+  --devpro-card-foreground:     var(--card-foreground);
+  --devpro-popover:             var(--popover);
+  --devpro-popover-foreground:  var(--popover-foreground);
+  --devpro-accent:              var(--accent);
+  --devpro-accent-foreground:   var(--accent-foreground);
+  --devpro-ring:                var(--ring);
+  --devpro-sidebar-bg:          var(--sidebar);
+  --devpro-sidebar:             var(--sidebar);
+  --devpro-sidebar-foreground:  var(--sidebar-foreground);
+  --devpro-sidebar-primary:     var(--sidebar-primary);
+  --devpro-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --devpro-sidebar-accent:      var(--sidebar-accent);
+  --devpro-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --devpro-sidebar-border:      var(--sidebar-border);
+  --devpro-sidebar-ring:        var(--sidebar-ring);
+}
+
+/* Base Styles */
+* {
+  border-color: var(--devpro-border);
+}
+
+body {
+  background-color: var(--devpro-background);
+  color: var(--devpro-foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* DevPro-Enterprise Custom Components */
+.devpro-gradient {
+  background: linear-gradient(135deg, var(--devpro-primary) 0%, var(--devpro-secondary) 100%);
+}
+
+.devpro-gradient-text {
+  background: linear-gradient(135deg, var(--devpro-primary) 0%, var(--devpro-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.devpro-card-hover {
+  transition: all 0.3s ease;
+}
+
+.devpro-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--devpro-shadow-lg);
+}
+
+/* Custom Scrollbar for Enterprise Dark Mode */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 10px;
+  border: 2px solid #0f172a;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #00ffcc;
+}
+
+/* Override for Dark Mode forced elements - Enhanced */
+.dark body {
+  background-color: #000000;  /* Pure black */
+  color: #ffffff;           /* Pure white */
+}
+
+/* Enhanced dark mode cards with more depth */
+.dark .devpro-card-dark {
+  background-color: #0a0a0a;  /* Very dark black */
+  border: 1px solid rgba(139, 92, 246, 0.4);  /* Bright purple border */
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);  /* Intense purple glow */
+}
+
+/* Enhanced neon glow effects */
+.dark .devpro-neon-glow {
+  box-shadow: 0 0 35px rgba(139, 92, 246, 0.6);  /* Intense purple glow */
+}
+
+.dark .devpro-neon-border {
+  border: 1px solid rgba(139, 92, 246, 0.6);  /* Bright purple border */
+}
+
+/* Enhanced scrollbar for dark mode */
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: #000000;  /* Pure black */
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #1a1a1a;  /* Very dark gray */
+  border-radius: 10px;
+  border: 2px solid #000000;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #8b5cf6;  /* Bright purple on hover */
+}
+
+/* Enhanced gradients for dark mode */
+.dark .devpro-gradient {
+  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #10b981 100%);  /* Purple to blue to green */
+}
+
+.dark .devpro-gradient-text {
+  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Enhanced hover effects */
+.dark .devpro-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px rgba(139, 92, 246, 0.3);
+}
+
+/* Enhanced button effects */
+.dark .devpro-button-primary {
+  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.4);
+}
+
+.dark .devpro-button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+}
+
+/* Shimmer animation for DsSkeleton loading states */
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+/* Smooth theme transition — prevents jarring color switch */
+html,
+html *,
+html *::before,
+html *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.15s ease, box-shadow 0.3s ease;
+}
+
+/* Animation Classes */
+@keyframes devpro-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes devpro-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes devpro-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.devpro-animate-slide-in {
+  animation: devpro-slide-in 0.3s ease-out;
+}
+
+.devpro-animate-fade-in {
+  animation: devpro-fade-in 0.3s ease-out;
+}
+
+.devpro-animate-scale-in {
+  animation: devpro-scale-in 0.3s ease-out;
+}
+
+/* Status Colors */
+.devpro-status-pending {
+  background-color: var(--devpro-warning);
+  color: var(--devpro-warning-foreground);
+}
+
+.devpro-status-approved {
+  background-color: var(--devpro-success);
+  color: var(--devpro-success-foreground);
+}
+
+.devpro-status-rejected {
+  background-color: var(--devpro-error);
+  color: var(--devpro-error-foreground);
+}
+
+.devpro-status-completed {
+  background-color: var(--devpro-primary);
+  color: var(--devpro-primary-foreground);
+}
+
+/* Loan Status Colors */
+.devpro-loan-low {
+  color: var(--devpro-success);
+}
+
+.devpro-loan-medium {
+  color: var(--devpro-warning);
+}
+
+.devpro-loan-high {
+  color: var(--devpro-error);
+}
+
+/* Property Type Colors */
+.devpro-type-residential {
+  background-color: oklch(0.55 0.15 145);
+  color: oklch(0.98 0.01 145);
+}
+
+.devpro-type-commercial {
+  background-color: oklch(0.65 0.18 45);
+  color: oklch(0.25 0.02 45);
+}
+
+.devpro-type-mixed {
+  background-color: oklch(0.45 0.12 240);
+  color: oklch(0.98 0.01 240);
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .devpro-mobile-hidden {
+    display: none;
+  }
+  
+  .devpro-mobile-full {
+    width: 100%;
+  }
+}
+
+/* KPRFlow Status Colors */
+.kprflow-status-pending {
+  background-color: var(--kprflow-warning);
+  color: var(--kprflow-warning-foreground);
+}
+
+.kprflow-status-approved {
+  background-color: var(--kprflow-success);
+  color: var(--kprflow-success-foreground);
+}
+
+.kprflow-status-rejected {
+  background-color: var(--kprflow-error);
+  color: var(--kprflow-error-foreground);
+}
+
+.kprflow-status-completed {
+  background-color: var(--kprflow-primary);
+  color: var(--kprflow-primary-foreground);
+}
+
+/* KPRFlow Loan Status Colors */
+.kprflow-loan-low {
+  color: var(--kprflow-success);
+}
+
+.kprflow-loan-medium {
+  color: var(--kprflow-warning);
+}
+
+.kprflow-loan-high {
+  color: var(--kprflow-error);
+}
+
+/* KPRFlow Property Type Colors */
+.kprflow-type-residential {
+  background-color: var(--kprflow-success);
+  color: var(--kprflow-success-foreground);
+}
+
+.kprflow-type-commercial {
+  background-color: var(--kprflow-warning);
+  color: var(--kprflow-warning-foreground);
+}
+
+.kprflow-type-mixed {
+  background-color: var(--kprflow-primary);
+  color: var(--kprflow-primary-foreground);
+}
+
+/* KPRFlow Gradient Text */
+.kprflow-gradient-text {
+  background: linear-gradient(135deg, var(--kprflow-primary) 0%, var(--kprflow-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* KPRFlow Card Hover Effects */
+.kprflow-card-hover {
+  transition: all 0.3s ease;
+}
+
+.kprflow-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(30, 64, 175, 0.1), 0 10px 10px -5px rgba(30, 64, 175, 0.04);
+}
+
+/* KPRFlow Button Styles */
+.kprflow-button-primary {
+  background: linear-gradient(135deg, var(--kprflow-primary) 0%, var(--kprflow-secondary) 100%);
+  color: var(--kprflow-primary-foreground);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.kprflow-button-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px -5px rgba(30, 64, 175, 0.25);
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .kprflow-mobile-hidden {
+    display: none;
+  }
+  
+  .kprflow-mobile-full {
+    width: 100%;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .kprflow-no-print {
+    display: none !important;
+  }
+  
+  .kprflow-print-only {
+    display: block !important;
+  }
+  
+  .devpro-no-print {
+    display: none !important;
+  }
+  
+  .devpro-print-only {
+    display: block !important;
+  }
+}

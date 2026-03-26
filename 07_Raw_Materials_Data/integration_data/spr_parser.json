@@ -1,0 +1,403 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-21",
+  "source": "bramsray2_spr_parser",
+  "description": "SPR parser edge function configuration for KPRFlow Enterprise",
+  
+  "function_id": "spr-parser",
+  "name": "SPR Parser",
+  "description": "Parse SPR (Surat Pernyataan Rumah) documents and extract customer information",
+  "category": "document_processing",
+  "enabled": true,
+  "status": "ACTIVE",
+  
+  "functionality": {
+    "pdf_processing": {
+      "enabled": true,
+      "description": "Extract data from PDF documents",
+      "features": [
+        "text_extraction",
+        "form_field_extraction",
+        "table_data_extraction",
+        "signature_detection",
+        "stamp_detection"
+      ]
+    },
+    "data_extraction": {
+      "enabled": true,
+      "description": "Parse customer information from SPR documents",
+      "extracted_fields": [
+        "customer_name",
+        "customer_nik",
+        "customer_address",
+        "customer_phone",
+        "customer_email",
+        "birth_date",
+        "marital_status",
+        "occupation",
+        "monthly_income",
+        "property_address",
+        "property_type",
+        "property_size",
+        "property_price",
+        "down_payment",
+        "loan_amount",
+        "loan_tenure",
+        "bank_name",
+        "spr_date",
+        "spr_number"
+      ]
+    },
+    "document_validation": {
+      "enabled": true,
+      "description": "Validate SPR document format and content",
+      "validation_rules": [
+        "document_structure_validation",
+        "required_fields_validation",
+        "data_format_validation",
+        "signature_validation",
+        "date_validation"
+      ]
+    },
+    "data_conversion": {
+      "enabled": true,
+      "description": "Convert extracted data to structured format",
+      "conversion_rules": [
+        "spr_to_customer_data",
+        "spr_to_application_data",
+        "spr_to_property_data",
+        "spr_to_financial_data"
+      ]
+    }
+  },
+  
+  "technology": {
+    "runtime": "deno",
+    "language": "typescript",
+    "version": "1.40.0",
+    "dependencies": [
+      {
+        "name": "std",
+        "version": "^0.224.0"
+      },
+      {
+        "name": "pdf",
+        "version": "^0.1.0"
+      },
+      {
+        "name": "image",
+        "version": "^0.1.0"
+      },
+      {
+        "name": "csv",
+        "version": "^0.8.0"
+      }
+    ]
+  },
+  
+  "integration": {
+    "document_storage": {
+      "provider": "google_drive",
+      "api_endpoint": "https://www.googleapis.com/drive/v3",
+      "folder_id": "your-spr-folder-id",
+      "authentication": "oauth2",
+      "scopes": [
+        "https://www.googleapis.com/auth/drive.readonly"
+      ]
+    },
+    "supabase": {
+      "enabled": true,
+      "database_url": "https://your-project.supabase.co",
+      "service_role_key": "your-service-role-key",
+      "tables": {
+        "customers": "customers",
+        "applications": "applications",
+        "properties": "properties",
+        "documents": "documents",
+        "spr_processing_logs": "spr_processing_logs",
+        "validation_results": "spr_validation_results"
+      }
+    }
+  },
+  
+  "parsing_rules": {
+    "document_structure": {
+      "required_sections": [
+        "header_section",
+        "customer_data_section",
+        "property_data_section",
+        "financial_data_section",
+        "signatures_section"
+      ],
+      "section_identifiers": {
+        "header": ["SURAT PERNYATAAN RUMAH", "SPR", "SURAT PERNYATAAN"],
+        "customer_data": ["DATA PEMOHON", "DATA NASABAH", "DATA DIRI"],
+        "property_data": ["DATA PROPERTI", "DATA RUMAH", "DATA OBJEK"],
+        "financial_data": ["DATA KEUANGAN", "DATA PINJAMAN", "KALKULASI"],
+        "signatures": ["TANDA TANGAN", "SIGNATURE", "PARAF"]
+      }
+    },
+    "field_extraction": {
+      "customer_name": {
+        "patterns": [
+          "Nama[:\\s]+([A-Z][a-z]+ [A-Z][a-z]+)",
+          "Pemohon[:\\s]+([A-Z][a-z]+ [A-Z][a-z]+)",
+          "Nama Lengkap[:\\s]+([A-Z][a-z]+ [A-Z][a-z]+)"
+        ],
+        "validation": "^[A-Z][a-z]+ [A-Z][a-z]+$"
+      },
+      "customer_nik": {
+        "patterns": [
+          "NIK[:\\s]+([0-9]{16})",
+          "No. KTP[:\\s]+([0-9]{16})",
+          "Nomor Induk[:\\s]+([0-9]{16})"
+        ],
+        "validation": "^[0-9]{16}$"
+      },
+      "customer_address": {
+        "patterns": [
+          "Alamat[:\\s]+([A-Z0-9\\s,.-]+)",
+          "Alamat Lengkap[:\\s]+([A-Z0-9\\s,.-]+)",
+          "Domisili[:\\s]+([A-Z0-9\\s,.-]+)"
+        ],
+        "validation": "^[A-Z0-9\\s,.-]{10,200}$"
+      },
+      "customer_phone": {
+        "patterns": [
+          "No. Telepon[:\\s]+([0-9+-\\s]+)",
+          "Telepon[:\\s]+([0-9+-\\s]+)",
+          "HP[:\\s]+([0-9+-\\s]+)"
+        ],
+        "validation": "^\\+62[0-9]{9,12}$"
+      },
+      "monthly_income": {
+        "patterns": [
+          "Penghasilan[:\\s]+Rp ([0-9.,]+)",
+          "Gaji Bulanan[:\\s]+Rp ([0-9.,]+)",
+          "Income[:\\s]+Rp ([0-9.,]+)"
+        ],
+        "validation": "^[0-9.,]+$"
+      },
+      "property_price": {
+        "patterns": [
+          "Harga Rumah[:\\s]+Rp ([0-9.,]+)",
+          "Harga Properti[:\\s]+Rp ([0-9.,]+)",
+          "Nilai Properti[:\\s]+Rp ([0-9.,]+)"
+        ],
+        "validation": "^[0-9.,]+$"
+      },
+      "loan_amount": {
+        "patterns": [
+          "Pinjaman[:\\s]+Rp ([0-9.,]+)",
+          "KPR[:\\s]+Rp ([0-9.,]+)",
+          "Jumlah Pinjaman[:\\s]+Rp ([0-9.,]+)"
+        ],
+        "validation": "^[0-9.,]+$"
+      }
+    },
+    "data_formatting": {
+      "currency_format": {
+        "remove_symbols": ["Rp", "IDR", "."],
+        "convert_to_numeric": true
+      },
+      "phone_format": {
+        "add_country_code": "+62",
+        "remove_special_chars": ["-", " ", "."]
+      },
+      "date_format": {
+        "input_formats": ["DD-MM-YYYY", "DD/MM/YYYY", "YYYY-MM-DD"],
+        "output_format": "YYYY-MM-DD"
+      }
+    }
+  },
+  
+  "validation_rules": {
+    "document_validation": {
+      "min_file_size_kb": 10,
+      "max_file_size_mb": 25,
+      "allowed_formats": ["application/pdf"],
+      "min_pages": 1,
+      "max_pages": 10
+    },
+    "data_validation": {
+      "required_fields": [
+        "customer_name",
+        "customer_nik",
+        "customer_address",
+        "property_address",
+        "property_price",
+        "loan_amount"
+      ],
+      "field_validation": {
+        "customer_name": {
+          "required": true,
+          "min_length": 3,
+          "max_length": 100,
+          "pattern": "^[A-Z][a-z]+ [A-Z][a-z]+$"
+        },
+        "customer_nik": {
+          "required": true,
+          "length": 16,
+          "pattern": "^[0-9]{16}$"
+        },
+        "customer_address": {
+          "required": true,
+          "min_length": 10,
+          "max_length": 500
+        },
+        "monthly_income": {
+          "required": false,
+          "min_value": 1000000,
+          "max_value": 100000000
+        },
+        "property_price": {
+          "required": true,
+          "min_value": 50000000,
+          "max_value": 5000000000
+        },
+        "loan_amount": {
+          "required": true,
+          "min_value": 10000000,
+          "max_value": 4000000000
+        }
+      }
+    },
+    "business_rules": {
+      "loan_to_value_ratio": {
+        "max_ratio": 0.8,
+        "calculation": "loan_amount / property_price"
+      },
+      "income_validation": {
+        "min_income_multiplier": 3,
+        "calculation": "monthly_income * 36 >= loan_amount"
+      },
+      "age_validation": {
+        "min_age": 21,
+        "max_age": 65,
+        "calculation": "CURRENT_DATE - birth_date"
+      }
+    }
+  },
+  
+  "processing_settings": {
+    "max_processing_time_seconds": 120,
+    "max_document_size_mb": 25,
+    "batch_processing": {
+      "enabled": true,
+      "batch_size": 5,
+      "batch_delay_seconds": 10
+    },
+    "retry_logic": {
+      "enabled": true,
+      "max_retry_attempts": 3,
+      "retry_delay_seconds": 60,
+      "exponential_backoff": true
+    },
+    "error_handling": {
+      "log_errors": true,
+      "notify_on_error": true,
+      "continue_on_error": true,
+      "quarantine_failed_documents": true
+    }
+  },
+  
+  "quality_assurance": {
+    "data_validation": {
+      "enabled": true,
+      "validate_extracted_data": true,
+      "validate_business_rules": true,
+      "validate_document_structure": true
+    },
+    "duplicate_detection": {
+      "enabled": true,
+      "check_duplicate_spr": true,
+      "check_duplicate_customers": true,
+      "merge_duplicate_data": true
+    },
+    "content_verification": {
+      "enabled": true,
+      "verify_signatures": true,
+      "verify_stamps": true,
+      "verify_dates": true
+    }
+  },
+  
+  "monitoring_settings": {
+    "metrics_tracking": {
+      "enabled": true,
+      "track_processing_time": true,
+      "track_success_rate": true,
+      "track_extraction_accuracy": true,
+      "track_validation_results": true
+    },
+    "logging": {
+      "enabled": true,
+      "log_level": "INFO",
+      "log_processing_details": true,
+      "log_extraction_results": true,
+      "log_validation_results": true
+    },
+    "alerting": {
+      "enabled": true,
+      "alert_on_processing_failure": true,
+      "alert_on_validation_errors": true,
+      "alert_on_quality_issues": true,
+      "alert_recipients": ["dev_team", "ops_team"]
+    }
+  },
+  
+  "security_settings": {
+    "authentication": {
+      "required": true,
+      "method": "api_key",
+      "api_key_header": "Authorization",
+      "api_key_validation": true
+    },
+    "data_protection": {
+      "encrypt_sensitive_data": true,
+      "mask_personal_info": true,
+      "gdpr_compliant": true,
+      "data_retention_days": 365
+    },
+    "access_control": {
+      "allowed_sources": ["google_drive", "direct_upload"],
+      "blocked_sources": [],
+      "ip_whitelist": [],
+      "domain_whitelist": []
+    }
+  },
+  
+  "testing_settings": {
+    "test_mode": false,
+    "test_documents": [
+      "test_spr_sample.pdf",
+      "test_spr_complete.pdf",
+      "test_spr_minimal.pdf"
+    ],
+    "mock_data_generation": true,
+    "test_scenarios": [
+      "complete_spr_parsing",
+      "partial_spr_parsing",
+      "invalid_spr_handling",
+      "duplicate_spr_detection"
+    ]
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-21",
+    "last_modified": "2026-03-21",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "SPR parser edge function configuration for KPRFlow Enterprise",
+    "total_extracted_fields": 18,
+    "validation_rules": 15,
+    "parsing_categories": 4,
+    "integration_tables": 6,
+    "data_sources": [
+      "bramsray2/supabase/functions/spr-parser/deno.json"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

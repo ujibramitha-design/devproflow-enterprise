@@ -1,0 +1,426 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-21",
+  "source": "bramsray3_notification_configuration",
+  "description": "Complete notification configuration for KPRFlow Enterprise",
+  
+  "notification_system": {
+    "enabled": false,
+    "status": "DISABLED",
+    "configuration": {
+      "multi_channel_enabled": false,
+      "template_management": false,
+      "delivery_optimization": false,
+      "personalization_enabled": false
+    }
+  },
+  
+  "notification_channels": [
+    {
+      "channel_id": "email",
+      "name": "Email Notifications",
+      "enabled": false,
+      "status": "DISABLED",
+      "configuration": {
+        "smtp_server": "smtp.gmail.com",
+        "smtp_port": 587,
+        "smtp_username": "notifications@kprflow.com",
+        "smtp_password": null,
+        "use_tls": true,
+        "max_retries": 3,
+        "retry_delay_seconds": 300,
+        "rate_limit_per_hour": 100,
+        "batch_size": 50
+      },
+      "templates": [
+        {
+          "template_id": "welcome_email",
+          "name": "Welcome Email",
+          "subject": "Welcome to KPRFlow Enterprise",
+          "body": "Dear {{customer_name}}, welcome to KPRFlow Enterprise!",
+          "variables": ["customer_name", "registration_date"],
+          "language": "id"
+        },
+        {
+          "template_id": "approval_email",
+          "name": "Approval Notification",
+          "subject": "Your KPR Application has been Approved",
+          "body": "Congratulations {{customer_name}}, your KPR application for {{property_type}} has been approved.",
+          "variables": ["customer_name", "property_type", "loan_amount"],
+          "language": "id"
+        },
+        {
+          "template_id": "rejection_email",
+          "name": "Rejection Notification",
+          "subject": "Regarding Your KPR Application",
+          "body": "Dear {{customer_name}}, we regret to inform you that your KPR application was not approved.",
+          "variables": ["customer_name", "rejection_reason", "application_id"],
+          "language": "id"
+        },
+        {
+          "template_id": "payment_reminder_email",
+          "name": "Payment Reminder",
+          "subject": "Payment Reminder - {{payment_type}}",
+          "body": "This is a reminder that your {{payment_type}} of {{amount}} is due on {{due_date}}.",
+          "variables": ["customer_name", "payment_type", "amount", "due_date"],
+          "language": "id"
+        }
+      ]
+    },
+    {
+      "channel_id": "sms",
+      "name": "SMS Notifications",
+      "enabled": false,
+      "status": "DISABLED",
+      "configuration": {
+        "provider": "twilio",
+        "api_key": null,
+        "api_secret": null,
+        "from_number": null,
+        "max_retries": 3,
+        "retry_delay_seconds": 60,
+        "rate_limit_per_minute": 10,
+        "max_characters": 160
+      },
+      "templates": [
+        {
+          "template_id": "welcome_sms",
+          "name": "Welcome SMS",
+          "body": "Welcome to KPRFlow! Your registration is complete. Customer ID: {{customer_id}}",
+          "variables": ["customer_name", "customer_id"],
+          "language": "id"
+        },
+        {
+          "template_id": "approval_sms",
+          "name": "Approval SMS",
+          "body": "Congratulations! Your KPR application has been approved. Loan: {{loan_amount}}",
+          "variables": ["customer_name", "loan_amount", "property_type"],
+          "language": "id"
+        },
+        {
+          "template_id": "payment_reminder_sms",
+          "name": "Payment Reminder SMS",
+          "body": "Payment reminder: {{amount}} due on {{due_date}}. Please pay on time.",
+          "variables": ["customer_name", "amount", "due_date"],
+          "language": "id"
+        }
+      ]
+    },
+    {
+      "channel_id": "whatsapp",
+      "name": "WhatsApp Notifications",
+      "enabled": false,
+      "status": "DISABLED",
+      "configuration": {
+        "provider": "twilio",
+        "api_key": null,
+        "api_secret": null,
+        "whatsapp_number": null,
+        "max_retries": 3,
+        "retry_delay_seconds": 120,
+        "rate_limit_per_minute": 5,
+        "max_message_length": 1000
+      },
+      "templates": [
+        {
+          "template_id": "welcome_whatsapp",
+          "name": "Welcome WhatsApp",
+          "body": "🎉 Welcome to KPRFlow! Your registration is complete.\n\n📋 Customer ID: {{customer_id}}\n👤 Name: {{customer_name}}",
+          "variables": ["customer_name", "customer_id"],
+          "language": "id"
+        },
+        {
+          "template_id": "approval_whatsapp",
+          "name": "Approval WhatsApp",
+          "body": "🏦 Congratulations! Your KPR application has been approved.\n\n💰 Loan Amount: {{loan_amount}}\n🏠 Property: {{property_type}}",
+          "variables": ["customer_name", "loan_amount", "property_type"],
+          "language": "id"
+        },
+        {
+          "template_id": "payment_reminder_whatsapp",
+          "name": "Payment Reminder WhatsApp",
+          "body": "💳 Payment Reminder\n\n💰 Amount: {{amount}}\n📅 Due: {{due_date}}\n📱 Please pay on time!",
+          "variables": ["customer_name", "amount", "due_date"],
+          "language": "id"
+        }
+      ]
+    },
+    {
+      "channel_id": "push_notification",
+      "name": "Push Notifications",
+      "enabled": false,
+      "status": "DISABLED",
+      "configuration": {
+        "provider": "firebase_cloud_messaging",
+        "server_key": null,
+        "api_url": "https://fcm.googleapis.com/fcm/send",
+        "max_retries": 3,
+        "retry_delay_seconds": 60,
+        "rate_limit_per_minute": 20,
+        "max_payload_size": 4096
+      },
+      "templates": [
+        {
+          "template_id": "welcome_push",
+          "name": "Welcome Push",
+          "title": "Welcome to KPRFlow",
+          "body": "Your registration is complete! Start exploring properties now.",
+          "variables": ["customer_name"],
+          "language": "id"
+        },
+        {
+          "template_id": "approval_push",
+          "name": "Approval Push",
+          "title": "KPR Application Approved!",
+          "body": "Congratulations! Your loan of {{loan_amount}} has been approved.",
+          "variables": ["customer_name", "loan_amount"],
+          "language": "id"
+        },
+        {
+          "template_id": "payment_reminder_push",
+          "name": "Payment Reminder Push",
+          "title": "Payment Reminder",
+          "body": "Your payment of {{amount}} is due on {{due_date}}.",
+          "variables": ["customer_name", "amount", "due_date"],
+          "language": "id"
+        }
+      ]
+    }
+  ],
+  
+  "template_management": {
+    "enabled": false,
+    "configuration": {
+      "template_storage": "database",
+      "template_versioning": true,
+      "template_approval": true,
+      "template_testing": true,
+      "template_localization": true
+    },
+    "supported_languages": ["id", "en"],
+    "template_categories": [
+      "welcome",
+      "approval",
+      "rejection",
+      "payment_reminder",
+      "document_upload",
+      "appointment_scheduled",
+      "status_update",
+      "system_notification"
+    ]
+  },
+  
+  "delivery_settings": {
+    "retry_logic": {
+      "enabled": false,
+      "max_retry_attempts": 3,
+      "retry_delay_seconds": 300,
+      "exponential_backoff": true,
+      "retry_on_errors": ["timeout", "rate_limit", "server_error"]
+    },
+    "rate_limiting": {
+      "enabled": false,
+      "requests_per_minute": 100,
+      "requests_per_hour": 1000,
+      "requests_per_day": 10000,
+      "burst_limit": 50
+    },
+    "batch_processing": {
+      "enabled": false,
+      "batch_size": 100,
+      "batch_delay_seconds": 60,
+      "parallel_batches": 5
+    },
+    "priority_handling": {
+      "enabled": false,
+      "priority_levels": ["low", "medium", "high", "urgent"],
+      "priority_weights": {
+        "low": 1,
+        "medium": 2,
+        "high": 3,
+        "urgent": 4
+      }
+    }
+  },
+  
+  "personalization": {
+    "enabled": false,
+    "configuration": {
+      "dynamic_content": true,
+      "customer_segmentation": true,
+      "behavioral_targeting": true,
+      "a_b_testing": false
+    },
+    "personalization_variables": [
+      "customer_name",
+      "customer_id",
+      "property_type",
+      "loan_amount",
+      "due_date",
+      "payment_type",
+      "application_id",
+      "registration_date",
+      "agent_name",
+      "branch_location"
+    ]
+  },
+  
+  "content_settings": {
+    "max_email_size_mb": 25,
+    "max_sms_length": 160,
+    "max_whatsapp_length": 1000,
+    "max_push_length": 100,
+    "allow_html_emails": true,
+    "allow_attachments": true,
+    "supported_attachment_types": [
+      "image/jpeg",
+      "image/png",
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    ],
+    "max_attachment_size_mb": 10
+  },
+  
+  "tracking_settings": {
+    "delivery_tracking": {
+      "enabled": false,
+      "track_sent": true,
+      "track_delivered": true,
+      "track_opened": true,
+      "track_clicked": true
+    },
+    "analytics": {
+      "enabled": false,
+      "track_engagement": true,
+      "track_conversion": true,
+      "track_opt_out": true,
+      "track_bounce": true
+    },
+    "reporting": {
+      "enabled": false,
+      "daily_reports": false,
+      "weekly_reports": false,
+      "monthly_reports": false,
+      "custom_reports": false
+    }
+  },
+  
+  "compliance_settings": {
+    "opt_in_management": {
+      "enabled": false,
+      "require_opt_in": true,
+      "opt_in_methods": ["checkbox", "email_confirmation", "sms_confirmation"],
+      "opt_out_handling": true,
+      "opt_out_methods": ["unsubscribe_link", "reply_stop", "preferences_page"]
+    },
+    "privacy_protection": {
+      "enabled": false,
+      "data_masking": true,
+      "gdpr_compliant": true,
+      "data_retention_days": 365,
+      "anonymization_enabled": true
+    },
+    "spam_prevention": {
+      "enabled": false,
+      "frequency_limits": true,
+      "content_filtering": true,
+      "blacklist_management": true,
+      "whitelist_management": true
+    }
+  },
+  
+  "integration_settings": {
+    "customer_management": {
+      "enabled": false,
+      "sync_customer_data": true,
+      "update_preferences": true,
+      "track_engagement": true
+    },
+    "workflow_tracking": {
+      "enabled": false,
+      "trigger_notifications": true,
+      "update_workflow_status": true,
+      "track_workflow_progress": true
+    },
+    "document_management": {
+      "enabled": false,
+      "document_notifications": true,
+      "upload_notifications": true,
+      "verification_notifications": true
+    },
+    "payment_system": {
+      "enabled": false,
+      "payment_notifications": true,
+      "due_date_reminders": true,
+      "payment_confirmations": true
+    }
+  },
+  
+  "error_handling": {
+    "retry_strategies": {
+      "immediate_retry": {
+        "max_attempts": 2,
+        "delay_seconds": 5
+      },
+      "exponential_backoff": {
+        "max_attempts": 5,
+        "initial_delay_seconds": 60,
+        "backoff_multiplier": 2,
+        "max_delay_seconds": 3600
+      }
+    },
+    "error_notifications": {
+      "enabled": false,
+      "notify_on_failure": true,
+      "notify_on_rate_limit": true,
+      "notify_on_template_error": true,
+      "notification_recipients": ["admin", "dev_team"]
+    },
+    "fallback_strategies": {
+      "channel_fallback": true,
+      "template_fallback": true,
+      "graceful_degradation": true
+    }
+  },
+  
+  "monitoring_settings": {
+    "health_checks": {
+      "enabled": false,
+      "check_interval_seconds": 300,
+      "timeout_seconds": 30,
+      "failure_threshold": 3
+    },
+    "performance_metrics": {
+      "enabled": false,
+      "track_delivery_time": true,
+      "track_success_rate": true,
+      "track_error_rate": true,
+      "track_throughput": true
+    },
+    "alerting": {
+      "enabled": false,
+      "alert_on_failure": true,
+      "alert_on_performance": true,
+      "alert_on_rate_limit": true,
+      "alert_recipients": ["ops_team", "dev_team"]
+    }
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-21",
+    "last_modified": "2026-03-21",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Complete notification configuration for KPRFlow Enterprise",
+    "total_channels": 4,
+    "total_templates": 12,
+    "supported_languages": 2,
+    "data_sources": [
+      "bramsray3/configuration/notification_configuration.json"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}

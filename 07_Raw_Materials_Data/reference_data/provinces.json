@@ -1,0 +1,774 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-20",
+  "source": "indonesia_government_data",
+  "total_provinces": 38,
+  "data": [
+    {
+      "id": 11,
+      "name": "Aceh",
+      "capital": "Banda Aceh",
+      "iso_code": "ID-AC",
+      "region": "Sumatera",
+      "population": 5274471,
+      "area_km2": 57650,
+      "density_per_km2": 91,
+      "districts": 18,
+      "cities": 0,
+      "established_year": 1953,
+      "governor": "Nova Iriansyah",
+      "website": "https://www.acehprov.go.id",
+      "coordinates": {
+        "latitude": 4.695135,
+        "longitude": 96.749397
+      }
+    },
+    {
+      "id": 12,
+      "name": "Sumatera Utara",
+      "capital": "Medan",
+      "iso_code": "ID-SU",
+      "region": "Sumatera",
+      "population": 14799361,
+      "area_km2": 72981,
+      "density_per_km2": 203,
+      "districts": 25,
+      "cities": 8,
+      "established_year": 1948,
+      "governor": "Edy Rahmayadi",
+      "website": "https://www.sumutprov.go.id",
+      "coordinates": {
+        "latitude": 3.595196,
+        "longitude": 98.672223
+      }
+    },
+    {
+      "id": 13,
+      "name": "Sumatera Barat",
+      "capital": "Padang",
+      "iso_code": "ID-SB",
+      "region": "Sumatera",
+      "population": 5534472,
+      "area_km2": 42013,
+      "density_per_km2": 132,
+      "districts": 12,
+      "cities": 7,
+      "established_year": 1948,
+      "governor": "Mahyeldi Ansharullah",
+      "website": "https://www.sumbarprov.go.id",
+      "coordinates": {
+        "latitude": -0.947142,
+        "longitude": 100.354268
+      }
+    },
+    {
+      "id": 14,
+      "name": "Riau",
+      "capital": "Pekanbaru",
+      "iso_code": "ID-RI",
+      "region": "Sumatera",
+      "population": 6398470,
+      "area_km2": 87915,
+      "density_per_km2": 73,
+      "districts": 10,
+      "cities": 2,
+      "established_year": 1957,
+      "governor": "Syamsuar",
+      "website": "https://www.riau.go.id",
+      "coordinates": {
+        "latitude": 0.293347,
+        "longitude": 101.706839
+      }
+    },
+    {
+      "id": 15,
+      "name": "Jambi",
+      "capital": "Jambi",
+      "iso_code": "ID-JA",
+      "region": "Sumatera",
+      "population": 3548228,
+      "area_km2": 50160,
+      "density_per_km2": 71,
+      "districts": 9,
+      "cities": 2,
+      "established_year": 1957,
+      "governor": "Al Haris",
+      "website": "https://www.jambiprov.go.id",
+      "coordinates": {
+        "latitude": -1.610640,
+        "longitude": 103.613129
+      }
+    },
+    {
+      "id": 16,
+      "name": "Sumatera Selatan",
+      "capital": "Palembang",
+      "iso_code": "ID-SS",
+      "region": "Sumatera",
+      "population": 8467326,
+      "area_km2": 91592,
+      "density_per_km2": 92,
+      "districts": 13,
+      "cities": 4,
+      "established_year": 1948,
+      "governor": "Herman Deru",
+      "website": "https://www.sumselprov.go.id",
+      "coordinates": {
+        "latitude": -2.976074,
+        "longitude": 104.775429
+      }
+    },
+    {
+      "id": 17,
+      "name": "Bengkulu",
+      "capital": "Bengkulu",
+      "iso_code": "ID-BE",
+      "region": "Sumatera",
+      "population": 2035709,
+      "area_km2": 19919,
+      "density_per_km2": 102,
+      "districts": 9,
+      "cities": 1,
+      "established_year": 1967,
+      "governor": "Rohidin Mersyah",
+      "website": "https://www.bengkuluprov.go.id",
+      "coordinates": {
+        "latitude": -3.800449,
+        "longitude": 102.251594
+      }
+    },
+    {
+      "id": 18,
+      "name": "Lampung",
+      "capital": "Bandar Lampung",
+      "iso_code": "ID-LA",
+      "region": "Sumatera",
+      "population": 8085490,
+      "area_km2": 35376,
+      "density_per_km2": 229,
+      "districts": 13,
+      "cities": 2,
+      "established_year": 1964,
+      "governor": "Arinal Djunaidi",
+      "website": "https://www.lampungprov.go.id",
+      "coordinates": {
+        "latitude": -5.429281,
+        "longitude": 105.261149
+      }
+    },
+    {
+      "id": 19,
+      "name": "Kepulauan Bangka Belitung",
+      "capital": "Pangkalpinang",
+      "iso_code": "ID-BB",
+      "region": "Sumatera",
+      "population": 1481756,
+      "area_km2": 16470,
+      "density_per_km2": 90,
+      "districts": 6,
+      "cities": 1,
+      "established_year": 2000,
+      "governor": "Erzaldi Rosman Djohan",
+      "website": "https://www.babelprov.go.id",
+      "coordinates": {
+        "latitude": -2.133333,
+        "longitude": 106.116667
+      }
+    },
+    {
+      "id": 21,
+      "name": "Kepulauan Riau",
+      "capital": "Tanjungpinang",
+      "iso_code": "ID-KR",
+      "region": "Sumatera",
+      "population": 2273188,
+      "area_km2": 8201,
+      "density_per_km2": 277,
+      "districts": 5,
+      "cities": 2,
+      "established_year": 2002,
+      "governor": "Ansar Ahmad",
+      "website": "https://www.kepriprov.go.id",
+      "coordinates": {
+        "latitude": 0.933333,
+        "longitude": 104.433333
+      }
+    },
+    {
+      "id": 31,
+      "name": "DKI Jakarta",
+      "capital": "Jakarta",
+      "iso_code": "ID-JK",
+      "region": "Jawa",
+      "population": 10562088,
+      "area_km2": 664,
+      "density_per_km2": 15906,
+      "districts": 6,
+      "cities": 1,
+      "established_year": 1527,
+      "governor": "Anies Baswedan",
+      "website": "https://www.jakarta.go.id",
+      "coordinates": {
+        "latitude": -6.208763,
+        "longitude": 106.845599
+      }
+    },
+    {
+      "id": 32,
+      "name": "Jawa Barat",
+      "capital": "Bandung",
+      "iso_code": "ID-JB",
+      "region": "Jawa",
+      "population": 48274162,
+      "area_km2": 35378,
+      "density_per_km2": 1365,
+      "districts": 18,
+      "cities": 9,
+      "established_year": 1950,
+      "governor": "Ridwan Kamil",
+      "website": "https://www.jabarprov.go.id",
+      "coordinates": {
+        "latitude": -6.917464,
+        "longitude": 107.619123
+      }
+    },
+    {
+      "id": 33,
+      "name": "Jawa Tengah",
+      "capital": "Semarang",
+      "iso_code": "ID-JT",
+      "region": "Jawa",
+      "population": 36393369,
+      "area_km2": 32801,
+      "density_per_km2": 1109,
+      "districts": 29,
+      "cities": 6,
+      "established_year": 1750,
+      "governor": "Ganjar Pranowo",
+      "website": "https://www.jatengprov.go.id",
+      "coordinates": {
+        "latitude": -7.250445,
+        "longitude": 110.175516
+      }
+    },
+    {
+      "id": 34,
+      "name": "DI Yogyakarta",
+      "capital": "Yogyakarta",
+      "iso_code": "ID-YO",
+      "region": "Jawa",
+      "population": 3689255,
+      "area_km2": 3185,
+      "density_per_km2": 1158,
+      "districts": 4,
+      "cities": 1,
+      "established_year": 1755,
+      "governor": "Sultan Hamengkubuwono X",
+      "website": "https://www.jogjaprov.go.id",
+      "coordinates": {
+        "latitude": -7.795580,
+        "longitude": 110.369492
+      }
+    },
+    {
+      "id": 35,
+      "name": "Jawa Timur",
+      "capital": "Surabaya",
+      "iso_code": "ID-JI",
+      "region": "Jawa",
+      "population": 40665696,
+      "area_km2": 47799,
+      "density_per_km2": 850,
+      "districts": 29,
+      "cities": 9,
+      "established_year": 1947,
+      "governor": "Khofifah Indar Parawansa",
+      "website": "https://www.jatimprov.go.id",
+      "coordinates": {
+        "latitude": -7.536064,
+        "longitude": 112.238402
+      }
+    },
+    {
+      "id": 36,
+      "name": "Banten",
+      "capital": "Serang",
+      "iso_code": "ID-BT",
+      "region": "Jawa",
+      "population": 12595866,
+      "area_km2": 9661,
+      "density_per_km2": 1304,
+      "districts": 4,
+      "cities": 4,
+      "established_year": 2000,
+      "governor": "Wahidin Halim",
+      "website": "https://www.bantenprov.go.id",
+      "coordinates": {
+        "latitude": -6.405817,
+        "longitude": 106.064018
+      }
+    },
+    {
+      "id": 51,
+      "name": "Bali",
+      "capital": "Denpasar",
+      "iso_code": "ID-BA",
+      "region": "Bali & Nusa Tenggara",
+      "population": 4317404,
+      "area_km2": 5780,
+      "density_per_km2": 747,
+      "districts": 8,
+      "cities": 1,
+      "established_year": 1958,
+      "governor": "I Wayan Koster",
+      "website": "https://www.baliprov.go.id",
+      "coordinates": {
+        "latitude": -8.670458,
+        "longitude": 115.212629
+      }
+    },
+    {
+      "id": 52,
+      "name": "Nusa Tenggara Barat",
+      "capital": "Mataram",
+      "iso_code": "ID-NB",
+      "region": "Bali & Nusa Tenggara",
+      "population": 5142377,
+      "area_km2": 18572,
+      "density_per_km2": 277,
+      "districts": 8,
+      "cities": 2,
+      "established_year": 1958,
+      "governor": "Zulkieflimansyah",
+      "website": "https://www.ntbprov.go.id",
+      "coordinates": {
+        "latitude": -8.583069,
+        "longitude": 116.116176
+      }
+    },
+    {
+      "id": 53,
+      "name": "Nusa Tenggara Timur",
+      "capital": "Kupang",
+      "iso_code": "ID-NT",
+      "region": "Bali & Nusa Tenggara",
+      "population": 5325571,
+      "area_km2": 48718,
+      "density_per_km2": 109,
+      "districts": 21,
+      "cities": 1,
+      "established_year": 1958,
+      "governor": "Frans Lebu Raya",
+      "website": "https://www.nttprov.go.id",
+      "coordinates": {
+        "latitude": -10.178306,
+        "longitude": 123.607195
+      }
+    },
+    {
+      "id": 61,
+      "name": "Kalimantan Barat",
+      "capital": "Pontianak",
+      "iso_code": "ID-KB",
+      "region": "Kalimantan",
+      "population": 5034237,
+      "area_km2": 147307,
+      "density_per_km2": 34,
+      "districts": 12,
+      "cities": 2,
+      "established_year": 1956,
+      "governor": "Sutarmidji",
+      "website": "https://www.kalbarprov.go.id",
+      "coordinates": {
+        "latitude": -0.026329,
+        "longitude": 109.342503
+      }
+    },
+    {
+      "id": 62,
+      "name": "Kalimantan Tengah",
+      "capital": "Palangkaraya",
+      "iso_code": "ID-KT",
+      "region": "Kalimantan",
+      "population": 2623396,
+      "area_km2": 153564,
+      "density_per_km2": 17,
+      "districts": 13,
+      "cities": 1,
+      "established_year": 1957,
+      "governor": "Sugianto Sabran",
+      "website": "https://www.kaltengprov.go.id",
+      "coordinates": {
+        "latitude": -1.681944,
+        "longitude": 113.382222
+      }
+    },
+    {
+      "id": 63,
+      "name": "Kalimantan Selatan",
+      "capital": "Banjarmasin",
+      "iso_code": "ID-KS",
+      "region": "Kalimantan",
+      "population": 4119794,
+      "area_km2": 38744,
+      "density_per_km2": 106,
+      "districts": 11,
+      "cities": 2,
+      "established_year": 1950,
+      "governor": "Sahbirin Noor",
+      "website": "https://www.kalselprov.go.id",
+      "coordinates": {
+        "latitude": -3.092642,
+        "longitude": 115.283758
+      }
+    },
+    {
+      "id": 64,
+      "name": "Kalimantan Timur",
+      "capital": "Samarinda",
+      "iso_code": "ID-KI",
+      "region": "Kalimantan",
+      "population": 3789821,
+      "area_km2": 127267,
+      "density_per_km2": 30,
+      "districts": 7,
+      "cities": 3,
+      "established_year": 1956,
+      "governor": "Isran Noor",
+      "website": "https://www.kaltimprov.go.id",
+      "coordinates": {
+        "latitude": -0.502106,
+        "longitude": 117.153709
+      }
+    },
+    {
+      "id": 65,
+      "name": "Kalimantan Utara",
+      "capital": "Tanjung Selor",
+      "iso_code": "ID-KU",
+      "region": "Kalimantan",
+      "population": 701784,
+      "area_km2": 75465,
+      "density_per_km2": 9,
+      "districts": 4,
+      "cities": 1,
+      "established_year": 2012,
+      "governor": "Zainal Arifin Paliwang",
+      "website": "https://www.kaltaraprov.go.id",
+      "coordinates": {
+        "latitude": 3.083333,
+        "longitude": 116.833333
+      }
+    },
+    {
+      "id": 71,
+      "name": "Sulawesi Utara",
+      "capital": "Manado",
+      "iso_code": "ID-SA",
+      "region": "Sulawesi",
+      "population": 2626218,
+      "area_km2": 13851,
+      "density_per_km2": 190,
+      "districts": 11,
+      "cities": 2,
+      "established_year": 1959,
+      "governor": "Olly Dondokambey",
+      "website": "https://www.sulutprov.go.id",
+      "coordinates": {
+        "latitude": 0.634692,
+        "longitude": 123.058993
+      }
+    },
+    {
+      "id": 72,
+      "name": "Sulawesi Tengah",
+      "capital": "Palu",
+      "iso_code": "ID-ST",
+      "region": "Sulawesi",
+      "population": 3102741,
+      "area_km2": 61231,
+      "density_per_km2": 51,
+      "districts": 10,
+      "cities": 1,
+      "established_year": 1964,
+      "governor": "Rusdy Mastura",
+      "website": "https://www.sultengprov.go.id",
+      "coordinates": {
+        "latitude": -0.897222,
+        "longitude": 119.870556
+      }
+    },
+    {
+      "id": 73,
+      "name": "Sulawesi Selatan",
+      "capital": "Makassar",
+      "iso_code": "ID-SN",
+      "region": "Sulawesi",
+      "population": 9073489,
+      "area_km2": 46717,
+      "density_per_km2": 194,
+      "districts": 21,
+      "cities": 3,
+      "established_year": 1950,
+      "governor": "Andi Sudirman Sulaiman",
+      "website": "https://www.sulselprov.go.id",
+      "coordinates": {
+        "latitude": -5.147665,
+        "longitude": 119.432732
+      }
+    },
+    {
+      "id": 74,
+      "name": "Sulawesi Tenggara",
+      "capital": "Kendari",
+      "iso_code": "ID-SR",
+      "region": "Sulawesi",
+      "population": 2635908,
+      "area_km2": 38067,
+      "density_per_km2": 69,
+      "districts": 15,
+      "cities": 2,
+      "established_year": 1964,
+      "governor": "Ali Mazi",
+      "website": "https://www.sultraprov.go.id",
+      "coordinates": {
+        "latitude": -3.998317,
+        "longitude": 122.516640
+      }
+    },
+    {
+      "id": 75,
+      "name": "Gorontalo",
+      "capital": "Gorontalo",
+      "iso_code": "ID-GO",
+      "region": "Sulawesi",
+      "population": 1178838,
+      "area_km2": 12180,
+      "density_per_km2": 97,
+      "districts": 5,
+      "cities": 1,
+      "established_year": 2000,
+      "governor": "Gorontalo",
+      "website": "https://www.gorontaloprov.go.id",
+      "coordinates": {
+        "latitude": 0.683333,
+        "longitude": 123.066667
+      }
+    },
+    {
+      "id": 76,
+      "name": "Sulawesi Barat",
+      "capital": "Mamuju",
+      "iso_code": "ID-SR",
+      "region": "Sulawesi",
+      "population": 1429316,
+      "area_km2": 16787,
+      "density_per_km2": 85,
+      "districts": 6,
+      "cities": 1,
+      "established_year": 2004,
+      "governor": "Ali Baal Masdar",
+      "website": "https://www.sulbarprov.go.id",
+      "coordinates": {
+        "latitude": -2.683333,
+        "longitude": 118.866667
+      }
+    },
+    {
+      "id": 81,
+      "name": "Maluku",
+      "capital": "Ambon",
+      "iso_code": "ID-MA",
+      "region": "Maluku & Papua",
+      "population": 1850780,
+      "area_km2": 31990,
+      "density_per_km2": 58,
+      "districts": 9,
+      "cities": 2,
+      "established_year": 1950,
+      "governor": "Murad Ismail",
+      "website": "https://www.malukuprov.go.id",
+      "coordinates": {
+        "latitude": -3.695338,
+        "longitude": 128.181908
+      }
+    },
+    {
+      "id": 82,
+      "name": "Maluku Utara",
+      "capital": "Ternate",
+      "iso_code": "ID-MU",
+      "region": "Maluku & Papua",
+      "population": 1312776,
+      "area_km2": 31990,
+      "density_per_km2": 41,
+      "districts": 8,
+      "cities": 2,
+      "established_year": 1999,
+      "governor": "Abdul Ghani Kasuba",
+      "website": "https://www.malutprov.go.id",
+      "coordinates": {
+        "latitude": 0.789333,
+        "longitude": 127.352278
+      }
+    },
+    {
+      "id": 91,
+      "name": "Papua",
+      "capital": "Jayapura",
+      "iso_code": "ID-PA",
+      "region": "Maluku & Papua",
+      "population": 4093904,
+      "area_km2": 319038,
+      "density_per_km2": 13,
+      "districts": 25,
+      "cities": 1,
+      "established_year": 1963,
+      "governor": "Lukas Enembe",
+      "website": "https://www.papua.go.id",
+      "coordinates": {
+        "latitude": -2.548926,
+        "longitude": 140.369446
+      }
+    },
+    {
+      "id": 94,
+      "name": "Papua Barat",
+      "capital": "Manokwari",
+      "iso_code": "ID-PB",
+      "region": "Maluku & Papua",
+      "population": 1154847,
+      "area_km2": 140376,
+      "density_per_km2": 8,
+      "districts": 10,
+      "cities": 1,
+      "established_year": 1999,
+      "governor": "Dominggus Mandacan",
+      "website": "https://www.papuabaratprov.go.id",
+      "coordinates": {
+        "latitude": -0.866667,
+        "longitude": 134.066667
+      }
+    },
+    {
+      "id": 93,
+      "name": "Papua Selatan",
+      "capital": "Merauke",
+      "iso_code": "ID-PS",
+      "region": "Maluku & Papua",
+      "population": 513817,
+      "area_km2": 127280,
+      "density_per_km2": 4,
+      "districts": 4,
+      "cities": 1,
+      "established_year": 2022,
+      "governor": "Fredik Gebze",
+      "website": "https://www.papuaselatanprov.go.id",
+      "coordinates": {
+        "latitude": -8.467222,
+        "longitude": 140.389167
+      }
+    },
+    {
+      "id": 92,
+      "name": "Papua Tengah",
+      "capital": "Nabire",
+      "iso_code": "ID-PT",
+      "region": "Maluku & Papua",
+      "population": 1426465,
+      "area_km2": 61312,
+      "density_per_km2": 23,
+      "districts": 8,
+      "cities": 1,
+      "established_year": 2022,
+      "governor": "Ricky Ham Pagawak",
+      "website": "https://www.papuatengahprov.go.id",
+      "coordinates": {
+        "latitude": -3.383333,
+        "longitude": 135.500000
+      }
+    },
+    {
+      "id": 95,
+      "name": "Papua Pegunungan",
+      "capital": "Wamena",
+      "iso_code": "ID-PP",
+      "region": "Maluku & Papua",
+      "population": 1285889,
+      "area_km2": 108476,
+      "density_per_km2": 12,
+      "districts": 8,
+      "cities": 1,
+      "established_year": 2022,
+      "governor": "Yulius Yapugai",
+      "website": "https://www.papuapegununganprov.go.id",
+      "coordinates": {
+        "latitude": -4.083333,
+        "longitude": 138.933333
+      }
+    }
+  ],
+  "regions": [
+    {
+      "name": "Sumatera",
+      "provinces": 10,
+      "total_population": 58196055,
+      "total_area_km2": 539475,
+      "description": "Western region of Indonesia, largest island by population"
+    },
+    {
+      "name": "Jawa",
+      "provinces": 6,
+      "total_population": 151516836,
+      "total_area_km2": 136568,
+      "description": "Central region, most populated area of Indonesia"
+    },
+    {
+      "name": "Bali & Nusa Tenggara",
+      "provinces": 3,
+      "total_population": 14785552,
+      "total_area_km2": 73070,
+      "description": "Eastern islands including Bali and Lesser Sunda Islands"
+    },
+    {
+      "name": "Kalimantan",
+      "provinces": 5,
+      "total_population": 16254032,
+      "total_area_km2": 542347,
+      "description": "Indonesian part of Borneo, largest island by area"
+    },
+    {
+      "name": "Sulawesi",
+      "provinces": 6,
+      "total_population": 20053110,
+      "total_area_km2": 189132,
+      "description": "Central-eastern region, shaped island"
+    },
+    {
+      "name": "Maluku & Papua",
+      "provinces": 6,
+      "total_population": 13409698,
+      "total_area_km2": 915472,
+      "description": "Easternmost region, includes Papua island"
+    }
+  ],
+  "statistics": {
+    "total_population": 273753191,
+    "total_area_km2": 2096064,
+    "average_density_per_km2": 131,
+    "most_populous_province": "Jawa Barat",
+    "least_populous_province": "Papua Selatan",
+    "largest_province_by_area": "Papua",
+    "smallest_province_by_area": "DKI Jakarta",
+    "highest_density_province": "DKI Jakarta",
+    "lowest_density_province": "Papua Pegunungan"
+  },
+  "metadata": {
+    "created_date": "2026-03-20",
+    "last_modified": "2026-03-20",
+    "version": "1.0.0",
+    "source": "BPS Statistics Indonesia",
+    "data_quality": "official",
+    "validation_status": "verified"
+  }
+}

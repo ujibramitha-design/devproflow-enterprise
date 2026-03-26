@@ -1,0 +1,233 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-03-21",
+  "source": "bramsray3_whatsapp_configuration",
+  "description": "Complete WhatsApp configuration for KPRFlow Enterprise",
+  
+  "whatsapp_enabled": false,
+  "whatsapp_rules": {
+    "auto_notifications": {
+      "enabled": false,
+      "types": [
+        "spr_received",
+        "application_approved",
+        "payment_due",
+        "document_uploaded",
+        "appointment_scheduled",
+        "payment_completed",
+        "application_rejected",
+        "document_verified"
+      ],
+      "settings": {
+        "send_immediately": true,
+        "retry_failed_messages": true,
+        "max_retry_attempts": 3,
+        "retry_delay_seconds": 300
+      }
+    },
+    "message_templates": {
+      "enabled": false,
+      "templates": [
+        {
+          "template_id": "welcome",
+          "name": "Welcome Message",
+          "content": "Selamat datang di KPRFlow! Kami siap membantu proses KPR Anda.",
+          "variables": ["customer_name", "application_id"],
+          "language": "id"
+        },
+        {
+          "template_id": "approval",
+          "name": "Approval Notification",
+          "content": "Selamat! Pengajuan KPR Anda telah disetujui. {loan_amount} untuk {property_type}.",
+          "variables": ["customer_name", "loan_amount", "property_type"],
+          "language": "id"
+        },
+        {
+          "template_id": "rejection",
+          "name": "Rejection Notification",
+          "content": "Mohon maaf, pengajuan KPR Anda belum dapat disetujui. Alasan: {rejection_reason}.",
+          "variables": ["customer_name", "rejection_reason", "application_id"],
+          "language": "id"
+        },
+        {
+          "template_id": "payment_reminder",
+          "name": "Payment Reminder",
+          "content": "Pengingat pembayaran: {amount} jatuh tempo pada {due_date}. Segera lakukan pembayaran.",
+          "variables": ["customer_name", "amount", "due_date", "payment_method"],
+          "language": "id"
+        },
+        {
+          "template_id": "document_uploaded",
+          "name": "Document Upload Confirmation",
+          "content": "Dokumen {document_type} telah berhasil diunggah. Kami akan segera memverifikasinya.",
+          "variables": ["customer_name", "document_type", "upload_time"],
+          "language": "id"
+        },
+        {
+          "template_id": "appointment_scheduled",
+          "name": "Appointment Scheduled",
+          "content": "Janji temu telah dijadwalkan pada {appointment_date} pukul {appointment_time}. Lokasi: {location}.",
+          "variables": ["customer_name", "appointment_date", "appointment_time", "location"],
+          "language": "id"
+        },
+        {
+          "template_id": "payment_completed",
+          "name": "Payment Completed",
+          "content": "Pembayaran {amount} telah berhasil diterima. Terima kasih atas kepercayaan Anda.",
+          "variables": ["customer_name", "amount", "payment_date", "payment_method"],
+          "language": "id"
+        },
+        {
+          "template_id": "document_verified",
+          "name": "Document Verified",
+          "content": "Dokumen {document_type} telah diverifikasi. Status: {verification_status}.",
+          "variables": ["customer_name", "document_type", "verification_status", "verification_notes"],
+          "language": "id"
+        }
+      ]
+    },
+    "bulk_messaging": {
+      "enabled": false,
+      "max_recipients": 100,
+      "settings": {
+        "batch_size": 50,
+        "batch_delay_seconds": 60,
+        "max_daily_messages": 1000,
+        "rate_limit_per_minute": 10
+      }
+    },
+    "scheduled_messages": {
+      "enabled": false,
+      "schedule_types": [
+        "daily",
+        "weekly",
+        "monthly"
+      ],
+      "schedules": [
+        {
+          "schedule_id": "daily_payment_reminder",
+          "name": "Daily Payment Reminder",
+          "frequency": "daily",
+          "time": "09:00",
+          "template": "payment_reminder",
+          "recipients": "customers_with_pending_payments"
+        },
+        {
+          "schedule_id": "weekly_status_update",
+          "name": "Weekly Status Update",
+          "frequency": "weekly",
+          "day": "monday",
+          "time": "10:00",
+          "template": "status_update",
+          "recipients": "active_applicants"
+        },
+        {
+          "schedule_id": "monthly_newsletter",
+          "name": "Monthly Newsletter",
+          "frequency": "monthly",
+          "day": 1,
+          "time": "08:00",
+          "template": "newsletter",
+          "recipients": "all_customers"
+        }
+      ]
+    }
+  },
+  
+  "api_configuration": {
+    "provider": "twilio",
+    "api_endpoint": "https://api.twilio.com/2010-04-01/Accounts",
+    "account_sid": null,
+    "auth_token": null,
+    "whatsapp_number": null,
+    "webhook_url": null,
+    "timeout_seconds": 30,
+    "retry_attempts": 3,
+    "rate_limit_per_second": 10
+  },
+  
+  "message_settings": {
+    "max_message_length": 1600,
+    "allowed_media_types": [
+      "image/jpeg",
+      "image/png",
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    ],
+    "max_media_size_mb": 16,
+    "message_retention_days": 90,
+    "delivery_confirmation": true,
+    "read_receipts": true
+  },
+  
+  "security_settings": {
+    "encryption_enabled": true,
+    "data_masking": true,
+    "audit_logging": true,
+    "access_control": {
+      "admin_access": true,
+      "manager_access": true,
+      "staff_access": false,
+      "customer_access": false
+    }
+  },
+  
+  "compliance_settings": {
+    "opt_in_required": true,
+    "opt_out_handling": true,
+    "consent_management": true,
+    "privacy_policy": true,
+    "data_protection": true,
+    "spam_prevention": true
+  },
+  
+  "integration_settings": {
+    "supabase": {
+      "enabled": true,
+      "table_name": "whatsapp_messages",
+      "webhook_table": "whatsapp_webhooks",
+      "template_table": "whatsapp_templates"
+    },
+    "notification_system": {
+      "enabled": true,
+      "sync_with_notifications": true,
+      "unified_messaging": true
+    },
+    "customer_management": {
+      "enabled": true,
+      "sync_customer_data": true,
+      "update_contact_preferences": true
+    }
+  },
+  
+  "monitoring_settings": {
+    "metrics_enabled": true,
+    "logging_enabled": true,
+    "error_tracking": true,
+    "performance_monitoring": true,
+    "alerting": {
+      "delivery_failures": true,
+      "api_errors": true,
+      "rate_limit_exceeded": true,
+      "template_errors": true
+    }
+  },
+  
+  "metadata": {
+    "created_date": "2026-03-21",
+    "last_modified": "2026-03-21",
+    "version": "1.0.0",
+    "author": "KPRFlow Enterprise",
+    "description": "Complete WhatsApp configuration for KPRFlow Enterprise",
+    "total_templates": 8,
+    "total_schedules": 3,
+    "notification_types": 8,
+    "data_sources": [
+      "bramsray3/configuration/whatsapp_configuration.json"
+    ],
+    "data_quality": "enterprise",
+    "validation_status": "verified",
+    "integration_ready": true
+  }
+}
