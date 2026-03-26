@@ -1,58 +1,15 @@
 {
-  "name": "devproflow-com",
-  "framework": "nextjs",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "installCommand": "npm install",
-  "devCommand": "npm run dev",
-  "functions": {
-    "02_Web_Application/frontend/src/app/api/**": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "env": {
-    "NEXT_PUBLIC_SUPABASE_URL": "@supabase-url",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase-anon-key",
-    "GOOGLE_AI_API_KEY": "@google-ai-key",
-    "OPENAI_API_KEY": "@openai-key",
-    "ANTHROPIC_API_KEY": "@anthropic-key"
-  },
-  "build": {
-    "env": {
-      "NEXT_PUBLIC_SUPABASE_URL": "@supabase-url",
-      "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase-anon-key"
-    }
-  },
-  "crons": [],
-  "redirects": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/scanner",
-      "destination": "/scanner",
-      "permanent": true
-    },
-    {
-      "source": "/dashboard",
-      "destination": "/dashboard/bod",
-      "permanent": true
+      "src": "index.js",
+      "use": "@vercel/node"
     }
   ],
-  "headers": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, PUT, DELETE, OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization"
-        }
-      ]
+      "src": "/(.*)",
+      "dest": "index.js"
     }
   ]
 }
