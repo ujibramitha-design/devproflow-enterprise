@@ -22,7 +22,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
-import { useGlobalData, Format } from "@/lib/global-store"
+import { Format } from "@/lib/global-store"
 
 const statusConfig: Record<string, { bg: string; text: string; dot: string }> = {
   "Active Loan": { bg: "bg-devpro-emerald/10", text: "text-devpro-emerald", dot: "bg-devpro-emerald" },
@@ -32,18 +32,40 @@ const statusConfig: Record<string, { bg: string; text: string; dot: string }> = 
 }
 
 export default function CustomerCrmPage() {
-  const { loading, error, fetchAllData, data: units } = useGlobalData()
   const [search, setSearch] = useState("")
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [customersApi, setCustomersApi] = useState<any[]>([])
 
   useEffect(() => {
-    fetchAllData()
-  }, [fetchAllData])
+    const fetchCustomers = async () => {
+      setLoading(true)
+      setError(null)
+      try {
+        const apiBase = (process.env.NEXT_PUBLIC_API_URL || "https://devproflow.com/api").replace(/\/+$/, "")
+        const response = await fetch(`${apiBase}/customers`, { cache: "no-store" })
+        if (!response.ok) {
+          throw new Error(`Failed to fetch customers: HTTP ${response.status}`)
+        }
+        const payload: unknown = await response.json()
+        const rows: any[] = Array.isArray(payload)
+          ? payload
+          : Array.isArray((payload as any)?.data)
+            ? (payload as any).data
+            : []
+        setCustomersApi(rows)
+      } catch (e) {
+        setCustomersApi([])
+        setError(e instanceof Error ? e.message : "Gagal memuat data customer")
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchCustomers()
+  }, [])
 
-  // Generate customer data from global master
-  const customers = units
-    .filter(r => r.nama_customer)
-    .map((unit, index) => {
-      const status = unit.status_unit ? String(unit.status_unit).toUpperCase() : "UNKNOWN"
+  const customers = customersApi.map((customer, index) => {
+      const status = customer.status ? String(customer.status).toUpperCase() : "UNKNOWN"
       let customerStatus = "Prospect"
       
       if (["CAIR"].includes(status)) {
@@ -55,18 +77,18 @@ export default function CustomerCrmPage() {
       }
 
       return {
-        id: `C${String(index + 1).padStart(3, '0')}`,
-        name: String(unit.nama_customer || "—"),
-        email: String(unit.email_cust || "—"),
-        phone: String(unit.wa_cust || "—"),
+        id: String(customer.customer_id ?? customer.id ?? `C${String(index + 1).padStart(3, '0')}`),
+        name: String(customer.name ?? customer.nama_customer ?? "—"),
+        email: String(customer.email ?? customer.email_cust ?? "—"),
+        phone: String(customer.phone ?? customer.wa_cust ?? "—"),
         status: customerStatus,
-        project: String(unit.siteplan || "—"),
-        unit: unit.blok && unit.nomor ? `Block ${unit.blok}-${unit.nomor}` : String(unit.id_unit || "—"),
-        history: "1 Application",
-        lastActive: unit.updated_at ? Format.dateShort(unit.updated_at) : "—",
-        plafon: unit.plafon ? Format.rupiah(unit.plafon) : "—",
-        bank: String(unit.bank_final || "—"),
-        sales: String(unit.sales_koordinator || "—"),
+        project: String(customer.project ?? customer.siteplan ?? "—"),
+        unit: customer.blok && customer.nomor ? `Block ${customer.blok}-${customer.nomor}` : String(customer.id_unit ?? customer.unit_id ?? "—"),
+        history: String(customer.history ?? "1 Application"),
+        lastActive: customer.updated_at ? Format.dateShort(customer.updated_at) : "—",
+        plafon: customer.plafon ? Format.rupiah(customer.plafon) : "—",
+        bank: String(customer.bank ?? customer.bank_final ?? "—"),
+        sales: String(customer.sales ?? customer.sales_koordinator ?? "—"),
       }
     })
 

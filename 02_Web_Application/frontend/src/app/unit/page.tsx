@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
-import { useGlobalData, Format, GlobalMasterRow } from "@/lib/global-store"
+import { Format } from "@/lib/global-store"
 import { HoverScale, StaggerContainer, StaggerItem, FadeIn } from "@/components/ui/page-transition"
 import { DsSkeleton, DsSkeletonGrid } from "@/components/ui/ds-skeleton"
 import { UnitStatusPanel } from "@/components/ui/unit-status-panel"
@@ -49,12 +49,50 @@ export default function UnitManagementPage() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const [search,   setSearch]   = useState("")
   const [activeSiteplan, setActiveSiteplan] = useState<string | null>(null)
+  const [units, setUnits] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  const { data: units, loading, error, fetchAllData, clearError, statusCounts } = useGlobalData()
+  const fetchAllData = async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const apiBase = (process.env.NEXT_PUBLIC_API_URL || "https://devproflow.com/api").replace(/\/+$/, "")
+      const response = await fetch(`${apiBase}/units`, { cache: "no-store" })
+      if (!response.ok) {
+        throw new Error(`Failed to fetch units: HTTP ${response.status}`)
+      }
+      const payload: unknown = await response.json()
+      const rows: any[] = Array.isArray(payload)
+        ? payload
+        : Array.isArray((payload as any)?.data)
+          ? (payload as any).data
+          : []
+      const mapped = rows.map((row, index) => ({
+        ...row,
+        id_unit: row.id_unit ?? row.unit_id ?? row.id ?? `UNIT-${index + 1}`,
+        tipe_unit: row.tipe_unit ?? row.unit_type ?? row.type ?? "—",
+        jenis_produk: row.jenis_produk ?? row.product_type ?? row.category ?? row.tipe_unit ?? row.unit_type ?? "—",
+        siteplan: row.siteplan ?? row.project ?? row.project_name ?? row.area ?? "—",
+        siteplan_index: row.siteplan_index ?? row.siteplan_id ?? row.project_id ?? null,
+        cluster: row.cluster ?? row.zone ?? row.section ?? "—",
+        blok: row.blok ?? row.block ?? "",
+        nomor: row.nomor ?? row.number ?? row.unit_number ?? "",
+        harga_jual_dpp: row.harga_jual_dpp ?? row.price ?? row.unit_price ?? row.amount ?? 0,
+        status_unit: row.status_unit ?? row.status ?? "AVAILABLE",
+      }))
+      setUnits(mapped)
+    } catch (e) {
+      setUnits([])
+      setError(e instanceof Error ? e.message : "Gagal memuat data unit")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
     fetchAllData()
-  }, [fetchAllData])
+  }, [])
 
   // Filter pencarian lokal
   const filtered = units.filter((u) => {
@@ -69,6 +107,13 @@ export default function UnitManagementPage() {
   })
 
   // Statistik dari global store
+  const statusCounts = {
+    available: units.filter(r => ["AVAILABLE", "TERSEDIA"].includes(String(r.status_unit ?? "").toUpperCase())).length,
+    akad: units.filter(r => String(r.status_unit ?? "").toUpperCase() === "AKAD").length,
+    cair: units.filter(r => String(r.status_unit ?? "").toUpperCase() === "CAIR").length,
+    sold: units.filter(r => ["SOLD", "TERJUAL"].includes(String(r.status_unit ?? "").toUpperCase())).length,
+    reserved: units.filter(r => !["AVAILABLE", "TERSEDIA", "AKAD", "CAIR", "SOLD", "TERJUAL"].includes(String(r.status_unit ?? "").toUpperCase())).length,
+  }
   const stats = {
     total:     statusCounts.available + statusCounts.akad + statusCounts.cair + statusCounts.sold + statusCounts.reserved,
     available: statusCounts.available,
@@ -291,7 +336,7 @@ export default function UnitManagementPage() {
             <p className="text-xs text-devpro-text-secondary/60 max-w-xs mx-auto leading-relaxed">
               {search
                 ? `Tidak ada unit dengan kata kunci "${search}"`
-                : 'Tabel "data global master" di Supabase masih kosong, atau koneksi belum dikonfigurasi.'}
+                : "Belum ada data unit dari backend API production."}
             </p>
           </div>
           {search && (
@@ -420,10 +465,10 @@ export default function UnitManagementPage() {
       <div className="bg-devpro-charcoal/50 border border-devpro-slate/30 p-4 rounded-xl flex items-center justify-center">
         <span className="text-[10px] font-bold text-devpro-text-secondary uppercase tracking-[0.3em]">
           {loading
-            ? "Memuat data dari Supabase..."
+            ? "Memuat data dari API production..."
             : error
-              ? "Koneksi Supabase diperlukan"
-              : `Menampilkan ${filtered.length} dari ${units.length} unit · Supabase Live · READ-ONLY`}
+              ? "Koneksi API production diperlukan"
+              : `Menampilkan ${filtered.length} dari ${units.length} unit · devproflow.com/api/units`}
         </span>
       </div>
 

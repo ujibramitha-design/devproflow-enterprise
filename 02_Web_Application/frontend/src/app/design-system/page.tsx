@@ -19,7 +19,7 @@ import {
   DsInput,
   DsCard, DsCardHeader, DsCardTitle, DsCardContent, DsCardFooter,
   DsModal, DsModalTrigger, DsModalContent, DsModalHeader,
-  DsModalTitle, DsModalDescription, DsModalBody, DsModalFooter,
+  DsModalTitle, DsModalDescription, DsModalBody, DsModalFooter, DsModalClose,
 } from "@/components/atoms"
 
 // ── Token color swatches ──────────────────────────────────────────────────────

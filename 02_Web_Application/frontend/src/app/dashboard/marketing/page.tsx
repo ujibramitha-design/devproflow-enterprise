@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Zap, Target, Users, TrendingUp, BarChart3, Megaphone, AlertCircle, Loader2, CheckCircle, Map, Search, RefreshCw, MessageSquare, Diamond, Phone, Grid3x3, Package, Edit } from "lucide-react"
+import { Zap, Target, Users, TrendingUp, BarChart3, Megaphone, AlertCircle, Loader2, CheckCircle, Map, Search, RefreshCw, MessageSquare, Diamond, Phone, Grid3x3, Package, Edit, ZoomIn, ZoomOut } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
 export default function MarketingPanelPage() {
   const { loading, error, fetchAllData, data: units } = useGlobalData()

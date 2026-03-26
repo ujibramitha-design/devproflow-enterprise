@@ -1,13 +1,16 @@
 // Backend API configuration
 export const API_CONFIG = {
-  BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'https://api.devproflow.com',
+  BASE_URL: (process.env.NEXT_PUBLIC_API_URL || 'https://devproflow.com/api').replace(/\/+$/, ''),
   ENDPOINTS: {
-    HEALTH: '/api/health',
-    UNITS: '/api/units',
-    CUSTOMERS: '/api/customers',
-    APPLICATIONS: '/api/applications',
-    DASHBOARD_STATS: '/api/dashboard/stats',
-    WHATSAPP: '/api/whatsapp/send'
+    // NOTE: BASE_URL diasumsikan sudah termasuk prefix `/api`.
+    // Contoh: NEXT_PUBLIC_API_URL=https://devproflow.com/api
+    // sehingga HEALTH => https://devproflow.com/api/health
+    HEALTH: '/health',
+    UNITS: '/units',
+    CUSTOMERS: '/customers',
+    APPLICATIONS: '/applications',
+    DASHBOARD_STATS: '/dashboard/stats',
+    WHATSAPP: '/whatsapp/send'
   }
 }
 

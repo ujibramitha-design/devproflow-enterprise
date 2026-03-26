@@ -39,7 +39,8 @@ import {
   ScanLine,
   Calendar,
   Clock,
-  TrendingUp
+  TrendingUp,
+  X
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"

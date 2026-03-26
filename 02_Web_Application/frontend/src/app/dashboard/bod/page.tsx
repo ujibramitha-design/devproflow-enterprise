@@ -185,7 +185,7 @@ export default function BODDashboardPage() {
       sub:   loading ? "Memuat..." : `${progresStats.proses} masih proses — kolom progres_rumah`,
       icon:  Home,
     },
-  ]
+  ];
 
   return (
     <div className="flex flex-col gap-8 devpro-animate-fade-in">
@@ -320,6 +320,7 @@ export default function BODDashboardPage() {
                   </Button>
                 </div>
               </div>
+            </div>
             </CardHeader>
             <CardContent>
               {siteplanView === 'grid' ? (
@@ -424,9 +425,8 @@ export default function BODDashboardPage() {
                       return (
                         <div
                           key={index}
-                          className="absolute w-3 h-3 rounded-full cursor-pointer hover:scale-150 transition-transform"
                           style={pos}
-                          className={statusColor}
+                          className={cn("absolute w-3 h-3 rounded-full cursor-pointer hover:scale-150 transition-transform", statusColor)}
                           onClick={() => setSelectedUnit(unit)}
                           title={`${unit.tipe_unit} - ${unit.blok}-${unit.nomor}`}
                         />
@@ -460,7 +460,6 @@ export default function BODDashboardPage() {
             </CardContent>
           </Card>
         </FadeIn>
-      )}
 
       {/* ── Activity Feed + Firebase Stats ─────────────────────────────────── */}
       <div className="grid gap-6 lg:grid-cols-2">

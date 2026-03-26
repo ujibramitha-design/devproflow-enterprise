@@ -168,7 +168,7 @@ export function SimpleKPRFlowDashboard() {
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <Button variant="kprflow" className="gap-2">
+            <Button variant="devpro" className="gap-2">
               <FileText className="h-4 w-4" />
               Pengajuan Baru
             </Button>
@@ -215,7 +215,7 @@ export function SimpleKPRFlowDashboard() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Button variant="kprflow">
+              <Button variant="devpro">
                 Search
               </Button>
             </div>

@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { WhatsAppService } from "@/lib/whatsapp"
-import { FirebaseService } from "@/lib/firebase"
 import { Search, Phone, CheckCircle, XCircle, Clock, DollarSign } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -28,26 +27,12 @@ export function RealTimeUnits() {
   useEffect(() => {
     // Load initial data
     loadUnits()
-    
-    // Set up real-time listener
-    const unsubscribe = FirebaseService.onUnitsChange((data) => {
-      if (data) {
-        const unitsArray = Object.entries(data).map(([id, unit]: [string, any]) => ({
-          id,
-          ...unit
-        }))
-        setUnits(unitsArray)
-        setFilteredUnits(unitsArray)
-        setConnectionStatus("connected")
-      } else {
-        setUnits([])
-        setFilteredUnits([])
-      }
-      setLoading(false)
-    })
+
+    // Periodic refresh to keep data "live" without relying on Firebase mocks.
+    const interval = setInterval(loadUnits, 30000)
 
     return () => {
-      if (unsubscribe) unsubscribe()
+      clearInterval(interval)
     }
   }, [])
 
@@ -67,18 +52,39 @@ export function RealTimeUnits() {
   }, [searchTerm, units])
 
   async function loadUnits() {
+    setLoading(true)
+    setConnectionStatus("connecting")
+
     try {
-      const data = await FirebaseService.getUnits()
-      if (data) {
-        const unitsArray = Object.entries(data).map(([id, unit]: [string, any]) => ({
-          id,
-          ...unit
-        }))
-        setUnits(unitsArray)
-        setFilteredUnits(unitsArray)
+      const apiBase = (process.env.NEXT_PUBLIC_API_URL || "https://devproflow.com/api").replace(/\/+$/, "")
+
+      const res = await fetch(`${apiBase}/units`, { cache: "no-store" })
+      if (!res.ok) {
+        throw new Error(`Failed to fetch units: HTTP ${res.status}`)
       }
+
+      const json: unknown = await res.json()
+      const rows: any[] = Array.isArray(json)
+        ? json
+        : Array.isArray((json as any)?.data)
+          ? (json as any).data
+          : []
+
+      const mapped: UnitData[] = rows.map((u, idx) => ({
+        id: String(u.id_unit ?? u.unit_id ?? u.id ?? idx),
+        nama_customer: u.nama_customer ?? u.customer_name ?? undefined,
+        tipe_unit: u.tipe_unit ?? u.unit_type ?? undefined,
+        harga_jual_dpp: u.harga_jual_dpp ?? u.price ?? undefined,
+        status_unit: String(u.status_unit ?? u.status ?? ""),
+      }))
+
+      setUnits(mapped)
+      setFilteredUnits(mapped)
+      setConnectionStatus("connected")
     } catch (error) {
       console.error("Error loading units:", error)
+      setUnits([])
+      setFilteredUnits([])
       setConnectionStatus("error")
     } finally {
       setLoading(false)
@@ -237,7 +243,11 @@ export function RealTimeUnits() {
             <div className="text-center py-8">
               <Search className="size-12 text-muted-foreground mx-auto mb-4" />
               <p className="text-muted-foreground">
-                {searchTerm ? "No units found matching your search." : "No units available."}
+                {connectionStatus === "error"
+                  ? "Gagal memuat data unit dari backend. Cek NEXT_PUBLIC_API_URL dan endpoint /api/units."
+                  : searchTerm
+                    ? "No units found matching your search."
+                    : "No units available."}
               </p>
             </div>
           )}

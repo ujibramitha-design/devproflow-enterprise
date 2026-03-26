@@ -304,6 +304,7 @@ export class BusinessRulesManager {
         default:
           return { valid: true }
       }
+      return { valid: true }
     } catch (error) {
       console.error(`Error evaluating rule ${rule.rule_id}:`, error)
       return { valid: true } // Fail safe

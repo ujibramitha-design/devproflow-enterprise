@@ -188,7 +188,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   // Fetch from backend
-  const response = await fetch('http://localhost:3002/api/units');
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/units`);
   const data = await response.json();
   
   return NextResponse.json(data);
@@ -198,7 +198,7 @@ export async function POST(request: Request) {
   const body = await request.json();
   
   // Create unit
-  const response = await fetch('http://localhost:3002/api/units', {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/units`); {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),

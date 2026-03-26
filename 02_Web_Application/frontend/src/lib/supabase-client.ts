@@ -161,7 +161,7 @@ export class SupabaseClientManager {
    */
   async createApplication(application: Database['public']['Tables']['kpr_applications']['Insert']) {
     const client = this.getClient()
-    const { data, error } = await client
+    const { data, error } = await (client as any)
       .from('kpr_applications')
       .insert(application)
       .select()
@@ -204,7 +204,7 @@ export class SupabaseClientManager {
 
   async updateApplication(id: string, updates: Database['public']['Tables']['kpr_applications']['Update']) {
     const client = this.getClient()
-    const { data, error } = await client
+    const { data, error } = await (client as any)
       .from('kpr_applications')
       .update({ ...updates, updated_at: new Date().toISOString() })
       .eq('id', id)
@@ -230,7 +230,7 @@ export class SupabaseClientManager {
    */
   async createApplicant(applicant: Database['public']['Tables']['applicants']['Insert']) {
     const client = this.getClient()
-    const { data, error } = await client
+    const { data, error } = await (client as any)
       .from('applicants')
       .insert(applicant)
       .select()
@@ -364,13 +364,15 @@ export class SupabaseClientManager {
 
     if (error) throw error
 
-    const stats = data.reduce((acc, app) => {
-      acc[app.status] = (acc[app.status] || 0) + 1
+    const rows = (data ?? []) as Array<{ status?: string | null }>
+    const stats = rows.reduce((acc, app) => {
+      const key = app.status || 'unknown'
+      acc[key] = (acc[key] || 0) + 1
       return acc
     }, {} as Record<string, number>)
 
     return {
-      total: data.length,
+      total: rows.length,
       pending: stats.pending || 0,
       approved: stats.approved || 0,
       rejected: stats.rejected || 0,

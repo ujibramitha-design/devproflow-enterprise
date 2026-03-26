@@ -45,6 +45,9 @@ function createWindow() {
   const startUrl = isDev
     ? 'http://localhost:3000'
     : `file://${path.join(process.resourcesPath, 'web-app', 'index.html')}`
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/units`);
+    const data = await response.json();
+    console.log("DATA ASLI DARI BACKEND:", data); // <--- Cek di Console Browser (F12)
 
   mainWindow.loadURL(startUrl)
 

@@ -13,14 +13,23 @@ const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Middleware
-app.use(cors());
+// Middleware - CORS configuration
+const corsOptions = {
+  origin: [
+    'https://devproflow.com',
+    'https://www.devproflow.com', 
+    'http://localhost:3000',
+    'http://localhost:3002'
+  ],
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // API Routes
 app.get('/', (req, res) => {
   res.json({ 
-    message: 'KPRFlow Enterprise API Server',
+    message: 'DevPro Flow Enterprise API Server',
     version: '1.0.0',
     status: 'Running',
     endpoints: {
@@ -31,12 +40,12 @@ app.get('/', (req, res) => {
       dashboard: '/api/dashboard/stats',
       whatsapp: '/api/whatsapp/send'
     },
-    documentation: 'https://github.com/kprflow/enterprise-api'
+    documentation: 'https://github.com/bramsray1/devpro-flow'
   });
 });
 
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'KPRFlow Enterprise API is running' });
+  res.json({ status: 'OK', message: 'DevPro Flow Enterprise API is running' });
 });
 
 // Units API
@@ -180,7 +189,7 @@ app.use((err, req, res, next) => {
 // Start server only in non-serverless environment
 if (process.env.NODE_ENV !== 'production' || process.env.VERCEL !== '1') {
   app.listen(PORT, () => {
-    console.log(`🚀 KPRFlow Enterprise API server running on port ${PORT}`);
+    console.log(`🚀 DevPro Flow Enterprise API server running on port ${PORT}`);
     console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
   });
 }

@@ -1,26 +1,12 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Calendar, Eye } from "lucide-react"
+import { Eye } from "lucide-react"
 import Link from "next/link"
 import DarkModeToggle from "@/components/ui/DarkModeToggle"
 import { AnimatedLogo } from "@/components/ui/AnimatedLogo"
 import { LiveClock } from "@/components/ui/LiveClock"
 
 export function DashboardHeader() {
-  const [mounted, setMounted] = useState(false)
-  const [formattedDate, setFormattedDate] = useState("")
-
-  useEffect(() => {
-    setMounted(true)
-    setFormattedDate(new Date().toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }))
-  }, [])
-
   return (
     <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between devpro-animate-fade-in">
       <div className="flex flex-col gap-4">
@@ -43,7 +29,7 @@ export function DashboardHeader() {
         {/* Description */}
         <div className="max-w-2xl">
           <h2 className="text-3xl font-black tracking-tight text-gray-900 dark:text-white leading-tight mb-2">
-            DevPro <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">Flow</span> Dashboard
+            DevPro <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">Flow</span> Enterprise Dashboard
           </h2>
           <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
             Integrated enterprise control system for KPR applications, unit inventory, and cross-platform synchronization with real-time analytics.
@@ -59,7 +45,7 @@ export function DashboardHeader() {
         <div className="flex items-center gap-3">
           <DarkModeToggle />
           <Link 
-            href="/reports/view"
+            href="/dashboard/bod"
             className="flex h-12 items-center gap-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-6 text-[13px] font-black text-white shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300 hover:scale-[1.05] active:scale-[0.95]"
           >
             <Eye className="size-5" strokeWidth={2.5} />

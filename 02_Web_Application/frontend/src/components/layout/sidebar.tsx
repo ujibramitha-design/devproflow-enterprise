@@ -43,7 +43,7 @@ export function DevProSidebar() {
           </div>
           {!collapsed && (
             <div className="flex flex-col">
-              <span className="font-bold text-lg text-[var(--foreground)] tracking-tight">DevPro <span className="text-[var(--primary)]">Flow</span></span>
+              <span className="font-bold text-lg text-[var(--foreground)] tracking-tight">DevPro <span className="text-[var(--primary)]">Flow</span> Enterprise</span>
               <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[var(--muted-foreground)] leading-none">
                 Enterprise v2.0
               </span>

@@ -22,7 +22,7 @@ export default function UnitCatalogPage() {
         <div className="flex items-center gap-3">
           <Badge className="bg-emerald-500/10 text-emerald-600 border-0">
             <Database className="size-3 mr-1" />
-            Firebase Connected
+            Backend API Connected
           </Badge>
           <Badge className="bg-rose-500/10 text-rose-400 border-0">
             <Phone className="size-3 mr-1" />
@@ -45,7 +45,7 @@ export default function UnitCatalogPage() {
         <CardContent>
           <div className="space-y-4">
             <p className="text-devpro-muted-foreground">
-              Browse available properties in real-time. All data is synchronized directly from our Firebase database, 
+              Browse available properties in real-time. All data is synchronized directly from our Backend API, 
               ensuring you always see the latest availability and pricing information.
             </p>
             <div className="grid gap-4 md:grid-cols-3">

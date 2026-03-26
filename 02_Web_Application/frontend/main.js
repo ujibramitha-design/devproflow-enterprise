@@ -11,8 +11,9 @@ function createWindow() {
     }
   });
 
-  // Load the Next.js development server
-  win.loadURL('http://localhost:3000');
+  // Load the Next.js server - use environment variable for production
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  win.loadURL(appUrl);
 
   // Optional: Open DevTools for debugging
   // win.webContents.openDevTools();

@@ -6,7 +6,7 @@ const nextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true,
-    domains: ['localhost', 'images.unsplash.com'],
+    domains: ['localhost', 'images.unsplash.com', 'devproflow.com', 'www.devproflow.com'],
   },
 
   // Allow Next.js compiler to process files from 05_UI_Design_System outside project root

@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
-import { useGlobalData, Format } from "@/lib/global-store"
+import { Format } from "@/lib/global-store"
 
 const steps = [
   { id: 1, title: "Personal Data", icon: User },
@@ -30,15 +30,60 @@ const steps = [
 ]
 
 export default function KprApplicationPage() {
-  const { loading, error, fetchAllData, data: units } = useGlobalData()
   const [currentStep, setCurrentStep] = useState(1)
   const [isVerifying, setIsVerifying] = useState(false)
   const [isVerified, setIsVerified] = useState(false)
   const [selectedUnit, setSelectedUnit] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [units, setUnits] = useState<any[]>([])
+  const [applications, setApplications] = useState<any[]>([])
 
   useEffect(() => {
-    fetchAllData()
-  }, [fetchAllData])
+    const fetchInitialData = async () => {
+      setLoading(true)
+      try {
+        const apiBase = (process.env.NEXT_PUBLIC_API_URL || "https://devproflow.com/api").replace(/\/+$/, "")
+        const [unitsRes, applicationsRes] = await Promise.all([
+          fetch(`${apiBase}/units`, { cache: "no-store" }),
+          fetch(`${apiBase}/applications`, { cache: "no-store" }),
+        ])
+        if (!unitsRes.ok) {
+          throw new Error(`Failed to fetch units: HTTP ${unitsRes.status}`)
+        }
+        if (!applicationsRes.ok) {
+          throw new Error(`Failed to fetch applications: HTTP ${applicationsRes.status}`)
+        }
+        const unitsPayload: unknown = await unitsRes.json()
+        const applicationsPayload: unknown = await applicationsRes.json()
+        const unitsRows: any[] = Array.isArray(unitsPayload)
+          ? unitsPayload
+          : Array.isArray((unitsPayload as any)?.data)
+            ? (unitsPayload as any).data
+            : []
+        const applicationsRows: any[] = Array.isArray(applicationsPayload)
+          ? applicationsPayload
+          : Array.isArray((applicationsPayload as any)?.data)
+            ? (applicationsPayload as any).data
+            : []
+        const mappedUnits = unitsRows.map((unit, index) => ({
+          ...unit,
+          no: unit.no ?? index + 1,
+          status_unit: unit.status_unit ?? unit.status ?? "AVAILABLE",
+          siteplan: unit.siteplan ?? unit.project ?? unit.project_name ?? "—",
+          blok: unit.blok ?? unit.block ?? "",
+          nomor: unit.nomor ?? unit.number ?? unit.unit_number ?? "",
+          tipe_unit: unit.tipe_unit ?? unit.unit_type ?? unit.type ?? "—",
+          jenis_produk: unit.jenis_produk ?? unit.product_type ?? unit.tipe_unit ?? unit.unit_type ?? "—",
+          harga_jual_dpp: unit.harga_jual_dpp ?? unit.price ?? unit.unit_price ?? 0,
+        }))
+        setUnits(mappedUnits)
+        setApplications(applicationsRows)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchInitialData()
+  }, [])
 
   // Get available units for selection
   const availableUnits = units.filter(r => {
@@ -112,7 +157,7 @@ export default function KprApplicationPage() {
                 </CardDescription>
               </div>
               <Badge className="bg-devpro-navy text-devpro-neon border-devpro-neon/30 px-3 py-1 text-[10px] font-black tracking-widest uppercase">
-                System Active
+                {applications.length} Applications
               </Badge>
             </div>
           </CardHeader>
