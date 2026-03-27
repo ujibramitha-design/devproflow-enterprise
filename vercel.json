@@ -2,9 +2,13 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/api/(.*)",
+      "destination": "/02_Web_Application/backend/index.js"
+    },
+    {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "api.devproflow.com" }],
-      "destination": "/02_Web_Application/backend/api/index.js"
+      "destination": "/02_Web_Application/backend/$1"
     },
     {
       "source": "/(.*)",
