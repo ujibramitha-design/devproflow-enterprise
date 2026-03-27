@@ -29,25 +29,16 @@ app.use(express.json());
 
 // Health Check Route
 app.get('/health', (req, res) => {
-  res.json({ status: 'API Live on Subdomain' });
+  res.json({ 
+    status: 'Online', 
+    message: 'DevPro Flow API is running on Subdomain!',
+    timestamp: new Date().toISOString()
+  });
 });
 
 // API Routes
 app.get('/', (req, res) => {
-  res.json({ 
-    message: 'DevPro Flow Enterprise API Server',
-    version: '1.0.0',
-    status: 'Running',
-    endpoints: {
-      health: '/api/health',
-      units: '/api/units',
-      customers: '/api/customers',
-      applications: '/api/applications',
-      dashboard: '/api/dashboard/stats',
-      whatsapp: '/api/whatsapp/send'
-    },
-    documentation: 'https://github.com/bramsray1/devpro-flow'
-  });
+  res.send('DevPro Flow API Engine is Live!');
 });
 
 app.get('/api/health', (req, res) => {
