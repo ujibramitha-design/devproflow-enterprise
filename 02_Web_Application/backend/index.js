@@ -27,14 +27,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Health Check Route
-app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'Online', 
-    message: 'DevPro Flow API is running on Subdomain!',
-    timestamp: new Date().toISOString()
-  });
-});
+app.get('/health', (req, res) => res.json({ status: 'API Live on Subdomain' }));
 
 // API Routes
 app.get('/', (req, res) => {
