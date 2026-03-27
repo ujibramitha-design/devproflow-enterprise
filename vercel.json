@@ -4,7 +4,7 @@
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "api.devproflow.com" }],
-      "destination": "/02_Web_Application/backend/$1"
+      "destination": "/02_Web_Application/backend/api/index.js"
     },
     {
       "source": "/(.*)",
