@@ -1,26 +1,19 @@
 {
   "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "02_Web_Application/frontend/package.json",
-      "use": "@vercel/next"
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "api.devproflow.com"
+        }
+      ],
+      "destination": "/02_Web_Application/backend/$1"
     },
     {
-      "src": "02_Web_Application/backend/api/index.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/02_Web_Application/backend/api/index.js?path=$1"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/"
+      "source": "/(.*)",
+      "destination": "/02_Web_Application/frontend/$1"
     }
   ]
 }

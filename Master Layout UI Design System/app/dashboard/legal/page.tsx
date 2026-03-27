@@ -1,1 +1,0 @@
-import Page from '@/app/dashboard/legal/page'; export default Page;

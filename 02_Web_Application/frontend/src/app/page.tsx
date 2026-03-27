@@ -9,6 +9,7 @@ import { FirebaseStats } from "@/components/dashboard/firebase-stats"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { AnimatedCard, AnimatedCardHeader, AnimatedCardContent } from "@/components/ui/AnimatedCard"
+import { ErrorBoundary } from "@/components/ui/error-boundary"
 import DarkModeToggle from "@/components/ui/DarkModeToggle"
 import { ShieldCheck, Activity, Bell, Zap, Cloud, BarChart3, ArrowRight, Database, Phone, FileText, Building2, Users, Settings, Sparkles, Cpu, Globe, TrendingUp, AlertCircle } from "lucide-react"
 import Link from "next/link"
@@ -17,13 +18,19 @@ import { cn } from "@/lib/utils"
 export default function DashboardPage() {
   return (
     <div className="flex flex-col gap-8 devpro-animate-fade-in bg-gradient-to-br from-gray-50 to-gray-100 dark:from-black dark:to-gray-900 min-h-screen transition-all duration-500">
-      <DashboardHeader />
+      <ErrorBoundary>
+        <DashboardHeader />
+      </ErrorBoundary>
 
-      <KpiCardsLive />
+      <ErrorBoundary>
+        <KpiCardsLive />
+      </ErrorBoundary>
 
       <div className="grid gap-6 lg:grid-cols-12">
         <div className="lg:col-span-8 flex flex-col gap-6">
-          <RecentApplications />
+          <ErrorBoundary>
+            <RecentApplications />
+          </ErrorBoundary>
           
           <div className="grid gap-6 sm:grid-cols-2">
             <AnimatedCard delay={100}>

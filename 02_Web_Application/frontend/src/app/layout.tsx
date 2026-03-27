@@ -1,11 +1,14 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Poppins } from 'next/font/google'
+import { Suspense } from 'react'
 import { ThemeProvider } from '@/components/theme-provider'
 import { DevProSidebar } from "@/components/layout/sidebar"
 import { DevProTopbar } from "@/components/layout/topbar"
 import { PageTransition } from "@/components/ui/page-transition"
 import { FloatingActionButton } from "@/components/ui/floating-action-button"
 import { Toaster } from "@/components/ui/sonner"
+import { ErrorBoundary } from "@/components/ui/error-boundary"
+import { FullPageLoading } from "@/components/ui/loading-spinner"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
 import '@/app/globals.css'
@@ -64,9 +67,13 @@ export default function RootLayout({
               <DevProTopbar />
               <main className="flex-1 overflow-y-auto bg-[var(--background)] scroll-smooth custom-scrollbar">
                 <div className="mx-auto flex max-w-[1600px] flex-col gap-6 px-8 py-8">
-                  <PageTransition>
-                    {children}
-                  </PageTransition>
+                  <ErrorBoundary>
+                    <Suspense fallback={<FullPageLoading text="Loading DevPro Flow Enterprise..." />}>
+                      <PageTransition>
+                        {children}
+                      </PageTransition>
+                    </Suspense>
+                  </ErrorBoundary>
                 </div>
               </main>
             </div>

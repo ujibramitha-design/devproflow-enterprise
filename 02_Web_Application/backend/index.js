@@ -17,7 +17,8 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const corsOptions = {
   origin: [
     'https://devproflow.com',
-    'https://www.devproflow.com', 
+    'https://www.devproflow.com',
+    'https://api.devproflow.com',
     'http://localhost:3000',
     'http://localhost:3002'
   ],
@@ -25,6 +26,11 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use(express.json());
+
+// Health Check Route
+app.get('/health', (req, res) => {
+  res.json({ status: 'API Live on Subdomain' });
+});
 
 // API Routes
 app.get('/', (req, res) => {
